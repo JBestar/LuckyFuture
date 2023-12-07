@@ -38,10 +38,14 @@ namespace LuckyFuture.UI
             if (OrdType == ORDTYPE.Earn)
             {
                 this.Text = "수익틱설정";
+                this.groupAvgLine.Text = "수익틱 버튼설정";
+                this.label1.Text = "틱수";
             }
             else if (OrdType == ORDTYPE.Loss)
             {
                 this.Text = "손실틱설정";
+                this.groupAvgLine.Text = "손실틱 버튼설정";
+                this.label1.Text = "틱수";
             }
             else
             {

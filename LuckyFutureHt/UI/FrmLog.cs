@@ -25,7 +25,7 @@ namespace LuckyFuture.UI
         public void AddLog(string log)
         {
             if (listLog.Items.Count > 1000)
-                listLog.Items.RemoveAt(1000);
+                listLog.Items.RemoveAt(0);
             listLog.Items.Add(log);
             AutoScrollList();
         }

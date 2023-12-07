@@ -294,7 +294,7 @@ namespace LuckyFutureLib.Include
             BETTYPE[] betTypeList =
             {
                 BETTYPE.EQUIVALENT, BETTYPE.UPDOWN, BETTYPE.CROSS,
-                BETTYPE.BOLINE, BETTYPE.HYBRID, /*BETTYPE.BOT1*/ BETTYPE.CCI
+                BETTYPE.BOLINE, BETTYPE.HYBRID, /*BETTYPE.BOT1 BETTYPE.CCI*/
             };
             return betTypeList;
         }

@@ -11,5 +11,6 @@ namespace LuckyFuture.Models.ValueObjects
 		NONE,
 		SELL,
 		BUY,
+		BOTH,
 	}
 }

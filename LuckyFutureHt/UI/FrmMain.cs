@@ -638,8 +638,11 @@ namespace LuckyFuture.UI
 					log = "서버시간:" + string.Format("[{0:D2}:{1:D2}:{2:D2}] ", dtServer.Hour, dtServer.Minute, dtServer.Second);
 				}
 				log = string.Format("[{0:D2}:{1:D2}:{2:D2}] ", dtCurrent.Hour, dtCurrent.Minute, dtCurrent.Second) + log;
-				
-				listLog.Items.Add(log);
+
+
+                if (listLog.Items.Count > 2000)
+                    listLog.Items.RemoveAt(0);
+                listLog.Items.Add(log);
                 //LogForm.AddLog(log);
                 AutoScrollLog();
                 WriteLog(log);
@@ -2221,6 +2224,7 @@ namespace LuckyFuture.UI
             cmbPayoffLoss.Text = Settings.Default.LossPayoffMoney.ToString();
             cmbCandlePayoff.SelectedItem = Settings.Default.CandlePayoffCount;
             txtTickPayoff.Text = Settings.Default.TickPayoffCount.ToString();
+            chkLossRange.Checked = Settings.Default.LossRangePayoff;
 
             chkCciPayoff.Checked = Settings.Default.CciPayoff;
             chkCciRange.Checked = Settings.Default.CciRangePayoff;
@@ -2271,7 +2275,8 @@ namespace LuckyFuture.UI
             cmbCrossUnit.Enabled = chkCrossLossPayoff.Checked && !chkCrossRange.Checked;
             chkCrossRange.Enabled = chkCrossLossPayoff.Checked;
             //손실
-            cmbPayoffLoss.Enabled = chkLossPayoff.Checked && !chkLossRange.Checked;
+            cmbPayoffLoss.Enabled = chkLossPayoff.Checked;
+            chkLossRange.Enabled = chkLossPayoff.Checked;
             //CCi 청산
             chkCciRange.Enabled = chkCciPayoff.Checked;
             txtPayoffCci1.Enabled = chkCciPayoff.Checked && !chkCciRange.Checked;
@@ -3093,6 +3098,8 @@ namespace LuckyFuture.UI
                         return;
                     }
                     log += ", 손실:" + Settings.Default.LossPayoffMoney + "틱";
+                    if(Settings.Default.LossRangePayoff)
+                        log += ", 손실영역 ";
 
                 }
                 Settings.Default.SmartLossPayoff = chkSmartLossPayoff.Checked;
