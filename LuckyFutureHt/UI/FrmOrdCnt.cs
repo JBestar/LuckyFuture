@@ -14,22 +14,50 @@ using ChartCtrl;
 
 namespace LuckyFuture.UI
 {
+    public enum ORDTYPE
+    {
+        Order,
+        Earn,
+        Loss
+    }
     public partial class FrmOrdCnt : Form
     {
-        public static readonly FrmOrdCnt Default = new FrmOrdCnt();
+        ORDTYPE _OrdType = ORDTYPE.Order;
         public event EventHandler<ChartEventArgs> ChartNoticeEvent;
 
-        public FrmOrdCnt()
+        public FrmOrdCnt(ORDTYPE type)
         {
+            OrdType = type;
             InitializeComponent();
             CenterToParent();
             InitializeComponentEx();
         }
         private void InitializeComponentEx()
         {
-            InitComponent();
+            int max = 1000;
+            if (OrdType == ORDTYPE.Earn)
+            {
+                this.Text = "수익틱설정";
+            }
+            else if (OrdType == ORDTYPE.Loss)
+            {
+                this.Text = "손실틱설정";
+            }
+            else
+            {
+                max = 100;
+            }
+            spin1.Maximum = max;
+            spin2.Maximum = max;
+            spin3.Maximum = max;
+            spin4.Maximum = max;
+            loadControls();
         }
-
+        public ORDTYPE OrdType
+        {
+            get => (ORDTYPE)this._OrdType;
+            set => _OrdType = value;
+        }
         public void SetChartEventHandler(EventHandler<ChartEventArgs> chartEvent)
         {
             this.ChartNoticeEvent += chartEvent;
@@ -40,30 +68,67 @@ namespace LuckyFuture.UI
             if (ChartNoticeEvent != null)
                 ChartNoticeEvent(this, new ChartEventArgs(obj));
         }
-        public void InitComponent()
+        public void loadControls()
         {
-            spin1.Value = Settings.Default.OrdCnt1;
-            spin2.Value = Settings.Default.OrdCnt2;
-            spin3.Value = Settings.Default.OrdCnt3;
-            spin4.Value = Settings.Default.OrdCnt4;
+            int[] spins = { 1, 1, 1, 1 };
+            string[] cnts = null;
+            if (OrdType == ORDTYPE.Earn)
+            {
+                cnts = Settings.Default.EarnTicks.Split('#');
+            }
+            else if (OrdType == ORDTYPE.Loss)
+            {
+                cnts = Settings.Default.LossTicks.Split('#');
+            }
+            else 
+            {
+                cnts = Settings.Default.OrdCnts.Split('#');
+            }
+
+            if (cnts == null && cnts.Length < 4)
+                return;
+            for (int i = 0; i<4; i++)
+            {
+                 if(!int.TryParse(cnts[i], out spins[i]))
+                {
+                    spins[i] = 1;
+                }
+            }
+
+            spin1.Value = spins[0];
+            spin2.Value = spins[1];
+            spin3.Value = spins[2];
+            spin4.Value = spins[3];
+
         }
 
         private void Setting_FormClosing(object sender, FormClosingEventArgs e)
         {
-            OnChartNoticeEvent(CHART_EVENTTYPE.BETTING_CHANGED);
-
             Hide();
             e.Cancel = true;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            Settings.Default.OrdCnt1 = (int)spin1.Value ;
-            Settings.Default.OrdCnt2 = (int)spin2.Value;
-            Settings.Default.OrdCnt3 = (int)spin3.Value;
-            Settings.Default.OrdCnt4 = (int)spin4.Value;
+
+            string sCnts = string.Format("{0}#{1}#{2}#{3}", spin1.Value, spin2.Value, spin3.Value, spin4.Value);
+            if (OrdType == ORDTYPE.Earn)
+            {
+                Settings.Default.EarnTicks = sCnts;
+                OnChartNoticeEvent(CHART_EVENTTYPE.EARNTICK_CHANGED);
+            }
+            else if (OrdType == ORDTYPE.Loss)
+            {
+                Settings.Default.LossTicks = sCnts;
+                OnChartNoticeEvent(CHART_EVENTTYPE.LOSSTICK_CHANGED);
+            }
+            else
+            {
+                Settings.Default.OrdCnts = sCnts;
+                OnChartNoticeEvent(CHART_EVENTTYPE.ORDERCNT_CHANGED);
+            }
+
             Settings.Default.Save();
-            OnChartNoticeEvent(CHART_EVENTTYPE.SETTING_CHANGED);
             Hide();
         }
 

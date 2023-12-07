@@ -1053,7 +1053,7 @@ namespace LuckyFuture.Logic
                 if (nRate >= 0 && dLossCci >= 0 && dLossCci > dMaxCci * nRate / 100.0)
                 {
                     log = string.Format(" CCI청산:{0:N2} ", dCurCci); 
-                    log += string.Format(" (영역:{0:N2} ", dMaxCci) + ", " + nRate.ToString() + "%이하)";
+                    log += string.Format(" (영역:{0:N2} ", dMaxCci) + ", " + nRate.ToString() + "%하락)";
                     this.frmMain.AddLog(log);
                     m_boLiquid = true;
                     return true;
@@ -1144,7 +1144,6 @@ namespace LuckyFuture.Logic
             }
             return false;
         }
-
 
         private bool CheckTradeChange(ref string log)
         {
@@ -1277,13 +1276,13 @@ namespace LuckyFuture.Logic
 				if (Settings.Default.AvgsCandle < 1)
 					return tradeType;
 
-				List<DItem> lastCandlelist2 = frmMain.GetCandleList(Settings.Default.AvgsCandle, true);
+				List<DItem> lastCandlelist2 = frmMain.GetCandleList(Settings.Default.AvgsCandle, false);
 				if(lastCandlelist2.Count < Settings.Default.AvgsCandle)
                 {
 					return TRADETYPE.NONE; 
 				}
 
-				int upDown = lastCandlelist[0].AvgPos;
+				int upDown = lastCandlelist2[0].AvgPos;
 				if (upDown == 0)
                     return TRADETYPE.NONE;
 				else if(upDown == 1)
@@ -1370,7 +1369,7 @@ namespace LuckyFuture.Logic
         }
 		private bool TraceRealtimeLog()
         {
-            if (Math.Abs(Environment.TickCount - m_tickValueLog) < 1000)
+            if (Math.Abs(Environment.TickCount - m_tickValueLog) < 300)
                 return false;
             m_tickValueLog = Environment.TickCount;
 
@@ -1398,10 +1397,10 @@ namespace LuckyFuture.Logic
 
             if (Settings.Default.AvgsCandle > 0)
             {
-                List<DItem> lastCandlelist2 = frmMain.GetCandleList(Settings.Default.AvgsCandle, true);
+                List<DItem> lastCandlelist2 = frmMain.GetCandleList(Settings.Default.AvgsCandle, false);
                 if (lastCandlelist2.Count >= Settings.Default.AvgsCandle)
                 {
-                    int upDown = lasDItemlist[0].AvgPos;
+                    int upDown = lastCandlelist2[0].AvgPos;
      
                     if (upDown == 1)
                     {

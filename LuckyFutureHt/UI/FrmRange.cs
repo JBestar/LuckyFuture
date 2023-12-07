@@ -38,8 +38,8 @@ namespace LuckyFuture.UI
             this.lbAmoutUnit.Text = "만원";
             this.lbLossUnit.Text = "% 하락청산";
 
-            this.amountDataGridViewTextBoxColumn.HeaderText = "금액";
-
+            //this.amountDataGridViewTextBoxColumn.HeaderText = "금액";
+            //this.rateDataGridViewTextBoxColumn.HeaderText = "손실";
             if (RangeType == RANGETYPE.SmartLoss)
             {
                 this.Text = "스마트청산 영역설정";
@@ -51,14 +51,15 @@ namespace LuckyFuture.UI
             else if (RangeType == RANGETYPE.CciLoss)
             {
                 this.amountDataGridViewTextBoxColumn.HeaderText = "CCI";
-                this.Text = "CCI손실청산 영역설정";
+                this.rateDataGridViewTextBoxColumn.HeaderText = "하락률";
+                this.Text = "CCI청산 영역설정";
                 this.lbAmount.Text = "CCI";
-                this.lbAmoutUnit.Text = "";
+                this.lbAmoutUnit.Text = "이상";
             }
             else
             {
-                this.Text = "손실청산 영역설정";
-                this.lbLossUnit.Text = "틱 하락청산";
+                this.Text = "손실 영역설정";
+                this.lbLossUnit.Text = "틱 변경";
             }
         }
        

@@ -69,6 +69,10 @@ namespace ChartCtrl
         DRAWING_CHANGED,
         BETTING_CHANGED,
         SETTING_CHANGED,
+        ORDERCNT_CHANGED,
+        EARNTICK_CHANGED,
+        LOSSTICK_CHANGED,
+
     }
     public class ChartEventArgs : EventArgs
     {

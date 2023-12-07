@@ -1091,54 +1091,6 @@ namespace LuckyFuture.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int OrdCnt1 {
-            get {
-                return ((int)(this["OrdCnt1"]));
-            }
-            set {
-                this["OrdCnt1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2")]
-        public int OrdCnt2 {
-            get {
-                return ((int)(this["OrdCnt2"]));
-            }
-            set {
-                this["OrdCnt2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public int OrdCnt3 {
-            get {
-                return ((int)(this["OrdCnt3"]));
-            }
-            set {
-                this["OrdCnt3"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
-        public int OrdCnt4 {
-            get {
-                return ((int)(this["OrdCnt4"]));
-            }
-            set {
-                this["OrdCnt4"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool AvgsOn {
             get {
@@ -1329,6 +1281,54 @@ namespace LuckyFuture.Properties {
             }
             set {
                 this["CciPayoffValue2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1#2#5#10")]
+        public string OrdCnts {
+            get {
+                return ((string)(this["OrdCnts"]));
+            }
+            set {
+                this["OrdCnts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20#30#50#100")]
+        public string EarnTicks {
+            get {
+                return ((string)(this["EarnTicks"]));
+            }
+            set {
+                this["EarnTicks"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20#30#50#100")]
+        public string LossTicks {
+            get {
+                return ((string)(this["LossTicks"]));
+            }
+            set {
+                this["LossTicks"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LiqType {
+            get {
+                return ((int)(this["LiqType"]));
+            }
+            set {
+                this["LiqType"] = value;
             }
         }
     }

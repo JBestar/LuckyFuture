@@ -181,7 +181,7 @@ namespace ChartCtrl
         private int m_tickLog = 0;
         public void showSpec()
         {
-            if (Math.Abs(Environment.TickCount - m_tickLog) < 500)
+            if (Math.Abs(Environment.TickCount - m_tickLog) < 300)
                 return ;
             m_tickLog = Environment.TickCount;
 

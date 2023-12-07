@@ -82,7 +82,8 @@ namespace LuckyFuture.Site
             Type = siteType;
             if(siteType == SITETYPE.TOPASSET)
             {
-                _AppName = "APP20";
+                _AppName = "/NEW_MST/몬스타 HTS/TeamViewer, /@";
+                //_AppName = "몬스타 HTS/TeamViewer, /@";
                 _IpAddr = "222.239.252.47";
             }   
 //             if (siteType == SITETYPE.TOPASSET)
@@ -92,7 +93,7 @@ namespace LuckyFuture.Site
 //             }
             else if (siteType == SITETYPE.DREAM)
             {
-                _AppName = "APP20";
+                _AppName = "/NEW/APP20/N/@";
                 _IpAddr = "172.65.237.26"; // 172.65.237.42
             }
 #if WRITE_LOG
@@ -134,9 +135,6 @@ namespace LuckyFuture.Site
             _ConnectState = LOGINSTATE.NONE;
             _ConnSock.RequestDialogLogin(id, password, _AppName);            
             Thread.Sleep(1000);
-            _ConnSock.CloseSocket();
-            Thread.Sleep(200);
-            OnLogin();
 
             if (_ConnectState == LOGINSTATE.OK)
             {
@@ -162,6 +160,10 @@ namespace LuckyFuture.Site
             {
                 login_result = ERRORCODE.LOGIN_NO_CON;
             }
+
+            _ConnSock.CloseSocket();
+            Thread.Sleep(200);
+            OnLogin();
             return login_result;
         }
 

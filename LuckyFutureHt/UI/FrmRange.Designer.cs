@@ -38,6 +38,11 @@ namespace LuckyFuture.UI
             this.lbAmoutUnit = new System.Windows.Forms.Label();
             this.txtAmout = new System.Windows.Forms.TextBox();
             this.dgvRangeInfo = new System.Windows.Forms.DataGridView();
+            this.btnAdd = new ReaLTaiizor.Controls.DreamButton();
+            this.lbAmount = new System.Windows.Forms.Label();
+            this.lbStage = new System.Windows.Forms.Label();
+            this.txtStage = new System.Windows.Forms.TextBox();
+            this.bsRangeInfo = new System.Windows.Forms.BindingSource(this.components);
             this.enabledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.StageName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,11 +51,6 @@ namespace LuckyFuture.UI
             this.RateUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ActionDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.EndColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bsRangeInfo = new System.Windows.Forms.BindingSource(this.components);
-            this.btnAdd = new ReaLTaiizor.Controls.DreamButton();
-            this.lbAmount = new System.Windows.Forms.Label();
-            this.lbStage = new System.Windows.Forms.Label();
-            this.txtStage = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRangeInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsRangeInfo)).BeginInit();
             this.SuspendLayout();
@@ -176,80 +176,6 @@ namespace LuckyFuture.UI
             this.dgvRangeInfo.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvRangeInfo_CellMouseClick);
             this.dgvRangeInfo.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvRangeInfo_EditingControlShowing);
             // 
-            // enabledDataGridViewCheckBoxColumn
-            // 
-            this.enabledDataGridViewCheckBoxColumn.DataPropertyName = "Enabled";
-            this.enabledDataGridViewCheckBoxColumn.FalseValue = "0";
-            this.enabledDataGridViewCheckBoxColumn.FillWeight = 30F;
-            this.enabledDataGridViewCheckBoxColumn.HeaderText = "";
-            this.enabledDataGridViewCheckBoxColumn.Name = "enabledDataGridViewCheckBoxColumn";
-            this.enabledDataGridViewCheckBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.enabledDataGridViewCheckBoxColumn.TrueValue = "1";
-            this.enabledDataGridViewCheckBoxColumn.Width = 20;
-            // 
-            // StageName
-            // 
-            this.StageName.DataPropertyName = "StageName";
-            this.StageName.HeaderText = "단계";
-            this.StageName.Name = "StageName";
-            this.StageName.ReadOnly = true;
-            this.StageName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.StageName.Width = 60;
-            // 
-            // amountDataGridViewTextBoxColumn
-            // 
-            this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
-            this.amountDataGridViewTextBoxColumn.HeaderText = "금액";
-            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
-            this.amountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.amountDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // Spec
-            // 
-            this.Spec.DataPropertyName = "AmountUnit";
-            this.Spec.HeaderText = "";
-            this.Spec.Name = "Spec";
-            this.Spec.ReadOnly = true;
-            this.Spec.Width = 45;
-            // 
-            // rateDataGridViewTextBoxColumn
-            // 
-            this.rateDataGridViewTextBoxColumn.DataPropertyName = "Rate";
-            this.rateDataGridViewTextBoxColumn.HeaderText = "손실";
-            this.rateDataGridViewTextBoxColumn.Name = "rateDataGridViewTextBoxColumn";
-            this.rateDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.rateDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // RateUnit
-            // 
-            this.RateUnit.DataPropertyName = "RateUnit";
-            this.RateUnit.HeaderText = "";
-            this.RateUnit.Name = "RateUnit";
-            this.RateUnit.ReadOnly = true;
-            this.RateUnit.Width = 45;
-            // 
-            // ActionDelete
-            // 
-            this.ActionDelete.DataPropertyName = "ActionDelete";
-            this.ActionDelete.HeaderText = "";
-            this.ActionDelete.Name = "ActionDelete";
-            this.ActionDelete.ReadOnly = true;
-            this.ActionDelete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ActionDelete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ActionDelete.Width = 50;
-            // 
-            // EndColumn
-            // 
-            this.EndColumn.HeaderText = "";
-            this.EndColumn.Name = "EndColumn";
-            this.EndColumn.ReadOnly = true;
-            this.EndColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.EndColumn.Width = 20;
-            // 
-            // bsRangeInfo
-            // 
-            this.bsRangeInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.PayoffLossInfo);
-            // 
             // btnAdd
             // 
             this.btnAdd.ColorA = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
@@ -301,6 +227,80 @@ namespace LuckyFuture.UI
             this.txtStage.Size = new System.Drawing.Size(31, 21);
             this.txtStage.TabIndex = 66;
             this.txtStage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // bsRangeInfo
+            // 
+            this.bsRangeInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.PayoffLossInfo);
+            // 
+            // enabledDataGridViewCheckBoxColumn
+            // 
+            this.enabledDataGridViewCheckBoxColumn.DataPropertyName = "Enabled";
+            this.enabledDataGridViewCheckBoxColumn.FalseValue = "0";
+            this.enabledDataGridViewCheckBoxColumn.FillWeight = 30F;
+            this.enabledDataGridViewCheckBoxColumn.HeaderText = "";
+            this.enabledDataGridViewCheckBoxColumn.Name = "enabledDataGridViewCheckBoxColumn";
+            this.enabledDataGridViewCheckBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.enabledDataGridViewCheckBoxColumn.TrueValue = "1";
+            this.enabledDataGridViewCheckBoxColumn.Width = 20;
+            // 
+            // StageName
+            // 
+            this.StageName.DataPropertyName = "StageName";
+            this.StageName.HeaderText = "단계";
+            this.StageName.Name = "StageName";
+            this.StageName.ReadOnly = true;
+            this.StageName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.StageName.Width = 55;
+            // 
+            // amountDataGridViewTextBoxColumn
+            // 
+            this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
+            this.amountDataGridViewTextBoxColumn.HeaderText = "금액";
+            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+            this.amountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.amountDataGridViewTextBoxColumn.Width = 55;
+            // 
+            // Spec
+            // 
+            this.Spec.DataPropertyName = "AmountUnit";
+            this.Spec.HeaderText = "";
+            this.Spec.Name = "Spec";
+            this.Spec.ReadOnly = true;
+            this.Spec.Width = 45;
+            // 
+            // rateDataGridViewTextBoxColumn
+            // 
+            this.rateDataGridViewTextBoxColumn.DataPropertyName = "Rate";
+            this.rateDataGridViewTextBoxColumn.HeaderText = "하락률";
+            this.rateDataGridViewTextBoxColumn.Name = "rateDataGridViewTextBoxColumn";
+            this.rateDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.rateDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // RateUnit
+            // 
+            this.RateUnit.DataPropertyName = "RateUnit";
+            this.RateUnit.HeaderText = "";
+            this.RateUnit.Name = "RateUnit";
+            this.RateUnit.ReadOnly = true;
+            this.RateUnit.Width = 45;
+            // 
+            // ActionDelete
+            // 
+            this.ActionDelete.DataPropertyName = "ActionDelete";
+            this.ActionDelete.HeaderText = "";
+            this.ActionDelete.Name = "ActionDelete";
+            this.ActionDelete.ReadOnly = true;
+            this.ActionDelete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ActionDelete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ActionDelete.Width = 50;
+            // 
+            // EndColumn
+            // 
+            this.EndColumn.HeaderText = "";
+            this.EndColumn.Name = "EndColumn";
+            this.EndColumn.ReadOnly = true;
+            this.EndColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.EndColumn.Width = 20;
             // 
             // FrmRange
             // 

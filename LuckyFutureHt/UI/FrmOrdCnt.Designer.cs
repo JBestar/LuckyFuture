@@ -219,7 +219,7 @@ namespace LuckyFuture.UI
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmOrdCnt";
-            this.Text = "주문수량";
+            this.Text = "주문수량설정";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Setting_FormClosing);
             this.groupAvgLine.ResumeLayout(false);
             this.groupAvgLine.PerformLayout();

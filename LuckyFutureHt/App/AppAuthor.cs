@@ -47,9 +47,9 @@ namespace LuckyFuture
 
         public event EventHandler<AuthorEventArgs> NoticeEvent;
 
-        public const string URL_MAIN = "http://210.90.155.77:8080/Temp/"; //localhost:8085/
-        public const string URL_UPDATE = "http://210.90.155.77:8080/Update/"; //210.90.155.77:8080
-        public const string URL_DOWNLOAD = "http://210.90.155.77:8080/Download/";
+        public const string URL_MAIN = "http://localhost:8085/Temp/"; //localhost:8085/
+        public const string URL_UPDATE = "http://localhost:8085/Update/"; //210.90.155.77:8080
+        public const string URL_DOWNLOAD = "http://localhost:8085/Download/";
         private const string URL_CERT_LOGIN = "Login.aspx";
         private const string URL_CERT_LOGOUT = "LogOut.aspx";
         private const string URL_CERT_KEEPALIVE = "ActiveKeep.aspx";

@@ -134,8 +134,7 @@ namespace LuckyFuture.Models.Reanteck
             sendData += GetPacketNo();
             sendData += "".PadRight(30, BODY_SPACE);
             sendData += "TR_0100_S_02/";
-            sendData += id + "/" + pwd;
-            sendData += "/NEW/" + app + "/N/@";
+            sendData += id + "/" + pwd + app;
 
             StartExtract();
             return SendData(sendData);
@@ -516,7 +515,7 @@ namespace LuckyFuture.Models.Reanteck
 #if WRITE_LOG
             WriteLog("<<<" + sendData);
 #endif
-            byte[] byteData = EncryptMsg(Encoding.ASCII.GetBytes(sendData));
+            byte[] byteData = EncryptMsg(Encoding.Default.GetBytes(sendData));
 
             base.SendData(byteData);
             return true;

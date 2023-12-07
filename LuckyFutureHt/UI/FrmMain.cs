@@ -45,6 +45,8 @@ namespace LuckyFuture.UI
             LockForm.SetChartEventHandler(OnChartNoticeReceive);
             SettingBand.SetChartEventHandler(OnChartNoticeReceive);
             OrdCntForm.SetChartEventHandler(OnChartNoticeReceive);
+            EarnTickForm.SetChartEventHandler(OnChartNoticeReceive);
+            LossTickForm.SetChartEventHandler(OnChartNoticeReceive);
         }
 
         // Sub Forms
@@ -57,7 +59,9 @@ namespace LuckyFuture.UI
         private BandSetting SettingBand { get => BandSetting.Default; }
         private FrmLock LockForm { get => FrmLock.Default; }
         private FrmNotice NoticeForm { get => FrmNotice.Default; }
-        private FrmOrdCnt OrdCntForm { get => FrmOrdCnt.Default; }
+        private FrmOrdCnt OrdCntForm = new FrmOrdCnt(ORDTYPE.Order);
+        private FrmOrdCnt EarnTickForm = new FrmOrdCnt(ORDTYPE.Earn);
+        private FrmOrdCnt LossTickForm = new FrmOrdCnt(ORDTYPE.Loss);
         public FrmRange PayoffLossForm = new FrmRange(RANGETYPE.PayoffLoss);
         public FrmRange SmartLossForm = new FrmRange(RANGETYPE.SmartLoss);
         public FrmRange CrossLossForm = new FrmRange(RANGETYPE.CrossLoss);
@@ -90,8 +94,8 @@ namespace LuckyFuture.UI
             InitializeSetting();
 
             btnHide.Text = "<<";
-            formHeight = 610;
-            this.ClientSize = new Size(860, formHeight);
+            formHeight = 620;
+            this.ClientSize = new Size(870, formHeight);
 
 			this.ChartForm.Visible = false;
             this.CurrentForm.Visible = false;
@@ -100,6 +104,8 @@ namespace LuckyFuture.UI
             ShowNotice();
             _tickLogout = 0;
             ChangeOrdCnt();
+            ChangeEarnTick();
+            ChangeLossTick();
         }
 
         private AxKFOpenAPILib.AxKFOpenAPI axKFOpenAPI;
@@ -172,7 +178,6 @@ namespace LuckyFuture.UI
                 cmbChartType4.Items.Add(s);
                 cmbChartType5.Items.Add(s);
                 cmbChartType6.Items.Add(s);
-                cmbChartType7.Items.Add(s);
             }
 
             string[] orderTypeList = { "시장가", "지정가" };
@@ -184,7 +189,6 @@ namespace LuckyFuture.UI
                 cmbOrderType4.Items.Add(s);
                 cmbOrderType5.Items.Add(s);
                 cmbOrderType6.Items.Add(s);
-                cmbOrderType7.Items.Add(s);
             }
 
             int[] avgTypeList = { 5, 10, 20, 60, 120 };
@@ -209,6 +213,9 @@ namespace LuckyFuture.UI
                 cmbAvgsSide1.Items.Add(s);
                 cmbAvgsSide2.Items.Add(s);
             }
+
+            cmbLiqType4.Items.Add("S-B선");
+            cmbLiqType4.Items.Add("CCI");
 
             cmbPayoffLoss.Items.Add("15");
             cmbPayoffLoss.Items.Add("30");
@@ -756,7 +763,6 @@ namespace LuckyFuture.UI
                             else ChangeSettingControls();
                             break;
                         case CHART_EVENTTYPE.SETTING_CHANGED:
-                            ChangeOrdCnt();
                             // AddLog("등락설정이 저장되었습니다.");
                             // ChartForm.SetChartFrom(Settings.Default.StartChartDt);
                             break;
@@ -770,7 +776,17 @@ namespace LuckyFuture.UI
                                 if (SignalSite != null)
                                     SignalSite.RequestRChart();
                             }
-                            
+                            break;
+                        case CHART_EVENTTYPE.ORDERCNT_CHANGED:
+                            ChangeOrdCnt();
+                            break;
+                        case CHART_EVENTTYPE.EARNTICK_CHANGED:
+                            ChangeEarnTick();
+                            break;
+                        case CHART_EVENTTYPE.LOSSTICK_CHANGED:
+                            ChangeLossTick();
+                            break;
+                        default:
                             break;
                     }
 
@@ -1648,7 +1664,7 @@ namespace LuckyFuture.UI
 			} else
             {
 				btnHide.Text = "<<";
-				this.ClientSize = new Size(860, formHeight);
+				this.ClientSize = new Size(870, formHeight);
 				LoadSettingControls();
 			}
         }
@@ -1671,30 +1687,39 @@ namespace LuckyFuture.UI
             
             if (index == 0)
             {
-                chkOrd11.Text = Settings.Default.OrdCnt1.ToString();
-                chkOrd12.Text = Settings.Default.OrdCnt2.ToString();
-                chkOrd13.Text = Settings.Default.OrdCnt3.ToString();
-                chkOrd14.Text = Settings.Default.OrdCnt4.ToString();
-                chkOrd21.Text = Settings.Default.OrdCnt1.ToString();
-                chkOrd22.Text = Settings.Default.OrdCnt2.ToString();
-                chkOrd23.Text = Settings.Default.OrdCnt3.ToString();
-                chkOrd24.Text = Settings.Default.OrdCnt4.ToString();
-                chkOrd31.Text = Settings.Default.OrdCnt1.ToString();
-                chkOrd32.Text = Settings.Default.OrdCnt2.ToString();
-                chkOrd33.Text = Settings.Default.OrdCnt3.ToString();
-                chkOrd34.Text = Settings.Default.OrdCnt4.ToString();
-                chkOrd41.Text = Settings.Default.OrdCnt1.ToString();
-                chkOrd42.Text = Settings.Default.OrdCnt2.ToString();
-                chkOrd43.Text = Settings.Default.OrdCnt3.ToString();
-                chkOrd44.Text = Settings.Default.OrdCnt4.ToString();
-                chkOrd51.Text = Settings.Default.OrdCnt1.ToString();
-                chkOrd52.Text = Settings.Default.OrdCnt2.ToString();
-                chkOrd53.Text = Settings.Default.OrdCnt3.ToString();
-                chkOrd54.Text = Settings.Default.OrdCnt4.ToString();
-                chkOrd71.Text = Settings.Default.OrdCnt1.ToString();
-                chkOrd72.Text = Settings.Default.OrdCnt2.ToString();
-                chkOrd73.Text = Settings.Default.OrdCnt3.ToString();
-                chkOrd74.Text = Settings.Default.OrdCnt4.ToString();
+                int[] ordCnts = { 1, 1, 1, 1 };
+                string[] sCnts = Settings.Default.OrdCnts.Split('#');
+
+                if (sCnts == null && sCnts.Length < 4)
+                    return;
+                for (int i = 0; i < 4; i++)
+                {
+                    if (!int.TryParse(sCnts[i], out ordCnts[i]))
+                    {
+                        ordCnts[i] = 1;
+                    }
+                }
+
+                chkOrd11.Text = ordCnts[0].ToString();
+                chkOrd12.Text = ordCnts[1].ToString();
+                chkOrd13.Text = ordCnts[2].ToString();
+                chkOrd14.Text = ordCnts[3].ToString();
+                chkOrd21.Text = ordCnts[0].ToString();
+                chkOrd22.Text = ordCnts[1].ToString();
+                chkOrd23.Text = ordCnts[2].ToString();
+                chkOrd24.Text = ordCnts[3].ToString();
+                chkOrd31.Text = ordCnts[0].ToString();
+                chkOrd32.Text = ordCnts[1].ToString();
+                chkOrd33.Text = ordCnts[2].ToString();
+                chkOrd34.Text = ordCnts[3].ToString();
+                chkOrd41.Text = ordCnts[0].ToString();
+                chkOrd42.Text = ordCnts[1].ToString();
+                chkOrd43.Text = ordCnts[2].ToString();
+                chkOrd44.Text = ordCnts[3].ToString();
+                chkOrd51.Text = ordCnts[0].ToString();
+                chkOrd52.Text = ordCnts[1].ToString();
+                chkOrd53.Text = ordCnts[2].ToString();
+                chkOrd54.Text = ordCnts[3].ToString();
             }
             else
             {
@@ -1703,203 +1728,171 @@ namespace LuckyFuture.UI
                     case 1:
                         if (Settings.Default.BettingType == (int)BETTYPE.EQUIVALENT)
                         {
-                            txtOrderCount1.Text = Settings.Default.OrdCnt1.ToString();
-                            setOrdCnt(chkOrd11, true);
-                            setOrdCnt(chkOrd12, false);
-                            setOrdCnt(chkOrd13, false);
-                            setOrdCnt(chkOrd14, false);
+                            txtOrderCount1.Text = chkOrd11.Text;
+                            ChangeOrdBtnColor(chkOrd11, true);
+                            ChangeOrdBtnColor(chkOrd12, false);
+                            ChangeOrdBtnColor(chkOrd13, false);
+                            ChangeOrdBtnColor(chkOrd14, false);
                         } else if (Settings.Default.BettingType == (int)BETTYPE.UPDOWN)
                         {
-                            txtOrderCount2.Text = Settings.Default.OrdCnt1.ToString();
-                            setOrdCnt(chkOrd21, true);
-                            setOrdCnt(chkOrd22, false);
-                            setOrdCnt(chkOrd23, false);
-                            setOrdCnt(chkOrd24, false);
+                            txtOrderCount2.Text = chkOrd21.Text;
+                            ChangeOrdBtnColor(chkOrd21, true);
+                            ChangeOrdBtnColor(chkOrd22, false);
+                            ChangeOrdBtnColor(chkOrd23, false);
+                            ChangeOrdBtnColor(chkOrd24, false);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.CROSS)
                         {
-                            txtOrderCount3.Text = Settings.Default.OrdCnt1.ToString();
-                            setOrdCnt(chkOrd31, true);
-                            setOrdCnt(chkOrd32, false);
-                            setOrdCnt(chkOrd33, false);
-                            setOrdCnt(chkOrd34, false);
+                            txtOrderCount3.Text = chkOrd31.Text;
+                            ChangeOrdBtnColor(chkOrd31, true);
+                            ChangeOrdBtnColor(chkOrd32, false);
+                            ChangeOrdBtnColor(chkOrd33, false);
+                            ChangeOrdBtnColor(chkOrd34, false);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.BOLINE)
                         {
-                            txtOrderCount4.Text = Settings.Default.OrdCnt1.ToString();
-                            setOrdCnt(chkOrd41, true);
-                            setOrdCnt(chkOrd42, false);
-                            setOrdCnt(chkOrd43, false);
-                            setOrdCnt(chkOrd44, false);
+                            txtOrderCount4.Text = chkOrd41.Text;
+                            ChangeOrdBtnColor(chkOrd41, true);
+                            ChangeOrdBtnColor(chkOrd42, false);
+                            ChangeOrdBtnColor(chkOrd43, false);
+                            ChangeOrdBtnColor(chkOrd44, false);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.HYBRID)
                         {
-                            txtOrderCount5.Text = Settings.Default.OrdCnt1.ToString();
-                            setOrdCnt(chkOrd51, true);
-                            setOrdCnt(chkOrd52, false);
-                            setOrdCnt(chkOrd53, false);
-                            setOrdCnt(chkOrd54, false);
-                        }
-                        else if (Settings.Default.BettingType == (int)BETTYPE.CCI)
-                        {
-                            txtOrderCount7.Text = Settings.Default.OrdCnt1.ToString();
-                            setOrdCnt(chkOrd71, true);
-                            setOrdCnt(chkOrd72, false);
-                            setOrdCnt(chkOrd73, false);
-                            setOrdCnt(chkOrd74, false);
+                            txtOrderCount5.Text = chkOrd51.Text;
+                            ChangeOrdBtnColor(chkOrd51, true);
+                            ChangeOrdBtnColor(chkOrd52, false);
+                            ChangeOrdBtnColor(chkOrd53, false);
+                            ChangeOrdBtnColor(chkOrd54, false);
                         }
                         break;
                     case 2:
                         if (Settings.Default.BettingType == (int)BETTYPE.EQUIVALENT)
                         {
-                            txtOrderCount1.Text = Settings.Default.OrdCnt2.ToString();
-                            setOrdCnt(chkOrd11, false);
-                            setOrdCnt(chkOrd12, true);
-                            setOrdCnt(chkOrd13, false);
-                            setOrdCnt(chkOrd14, false);
+                            txtOrderCount1.Text = chkOrd12.Text;
+                            ChangeOrdBtnColor(chkOrd11, false);
+                            ChangeOrdBtnColor(chkOrd12, true);
+                            ChangeOrdBtnColor(chkOrd13, false);
+                            ChangeOrdBtnColor(chkOrd14, false);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.UPDOWN)
                         {
-                            txtOrderCount2.Text = Settings.Default.OrdCnt2.ToString();
-                            setOrdCnt(chkOrd21, false);
-                            setOrdCnt(chkOrd22, true);
-                            setOrdCnt(chkOrd23, false);
-                            setOrdCnt(chkOrd24, false);
+                            txtOrderCount2.Text = chkOrd22.Text;
+                            ChangeOrdBtnColor(chkOrd21, false);
+                            ChangeOrdBtnColor(chkOrd22, true);
+                            ChangeOrdBtnColor(chkOrd23, false);
+                            ChangeOrdBtnColor(chkOrd24, false);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.CROSS)
                         {
-                            txtOrderCount3.Text = Settings.Default.OrdCnt2.ToString();
-                            setOrdCnt(chkOrd31, false);
-                            setOrdCnt(chkOrd32, true);
-                            setOrdCnt(chkOrd33, false);
-                            setOrdCnt(chkOrd34, false);
+                            txtOrderCount3.Text = chkOrd32.Text;
+                            ChangeOrdBtnColor(chkOrd31, false);
+                            ChangeOrdBtnColor(chkOrd32, true);
+                            ChangeOrdBtnColor(chkOrd33, false);
+                            ChangeOrdBtnColor(chkOrd34, false);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.BOLINE)
                         {
-                            txtOrderCount4.Text = Settings.Default.OrdCnt2.ToString();
-                            setOrdCnt(chkOrd41, false);
-                            setOrdCnt(chkOrd42, true);
-                            setOrdCnt(chkOrd43, false);
-                            setOrdCnt(chkOrd44, false);
+                            txtOrderCount4.Text = chkOrd42.Text;
+                            ChangeOrdBtnColor(chkOrd41, false);
+                            ChangeOrdBtnColor(chkOrd42, true);
+                            ChangeOrdBtnColor(chkOrd43, false);
+                            ChangeOrdBtnColor(chkOrd44, false);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.HYBRID)
                         {
-                            txtOrderCount5.Text = Settings.Default.OrdCnt2.ToString();
-                            setOrdCnt(chkOrd51, false);
-                            setOrdCnt(chkOrd52, true);
-                            setOrdCnt(chkOrd53, false);
-                            setOrdCnt(chkOrd54, false);
-                        }
-                        else if (Settings.Default.BettingType == (int)BETTYPE.CCI)
-                        {
-                            txtOrderCount7.Text = Settings.Default.OrdCnt2.ToString();
-                            setOrdCnt(chkOrd71, false);
-                            setOrdCnt(chkOrd72, true);
-                            setOrdCnt(chkOrd73, false);
-                            setOrdCnt(chkOrd74, false);
+                            txtOrderCount5.Text = chkOrd52.Text;
+                            ChangeOrdBtnColor(chkOrd51, false);
+                            ChangeOrdBtnColor(chkOrd52, true);
+                            ChangeOrdBtnColor(chkOrd53, false);
+                            ChangeOrdBtnColor(chkOrd54, false);
                         }
                         break;
                     case 3:
                         if (Settings.Default.BettingType == (int)BETTYPE.EQUIVALENT)
                         {
-                            txtOrderCount1.Text = Settings.Default.OrdCnt3.ToString();
-                            setOrdCnt(chkOrd11, false);
-                            setOrdCnt(chkOrd12, false);
-                            setOrdCnt(chkOrd13, true);
-                            setOrdCnt(chkOrd14, false);
+                            txtOrderCount1.Text = chkOrd13.Text;
+                            ChangeOrdBtnColor(chkOrd11, false);
+                            ChangeOrdBtnColor(chkOrd12, false);
+                            ChangeOrdBtnColor(chkOrd13, true);
+                            ChangeOrdBtnColor(chkOrd14, false);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.UPDOWN)
                         {
-                            txtOrderCount2.Text = Settings.Default.OrdCnt3.ToString();
-                            setOrdCnt(chkOrd21, false);
-                            setOrdCnt(chkOrd22, false);
-                            setOrdCnt(chkOrd23, true);
-                            setOrdCnt(chkOrd24, false);
+                            txtOrderCount2.Text = chkOrd23.Text;
+                            ChangeOrdBtnColor(chkOrd21, false);
+                            ChangeOrdBtnColor(chkOrd22, false);
+                            ChangeOrdBtnColor(chkOrd23, true);
+                            ChangeOrdBtnColor(chkOrd24, false);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.CROSS)
                         {
-                            txtOrderCount3.Text = Settings.Default.OrdCnt3.ToString();
-                            setOrdCnt(chkOrd31, false);
-                            setOrdCnt(chkOrd32, false);
-                            setOrdCnt(chkOrd33, true);
-                            setOrdCnt(chkOrd34, false);
+                            txtOrderCount3.Text = chkOrd33.Text;
+                            ChangeOrdBtnColor(chkOrd31, false);
+                            ChangeOrdBtnColor(chkOrd32, false);
+                            ChangeOrdBtnColor(chkOrd33, true);
+                            ChangeOrdBtnColor(chkOrd34, false);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.BOLINE)
                         {
-                            txtOrderCount4.Text = Settings.Default.OrdCnt3.ToString();
-                            setOrdCnt(chkOrd41, false);
-                            setOrdCnt(chkOrd42, false);
-                            setOrdCnt(chkOrd43, true);
-                            setOrdCnt(chkOrd44, false);
+                            txtOrderCount4.Text = chkOrd43.Text ;
+                            ChangeOrdBtnColor(chkOrd41, false);
+                            ChangeOrdBtnColor(chkOrd42, false);
+                            ChangeOrdBtnColor(chkOrd43, true);
+                            ChangeOrdBtnColor(chkOrd44, false);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.HYBRID)
                         {
-                            txtOrderCount5.Text = Settings.Default.OrdCnt3.ToString();
-                            setOrdCnt(chkOrd51, false);
-                            setOrdCnt(chkOrd52, false);
-                            setOrdCnt(chkOrd53, true);
-                            setOrdCnt(chkOrd54, false);
-                        }
-                        else if (Settings.Default.BettingType == (int)BETTYPE.CCI)
-                        {
-                            txtOrderCount7.Text = Settings.Default.OrdCnt3.ToString();
-                            setOrdCnt(chkOrd71, false);
-                            setOrdCnt(chkOrd72, false);
-                            setOrdCnt(chkOrd73, true);
-                            setOrdCnt(chkOrd74, false);
+                            txtOrderCount5.Text = chkOrd53.Text ;
+                            ChangeOrdBtnColor(chkOrd51, false);
+                            ChangeOrdBtnColor(chkOrd52, false);
+                            ChangeOrdBtnColor(chkOrd53, true);
+                            ChangeOrdBtnColor(chkOrd54, false);
                         }
                        
                         break;
                     case 4:
                         if (Settings.Default.BettingType == (int)BETTYPE.EQUIVALENT)
                         {
-                            txtOrderCount1.Text = Settings.Default.OrdCnt4.ToString();
-                            setOrdCnt(chkOrd11, false);
-                            setOrdCnt(chkOrd12, false);
-                            setOrdCnt(chkOrd13, false);
-                            setOrdCnt(chkOrd14, true);
+                            txtOrderCount1.Text = chkOrd14.Text;
+                            ChangeOrdBtnColor(chkOrd11, false);
+                            ChangeOrdBtnColor(chkOrd12, false);
+                            ChangeOrdBtnColor(chkOrd13, false);
+                            ChangeOrdBtnColor(chkOrd14, true);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.UPDOWN)
                         {
-                            txtOrderCount2.Text = Settings.Default.OrdCnt4.ToString();
-                            setOrdCnt(chkOrd21, false);
-                            setOrdCnt(chkOrd22, false);
-                            setOrdCnt(chkOrd23, false);
-                            setOrdCnt(chkOrd24, true);
+                            txtOrderCount2.Text = chkOrd24.Text;
+                            ChangeOrdBtnColor(chkOrd21, false);
+                            ChangeOrdBtnColor(chkOrd22, false);
+                            ChangeOrdBtnColor(chkOrd23, false);
+                            ChangeOrdBtnColor(chkOrd24, true);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.CROSS)
                         {
-                            txtOrderCount3.Text = Settings.Default.OrdCnt4.ToString();
-                            setOrdCnt(chkOrd31, false);
-                            setOrdCnt(chkOrd32, false);
-                            setOrdCnt(chkOrd33, false);
-                            setOrdCnt(chkOrd34, true);
+                            txtOrderCount3.Text = chkOrd34.Text;
+                            ChangeOrdBtnColor(chkOrd31, false);
+                            ChangeOrdBtnColor(chkOrd32, false);
+                            ChangeOrdBtnColor(chkOrd33, false);
+                            ChangeOrdBtnColor(chkOrd34, true);
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.BOLINE)
                         {
-                            txtOrderCount4.Text = Settings.Default.OrdCnt4.ToString();
-                            setOrdCnt(chkOrd41, false);
-                            setOrdCnt(chkOrd42, false);
-                            setOrdCnt(chkOrd43, false);
-                            setOrdCnt(chkOrd44, true);
+                            txtOrderCount4.Text = chkOrd44.Text;
+                            ChangeOrdBtnColor(chkOrd41, false);
+                            ChangeOrdBtnColor(chkOrd42, false);
+                            ChangeOrdBtnColor(chkOrd43, false);
+                            ChangeOrdBtnColor(chkOrd44, true);
                             
                         }
                         else if (Settings.Default.BettingType == (int)BETTYPE.HYBRID)
                         {
-                            txtOrderCount5.Text = Settings.Default.OrdCnt4.ToString();
-                            setOrdCnt(chkOrd51, false);
-                            setOrdCnt(chkOrd52, false);
-                            setOrdCnt(chkOrd53, false);
-                            setOrdCnt(chkOrd54, true);
+                            txtOrderCount5.Text = chkOrd54.Text;
+                            ChangeOrdBtnColor(chkOrd51, false);
+                            ChangeOrdBtnColor(chkOrd52, false);
+                            ChangeOrdBtnColor(chkOrd53, false);
+                            ChangeOrdBtnColor(chkOrd54, true);
                             
-                        }
-                        else if (Settings.Default.BettingType == (int)BETTYPE.CCI)
-                        {
-                            txtOrderCount7.Text = Settings.Default.OrdCnt4.ToString();
-                            setOrdCnt(chkOrd71, false);
-                            setOrdCnt(chkOrd72, false);
-                            setOrdCnt(chkOrd73, false);
-                            setOrdCnt(chkOrd74, true);
                         }
                         break;
                     default:
@@ -1909,18 +1902,152 @@ namespace LuckyFuture.UI
             }
 
         }
-        private void setOrdCnt(CheckBox chkOrd, bool bChecked)
+        private void ChangeOrdBtnColor(CheckBox chkOrd, bool bChecked)
         {
             chkOrd.Checked = bChecked;
             chkOrd.BackColor = chkOrd.Checked ? Color.FromArgb(105, 170, 142) : Color.FromArgb(100, 150, 250);
         }
+        private void ChangeEarnTick(int index = 0)
+        {
+
+            if (index == 0)
+            {
+                int[] ordCnts = { 1, 1, 1, 1 };
+                string[] sCnts = Settings.Default.EarnTicks.Split('#');
+
+                if (sCnts == null && sCnts.Length < 4)
+                    return;
+                for (int i = 0; i < 4; i++)
+                {
+                    if (!int.TryParse(sCnts[i], out ordCnts[i]))
+                    {
+                        ordCnts[i] = 1;
+                    }
+                }
+
+                btnEarnTick1.Text = ordCnts[0].ToString();
+                btnEarnTick2.Text = ordCnts[1].ToString();
+                btnEarnTick3.Text = ordCnts[2].ToString();
+                btnEarnTick4.Text = ordCnts[3].ToString();
+            }
+            else
+            {
+                switch (index)
+                {
+                    case 1:
+                        txtPayoffEarn.Text = btnEarnTick1.Text;
+                        ChangeTickBtnColor(btnEarnTick1, true);
+                        ChangeTickBtnColor(btnEarnTick2, false);
+                        ChangeTickBtnColor(btnEarnTick3, false);
+                        ChangeTickBtnColor(btnEarnTick4, false);
+                        break;
+                    case 2:
+                        txtPayoffEarn.Text = btnEarnTick2.Text;
+                        ChangeTickBtnColor(btnEarnTick1, false);
+                        ChangeTickBtnColor(btnEarnTick2, true);
+                        ChangeTickBtnColor(btnEarnTick3, false);
+                        ChangeTickBtnColor(btnEarnTick4, false);
+                        break;
+                    case 3:
+                        txtPayoffEarn.Text = btnEarnTick3.Text;
+                        ChangeTickBtnColor(btnEarnTick1, false);
+                        ChangeTickBtnColor(btnEarnTick2, false);
+                        ChangeTickBtnColor(btnEarnTick3, true);
+                        ChangeTickBtnColor(btnEarnTick4, false);
+                        break;
+                    case 4:
+                        txtPayoffEarn.Text = btnEarnTick4.Text;
+                        ChangeTickBtnColor(btnEarnTick1, false);
+                        ChangeTickBtnColor(btnEarnTick2, false);
+                        ChangeTickBtnColor(btnEarnTick3, false);
+                        ChangeTickBtnColor(btnEarnTick4, true);
+                        break;
+                    default: break;
+                }
+                btnEarnTick1.Invalidate();
+                btnEarnTick2.Invalidate();
+                btnEarnTick3.Invalidate();
+                btnEarnTick4.Invalidate();
+            }
+        }
+        private void ChangeLossTick(int index = 0)
+        {
+
+            if (index == 0)
+            {
+                int[] ordCnts = { 1, 1, 1, 1 };
+                string[] sCnts = Settings.Default.LossTicks.Split('#');
+
+                if (sCnts == null && sCnts.Length < 4)
+                    return;
+                for (int i = 0; i < 4; i++)
+                {
+                    if (!int.TryParse(sCnts[i], out ordCnts[i]))
+                    {
+                        ordCnts[i] = 1;
+                    }
+                }
+
+                btnLossTick1.Text = ordCnts[0].ToString();
+                btnLossTick2.Text = ordCnts[1].ToString();
+                btnLossTick3.Text = ordCnts[2].ToString();
+                btnLossTick4.Text = ordCnts[3].ToString();
+            }
+            else
+            {
+                switch (index)
+                {
+                    case 1:
+                        cmbPayoffLoss.Text = btnLossTick1.Text;
+                        ChangeTickBtnColor(btnLossTick1, true);
+                        ChangeTickBtnColor(btnLossTick2, false);
+                        ChangeTickBtnColor(btnLossTick3, false);
+                        ChangeTickBtnColor(btnLossTick4, false);
+                        break;
+                    case 2:
+                        cmbPayoffLoss.Text = btnLossTick2.Text;
+                        ChangeTickBtnColor(btnLossTick1, false);
+                        ChangeTickBtnColor(btnLossTick2, true);
+                        ChangeTickBtnColor(btnLossTick3, false);
+                        ChangeTickBtnColor(btnLossTick4, false);
+                        break;
+                    case 3:
+                        cmbPayoffLoss.Text = btnLossTick3.Text;
+                        ChangeTickBtnColor(btnLossTick1, false);
+                        ChangeTickBtnColor(btnLossTick2, false);
+                        ChangeTickBtnColor(btnLossTick3, true);
+                        ChangeTickBtnColor(btnLossTick4, false);
+                        break;
+                    case 4:
+                        cmbPayoffLoss.Text = btnLossTick4.Text;
+                        ChangeTickBtnColor(btnLossTick1, false);
+                        ChangeTickBtnColor(btnLossTick2, false);
+                        ChangeTickBtnColor(btnLossTick3, false);
+                        ChangeTickBtnColor(btnLossTick4, true);
+                        break;
+                    default: break;
+                }
+                btnLossTick1.Invalidate();
+                btnLossTick2.Invalidate();
+                btnLossTick3.Invalidate();
+                btnLossTick4.Invalidate();
+            }
+        }
+        private void ChangeTickBtnColor(ReaLTaiizor.Controls.DreamButton btn, bool bChecked)
+        {
+
+            Color btnColor = bChecked? Color.FromArgb(105, 170, 142) : Color.FromArgb(100, 150, 250);
+
+            btn.ColorA = btnColor;
+            btn.ColorB = btnColor;
+            btn.ColorC = btnColor;
+            btn.ColorD = btnColor;
+        }
         private void ChangeSettingControls(bool bForce = false)
         {
-            // Trace.TraceInformation("<FrmMain> ChangeSettingControls() _bLoadConfig:{0}, bForce:{1}", _bLoadConfig, bForce);
 
             if (_bLoadConfig && !bForce)
                 return;
-            // Trace.TraceInformation("<FrmMain> ChangeSettingControls()");
 
             _bLoadConfig = true;
             groupBetting1.Visible = false;
@@ -1929,7 +2056,6 @@ namespace LuckyFuture.UI
             groupBetting4.Visible = false;
             groupBetting5.Visible = false;
             groupBetting6.Visible = false;
-            groupBetting7.Visible = false;
 
             groupPayoff1.Visible = false;
             groupPayoff2.Visible = false;
@@ -1990,6 +2116,7 @@ namespace LuckyFuture.UI
                 cmbOrderType4.SelectedIndex = Settings.Default.OrderType;
                 txtOrderCount4.Text = Settings.Default.OrderCount.ToString();
                 label29.Text = strCom;
+                //Group A
                 chkConc1.Checked = Settings.Default.Conc1On;
                 txtConc1Min.Text = Settings.Default.Conc1Min.ToString();
                 txtConc1Cnt.Text = Settings.Default.Conc1Cnt.ToString();
@@ -1999,6 +2126,25 @@ namespace LuckyFuture.UI
                 chkAdx.Checked = Settings.Default.AdxOn;
                 txtAdx.Text = Settings.Default.AdxCnt.ToString();
                 txtBoAdjust4.Text = Settings.Default.BoLineAdjust.ToString();
+
+                cmbLiqType4.SelectedIndex = Settings.Default.LiqType;
+                //Group B
+                chkCci.Checked = Settings.Default.CciOn;
+                txtCci1.Text = Settings.Default.CciRange1.ToString();
+                txtCci2.Text = Settings.Default.CciRange2.ToString();
+                cmbCciSide1.SelectedIndex = Settings.Default.CciSide1;
+                cmbCciSide2.SelectedIndex = Settings.Default.CciSide2;
+
+                chkRsi.Checked = Settings.Default.RsiOn;
+                txtRsi1.Text = Settings.Default.RsiRange1.ToString();
+                txtRsi2.Text = Settings.Default.RsiRange2.ToString();
+                cmbRsiSide1.SelectedIndex = Settings.Default.RsiSide1;
+                cmbRsiSide2.SelectedIndex = Settings.Default.RsiSide2;
+
+                chkAvgs.Checked = Settings.Default.AvgsOn;
+                txtAvgsCandle.Text = Settings.Default.AvgsCandle.ToString();
+                cmbAvgsSide1.SelectedIndex = Settings.Default.AvgsSide1;
+                cmbAvgsSide2.SelectedIndex = Settings.Default.AvgsSide2;
 
                 enableSmart = true;
                 enableCross = true;
@@ -2027,37 +2173,6 @@ namespace LuckyFuture.UI
                 label59.Text = strCom;
                 cmbBettingCross6.SelectedIndex = Settings.Default.BettingEnter ? 1 : 0;
                 txtBoAdjust6.Text = Settings.Default.BoLineAdjust.ToString();
-
-                enableSmart = true;
-                enableCross = true;
-                enableCci = true;
-            }
-            else if (cmbBettingType.SelectedIndex == (int)BETTYPE.CCI)
-            {
-                groupBetting7.Visible = true;
-                groupPayoff1.Visible = true;
-
-                cmbChartType7.SelectedIndex = Settings.Default.ChartType;
-                cmbOrderType7.SelectedIndex = Settings.Default.OrderType;
-                txtOrderCount7.Text = Settings.Default.OrderCount.ToString();
-                label78.Text = strCom;
-                
-                chkCci.Checked = Settings.Default.CciOn;
-                txtCci1.Text = Settings.Default.CciRange1.ToString();
-                txtCci2.Text = Settings.Default.CciRange2.ToString();
-                cmbCciSide1.SelectedIndex = Settings.Default.CciSide1;
-                cmbCciSide2.SelectedIndex = Settings.Default.CciSide2;
-
-                chkRsi.Checked = Settings.Default.RsiOn;
-                txtRsi1.Text = Settings.Default.RsiRange1.ToString();
-                txtRsi2.Text = Settings.Default.RsiRange2.ToString();
-                cmbRsiSide1.SelectedIndex = Settings.Default.RsiSide1;
-                cmbRsiSide2.SelectedIndex = Settings.Default.RsiSide2;
-
-                chkAvgs.Checked = Settings.Default.AvgsOn;
-                txtAvgsCandle.Text = Settings.Default.AvgsCandle.ToString();
-                cmbAvgsSide1.SelectedIndex = Settings.Default.AvgsSide1;
-                cmbAvgsSide2.SelectedIndex = Settings.Default.AvgsSide2;
 
                 enableSmart = true;
                 enableCross = true;
@@ -2334,8 +2449,8 @@ namespace LuckyFuture.UI
                 }
                 catch
                 {
-                    txtOrderCount7.SelectAll();
-                    txtOrderCount7.Focus();
+                    txtOrderCount1.SelectAll();
+                    txtOrderCount1.Focus();
                     return;
                 }
                 
@@ -2499,6 +2614,7 @@ namespace LuckyFuture.UI
                 Settings.Default.BettingType = (int)BETTYPE.BOLINE;
                 Settings.Default.ChartType = cmbChartType4.SelectedIndex;
                 Settings.Default.OrderType = cmbOrderType4.SelectedIndex;
+                Settings.Default.LiqType = cmbLiqType4.SelectedIndex;
                 try
                 {
                     int nOrderCnt = Int32.Parse(txtOrderCount4.Text);
@@ -2526,7 +2642,6 @@ namespace LuckyFuture.UI
                 }
 
                 Settings.Default.BettingCandleCount = 1;
-
                 Settings.Default.BettingEnter = false;
                 Settings.Default.Conc1On = chkConc1.Checked;
                 if (chkConc1.Checked)
@@ -2653,56 +2768,6 @@ namespace LuckyFuture.UI
                     txtBoAdjust4.Focus();
                     return;
                 }
-
-                log += "주문(방식:S-B선";
-                log += ", 차트타입:" + cmbChartType4.SelectedItem.ToString();
-                log += ", 주문타입:" + (Settings.Default.OrderType == 0 ? "시장가" : "지정가");
-                log += ", 주문수량:" + Settings.Default.OrderCount;
-                if(chkConc1.Checked)
-                    log += string.Format(", {0}분당 거래량 {1}이상", Settings.Default.Conc1Min, Settings.Default.Conc1Cnt);
-                if(chkConc2.Checked)
-                    log += string.Format(", {0}차트 {1}봉내 거래량 {2}%이상", Settings.Default.Conc2Chart, Settings.Default.Conc2Candle, Settings.Default.Conc2Cnt);
-                if (chkAdx.Checked)
-                    log += string.Format(", ADX: {0}이상", Settings.Default.AdxCnt);
-                //log += ", 상승/하락:" + cmbBettingCandle4.SelectedItem.ToString();
-                log += ", S-B선조정:" + Settings.Default.BoLineAdjust+"틱";
-                log += ") ";
-            }
-            else if (cmbBettingType.SelectedIndex == (int)BETTYPE.CCI)       //CCI
-            {
-                Settings.Default.BettingType = (int)BETTYPE.CCI;
-                Settings.Default.ChartType = cmbChartType7.SelectedIndex;
-                Settings.Default.OrderType = cmbOrderType7.SelectedIndex;
-                try
-                {
-                    int nOrderCnt = Int32.Parse(txtOrderCount7.Text);
-                    if (nOrderCnt < 0)
-                    {
-                        txtOrderCount7.SelectAll();
-                        txtOrderCount7.Focus();
-                        return;
-                    }
-                    else if (nOrderCnt > Settings.Default.OrderMax)
-                    {
-                        MessageBox.Show(strWarning, "경고");
-
-                        txtOrderCount7.SelectAll();
-                        txtOrderCount7.Focus();
-                        return;
-                    }
-                    Settings.Default.OrderCount = nOrderCnt;
-                }
-                catch
-                {
-                    txtOrderCount7.SelectAll();
-                    txtOrderCount7.Focus();
-                    return;
-                }
-
-                Settings.Default.BettingCandleCount = 1;
-
-                Settings.Default.BettingEnter = false;
-                
                 Settings.Default.CciOn = chkCci.Checked;
                 if (chkCci.Checked)
                 {
@@ -2808,29 +2873,41 @@ namespace LuckyFuture.UI
                     Settings.Default.AvgsSide1 = cmbAvgsSide1.SelectedIndex;
                     Settings.Default.AvgsSide2 = cmbAvgsSide2.SelectedIndex;
                 }
-                log += "주문(방식:CCI";
-                log += ", 차트타입:" + cmbChartType7.SelectedItem.ToString();
+
+
+
+
+                log += "주문(방식:S-B선";
+                log += ", 차트타입:" + cmbChartType4.SelectedItem.ToString();
                 log += ", 주문타입:" + (Settings.Default.OrderType == 0 ? "시장가" : "지정가");
                 log += ", 주문수량:" + Settings.Default.OrderCount;
+                if(chkConc1.Checked)
+                    log += string.Format(", {0}분당 거래량 {1}이상", Settings.Default.Conc1Min, Settings.Default.Conc1Cnt);
+                if(chkConc2.Checked)
+                    log += string.Format(", {0}차트 {1}봉내 거래량 {2}%이상", Settings.Default.Conc2Chart, Settings.Default.Conc2Candle, Settings.Default.Conc2Cnt);
+                if (chkAdx.Checked)
+                    log += string.Format(", ADX: {0}이상", Settings.Default.AdxCnt);
+
                 if (chkCci.Checked)
                 {
-                    log += string.Format(", CCI: 상승{0} {1}, 하락{2} {3}", 
+                    log += string.Format(", CCI: 상승{0} {1}, 하락{2} {3}",
                         Settings.Default.CciRange1, Settings.Default.CciSide1 == 0 ? "매수" : "매도",
                         Settings.Default.CciRange2, Settings.Default.CciSide2 == 0 ? "매수" : "매도");
                 }
                 if (chkRsi.Checked)
                 {
-                    log += string.Format(", RSI: 상승{0} {1}, 하락{1} {3}", 
-                        Settings.Default.RsiRange1, Settings.Default.RsiSide1 == 0 ? "매수" : "매도", 
+                    log += string.Format(", RSI: 상승{0} {1}, 하락{2} {3}",
+                        Settings.Default.RsiRange1, Settings.Default.RsiSide1 == 0 ? "매수" : "매도",
                         Settings.Default.RsiRange2, Settings.Default.RsiSide2 == 0 ? "매수" : "매도");
                 }
                 if (chkAdx.Checked)
                 {
-                    log += string.Format(", 200일선: {0}봉 위{1}, 아래{2}", Settings.Default.AvgsCandle, 
-                            Settings.Default.AvgsSide1==0?"매수":"매도", 
+                    log += string.Format(", 200일선: {0}봉 위{1}, 아래{2}", Settings.Default.AvgsCandle,
+                            Settings.Default.AvgsSide1 == 0 ? "매수" : "매도",
                             Settings.Default.AvgsSide2 == 0 ? "매수" : "매도");
                 }
 
+                log += ", S-B선조정:" + Settings.Default.BoLineAdjust+"틱";
                 log += ") ";
             }
             else if (cmbBettingType.SelectedIndex == (int)BETTYPE.HYBRID)       //이평주하
@@ -3275,7 +3352,7 @@ namespace LuckyFuture.UI
 
             AddLog("설정이 저장되었습니다.");
 
-            WriteLog(log);
+            AddLog(log);
 
             ResetDChartType();
         }
@@ -4048,7 +4125,7 @@ namespace LuckyFuture.UI
         {
             if (!OrdCntForm.Visible)
             {
-                OrdCntForm.InitComponent();
+                OrdCntForm.loadControls();
                 OrdCntForm.Show(this);
             }
         }
@@ -4074,41 +4151,6 @@ namespace LuckyFuture.UI
         private void chkOrd44_CheckedChanged(object sender, EventArgs e)
         {
             if(chkOrd44.Checked)
-                ChangeOrdCnt(4);
-        }
-
-        private void btnOrdSel7_Click(object sender, EventArgs e)
-        {
-            if (!OrdCntForm.Visible)
-            {
-                OrdCntForm.InitComponent();
-                OrdCntForm.Show(this);
-            }
-        }
-
-        private void chkOrd71_CheckedChanged(object sender, EventArgs e)
-        {
-
-            if (chkOrd71.Checked)
-                ChangeOrdCnt(1);
-        }
-
-        private void chkOrd72_CheckedChanged(object sender, EventArgs e)
-        {
-
-            if (chkOrd72.Checked)
-                ChangeOrdCnt(2);
-        }
-
-        private void chkOrd73_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkOrd73.Checked)
-                ChangeOrdCnt(3);
-        }
-
-        private void chkOrd74_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkOrd74.Checked)
                 ChangeOrdCnt(4);
         }
 
@@ -4140,7 +4182,7 @@ namespace LuckyFuture.UI
         {
             if (!OrdCntForm.Visible)
             {
-                OrdCntForm.InitComponent();
+                OrdCntForm.loadControls();
                 OrdCntForm.Show(this);
             }
         }
@@ -4173,7 +4215,7 @@ namespace LuckyFuture.UI
         {
             if (!OrdCntForm.Visible)
             {
-                OrdCntForm.InitComponent();
+                OrdCntForm.loadControls();
                 OrdCntForm.Show(this);
             }
         }
@@ -4182,7 +4224,7 @@ namespace LuckyFuture.UI
         {
             if (!OrdCntForm.Visible)
             {
-                OrdCntForm.InitComponent();
+                OrdCntForm.loadControls();
                 OrdCntForm.Show(this);
             }
         }
@@ -4215,7 +4257,7 @@ namespace LuckyFuture.UI
         {
             if (!OrdCntForm.Visible)
             {
-                OrdCntForm.InitComponent();
+                OrdCntForm.loadControls();
                 OrdCntForm.Show(this);
             }
         }
@@ -4242,41 +4284,6 @@ namespace LuckyFuture.UI
         {
             if (chkOrd34.Checked)
                 ChangeOrdCnt(4);
-        }
-
-        private void cmbChartType7_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            e.DrawBackground();
-            if (e.Index >= 0)
-            {
-                e.Graphics.DrawString(cmbChartType7.Items[e.Index].ToString(), e.Font,
-                 new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
-            }
-        }
-
-        private void cmbChartType7_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            saveSetting();
-        }
-
-        private void cmbOrderType7_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            e.DrawBackground();
-            if (e.Index >= 0)
-            {
-                e.Graphics.DrawString(cmbOrderType7.Items[e.Index].ToString(), e.Font,
-                 new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
-            }
-        }
-
-        private void cmbOrderType7_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            saveSetting();
-        }
-
-        private void txtOrderCount7_TextChanged(object sender, EventArgs e)
-        {
-            saveSetting();
         }
 
         private void chkRsi_CheckedChanged(object sender, EventArgs e)
@@ -4506,6 +4513,79 @@ namespace LuckyFuture.UI
         private void txtPayoffCci1_TextChanged(object sender, EventArgs e)
         {
             saveSetting();
+        }
+
+        private void btnEarnTick1_Click(object sender, EventArgs e)
+        {
+            ChangeEarnTick(1);
+        }
+
+        private void btnEarnTick2_Click(object sender, EventArgs e)
+        {
+            ChangeEarnTick(2);
+        }
+
+        private void btnEarnTick3_Click(object sender, EventArgs e)
+        {
+            ChangeEarnTick(3);
+        }
+
+        private void btnEarnTick4_Click(object sender, EventArgs e)
+        {
+            ChangeEarnTick(4);
+        }
+
+        private void btnEarnTickSet_Click(object sender, EventArgs e)
+        {
+            if (!EarnTickForm.Visible)
+            {
+                EarnTickForm.loadControls();
+                EarnTickForm.Show(this);
+            }
+        }
+
+        private void btnLossTick1_Click(object sender, EventArgs e)
+        {
+            ChangeLossTick(1);
+        }
+
+        private void btnLossTick2_Click(object sender, EventArgs e)
+        {
+            ChangeLossTick(2);
+        }
+
+        private void btnLossTick3_Click(object sender, EventArgs e)
+        {
+            ChangeLossTick(3);
+        }
+
+        private void btnLossTick4_Click(object sender, EventArgs e)
+        {
+            ChangeLossTick(4);
+        }
+
+        private void btnLossTickSet_Click(object sender, EventArgs e)
+        {
+            if (!LossTickForm.Visible)
+            {
+                LossTickForm.loadControls();
+                LossTickForm.Show(this);
+            }
+        }
+
+        private void cmbLiqType4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            saveSetting();
+        }
+
+        private void cmbLiqType4_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            if (e.Index >= 0)
+            {
+                e.Graphics.DrawString(cmbLiqType4.Items[e.Index].ToString(), e.Font,
+                 new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
+            }
         }
     }
 }

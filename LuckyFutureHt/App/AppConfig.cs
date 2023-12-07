@@ -122,6 +122,7 @@ namespace LuckyFuture
                         case "CciPayoff": Settings.Default.CciPayoff = bool.Parse(value); break;
                         case "CciPayoffValue": Settings.Default.CciPayoffValue1 = int.Parse(value); break;
                         case "CciRangePayoff": Settings.Default.CciRangePayoff = bool.Parse(value); break;
+                        case "LiqType": Settings.Default.LiqType = int.Parse(value); break;
 
                         // case "SignalSiteOn": Settings.Default.SignalSiteOn = bool.Parse(value); break;
                         default: break;
@@ -243,6 +244,7 @@ namespace LuckyFuture
                 AddElement(document, itemListElement, "CciPayoff", Settings.Default.CciPayoff.ToString());
                 AddElement(document, itemListElement, "CciPayoffValue", Settings.Default.CciPayoffValue1.ToString());
                 AddElement(document, itemListElement, "CciRangePayoff", Settings.Default.CciRangePayoff.ToString());
+                AddElement(document, itemListElement, "LiqType", Settings.Default.LiqType.ToString());
                 //AddElement(document, itemListElement, "SignalSiteOn", Settings.Default.SignalSiteOn.ToString());
 
                 document.Save(filePath);

@@ -326,6 +326,7 @@ namespace ChartCtrl
             SetBoLineVal();
             SetAdx();
             SetCci();
+            SetRsi();
             if (CtrlProperty._DTimeType == TIMETYPE.TIMETYPE_TICK)
             {
                 if (m_iTick + nTick <= (int)CtrlProperty._DTimeUnitAmt)

@@ -269,18 +269,6 @@
     <Setting Name="RsiSide2" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="OrdCnt1" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
-    </Setting>
-    <Setting Name="OrdCnt2" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">2</Value>
-    </Setting>
-    <Setting Name="OrdCnt3" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
-    </Setting>
-    <Setting Name="OrdCnt4" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
-    </Setting>
     <Setting Name="AvgsOn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -357,6 +345,18 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CciPayoffValue2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="OrdCnts" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1#2#5#10</Value>
+    </Setting>
+    <Setting Name="EarnTicks" Type="System.String" Scope="User">
+      <Value Profile="(Default)">20#30#50#100</Value>
+    </Setting>
+    <Setting Name="LossTicks" Type="System.String" Scope="User">
+      <Value Profile="(Default)">20#30#50#100</Value>
+    </Setting>
+    <Setting Name="LiqType" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
