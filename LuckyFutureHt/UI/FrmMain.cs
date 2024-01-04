@@ -75,7 +75,7 @@ namespace LuckyFuture.UI
 		{
             AppConfig.ReadLossConfig();
             // supported site list
-            string[] site_names = {"더드림", "몬스타", "키움증권" }; //"레안텍", "나눔"
+            string[] site_names = {"더드림", "몬스타", "키움증권", "미래" }; //"레안텍", "나눔"
             foreach (string site_name in site_names) 
 				cmbSiteList.Items.Add(site_name);
 
@@ -995,7 +995,7 @@ namespace LuckyFuture.UI
         }
         private void EnableControls()
 		{
-            chkSignal.Visible = !((SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.KIWOOM); 
+            chkSignal.Visible = !((SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.KIWOOM || (SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.MIRAE); 
 
             bool running  = LogicAuto.Default.IsRunning;
 			cmbSiteList.Enabled = !running;
@@ -1115,6 +1115,11 @@ namespace LuckyFuture.UI
 					txtPassword.Focus();
 					return;
 				}
+                if (this.CurrentSiteType == SITETYPE.MIRAE)
+                {
+                    chkSignal.Checked = false;
+                    Settings.Default.SignalSiteOn = chkSignal.Checked;
+                }
 
                 string id = txtId.Text;
                 string acc = "";
@@ -1204,7 +1209,8 @@ namespace LuckyFuture.UI
             {
 				string itemSymbol = CurrentSite.ItemList[itemIndex].Symbol;
                 
-				if(this.CurrentSiteType == SITETYPE.DREAM || this.CurrentSiteType == SITETYPE.TOPASSET || this.CurrentSiteType == SITETYPE.KIWOOM)
+				if(this.CurrentSiteType == SITETYPE.DREAM || this.CurrentSiteType == SITETYPE.TOPASSET
+                    || this.CurrentSiteType == SITETYPE.KIWOOM || this.CurrentSiteType == SITETYPE.MIRAE)
                 {
                     ItemChanged = true;
                     if (CurrentSite.ChangeItem(itemSymbol))

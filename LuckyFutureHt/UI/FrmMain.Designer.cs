@@ -714,7 +714,7 @@ namespace LuckyFuture.UI
             // 
             // columnLog
             // 
-            this.columnLog.Width = 485;
+            this.columnLog.Width = 1500;
             // 
             // btnChat
             // 

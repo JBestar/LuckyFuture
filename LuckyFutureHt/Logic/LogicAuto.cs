@@ -180,7 +180,9 @@ namespace LuckyFuture.Logic
                 case SITETYPE.KIWOOM:
                     _currentSite = new KFOpen(axKFOpenAPI);
                     break;
-
+                case SITETYPE.MIRAE:
+                    _currentSite = new SiteMirae(SITETYPE.MIRAE);
+                    break;
                 default:
 					_currentSite = null;
 					break;

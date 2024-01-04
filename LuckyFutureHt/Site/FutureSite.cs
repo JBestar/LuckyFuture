@@ -32,8 +32,9 @@ namespace LuckyFuture.Site
         DREAM = 0,
         TOPASSET = 1,
         KIWOOM = 2,
-		VISION_ASSET = 3,
-		RELEASE = 100,
+        MIRAE = 3,
+        VISION_ASSET = 4,
+        RELEASE = 100,
 	}
 
 	public enum SITE_NOTICEEVENTTYPE

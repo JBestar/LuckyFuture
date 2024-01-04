@@ -17,6 +17,7 @@ namespace LuckyFuture.Models.ValueObjects
         public double Exchange { get; set; }
         public int Precision { get; set; }
         public double MidPrice { get; set; }
+        public int index { get; set; }
 
     }
 }

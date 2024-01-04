@@ -123,6 +123,8 @@
     <Compile Include="App\AppAuthor.cs" />
     <Compile Include="App\AppConfig.cs" />
     <Compile Include="Logic\LogicAuto.cs" />
+    <Compile Include="Models\Mirae\TraderSocket.cs" />
+    <Compile Include="Models\Mirae\LoginSocket.cs" />
     <Compile Include="Models\Reanteck\CurrencySocket.cs" />
     <Compile Include="Models\Reanteck\ConnectSocket.cs" />
     <Compile Include="Models\ValueObjects\DayProfitLossInfo.cs" />
@@ -142,6 +144,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Site\FutureSite.cs" />
     <Compile Include="Site\KFOpen.cs" />
+    <Compile Include="Site\SiteMirae.cs" />
     <Compile Include="Site\SiteReantek.cs" />
     <Compile Include="Site\SiteVisionAsset.cs" />
     <Compile Include="UI\FrmOrdCnt.cs">
