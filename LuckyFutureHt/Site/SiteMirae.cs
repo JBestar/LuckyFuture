@@ -837,13 +837,17 @@ namespace LuckyFuture.Site
                 foreach (string msg in itemList)
                 {
                     index++;
+
+                    if (msg.IndexOf("CME") < 0 && msg.IndexOf("HKEX") < 0)
+                        continue;
+                    WriteLog(msg);
                     MatchCollection mc = regex.Matches(msg);
                     foreach (Match m in mc)
                     {
                         newItem = new ItemSymbolInfo();
                         newItem.Symbol = m.Groups[1].Value;                     //6AH24
 
-                        if (newItem.Symbol.IndexOf("201V") >= 0)
+                        if (newItem.Symbol.IndexOf("201") >= 0)
                             break;
 
                         newItem.index = index;

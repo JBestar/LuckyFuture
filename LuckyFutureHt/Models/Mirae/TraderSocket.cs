@@ -246,7 +246,7 @@ namespace LuckyFuture.Models.Reanteck
             endBytes = Encoding.Default.GetBytes(bodyData2);
             bodyBytes = Extension.CombineBytes(bodyBytes, endBytes);
 
-            return RequestPacket(headId, bodyBytes);
+            return RequestPacket(headId, bodyBytes, true);
 
         }
 
@@ -389,7 +389,7 @@ namespace LuckyFuture.Models.Reanteck
             endBytes = Encoding.Default.GetBytes(bodyData2);
             bodyBytes = Extension.CombineBytes(bodyBytes, endBytes);
 
-            return RequestPacket(headId, bodyBytes);
+            return RequestPacket(headId, bodyBytes, true);
         }
         public bool RequestCurrency(string symbol, int index)
         {
@@ -410,7 +410,7 @@ namespace LuckyFuture.Models.Reanteck
             endBytes = Encoding.Default.GetBytes(bodyData2);
 
             bodyBytes = Extension.CombineBytes(bodyBytes, endBytes);
-            return RequestPacket(headId, bodyBytes);
+            return RequestPacket(headId, bodyBytes, true);
 
         }
         public bool RequestControlTick(string symbol, bool bOpen)
@@ -838,8 +838,8 @@ namespace LuckyFuture.Models.Reanteck
                 sMsg = Encoding.Default.GetString(recvBytes, iCurPos, iEndPos - iCurPos);
                 listItem.Add(sMsg);
                 iCurPos = iEndPos + 0xF;
-                if (listItem.Count > 15)
-                    break;
+//                 if (listItem.Count > 1000)
+//                     break;
             }
             return listItem;
         }
@@ -851,14 +851,17 @@ namespace LuckyFuture.Models.Reanteck
             for (int i = offset; i < recvBytes.Length - 0xF; i++)
             {
                 cnt = 0;
-                for (int j = i; j <= i + 0xE; j++)
-                {
-                    if (recvBytes[j] == 0)
-                    {
-                        cnt++;
-                    }
-                    else break;
-                }
+                if (recvBytes[i] == 0)
+                    cnt = 0xF;
+
+                    //                 for (int j = i; j <= i + 0xE; j++)
+                    //                 {
+                    //                     if (recvBytes[j] == 0)
+                    //                     {
+                    //                         cnt++;
+                    //                     }
+                    //                     else break;
+                    //                 }
                 if (cnt >= 0xF)
                 {
                     iPos = i;
