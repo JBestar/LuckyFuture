@@ -73,16 +73,16 @@ namespace LuckyFuture.Site
 
         int _aliveTime = 0;
         int _orderTick = 0;
-        int _currencyTick = 0;
+        // int _currencyTick = 0;
 
         Random _random = new Random();
         public SiteMirae(SITETYPE siteType)
         {
             Type = siteType;
-            if (siteType == SITETYPE.MIRAE)
-            {
-                _IpAddr = "218.50.1.4";
-            }
+//             if (siteType == SITETYPE.MIRAE)
+//             {
+//                 _IpAddr = "218.50.1.4";
+//             }
 
 #if WRITE_LOG
             CreateLogFile();
@@ -302,7 +302,7 @@ namespace LuckyFuture.Site
 
             Thread.Sleep(500);
             _TraderSock.RequestTr0010();
-            _currencyTick = 0;
+            // _currencyTick = 0;
             StartPrice = 0;
             Thread.Sleep(300);
             _TraderSock.RequestItemlist(); //HEAD_BQ0006

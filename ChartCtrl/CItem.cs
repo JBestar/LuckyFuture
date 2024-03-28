@@ -23,7 +23,7 @@ namespace ChartCtrl
         /// Declare Member Variables
         private long m_lStartTm;        //시작시간
         private long m_lEndTm;          //마감시간
-        private int m_iTick;           //틱개수
+        private int m_iTick;           //틱수
         private int m_nConc;           //거래량
 
 

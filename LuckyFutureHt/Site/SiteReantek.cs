@@ -85,16 +85,16 @@ namespace LuckyFuture.Site
                 _AppName = "/NEW_MST/몬스타 HTS/TeamViewer, /@";
                 //_AppName = "몬스타 HTS/TeamViewer, /@";
                 _IpAddr = "222.239.252.47";
-            }   
-//             if (siteType == SITETYPE.TOPASSET)
-//             {
-//                 _AppName = "brother system";
-//                 _IpAddr = "110.10.212.147";
-//             }
+            }
+            else if (siteType == SITETYPE.MIRAE2)
+            {
+                _AppName = "/NEW/미래선물 HTS/N/@";
+                _IpAddr = "117.52.11.89";
+            }
             else if (siteType == SITETYPE.DREAM)
             {
                 _AppName = "/NEW/APP20/N/@";
-                _IpAddr = "172.65.237.26"; // 172.65.237.42
+                _IpAddr = "172.65.218.121"; //172.65.237.26 // 172.65.237.42
             }
 #if WRITE_LOG
             CreateLogFile();

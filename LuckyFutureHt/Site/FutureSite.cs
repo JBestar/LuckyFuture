@@ -32,7 +32,8 @@ namespace LuckyFuture.Site
         DREAM = 0,
         TOPASSET = 1,
         KIWOOM = 2,
-        MIRAE = 3,
+        //MIRAE = 3,
+        MIRAE2 = 3,
         VISION_ASSET = 4,
         RELEASE = 100,
 	}
@@ -244,7 +245,7 @@ namespace LuckyFuture.Site
 					last_error_code = Check();
                     if (last_error_code == ERRORCODE.ACCOUNT_STANDBY)
                         SetStageWait((int)FUSTAGE.LOGIN, 3000);
-                    else if (last_error_code == ERRORCODE.PREPARE_FAILED)	//종목변경
+                    else if (last_error_code == ERRORCODE.PREPARE_FAILED)	
                         SetStageWait((int)FUSTAGE.PREPARE, 1000);
                     else if (last_error_code == ERRORCODE.SUCCESS)
 						SetStageWait((int)FUSTAGE.CHECK, 500);

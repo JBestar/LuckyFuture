@@ -20,10 +20,10 @@ namespace LuckyFuture.Models.Reanteck
 
         public const string HEAD_KEEPALIVE = "TA000";     //KeepAlive
         public const string HEAD_POPUPLOGIN = "TA002";     //로그인
-        public const string HEAD_MAINLOGIN = "TA003";     //메인창로그인
+        public const string HEAD_MAINLOGIN = "TA003";     //메인로그인
                                                           //
-        public const string HEAD_LOGOUTEND = "TA006";      //로그아웃 마지막닫기
-        public const string HEAD_DUPLOGIN = "TA007";     //중복로그인 밀어내기
+        public const string HEAD_LOGOUTEND = "TA006";      //로그아웃 마지막
+        public const string HEAD_DUPLOGIN = "TA007";     //중복로그인 
 
         public const string HEAD_LOGOUT = "TA011";     //로그아웃 
         public const string HEAD_ORDER = "TA101";     //주문, 청산요청

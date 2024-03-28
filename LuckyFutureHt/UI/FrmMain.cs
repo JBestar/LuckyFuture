@@ -995,7 +995,7 @@ namespace LuckyFuture.UI
         }
         private void EnableControls()
 		{
-            chkSignal.Visible = !((SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.KIWOOM || (SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.MIRAE); 
+            chkSignal.Visible = !((SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.KIWOOM/* || (SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.MIRAE2*/); 
 
             bool running  = LogicAuto.Default.IsRunning;
 			cmbSiteList.Enabled = !running;
@@ -1115,11 +1115,11 @@ namespace LuckyFuture.UI
 					txtPassword.Focus();
 					return;
 				}
-                if (this.CurrentSiteType == SITETYPE.MIRAE)
-                {
-                    chkSignal.Checked = false;
-                    Settings.Default.SignalSiteOn = chkSignal.Checked;
-                }
+//                 if (this.CurrentSiteType == SITETYPE.MIRAE)
+//                 {
+//                     chkSignal.Checked = false;
+//                     Settings.Default.SignalSiteOn = chkSignal.Checked;
+//                 }
 
                 string id = txtId.Text;
                 string acc = "";
@@ -1210,7 +1210,7 @@ namespace LuckyFuture.UI
 				string itemSymbol = CurrentSite.ItemList[itemIndex].Symbol;
                 
 				if(this.CurrentSiteType == SITETYPE.DREAM || this.CurrentSiteType == SITETYPE.TOPASSET
-                    || this.CurrentSiteType == SITETYPE.KIWOOM || this.CurrentSiteType == SITETYPE.MIRAE)
+                    || this.CurrentSiteType == SITETYPE.KIWOOM || this.CurrentSiteType == SITETYPE.MIRAE2)
                 {
                     ItemChanged = true;
                     if (CurrentSite.ChangeItem(itemSymbol))
