@@ -1094,11 +1094,15 @@ namespace ChartCtrl
             Invalidate();
         }
 
-        public void SetChartFrom(DateTime dtFrom)
+        public void SetChartFrom(DateTime dtFrom, double price = 0)
         {
             lock (_objLock)
             {
-                mlistRealVal.RemoveAll(v => v._dtRec < dtFrom);
+                if(price == 0)
+                    mlistRealVal.RemoveAll(v => v._dtRec < dtFrom);
+                else
+                    mlistRealVal.RemoveAll(v => v._dtRec < dtFrom || (v._dtRec == dtFrom && v._fVal == price) );
+
             }
             InitChart();
             int[] arrAvgCnt = { 5, 10, 20, 60, 120 };

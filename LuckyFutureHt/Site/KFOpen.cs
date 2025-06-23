@@ -1,4 +1,4 @@
-﻿// #define WRITE_LOG
+﻿#define WRITE_LOG
 
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ using LuckyFuture.Properties;
 using ChartCtrl;
 using LuckyFutureLib.Include;
 using Goodbyte.TradingSystem.Domain.Entities;
+using System.Text.RegularExpressions;
 
 namespace LuckyFuture.Site
 {
@@ -285,7 +286,6 @@ namespace LuckyFuture.Site
                 Thread.Sleep(500);
                 CurItemSymbol.MidPrice = 0;
             }
-            Settings.Default.ServerTimeDelay = 0;
             Current = null;
 
             CurrentList.Clear();
@@ -299,17 +299,17 @@ namespace LuckyFuture.Site
             
             if (this.CurrentUserAccount == null || string.IsNullOrEmpty(CurrentUserAccount.UserAccountId))
             {
-                OnFutureSiteLogEvent("계좌정보 오류!");
+                OnFutureSiteLogEvent("[주문] 계좌정보 오류!");
                 return false;
             }
             if (nQuantity < 1 || nQuantity > 10)
             {
-                OnFutureSiteLogEvent("주문수량 오류!");
+                OnFutureSiteLogEvent("[주문] 주문수량 오류!");
                 return false;
             }
             if (CurrentUserAccount.Balance < 300000 * nQuantity)
             {
-                OnFutureSiteLogEvent("담보금 부족!");
+                OnFutureSiteLogEvent("[주문] 담보금 부족!");
                 return false;
             }
 
@@ -322,7 +322,7 @@ namespace LuckyFuture.Site
             */
             if (Current == null || Current.CurrentPrice < 1)
             {
-                OnFutureSiteLogEvent("주문기간이 아닙니다.");
+                OnFutureSiteLogEvent("[주문] 주문기간이 아닙니다.");
                 return false;
             }
 
@@ -331,7 +331,7 @@ namespace LuckyFuture.Site
                 double nOrderRange = 40 * CurItemSymbol.OverTick;
                 if (quoteInfo.Price < Current.CurrentPrice - nOrderRange || quoteInfo.Price > Current.CurrentPrice + nOrderRange)
                 {
-                    OnFutureSiteLogEvent("주문 가격이 초과 됨");
+                    OnFutureSiteLogEvent("[주문] 주문 가격이 초과 됨");
                     return false;
                 }
             }
@@ -358,8 +358,8 @@ namespace LuckyFuture.Site
 
             if (iRet == (int)ERRORCOM.SUCCESS)
             {
-                OnFutureSiteLogEvent("매도주문이 접수되었습니다.");
-                OnFutureSiteLogEvent("주문시가격:" + Current.CurrentPrice);
+                OnFutureSiteLogEvent("[주문] 매도주문이 접수되었습니다.");
+                OnFutureSiteLogEvent("[주문] 주문시가격:" + Current.CurrentPrice);
                 return true;
             }
             else ShowErrorLog((ERRORCOM)iRet);
@@ -372,19 +372,19 @@ namespace LuckyFuture.Site
 
             if (this.CurrentUserAccount == null || string.IsNullOrEmpty(CurrentUserAccount.UserAccountId))
             {
-                OnFutureSiteLogEvent("계좌정보 오류!");
+                OnFutureSiteLogEvent("[주문] 계좌정보 오류!");
                 return false;
             }
 
             if (nQuantity < 1 || nQuantity > 10)
             {
-                OnFutureSiteLogEvent("주문수량 오류!");
+                OnFutureSiteLogEvent("[주문] 주문수량 오류!");
                 return false;
             }
 
             if (CurrentUserAccount.Balance < 300000 * nQuantity)
             {
-                OnFutureSiteLogEvent("담보금 부족!");
+                OnFutureSiteLogEvent("[주문] 담보금 부족!");
                 return false;
             }
             /*
@@ -396,7 +396,7 @@ namespace LuckyFuture.Site
             */
             if (Current == null || Current.CurrentPrice < 1)
             {
-                OnFutureSiteLogEvent("주문기간이 아닙니다.");
+                OnFutureSiteLogEvent("[주문] 주문기간이 아닙니다.");
                 return false;
             }
 
@@ -405,7 +405,7 @@ namespace LuckyFuture.Site
                 double nOrderRange = 40 * CurItemSymbol.OverTick;
                 if (quoteInfo.Price < Current.CurrentPrice - nOrderRange || quoteInfo.Price > Current.CurrentPrice + nOrderRange)
                 {
-                    OnFutureSiteLogEvent("주문 가격이 초과 됨");
+                    OnFutureSiteLogEvent("[주문] 주문 가격이 초과 됨");
                     return false;
                 }
             }
@@ -434,8 +434,8 @@ namespace LuckyFuture.Site
             if (iRet == (int)ERRORCOM.SUCCESS)
             {
                 // _orderTrade = TRADETYPE.BUY;
-                OnFutureSiteLogEvent("매수주문이 접수되었습니다.");
-                OnFutureSiteLogEvent("주문시가격:" + Current.CurrentPrice);
+                OnFutureSiteLogEvent("[주문] 매수주문이 접수되었습니다.");
+                OnFutureSiteLogEvent("[주문] 주문시가격:" + Current.CurrentPrice);
                 return true;
             }
             else ShowErrorLog((ERRORCOM)iRet);
@@ -447,7 +447,7 @@ namespace LuckyFuture.Site
         {
             if (this.CurrentUserAccount == null || string.IsNullOrEmpty(CurrentUserAccount.UserAccountId))
             {
-                OnFutureSiteLogEvent("계좌정보 오류!");
+                OnFutureSiteLogEvent("[주문취소] 계좌정보 오류!");
                 return false;
             }
 
@@ -468,9 +468,9 @@ namespace LuckyFuture.Site
             if (iRet == (int)ERRORCOM.SUCCESS)
             {
                 if (orderInfo.TradeTypeNo == "1")
-                    OnFutureSiteLogEvent("매도주문이 취소되었습니다.");
+                    OnFutureSiteLogEvent("[주문취소] 매도주문이 취소되었습니다.");
                 else if (orderInfo.TradeTypeNo == "2")
-                    OnFutureSiteLogEvent("매수주문이 취소되었습니다.");
+                    OnFutureSiteLogEvent("[주문취소] 매수주문이 취소되었습니다.");
             }
             else ShowErrorLog((ERRORCOM)iRet);
 
@@ -509,14 +509,14 @@ namespace LuckyFuture.Site
             {
                 if (orderInfo.TradeTypeNo == "1")
                 {
-                    OnFutureSiteLogEvent("매도주문이 청산되었습니다.");
+                    OnFutureSiteLogEvent("[청산] 매도주문이 청산되었습니다.");
                 }
                 else if (orderInfo.TradeTypeNo == "2")
                 {
-                    OnFutureSiteLogEvent("매수주문이 청산되었습니다.");
+                    OnFutureSiteLogEvent("[청산] 매수주문이 청산되었습니다.");
                 }
 
-                OnFutureSiteLogEvent("청산시가격:" + Current.CurrentPrice);
+                OnFutureSiteLogEvent("[청산] 청산시가격:" + Current.CurrentPrice);
 
             }
             else ShowErrorLog((ERRORCOM)iResCode);
@@ -1240,15 +1240,27 @@ namespace LuckyFuture.Site
             if (sRateValue == null)
                 return;
             //"USD미국달러            000009979000000009974500000000000000000000009974500000000000000000000000000000000000000000000000126783195"
-            // WriteLog("OnReceiveExchangeRate()" + sRateValue.Length +" "+ sRateValue);
+            WriteLog("OnReceiveExchangeRate() len=" + sRateValue.Length +" value="+ sRateValue);
             if (sRateValue.Length < 110)
                 return;
 
+            string pattern = @"([A-Za-z]+)\S+\s+(\d+)";
+            string usdRate = "";
+            foreach (Match match in Regex.Matches(sRateValue, pattern, RegexOptions.IgnoreCase))
+            {
+                if (match.Groups[1].Value == "USD")
+                    usdRate = match.Value;
+            }
+
+            if (usdRate.Length == 0)
+                return;
+
+            sRateValue = usdRate;
             try
             {
                 string sCurrencyCode = sRateValue.Substring(0, 3).Trim();   //통화코드
 
-                //WriteLog("OnReceiveExchangeRate" + sCurrencyCode);
+                WriteLog("OnReceiveExchangeRate=" + sCurrencyCode);
 
                 if (sCurrencyCode == "USD")
                 {
@@ -1324,6 +1336,7 @@ namespace LuckyFuture.Site
                         AveragePrice = sAveragePrice,
                         MaxAveragePrice = Math.Round(dAveragePrice, 6),
                         CurrentPrice = sCurrentPrice,
+                        StartCciPrice = -10000,
                         Valuation = lValuation,
                         Action = "청산",
                         TradeType = sTradeTypeNo == "1" ? TRADETYPE.SELL : TRADETYPE.BUY,

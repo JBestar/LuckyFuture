@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 
+
 using LuckyFuture.UI;
 
 namespace LuckyFuture
@@ -20,9 +21,8 @@ namespace LuckyFuture
 			
             Application.ThreadException += ThreadException;
             AppDomain.CurrentDomain.UnhandledException += UnhandledException;
-			
 
-			Application.EnableVisualStyles();
+            Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			var mf = new FrmMain();
 			Application.Run(mf);
@@ -38,6 +38,7 @@ namespace LuckyFuture
         {
             //MessageBox.Show(e.ExceptionObject.ToString());
         }
+
 
     }
 }

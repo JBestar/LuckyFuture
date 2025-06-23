@@ -1141,12 +1141,12 @@ namespace LuckyFuture.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>1#0#50</string>
-  <string>1#10#40</string>
-  <string>1#30#30</string>
-  <string>1#50#20</string>
-  <string>1#70#10</string>
-  <string>1#100#5</string>
+  <string>1#0#50#</string>
+  <string>1#10#40#</string>
+  <string>1#30#30#</string>
+  <string>1#50#20#</string>
+  <string>1#70#10#</string>
+  <string>1#100#5#</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection PayoffLossRange {
             get {
@@ -1161,16 +1161,16 @@ namespace LuckyFuture.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>1#10#50</string>
-  <string>1#20#45</string>
-  <string>1#30#40</string>
-  <string>1#40#35</string>
-  <string>1#50#30</string>
-  <string>1#60#25</string>
-  <string>1#70#20</string>
-  <string>1#80#15</string>
-  <string>1#90#10</string>
-  <string>1#100#5</string>
+  <string>1#10#50#50</string>
+  <string>1#20#45#50</string>
+  <string>1#30#40#50</string>
+  <string>1#40#35#50</string>
+  <string>1#50#30#50</string>
+  <string>1#60#25#50</string>
+  <string>1#70#20#50</string>
+  <string>1#80#15#50</string>
+  <string>1#90#10#50</string>
+  <string>1#100#5#50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection SmartLossRange {
             get {
@@ -1185,16 +1185,16 @@ namespace LuckyFuture.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>1#10#50</string>
-  <string>1#20#45</string>
-  <string>1#30#40</string>
-  <string>1#40#35</string>
-  <string>1#50#30</string>
-  <string>1#60#25</string>
-  <string>1#70#20</string>
-  <string>1#80#15</string>
-  <string>1#90#10</string>
-  <string>1#100#5</string>
+  <string>1#10#50#50</string>
+  <string>1#20#45#50</string>
+  <string>1#30#40#50</string>
+  <string>1#40#35#50</string>
+  <string>1#50#30#50</string>
+  <string>1#60#25#50</string>
+  <string>1#70#20#50</string>
+  <string>1#80#15#50</string>
+  <string>1#90#10#50</string>
+  <string>1#100#5#50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection CrossLossRange {
             get {
@@ -1209,11 +1209,11 @@ namespace LuckyFuture.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>1#100#50</string>
-  <string>1#150#40</string>
-  <string>1#200#30</string>
-  <string>1#250#20</string>
-  <string>1#300#10</string>
+  <string>1#100#50#50</string>
+  <string>1#150#40#50</string>
+  <string>1#200#30#50</string>
+  <string>1#250#20#50</string>
+  <string>1#300#10#50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection CciLossRange {
             get {
@@ -1323,12 +1323,71 @@ namespace LuckyFuture.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int LiqType {
+        public int BoOrdType {
             get {
-                return ((int)(this["LiqType"]));
+                return ((int)(this["BoOrdType"]));
             }
             set {
-                this["LiqType"] = value;
+                this["BoOrdType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CciPayoffValue3 {
+            get {
+                return ((int)(this["CciPayoffValue3"]));
+            }
+            set {
+                this["CciPayoffValue3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CciRange11 {
+            get {
+                return ((int)(this["CciRange11"]));
+            }
+            set {
+                this["CciRange11"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CciRange21 {
+            get {
+                return ((int)(this["CciRange21"]));
+            }
+            set {
+                this["CciRange21"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection SyncMembers {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["SyncMembers"]));
+            }
+            set {
+                this["SyncMembers"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SyncChart {
+            get {
+                return ((bool)(this["SyncChart"]));
+            }
+            set {
+                this["SyncChart"] = value;
             }
         }
     }

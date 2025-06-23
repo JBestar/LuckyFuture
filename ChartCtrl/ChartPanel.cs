@@ -176,7 +176,7 @@ namespace ChartCtrl
         public void SetRealTimeVal(float fVal, DateTime dtReceive, int nTick, int nConc)
         {
             rChartCtrl.SetRealTimeVal(fVal, dtReceive, nTick, nConc);
-            showSpec();
+            // showSpec();
         }
         private int m_tickLog = 0;
         public void showSpec()
@@ -189,24 +189,42 @@ namespace ChartCtrl
                 return;
             RItem rItem = CtrlProperty._RItemList.Last();
             string log = "";
+            txtSpec.Text = "";
             if (rItem.Adx > 0)
             {
-                log += string.Format(" ADX:{0:N2}  | ", rItem.Adx);
+                log = string.Format(" ADX:{0:N2}  | ", rItem.Adx);
+                AppendText(txtSpec, log, Color.Black);
             }
 
             if (rItem.Cci != 0)
             {
-                log += string.Format(" CCI:{0:N2}  | ", rItem.Cci);
+                log = string.Format(" CCI:{0:N2}  | ", rItem.Cci);
+                AppendText(txtSpec, log, rItem.Cci >= 0 ? Color.Red : Color.Blue);
             }
 
             if (rItem.Rsi > 0)
             {
-                log += string.Format(" RSI:{0:N2} ", rItem.Rsi);
+                log = string.Format(" RSI:{0:N2} ", rItem.Rsi);
+                AppendText(txtSpec, log, rItem.Cci >= 0 ? Color.Red : Color.Blue);
             }
 
-            if (log.Length > 0)
-                txtSpec.Text = log;
+        }
 
+        public void AppendValue(string value, Color color)
+        {
+            if (value.Length > 0)
+                AppendText(txtSpec, value, color);
+            else txtSpec.Text = "";
+        }
+
+        public void AppendText(RichTextBox box, string text, Color color)
+        {
+            box.SelectionStart = box.TextLength;
+            box.SelectionLength = 0;
+
+            box.SelectionColor = color;
+            box.AppendText(text);
+            box.SelectionColor = box.ForeColor;
         }
         private void InitBtnTimeType()
         {
@@ -745,9 +763,9 @@ namespace ChartCtrl
             return rChartCtrl.SetDChart2Type(iTimeType, nTimeUnit);
         }
 
-        public void SetChartFrom(DateTime dtFrom)
+        public void SetChartFrom(DateTime dtFrom, double price)
         {
-            rChartCtrl.SetChartFrom(dtFrom);
+            rChartCtrl.SetChartFrom(dtFrom, price);
         }
 
         public bool SetOrderInfo(OrderVal orderInfo)

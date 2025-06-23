@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.IO;
 using System.Collections.Specialized;
+using System.Net.NetworkInformation;
 using LuckyFuture.Properties;
 using LuckyFuture.Models.ValueObjects;
 
@@ -18,6 +19,10 @@ namespace LuckyFuture
         public static List<PayoffLossInfo> SmartLossConfs = new List<PayoffLossInfo>();
         public static List<PayoffLossInfo> CrossLossConfs = new List<PayoffLossInfo>();
         public static List<PayoffLossInfo> CciLossConfs = new List<PayoffLossInfo>();
+        public static List<MemberInfo> SyncMemInfos = new List<MemberInfo>();
+        public static string _PhysicalAddr = "";
+        public static string _IpAddr = "";
+        public static int _DtDelay = 0;
         public static bool ReadConfig(string filePath = "")
         {
             try
@@ -105,6 +110,8 @@ namespace LuckyFuture
                         case "CciOn": Settings.Default.CciOn = bool.Parse(value); break;
                         case "CciRange1": Settings.Default.CciRange1 = int.Parse(value); break;
                         case "CciRange2": Settings.Default.CciRange2 = int.Parse(value); break;
+                        case "CciRange11": Settings.Default.CciRange11 = int.Parse(value); break;
+                        case "CciRange21": Settings.Default.CciRange21 = int.Parse(value); break;
                         case "CciSide1": Settings.Default.CciSide1 = int.Parse(value); break;
                         case "CciSide2": Settings.Default.CciSide2 = int.Parse(value); break;
                         case "SmartRangePayoff": Settings.Default.SmartRangePayoff = bool.Parse(value); break;
@@ -120,15 +127,26 @@ namespace LuckyFuture
                         case "AvgsSide2": Settings.Default.AvgsSide2 = int.Parse(value); break;
                         case "LossRangePayoff": Settings.Default.LossRangePayoff = bool.Parse(value); break;
                         case "CciPayoff": Settings.Default.CciPayoff = bool.Parse(value); break;
-                        case "CciPayoffValue": Settings.Default.CciPayoffValue1 = int.Parse(value); break;
+                        case "CciPayoffValue1": Settings.Default.CciPayoffValue1 = int.Parse(value); break;
+                        case "CciPayoffValue2": Settings.Default.CciPayoffValue2 = int.Parse(value); break;
+                        case "CciPayoffValue3": Settings.Default.CciPayoffValue3 = int.Parse(value); break;
                         case "CciRangePayoff": Settings.Default.CciRangePayoff = bool.Parse(value); break;
-                        case "LiqType": Settings.Default.LiqType = int.Parse(value); break;
-
+                        case "BoOrdType": Settings.Default.BoOrdType = int.Parse(value); break;
+                        case "PayoffLossRange": Settings.Default.PayoffLossRange = ParseSerialString(value); break;
+                        case "SmartLossRange": Settings.Default.SmartLossRange = ParseSerialString(value); break;
+                        case "CrossLossRange": Settings.Default.CrossLossRange = ParseSerialString(value); break;
+                        case "CciLossRange": Settings.Default.CciLossRange = ParseSerialString(value); break;
+                        case "OrdCnts": Settings.Default.OrdCnts = value; break;
+                        case "EarnTicks": Settings.Default.EarnTicks = value; break;
+                        case "LossTicks": Settings.Default.LossTicks = value; break;
+                        case "SyncChart": Settings.Default.SyncChart = bool.Parse(value); break;
                         // case "SignalSiteOn": Settings.Default.SignalSiteOn = bool.Parse(value); break;
+
                         default: break;
                     }
                 }
 
+                ReadLossConfig();
                 return true;
             }
             catch (Exception)
@@ -226,7 +244,9 @@ namespace LuckyFuture
                 AddElement(document, itemListElement, "AdxCnt", Settings.Default.AdxCnt.ToString());
                 AddElement(document, itemListElement, "CciOn", Settings.Default.CciOn.ToString());
                 AddElement(document, itemListElement, "CciRange1", Settings.Default.CciRange1.ToString());
+                AddElement(document, itemListElement, "CciRange11", Settings.Default.CciRange11.ToString());
                 AddElement(document, itemListElement, "CciRange2", Settings.Default.CciRange2.ToString());
+                AddElement(document, itemListElement, "CciRange21", Settings.Default.CciRange21.ToString());
                 AddElement(document, itemListElement, "CciSide1", Settings.Default.CciSide1.ToString());
                 AddElement(document, itemListElement, "CciSide2", Settings.Default.CciSide2.ToString());
                 AddElement(document, itemListElement, "SmartRangePayoff", Settings.Default.SmartRangePayoff.ToString());
@@ -242,9 +262,20 @@ namespace LuckyFuture
                 AddElement(document, itemListElement, "AvgsSide2", Settings.Default.AvgsSide2.ToString());
                 AddElement(document, itemListElement, "LossRangePayoff", Settings.Default.LossRangePayoff.ToString());
                 AddElement(document, itemListElement, "CciPayoff", Settings.Default.CciPayoff.ToString());
-                AddElement(document, itemListElement, "CciPayoffValue", Settings.Default.CciPayoffValue1.ToString());
+                AddElement(document, itemListElement, "CciPayoffValue1", Settings.Default.CciPayoffValue1.ToString());
+                AddElement(document, itemListElement, "CciPayoffValue2", Settings.Default.CciPayoffValue2.ToString());
+                AddElement(document, itemListElement, "CciPayoffValue3", Settings.Default.CciPayoffValue3.ToString());
                 AddElement(document, itemListElement, "CciRangePayoff", Settings.Default.CciRangePayoff.ToString());
-                AddElement(document, itemListElement, "LiqType", Settings.Default.LiqType.ToString());
+                AddElement(document, itemListElement, "BoOrdType", Settings.Default.BoOrdType.ToString());
+                AddElement(document, itemListElement, "PayoffLossRange", ToSerialString(Settings.Default.PayoffLossRange));
+                AddElement(document, itemListElement, "SmartLossRange", ToSerialString(Settings.Default.SmartLossRange));
+                AddElement(document, itemListElement, "CrossLossRange", ToSerialString(Settings.Default.CrossLossRange));
+                AddElement(document, itemListElement, "CciLossRange", ToSerialString(Settings.Default.CciLossRange));
+                AddElement(document, itemListElement, "OrdCnts", Settings.Default.OrdCnts);
+                AddElement(document, itemListElement, "EarnTicks", Settings.Default.EarnTicks);
+                AddElement(document, itemListElement, "LossTicks", Settings.Default.LossTicks);
+                AddElement(document, itemListElement, "SyncChart", Settings.Default.SyncChart.ToString());
+
                 //AddElement(document, itemListElement, "SignalSiteOn", Settings.Default.SignalSiteOn.ToString());
 
                 document.Save(filePath);
@@ -254,6 +285,26 @@ namespace LuckyFuture
             {
                 return false;
             }
+        }
+        public static string ToSerialString(StringCollection sCollection)
+        {
+            string result = "";
+            foreach (string sValue in sCollection)
+            {
+                result += sValue + ";";
+            }
+            return result;
+        }
+        public static StringCollection ParseSerialString(string sValue)
+        {
+            string[] infos = sValue.Split(';');
+            StringCollection sCollection = new StringCollection();
+            foreach (string info in infos)
+            {
+                if (info.Length > 0)
+                    sCollection.Add(info);
+            }
+            return sCollection;
         }
 
         public static bool ReadLossConfig()
@@ -266,6 +317,7 @@ namespace LuckyFuture
                     //PayoffLossConfs
                     PayoffLossConfs.Clear();
                     int iStage = 0;
+                    bool bReset = false;
                     foreach (string lossRange in Settings.Default.PayoffLossRange)
                     {
                         string[] infos = lossRange.Split('#');
@@ -280,14 +332,26 @@ namespace LuckyFuture
                             Rate = int.Parse(infos[2]),
                             RateUnit = "틱",
                             Enabled = int.Parse(infos[0]),
+                            Param = "",
                             ActionDelete = "삭제"
                         };
+                        if (infos.Length < 4)
+                            bReset = true;
                         PayoffLossConfs.Add(lossInfo);
+                    }
+                    if (bReset)
+                    {
+                        Settings.Default.PayoffLossRange.Clear();
+                        foreach (PayoffLossInfo lossConf in PayoffLossConfs)
+                        {
+                            Settings.Default.PayoffLossRange.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param);
+                        }
                     }
 
                     //SmartLossConfs
                     SmartLossConfs.Clear();
                     iStage = 0;
+                    bReset = false;
                     foreach (string lossRange in Settings.Default.SmartLossRange)
                     {
                         string[] infos = lossRange.Split('#');
@@ -302,14 +366,28 @@ namespace LuckyFuture
                             Rate = int.Parse(infos[2]),
                             RateUnit = "%",
                             Enabled = int.Parse(infos[0]),
+                            Param = "50",
                             ActionDelete = "삭제"
                         };
+
+                        if (infos.Length > 3 && infos[3].Length > 0)
+                            lossInfo.Param = infos[3];
+                        else bReset = true;
                         SmartLossConfs.Add(lossInfo);
+                    }
+                    if (bReset)
+                    {
+                        Settings.Default.SmartLossRange.Clear();
+                        foreach(PayoffLossInfo lossConf in SmartLossConfs)
+                        {
+                            Settings.Default.SmartLossRange.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param);
+                        }
                     }
 
                     //CrossLossConfs
                     CrossLossConfs.Clear();
                     iStage = 0;
+                    bReset = false;
                     foreach (string lossRange in Settings.Default.CrossLossRange)
                     {
                         string[] infos = lossRange.Split('#');
@@ -324,14 +402,27 @@ namespace LuckyFuture
                             Rate = int.Parse(infos[2]),
                             RateUnit = "%",
                             Enabled = int.Parse(infos[0]),
+                            Param = "50",
                             ActionDelete = "삭제"
                         };
+                        if (infos.Length > 3 && infos[3].Length > 0)
+                            lossInfo.Param = infos[3];
+                        else bReset = true;
                         CrossLossConfs.Add(lossInfo);
+                    }
+                    if (bReset)
+                    {
+                        Settings.Default.CrossLossRange.Clear();
+                        foreach (PayoffLossInfo lossConf in CrossLossConfs)
+                        {
+                            Settings.Default.CrossLossRange.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param);
+                        }
                     }
 
                     //CrossLossConfs
                     CciLossConfs.Clear();
                     iStage = 0;
+                    bReset = false;
                     foreach (string lossRange in Settings.Default.CciLossRange)
                     {
                         string[] infos = lossRange.Split('#');
@@ -346,10 +437,44 @@ namespace LuckyFuture
                             Rate = int.Parse(infos[2]),
                             RateUnit = "%하락",
                             Enabled = int.Parse(infos[0]),
+                            Param = "50",
                             ActionDelete = "삭제"
                         };
+                        if (infos.Length > 3 && infos[3].Length > 0)
+                            lossInfo.Param = infos[3];
+                        else bReset = true;
                         CciLossConfs.Add(lossInfo);
                     }
+                    if (bReset)
+                    {
+                        Settings.Default.CciLossRange.Clear();
+                        foreach (PayoffLossInfo lossConf in CciLossConfs)
+                        {
+                            Settings.Default.CciLossRange.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param);
+                        }
+                    }
+
+                    //SyncMemInfos
+                    if (Settings.Default.SyncMembers == null)
+                    {
+                        Settings.Default.SyncMembers = new StringCollection();
+                    } else
+                    {
+                        SyncMemInfos.Clear();
+                        MemberInfo memInfo = null;
+                        foreach (string syncMember in Settings.Default.SyncMembers)
+                        {
+                            if (syncMember.Length < 1)
+                                continue;
+                            memInfo = new MemberInfo
+                            {
+                                Id = syncMember,
+                                Delete = "삭제"
+                            };
+                            SyncMemInfos.Add(memInfo);
+                        }
+                    }
+                    
                 }
 
                 return true;
@@ -360,6 +485,53 @@ namespace LuckyFuture
             }
 
         }
+
+        public static void SetNetworkInterfaces()
+        {
+            IPGlobalProperties computerProperties = IPGlobalProperties.GetIPGlobalProperties();
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            // Console.WriteLine("Interface information for {0}.{1}     ", computerProperties.HostName, computerProperties.DomainName);
+            if (nics == null || nics.Length < 1)
+            {
+                // Console.WriteLine("  No network interfaces found.");
+                return;
+            }
+
+            string physicalAddr = "";
+            // Console.WriteLine("  Number of interfaces .................... : {0}", nics.Length);
+            foreach (NetworkInterface adapter in nics)
+            {
+                IPInterfaceProperties properties = adapter.GetIPProperties(); //  .GetIPInterfaceProperties();
+                //Console.WriteLine();
+                //Console.WriteLine(adapter.Description);
+                //Console.WriteLine(String.Empty.PadLeft(adapter.Description.Length, '='));
+                //Console.WriteLine("  Interface type .......................... : {0}", adapter.NetworkInterfaceType);
+                //Console.Write("  Physical address ........................ : ");
+                PhysicalAddress address = adapter.GetPhysicalAddress();
+                byte[] bytes = address.GetAddressBytes();
+                physicalAddr = "";
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    // Display the physical address in hexadecimal.
+                    physicalAddr += bytes[i].ToString("X2");
+                    // Console.Write("{0}", bytes[i].ToString("X2"));
+                    // Insert a hyphen after each byte, unless we're at the end of the address.
+                    if (i != bytes.Length - 1)
+                    {
+                        physicalAddr += "-";
+                        // Console.Write("-");
+                    }
+                }
+                if(physicalAddr.Length > 0)
+                {
+                    _PhysicalAddr = physicalAddr;
+                    break;
+                }
+
+                // Console.WriteLine();
+            }
+        }
+
     }
 
 

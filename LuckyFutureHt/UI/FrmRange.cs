@@ -36,7 +36,7 @@ namespace LuckyFuture.UI
             dgvRangeInfo.DoubleBuffered(true);
             this.lbAmount.Text = "금액";
             this.lbAmoutUnit.Text = "만원";
-            this.lbLossUnit.Text = "% 하락청산";
+            this.lbLossUnit.Text = "% 하락";
 
             //this.amountDataGridViewTextBoxColumn.HeaderText = "금액";
             //this.rateDataGridViewTextBoxColumn.HeaderText = "손실";
@@ -60,6 +60,10 @@ namespace LuckyFuture.UI
             {
                 this.Text = "손실 영역설정";
                 this.lbLossUnit.Text = "틱 변경";
+                this.paramDataGridViewTextBoxColumn.HeaderText = "";
+                this.lblRsi.Visible = false;
+                this.txtRsi.Visible = false;
+
             }
         }
        
@@ -121,6 +125,7 @@ namespace LuckyFuture.UI
                         Rate = lossConf.Rate,
                         RateUnit = lossConf.RateUnit,
                         Enabled = lossConf.Enabled,
+                        Param = lossConf.Param,
                         ActionDelete = lossConf.ActionDelete
                     };
 
@@ -132,29 +137,6 @@ namespace LuckyFuture.UI
 
         }
         private void UpdateRangeInfo()
-        {
-            
-            if (this.dgvRangeInfo.RowCount >= 0)
-            {
-                RangeInfo = null;
-                RangeInfo = CurRangeList;
-            }
-
-        }
-
-        private void Setting_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Hide();
-            e.Cancel = true;
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
-        
-        private void btnOk_Click(object sender, EventArgs e)
         {
             lock (AppConfig._lockObj)
             {
@@ -201,16 +183,42 @@ namespace LuckyFuture.UI
                         Rate = lossInfo.Rate,
                         RateUnit = lossInfo.RateUnit,
                         Enabled = lossInfo.Enabled,
+                        Param = lossInfo.Param,
                         ActionDelete = lossInfo.ActionDelete
                     };
-                    rangeCollection.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString());
+                    rangeCollection.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param);
                     lossConfs.Add(lossConf);
                 }
             }
+
+            if (this.dgvRangeInfo.RowCount >= 0)
+            {
+                RangeInfo = null;
+                RangeInfo = CurRangeList;
+            }
+
+        }
+
+        private void Setting_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Hide();
+            e.Cancel = true;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            
             UpdateRangeInfo();
 
             Settings.Default.Save();
             MessageBox.Show("설정이 저장되었습니다.", "저장성공");
+            Hide();
         }
 
         private void deleteLossItem(PayoffLossInfo lossInfo)
@@ -224,7 +232,7 @@ namespace LuckyFuture.UI
             {
                 if (e.RowIndex >= 0 && this.RangeInfo[e.RowIndex] == this.SelectedRangeInfo)
                 {
-                    if (e.ColumnIndex == 6)
+                    if (e.ColumnIndex == 7)
                     {
                         if (this.SelectedRangeInfo != null)
                         {
@@ -243,24 +251,24 @@ namespace LuckyFuture.UI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            int iStage = 0, nAmount = 0, nRate = 0 ;
-            try
-            {
-                int nTemp = Int32.Parse(txtStage.Text);
-                if (nTemp < 1)
-                {
-                    txtStage.SelectAll();
-                    txtStage.Focus();
-                    return;
-                }
-                iStage = nTemp;
-            }
-            catch
-            {
-                txtStage.SelectAll();
-                txtStage.Focus();
-                return;
-            }
+            int iStage = CurRangeList.Count, nAmount = 0, nRate = 0 ;
+//             try
+//             {
+//                 int nTemp = Int32.Parse(txtStage.Text);
+//                 if (nTemp < 1)
+//                 {
+//                     txtStage.SelectAll();
+//                     txtStage.Focus();
+//                     return;
+//                 }
+//                 iStage = nTemp;
+//             }
+//             catch
+//             {
+//                 txtStage.SelectAll();
+//                 txtStage.Focus();
+//                 return;
+//             }
 
             try
             {
@@ -311,6 +319,29 @@ namespace LuckyFuture.UI
                 rateUnit = "틱";
             }
 
+            string param = "";
+           if(RangeType == RANGETYPE.SmartLoss || RangeType == RANGETYPE.CrossLoss || RangeType == RANGETYPE.CciLoss)
+            {
+
+                try
+                {
+                    int nTemp = Int32.Parse(txtRsi.Text);
+                    if (nTemp < 1)
+                    {
+                        txtRsi.SelectAll();
+                        txtRsi.Focus();
+                        return;
+                    }
+                    param = nTemp.ToString();
+                }
+                catch
+                {
+                    txtRsi.SelectAll();
+                    txtRsi.Focus();
+                    return;
+                }
+            }
+
             bool bInserted = false;
             PayoffLossInfo insertInfo = new PayoffLossInfo()
             {
@@ -321,6 +352,7 @@ namespace LuckyFuture.UI
                 Rate = nRate,
                 RateUnit = rateUnit,
                 Enabled = 1,
+                Param = param,
                 ActionDelete = "삭제"
             };
             for (int i = 0; i < CurRangeList.Count; i++)
@@ -345,12 +377,17 @@ namespace LuckyFuture.UI
             }
             UpdateRangeInfo();
 
+            // txtStage.Text = "";
+            txtAmout.Text = "";
+            txtPercent.Text = "";
+            txtRsi.Text = "";
+
         }
 
         private void dgvRangeInfo_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
-            if (dgvRangeInfo.CurrentCell.ColumnIndex == 2 || dgvRangeInfo.CurrentCell.ColumnIndex == 4) //Amout Or Rate
+            if (dgvRangeInfo.CurrentCell.ColumnIndex == 2 || dgvRangeInfo.CurrentCell.ColumnIndex == 4 || (_RangeType != RANGETYPE.PayoffLoss && dgvRangeInfo.CurrentCell.ColumnIndex == 6) ) //Amout Or Rate Or Param
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)

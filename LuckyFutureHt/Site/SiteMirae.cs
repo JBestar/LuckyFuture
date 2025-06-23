@@ -322,7 +322,6 @@ namespace LuckyFuture.Site
         {
             base.OnPrepare();
 
-            Settings.Default.ServerTimeDelay = 0;
 
             Current = null;
             CurrentList.Clear();

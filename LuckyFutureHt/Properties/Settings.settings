@@ -284,52 +284,52 @@
     <Setting Name="PayoffLossRange" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;1#0#50&lt;/string&gt;
-  &lt;string&gt;1#10#40&lt;/string&gt;
-  &lt;string&gt;1#30#30&lt;/string&gt;
-  &lt;string&gt;1#50#20&lt;/string&gt;
-  &lt;string&gt;1#70#10&lt;/string&gt;
-  &lt;string&gt;1#100#5&lt;/string&gt;
+  &lt;string&gt;1#0#50#&lt;/string&gt;
+  &lt;string&gt;1#10#40#&lt;/string&gt;
+  &lt;string&gt;1#30#30#&lt;/string&gt;
+  &lt;string&gt;1#50#20#&lt;/string&gt;
+  &lt;string&gt;1#70#10#&lt;/string&gt;
+  &lt;string&gt;1#100#5#&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="SmartLossRange" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;1#10#50&lt;/string&gt;
-  &lt;string&gt;1#20#45&lt;/string&gt;
-  &lt;string&gt;1#30#40&lt;/string&gt;
-  &lt;string&gt;1#40#35&lt;/string&gt;
-  &lt;string&gt;1#50#30&lt;/string&gt;
-  &lt;string&gt;1#60#25&lt;/string&gt;
-  &lt;string&gt;1#70#20&lt;/string&gt;
-  &lt;string&gt;1#80#15&lt;/string&gt;
-  &lt;string&gt;1#90#10&lt;/string&gt;
-  &lt;string&gt;1#100#5&lt;/string&gt;
+  &lt;string&gt;1#10#50#50&lt;/string&gt;
+  &lt;string&gt;1#20#45#50&lt;/string&gt;
+  &lt;string&gt;1#30#40#50&lt;/string&gt;
+  &lt;string&gt;1#40#35#50&lt;/string&gt;
+  &lt;string&gt;1#50#30#50&lt;/string&gt;
+  &lt;string&gt;1#60#25#50&lt;/string&gt;
+  &lt;string&gt;1#70#20#50&lt;/string&gt;
+  &lt;string&gt;1#80#15#50&lt;/string&gt;
+  &lt;string&gt;1#90#10#50&lt;/string&gt;
+  &lt;string&gt;1#100#5#50&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="CrossLossRange" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;1#10#50&lt;/string&gt;
-  &lt;string&gt;1#20#45&lt;/string&gt;
-  &lt;string&gt;1#30#40&lt;/string&gt;
-  &lt;string&gt;1#40#35&lt;/string&gt;
-  &lt;string&gt;1#50#30&lt;/string&gt;
-  &lt;string&gt;1#60#25&lt;/string&gt;
-  &lt;string&gt;1#70#20&lt;/string&gt;
-  &lt;string&gt;1#80#15&lt;/string&gt;
-  &lt;string&gt;1#90#10&lt;/string&gt;
-  &lt;string&gt;1#100#5&lt;/string&gt;
+  &lt;string&gt;1#10#50#50&lt;/string&gt;
+  &lt;string&gt;1#20#45#50&lt;/string&gt;
+  &lt;string&gt;1#30#40#50&lt;/string&gt;
+  &lt;string&gt;1#40#35#50&lt;/string&gt;
+  &lt;string&gt;1#50#30#50&lt;/string&gt;
+  &lt;string&gt;1#60#25#50&lt;/string&gt;
+  &lt;string&gt;1#70#20#50&lt;/string&gt;
+  &lt;string&gt;1#80#15#50&lt;/string&gt;
+  &lt;string&gt;1#90#10#50&lt;/string&gt;
+  &lt;string&gt;1#100#5#50&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="CciLossRange" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;1#100#50&lt;/string&gt;
-  &lt;string&gt;1#150#40&lt;/string&gt;
-  &lt;string&gt;1#200#30&lt;/string&gt;
-  &lt;string&gt;1#250#20&lt;/string&gt;
-  &lt;string&gt;1#300#10&lt;/string&gt;
+  &lt;string&gt;1#100#50#50&lt;/string&gt;
+  &lt;string&gt;1#150#40#50&lt;/string&gt;
+  &lt;string&gt;1#200#30#50&lt;/string&gt;
+  &lt;string&gt;1#250#20#50&lt;/string&gt;
+  &lt;string&gt;1#300#10#50&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="LossRangePayoff" Type="System.Boolean" Scope="User">
@@ -356,8 +356,23 @@
     <Setting Name="LossTicks" Type="System.String" Scope="User">
       <Value Profile="(Default)">20#30#50#100</Value>
     </Setting>
-    <Setting Name="LiqType" Type="System.Int32" Scope="User">
+    <Setting Name="BoOrdType" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CciPayoffValue3" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CciRange11" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CciRange21" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="SyncMembers" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SyncChart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

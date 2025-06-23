@@ -1,4 +1,4 @@
-﻿// #define WRITE_LOG
+﻿#define WRITE_LOG
 
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,8 @@ namespace LuckyFuture.Models.Reanteck
         public const string HEAD_KEEPALIVE = "TA000";     //KeepAlive
         public const string HEAD_POPUPLOGIN = "TA002";     //로그인
         public const string HEAD_MAINLOGIN = "TA003";     //메인로그인
-                                                          //
+        public const string HEAD_MESSAGE = "TA004";      //Message
+
         public const string HEAD_LOGOUTEND = "TA006";      //로그아웃 마지막
         public const string HEAD_DUPLOGIN = "TA007";     //중복로그인 
 
@@ -333,6 +334,21 @@ namespace LuckyFuture.Models.Reanteck
 
             return SendData(sendData);
         }
+        public bool RequestMsg(string msg)
+        {
+            string id = _id;
+
+            string sendData = HEAD_MESSAGE;
+            sendData += GetPacketNo();
+            sendData += id.PadRight(10, BODY_SPACE);
+            sendData += _account.PadRight(20, BODY_SPACE);
+            sendData += "TR_0000_S_01/";
+
+            sendData += id + "#" + _account + "#" + msg;
+
+            return SendData(sendData);
+        }
+
         public bool RequestProfit(string account = "")
         {
             if (account.Length > 0)
@@ -357,6 +373,7 @@ namespace LuckyFuture.Models.Reanteck
 
 
             string sendData = HEAD_ITEMLIST;
+            // _PacketNo += 6;
             sendData += GetPacketNo();
             sendData += id.PadRight(30, BODY_SPACE);
             sendData += "OSList/";
@@ -549,7 +566,7 @@ namespace LuckyFuture.Models.Reanteck
                     int packSize = getPacketLen(_ReceiveBuffer);
 #if WRITE_LOG
                     WriteLog(">>>pk_2>>>len=" + strLen + " packSize=" + packSize);
-                    WriteBytes(ByteArrayToString(_ReceiveBuffer, packSize));
+                    // WriteBytes(ByteArrayToString(_ReceiveBuffer, packSize));
 #endif
                     if (packSize < 1)
                         return;

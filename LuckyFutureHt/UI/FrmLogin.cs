@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace LuckyFuture.UI
 {
@@ -34,7 +35,8 @@ namespace LuckyFuture.UI
 
 		private void btnLogin_Click(object sender, EventArgs e)
 		{
-			if (txtId.Text == "")
+
+            if (txtId.Text == "")
 			{
 				txtId.Focus();
 				return;

@@ -72,6 +72,7 @@ namespace ChartCtrl
         ORDERCNT_CHANGED,
         EARNTICK_CHANGED,
         LOSSTICK_CHANGED,
+        SYNCCHART_CHANGED,
 
     }
     public class ChartEventArgs : EventArgs

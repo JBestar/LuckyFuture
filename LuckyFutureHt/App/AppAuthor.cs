@@ -47,9 +47,10 @@ namespace LuckyFuture
 
         public event EventHandler<AuthorEventArgs> NoticeEvent;
 
-        public const string URL_MAIN = "http://210.90.155.77:8080/Temp/"; //localhost:8085/
-        public const string URL_UPDATE = "http://210.90.155.77:8080/Update/"; //210.90.155.77:8080
-        public const string URL_DOWNLOAD = "http://210.90.155.77:8080/Download/";
+        public const string URL_MAIN = "http://localhost:7082/Temp/"; //localhost:7082/
+        public const string URL_UPDATE = "http://localhost:7082/Update/"; //210.90.155.77:8080
+        public const string URL_DOWNLOAD = "http://localhost:7082/Download/";
+        public const string URL_WS2 = "ws://localhost:7082/Temp/TempWebSocket.ashx?websession="; //
         private const string URL_CERT_LOGIN = "Login.aspx";
         private const string URL_CERT_LOGOUT = "LogOut.aspx";
         private const string URL_CERT_KEEPALIVE = "ActiveKeep.aspx";
@@ -85,6 +86,14 @@ namespace LuckyFuture
             get => _vip;
         }
 
+        public string Uid
+        {
+            get => _id;
+        }
+        public string SessionId
+        {
+            get => _sessionId;
+        }
         public AppAuthor()
         {
             Reset();
@@ -92,7 +101,6 @@ namespace LuckyFuture
 
             var configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
             _configPath = configuration.FilePath;
-
         }
 
         public void Reset()
@@ -379,6 +387,49 @@ namespace LuckyFuture
 
         }
 
+        int _tickGet;
+        public void ReqIpDt()
+        {
+            if (Math.Abs(Environment.TickCount - _tickGet) < 60000)
+                return;
+            _tickGet = Environment.TickCount;
+
+            DateTime dtNow = DateTime.Now;
+            if (!_httpClient.SendRequest(out string body, out _, HTTPREQUEST_TYPE.GET, "http://worldtimeapi.org/api/timezone/Asia/Seoul?t="+ dtNow.Second))
+                return;
+
+//             {
+//                 "abbreviation": "KST",
+//                 "client_ip": "58.138.233.78",
+//                 "datetime": "2024-04-11T12:50:27.602350+09:00",
+//                 "day_of_week": 4,
+//                 "day_of_year": 102,
+//                 "timezone": "Asia/Seoul",
+//                 "unixtime": 1712807427,
+//                 "utc_datetime": "2024-04-11T03:50:27.602350+00:00",
+//                 "utc_offset": "+09:00",
+//                 "week_number": 15
+//             }
+
+            try
+            {
+                JsonDocument doc = JsonDocument.Parse(body);
+                JsonElement rootElement = doc.RootElement;
+                AppConfig._IpAddr = rootElement.GetProperty("client_ip").GetString();
+                string sDt = rootElement.GetProperty("datetime").GetString();
+                if(sDt.Length > 0)
+                {
+                    DateTime dtServ = DateTime.Parse(sDt);
+                    TimeSpan tmSpan = dtServ.Subtract(dtNow);
+                    AppConfig._DtDelay = (int)(tmSpan.TotalSeconds);
+                }
+                
+            }
+            catch (Exception)
+            {
+            }
+
+        }
         public bool UploadConfig()
         {
             return _webClient.UploadFile(URL_MAIN + URL_UPLOAD, _configPath, "Cookie", WEBSESSION_KEY + "=" + _sessionId);
@@ -406,6 +457,7 @@ namespace LuckyFuture
                     nError = SendKeepAlive();
                     if (nError == APPLOGINRESULT.SUCCESS)
                     {
+                        ReqIpDt();
                         // Trace.TraceError("<KEEPALIVE> nError = {0} loginTry = {1} ", nError, _loginTry);
                         SetStageWait((int)LHSTAGE.KEEPALIVE, SEND_KEEP_ALIVE_INTERVAL); // <- next keep-alive after cycle
                     }

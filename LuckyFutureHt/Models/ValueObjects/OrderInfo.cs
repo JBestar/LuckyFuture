@@ -35,8 +35,9 @@ namespace LuckyFuture.Models.ValueObjects
 
 		public double MaxAveragePrice { get; set; }
         public int LossPayoffTick { get; set; }
+		public double StartCciPrice { get; set; }
         public double MaxCciPrice { get; set; }
-        public double CrossAveragePrice { get; set; }
+		public double CrossAveragePrice { get; set; }
         // Token: 0x170002A7 RID: 679
         // (get) Token: 0x06000DB7 RID: 3511 RVA: 0x0004CB9F File Offset: 0x0004AD9F
         // (set) Token: 0x06000DB8 RID: 3512 RVA: 0x0004CBA7 File Offset: 0x0004ADA7

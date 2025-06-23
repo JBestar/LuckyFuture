@@ -70,7 +70,7 @@ namespace ChartCtrl
             this.btnTkUnit9 = new ReaLTaiizor.Controls.DreamButton();
             this.panelGraphType = new System.Windows.Forms.FlowLayoutPanel();
             this.rChartCtrl = new ChartCtrl.RChartCtrl();
-            this.txtSpec = new System.Windows.Forms.TextBox();
+            this.txtSpec = new System.Windows.Forms.RichTextBox();
             this.panelTimeUnit1.SuspendLayout();
             this.panelTimeType.SuspendLayout();
             this.panelTool.SuspendLayout();
@@ -814,11 +814,13 @@ namespace ChartCtrl
             this.txtSpec.BackColor = System.Drawing.SystemColors.Control;
             this.txtSpec.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSpec.Location = new System.Drawing.Point(5, 52);
+            this.txtSpec.Location = new System.Drawing.Point(5, 50);
+            this.txtSpec.Multiline = false;
             this.txtSpec.Name = "txtSpec";
             this.txtSpec.ReadOnly = true;
-            this.txtSpec.Size = new System.Drawing.Size(491, 15);
+            this.txtSpec.Size = new System.Drawing.Size(491, 20);
             this.txtSpec.TabIndex = 31;
+            this.txtSpec.Text = "";
             // 
             // ChartPanel
             // 
@@ -881,6 +883,6 @@ namespace ChartCtrl
         private FlowLayoutPanel panelTool;
         private FlowLayoutPanel panelTimeUnit2;
         private FlowLayoutPanel panelGraphType;
-        private TextBox txtSpec;
+        private RichTextBox txtSpec;
     }
 }

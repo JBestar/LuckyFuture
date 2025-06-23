@@ -320,9 +320,13 @@ namespace LuckyFuture.UI
         {
             return chartFuture.GetConcPerMin(nMin);
         }
-        public void SetChartFrom(DateTime dtFrom)
+        public void SetChartFrom(DateTime dtFrom, double price = 0)
         {
-            chartFuture.SetChartFrom(dtFrom);
+            chartFuture.SetChartFrom(dtFrom, price);
+        }
+        public void SetChartValue(string value, Color color)
+        {
+            chartFuture.AppendValue(value, color);
         }
         private void FrmChat_FormClosing(object sender, FormClosingEventArgs e)
 		{
