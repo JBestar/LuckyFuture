@@ -12,7 +12,7 @@ namespace LuckyFuture.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.12.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -253,7 +253,7 @@ namespace LuckyFuture.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
         public int BettingType {
             get {
                 return ((int)(this["BettingType"]));
@@ -1141,50 +1141,6 @@ namespace LuckyFuture.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>1#0#50#</string>
-  <string>1#10#40#</string>
-  <string>1#30#30#</string>
-  <string>1#50#20#</string>
-  <string>1#70#10#</string>
-  <string>1#100#5#</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection PayoffLossRange {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["PayoffLossRange"]));
-            }
-            set {
-                this["PayoffLossRange"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>1#10#50#50</string>
-  <string>1#20#45#50</string>
-  <string>1#30#40#50</string>
-  <string>1#40#35#50</string>
-  <string>1#50#30#50</string>
-  <string>1#60#25#50</string>
-  <string>1#70#20#50</string>
-  <string>1#80#15#50</string>
-  <string>1#90#10#50</string>
-  <string>1#100#5#50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection SmartLossRange {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["SmartLossRange"]));
-            }
-            set {
-                this["SmartLossRange"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>1#10#50#50</string>
   <string>1#20#45#50</string>
   <string>1#30#40#50</string>
@@ -1388,6 +1344,50 @@ namespace LuckyFuture.Properties {
             }
             set {
                 this["SyncChart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+  <string>1#0#50#</string>
+  <string>1#10#40#</string>
+  <string>1#30#30#</string>
+  <string>1#50#20#</string>
+  <string>1#70#10#</string>
+  <string>1#100#5#</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection PayoffLossRange {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["PayoffLossRange"]));
+            }
+            set {
+                this["PayoffLossRange"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+  <string>1#10#50#50</string>
+  <string>1#20#45#50</string>
+  <string>1#30#40#50</string>
+  <string>1#40#35#50</string>
+  <string>1#50#30#50</string>
+  <string>1#60#25#50</string>
+  <string>1#70#20#50</string>
+  <string>1#80#15#50</string>
+  <string>1#90#10#50</string>
+  <string>1#100#5#50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection SmartLossRange {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["SmartLossRange"]));
+            }
+            set {
+                this["SmartLossRange"] = value;
             }
         }
     }

@@ -1595,9 +1595,10 @@ namespace LuckyFuture.Logic
 					{
 						m_tickOrder = Environment.TickCount;
 					}
-					if (DoOrder(nQuantity * 2))
+                    if (_currentSite.Type != SITETYPE.KIWOOM && DoOrder(nQuantity * 2))
+                    {
 						return true;
-
+                    }
 				}
 				else if (_orderToCancel.TradeType == TRADETYPE.SELL)	//매도
 				{
@@ -1606,9 +1607,11 @@ namespace LuckyFuture.Logic
 					{
 						m_tickOrder = Environment.TickCount;
 					}
-					if (DoOrder(nQuantity * 2))
-						return true;
-				}
+                    if (_currentSite.Type != SITETYPE.KIWOOM && DoOrder(nQuantity * 2))
+                    {
+                        return true;
+                    }
+                }
 				else return false;
                 
             }

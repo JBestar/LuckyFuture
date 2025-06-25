@@ -29,9 +29,9 @@ namespace LuckyFuture.Site
 	public enum SITETYPE
 	{
 		NONE = -1,
-        DREAM = 0,
-        TOPASSET = 1,
-        KIWOOM = 2,
+        KIWOOM = 0,
+        DREAM = 1,
+        TOPASSET = 2,
         //MIRAE = 3,
         MIRAE2 = 3,
         VISION_ASSET = 4,

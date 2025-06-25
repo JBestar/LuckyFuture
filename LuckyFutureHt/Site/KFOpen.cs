@@ -1,4 +1,4 @@
-﻿#define WRITE_LOG
+﻿// #define WRITE_LOG
 
 using System;
 using System.Collections.Generic;
@@ -190,6 +190,13 @@ namespace LuckyFuture.Site
 
         protected override ERRORCODE Prepare()
         {
+            if (this.QuoteList == null)
+                this.QuoteList = new List<QuoteInfo>();
+            else this.QuoteList.Clear();
+
+            if (this.CurrentList == null)
+                this.CurrentList = new List<CurrentInfo>();
+            else this.CurrentList.Clear();
 
             LoginState = LOGINSTATE.OK;
             m_DChartType = CHARTTYPE.NONE;
@@ -210,6 +217,10 @@ namespace LuckyFuture.Site
                 if(itemSymbol != null)
                 {
                     CurItemSymbol = itemSymbol;
+                    ItemPrecision = itemSymbol.Precision;
+                    Settings.Default.PriceFormat = Common.GetPriceFormat(CurItemSymbol.Precision);
+
+                    OnFutureSiteLogEvent(CurItemSymbol.ItemName);
                     return ERRORCODE.PREPARE_FAILED;
                 } else
                     return ERRORCODE.UNKNOWN_FAILED;
@@ -358,7 +369,7 @@ namespace LuckyFuture.Site
 
             if (iRet == (int)ERRORCOM.SUCCESS)
             {
-                OnFutureSiteLogEvent("[주문] 매도주문이 접수되었습니다.");
+                OnFutureSiteLogEvent("[주문] 매도주문 요청");
                 OnFutureSiteLogEvent("[주문] 주문시가격:" + Current.CurrentPrice);
                 return true;
             }
@@ -434,7 +445,7 @@ namespace LuckyFuture.Site
             if (iRet == (int)ERRORCOM.SUCCESS)
             {
                 // _orderTrade = TRADETYPE.BUY;
-                OnFutureSiteLogEvent("[주문] 매수주문이 접수되었습니다.");
+                OnFutureSiteLogEvent("[주문] 매수주문 요청");
                 OnFutureSiteLogEvent("[주문] 주문시가격:" + Current.CurrentPrice);
                 return true;
             }
@@ -468,9 +479,9 @@ namespace LuckyFuture.Site
             if (iRet == (int)ERRORCOM.SUCCESS)
             {
                 if (orderInfo.TradeTypeNo == "1")
-                    OnFutureSiteLogEvent("[주문취소] 매도주문이 취소되었습니다.");
+                    OnFutureSiteLogEvent("[주문취소] 매도주문 요청");
                 else if (orderInfo.TradeTypeNo == "2")
-                    OnFutureSiteLogEvent("[주문취소] 매수주문이 취소되었습니다.");
+                    OnFutureSiteLogEvent("[주문취소] 매수주문 요청");
             }
             else ShowErrorLog((ERRORCOM)iRet);
 
@@ -1092,7 +1103,7 @@ namespace LuckyFuture.Site
 
                 lock (CtrlProperty._DItemList) lock(CtrlProperty._CItemList)
                 {
-                    nLen = nLen > 200 ? 200 : nLen;
+                    nLen = nLen > 300 ? 300 : nLen;
                     if(bDChart)
                         CtrlProperty._DItemList.Clear();
                     if(bCChart)
@@ -1882,17 +1893,27 @@ namespace LuckyFuture.Site
                 }
                 else if (sRQName == "RQ_4")		//청산
                 {
-                    //tValues = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 1); //싱글
-                    //tValues = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 2); //멀티
+                    tSValue = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 1); //싱글
+                    tMValue = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 2); //멀티
+                    WriteLog("청산상태: sValue=" + tSValue + " mValue=" + tMValue);
+
+                    if(tSValue.Trim().Length == 0)
+                    {
+                        OnFutureSiteLogEvent("[청산] 요청 실패");
+                    }
 
                     // RequestOrderList(true, true);
 
                 }
-                else if (sRQName == "RQ_5")     //주문상태
+                else if (sRQName == "RQ_5")     //주문, 취소상태
                 {
-                    //tValues = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 1); //싱글(거래번호)
-                    //tValues = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 2); //멀티
-                    
+                    tSValue = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 1); //싱글(거래번호)
+                    tMValue = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 2); //멀티
+                    if(tSValue.Trim().Length == 0)
+                    {
+                        OnFutureSiteLogEvent("[주문] 요청 실패");
+                    }
+                    WriteLog("주문상태: sValue=" + tSValue + " mValue=" + tMValue);
 
                 }
                 else if (sRQName == "RQ_6")     //미체결내역조회				opw30001
@@ -2213,34 +2234,34 @@ namespace LuckyFuture.Site
 
             if (int.Parse(strGubun) == 0)
             {
-//                 string sAccountNo = axKFOpenAPI.GetChejanData(9201); //계좌번호
-//                 string sOrderNo = axKFOpenAPI.GetChejanData(9203); //주문번호
-//                 string sItemSymbol = axKFOpenAPI.GetChejanData(9001); //종목코드
-//                 string sTradeType = axKFOpenAPI.GetChejanData(907); //매도수구분
-//                 string sOrderType = axKFOpenAPI.GetChejanData(905); //주문구분
-//                 string sOrderOrg = axKFOpenAPI.GetChejanData(904); //원주문번호
-//                 string sItemName = axKFOpenAPI.GetChejanData(302); //종목명
-//                 string sOrderKind = axKFOpenAPI.GetChejanData(906); //주문유형
-//                 string sOrderCnt = axKFOpenAPI.GetChejanData(900); //주문수량
-//                 string sOrderPrice = axKFOpenAPI.GetChejanData(901); //주문가격
-//                 string sCondPrice = axKFOpenAPI.GetChejanData(13333); //조건가격
-//                 string sMarkPrice = axKFOpenAPI.GetChejanData(13330); //주문표시가격
-//                 string sComPrice = axKFOpenAPI.GetChejanData(13332); //조건표시가격
-//                 string sLiqCnt = axKFOpenAPI.GetChejanData(902); //미체결수량
-//                 string sOrderState = axKFOpenAPI.GetChejanData(913); //주문상태
-//                 string sReverseOrd = axKFOpenAPI.GetChejanData(919); //반대매매여부
-//                 string sMarketCode = axKFOpenAPI.GetChejanData(8046); //거래소코드
-//                 string sCurrencyCode = axKFOpenAPI.GetChejanData(8043); //통화코드
-//                 string sOrderTime = axKFOpenAPI.GetChejanData(908); //주문시간
-//                 string sOrdCondSort = axKFOpenAPI.GetChejanData(50713); //해외주문조건구분
-//                 string sOrdEnd = axKFOpenAPI.GetChejanData(50714); //주문조건종료일자
-// 
-// 
-//                 WriteLog(string.Format("주문내역=>계좌번호:{0}, 주문번호:{1}, 종목코드:{2}, 매도수구분:{3}, 주문구분:{4}, 원주문번호:{5}, 종목명:{6}, 주문유형:{7}, 주문수량:{8}, 주문가격:{9}, " +
-//                     "조건가격:{10}, 주문표시가격:{11}, 조건표시가격:{12}, 미체결수량:{13}, 주문상태:{14}, 반대매매여부:{15}, 거래소코드:{16}, 통화코드:{17}, 주문시간:{18}, 해외주문조건:{19}, 주문조건종료일자:{20}",
-//                     sAccountNo, sOrderNo, sItemSymbol, sTradeType, sOrderType, sOrderOrg, sItemName, sOrderKind, sOrderCnt, sOrderPrice,
-//                     sCondPrice, sMarkPrice, sComPrice, sLiqCnt, sOrderState, sReverseOrd, sMarketCode, sCurrencyCode, sOrderTime, sOrdCondSort, sOrdEnd
-//                     ));
+                string sAccountNo = axKFOpenAPI.GetChejanData(9201); //계좌번호
+                string sOrderNo = axKFOpenAPI.GetChejanData(9203); //주문번호
+                string sItemSymbol = axKFOpenAPI.GetChejanData(9001); //종목코드
+                string sTradeType = axKFOpenAPI.GetChejanData(907); //매도수구분
+                string sOrderType = axKFOpenAPI.GetChejanData(905); //주문구분
+                string sOrderOrg = axKFOpenAPI.GetChejanData(904); //원주문번호
+                string sItemName = axKFOpenAPI.GetChejanData(302); //종목명
+                string sOrderKind = axKFOpenAPI.GetChejanData(906); //주문유형
+                string sOrderCnt = axKFOpenAPI.GetChejanData(900); //주문수량
+                string sOrderPrice = axKFOpenAPI.GetChejanData(901); //주문가격
+                string sCondPrice = axKFOpenAPI.GetChejanData(13333); //조건가격
+                string sMarkPrice = axKFOpenAPI.GetChejanData(13330); //주문표시가격
+                string sComPrice = axKFOpenAPI.GetChejanData(13332); //조건표시가격
+                string sLiqCnt = axKFOpenAPI.GetChejanData(902); //미체결수량
+                string sOrderState = axKFOpenAPI.GetChejanData(913); //주문상태
+                string sReverseOrd = axKFOpenAPI.GetChejanData(919); //반대매매여부
+                string sMarketCode = axKFOpenAPI.GetChejanData(8046); //거래소코드
+                string sCurrencyCode = axKFOpenAPI.GetChejanData(8043); //통화코드
+                string sOrderTime = axKFOpenAPI.GetChejanData(908); //주문시간
+                string sOrdCondSort = axKFOpenAPI.GetChejanData(50713); //해외주문조건구분
+                string sOrdEnd = axKFOpenAPI.GetChejanData(50714); //주문조건종료일자
+
+
+                WriteLog(string.Format("주문내역=>계좌번호:{0}, 주문번호:{1}, 종목코드:{2}, 매도수구분:{3}, 주문구분:{4}, 원주문번호:{5}, 종목명:{6}, 주문유형:{7}, 주문수량:{8}, 주문가격:{9}, " +
+                    "조건가격:{10}, 주문표시가격:{11}, 조건표시가격:{12}, 미체결수량:{13}, 주문상태:{14}, 반대매매여부:{15}, 거래소코드:{16}, 통화코드:{17}, 주문시간:{18}, 해외주문조건:{19}, 주문조건종료일자:{20}",
+                    sAccountNo, sOrderNo, sItemSymbol, sTradeType, sOrderType, sOrderOrg, sItemName, sOrderKind, sOrderCnt, sOrderPrice,
+                    sCondPrice, sMarkPrice, sComPrice, sLiqCnt, sOrderState, sReverseOrd, sMarketCode, sCurrencyCode, sOrderTime, sOrdCondSort, sOrdEnd
+                    ));
 
 
                 RequestOrderList(false, false);

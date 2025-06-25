@@ -170,8 +170,10 @@ namespace ChartCtrl
             }
 
             SetTimeAxis(iStartItem);
+            if (CtrlProperty._ClientW > 0 && CtrlProperty._nItemView > 0)
+                mCandleW = (float)CtrlProperty._ClientW / CtrlProperty._nItemView;
 
-            Invalidate();
+            RChartCtrl_SizeChanged(this, new EventArgs());
         }
 
         public void Review()
@@ -1062,6 +1064,8 @@ namespace ChartCtrl
             if (m_itemGroup.Count() < 1)
                 return;
 
+            SetClientRect();
+
             int prvClientW = CtrlProperty._ClientW;
 
             if (prvClientW == 0 && mCandleW == 0)
@@ -1073,7 +1077,6 @@ namespace ChartCtrl
             if (mCandleW == 0)
                 return;
 
-            SetClientRect();
             int prvItemView = CtrlProperty._nItemView;
 
             if (prvClientW > 0 && prvClientW != CtrlProperty._ClientW)

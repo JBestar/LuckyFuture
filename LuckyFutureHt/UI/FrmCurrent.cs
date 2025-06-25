@@ -100,7 +100,7 @@ namespace LuckyFuture.UI
 		// selected user account
 		
 		
-		private void InitListView(bool bAll = true)
+		public void InitListView(bool bAll = true)
         {
             if (InvokeRequired)
             {

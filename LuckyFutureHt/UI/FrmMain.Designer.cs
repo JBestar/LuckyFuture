@@ -439,8 +439,8 @@ namespace LuckyFuture.UI
             this.dgvQuoteInfo.DataSource = this.bsQuoteInfo;
             this.dgvQuoteInfo.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvQuoteInfo.EnableHeadersVisualStyles = false;
-            this.dgvQuoteInfo.Location = new System.Drawing.Point(44, 332);
-            this.dgvQuoteInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvQuoteInfo.Location = new System.Drawing.Point(55, 415);
+            this.dgvQuoteInfo.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.dgvQuoteInfo.MultiSelect = false;
             this.dgvQuoteInfo.Name = "dgvQuoteInfo";
             this.dgvQuoteInfo.ReadOnly = true;
@@ -456,7 +456,7 @@ namespace LuckyFuture.UI
             this.dgvQuoteInfo.ShowCellToolTips = false;
             this.dgvQuoteInfo.ShowEditingIcon = false;
             this.dgvQuoteInfo.ShowRowErrors = false;
-            this.dgvQuoteInfo.Size = new System.Drawing.Size(457, 123);
+            this.dgvQuoteInfo.Size = new System.Drawing.Size(571, 154);
             this.dgvQuoteInfo.TabIndex = 0;
             this.dgvQuoteInfo.VirtualMode = true;
             this.dgvQuoteInfo.Visible = false;
@@ -610,9 +610,10 @@ namespace LuckyFuture.UI
             this.chkFixed.BackColor = System.Drawing.SystemColors.Control;
             this.chkFixed.Checked = true;
             this.chkFixed.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkFixed.Location = new System.Drawing.Point(215, 332);
+            this.chkFixed.Location = new System.Drawing.Point(269, 415);
+            this.chkFixed.Margin = new System.Windows.Forms.Padding(4);
             this.chkFixed.Name = "chkFixed";
-            this.chkFixed.Size = new System.Drawing.Size(89, 18);
+            this.chkFixed.Size = new System.Drawing.Size(111, 22);
             this.chkFixed.TabIndex = 1;
             this.chkFixed.Text = "호가고정";
             this.chkFixed.UseVisualStyleBackColor = false;
@@ -641,8 +642,8 @@ namespace LuckyFuture.UI
             this.dgvValuationInfo.DataSource = this.bsValuationInfo;
             this.dgvValuationInfo.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvValuationInfo.EnableHeadersVisualStyles = false;
-            this.dgvValuationInfo.Location = new System.Drawing.Point(7, 146);
-            this.dgvValuationInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvValuationInfo.Location = new System.Drawing.Point(9, 182);
+            this.dgvValuationInfo.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.dgvValuationInfo.MultiSelect = false;
             this.dgvValuationInfo.Name = "dgvValuationInfo";
             this.dgvValuationInfo.ReadOnly = true;
@@ -658,7 +659,7 @@ namespace LuckyFuture.UI
             this.dgvValuationInfo.ShowCellToolTips = false;
             this.dgvValuationInfo.ShowEditingIcon = false;
             this.dgvValuationInfo.ShowRowErrors = false;
-            this.dgvValuationInfo.Size = new System.Drawing.Size(511, 39);
+            this.dgvValuationInfo.Size = new System.Drawing.Size(639, 49);
             this.dgvValuationInfo.TabIndex = 0;
             this.dgvValuationInfo.VirtualMode = true;
             this.dgvValuationInfo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvValuationInfo_CellFormatting);
@@ -749,9 +750,10 @@ namespace LuckyFuture.UI
             // txtId
             // 
             this.txtId.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtId.Location = new System.Drawing.Point(205, 58);
+            this.txtId.Location = new System.Drawing.Point(256, 72);
+            this.txtId.Margin = new System.Windows.Forms.Padding(4);
             this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(68, 23);
+            this.txtId.Size = new System.Drawing.Size(84, 27);
             this.txtId.TabIndex = 1;
             this.txtId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -762,9 +764,10 @@ namespace LuckyFuture.UI
             this.cmbSiteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSiteList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSiteList.FormattingEnabled = true;
-            this.cmbSiteList.Location = new System.Drawing.Point(43, 58);
+            this.cmbSiteList.Location = new System.Drawing.Point(54, 72);
+            this.cmbSiteList.Margin = new System.Windows.Forms.Padding(4);
             this.cmbSiteList.Name = "cmbSiteList";
-            this.cmbSiteList.Size = new System.Drawing.Size(82, 22);
+            this.cmbSiteList.Size = new System.Drawing.Size(136, 25);
             this.cmbSiteList.TabIndex = 0;
             this.cmbSiteList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbSiteList_DrawItem);
             this.cmbSiteList.SelectedIndexChanged += new System.EventHandler(this.cmbSiteList_SelectedIndexChanged);
@@ -772,9 +775,10 @@ namespace LuckyFuture.UI
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(276, 58);
+            this.txtPassword.Location = new System.Drawing.Point(345, 72);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(48, 23);
+            this.txtPassword.Size = new System.Drawing.Size(59, 27);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPassword.UseSystemPasswordChar = true;
@@ -782,9 +786,10 @@ namespace LuckyFuture.UI
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 62);
+            this.label2.Location = new System.Drawing.Point(10, 78);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 12);
+            this.label2.Size = new System.Drawing.Size(42, 15);
             this.label2.TabIndex = 4;
             this.label2.Text = "계 정";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -813,8 +818,8 @@ namespace LuckyFuture.UI
             this.dgvOrderInfo.DataSource = this.bsOrderInfo;
             this.dgvOrderInfo.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvOrderInfo.EnableHeadersVisualStyles = false;
-            this.dgvOrderInfo.Location = new System.Drawing.Point(7, 209);
-            this.dgvOrderInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvOrderInfo.Location = new System.Drawing.Point(9, 261);
+            this.dgvOrderInfo.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.dgvOrderInfo.MultiSelect = false;
             this.dgvOrderInfo.Name = "dgvOrderInfo";
             this.dgvOrderInfo.ReadOnly = true;
@@ -830,7 +835,7 @@ namespace LuckyFuture.UI
             this.dgvOrderInfo.ShowCellToolTips = false;
             this.dgvOrderInfo.ShowEditingIcon = false;
             this.dgvOrderInfo.ShowRowErrors = false;
-            this.dgvOrderInfo.Size = new System.Drawing.Size(511, 81);
+            this.dgvOrderInfo.Size = new System.Drawing.Size(639, 101);
             this.dgvOrderInfo.TabIndex = 0;
             this.dgvOrderInfo.VirtualMode = true;
             this.dgvOrderInfo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvOrderInfo_CellFormatting);
@@ -953,8 +958,8 @@ namespace LuckyFuture.UI
             dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvCurrentInfo.DefaultCellStyle = dataGridViewCellStyle16;
             this.dgvCurrentInfo.EnableHeadersVisualStyles = false;
-            this.dgvCurrentInfo.Location = new System.Drawing.Point(151, 332);
-            this.dgvCurrentInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvCurrentInfo.Location = new System.Drawing.Point(189, 415);
+            this.dgvCurrentInfo.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.dgvCurrentInfo.MultiSelect = false;
             this.dgvCurrentInfo.Name = "dgvCurrentInfo";
             this.dgvCurrentInfo.ReadOnly = true;
@@ -971,7 +976,7 @@ namespace LuckyFuture.UI
             this.dgvCurrentInfo.ShowCellToolTips = false;
             this.dgvCurrentInfo.ShowEditingIcon = false;
             this.dgvCurrentInfo.ShowRowErrors = false;
-            this.dgvCurrentInfo.Size = new System.Drawing.Size(248, 136);
+            this.dgvCurrentInfo.Size = new System.Drawing.Size(310, 170);
             this.dgvCurrentInfo.TabIndex = 0;
             this.dgvCurrentInfo.VirtualMode = true;
             this.dgvCurrentInfo.Visible = false;
@@ -1035,9 +1040,10 @@ namespace LuckyFuture.UI
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 93);
+            this.label7.Location = new System.Drawing.Point(9, 116);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 12);
+            this.label7.Size = new System.Drawing.Size(42, 15);
             this.label7.TabIndex = 4;
             this.label7.Text = "계 좌";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1054,9 +1060,10 @@ namespace LuckyFuture.UI
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnLogin.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLogin.Location = new System.Drawing.Point(330, 54);
+            this.btnLogin.Location = new System.Drawing.Point(412, 68);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(72, 26);
+            this.btnLogin.Size = new System.Drawing.Size(90, 32);
             this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "접 속";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -1070,10 +1077,11 @@ namespace LuckyFuture.UI
             this.listLog.FullRowSelect = true;
             this.listLog.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listLog.HideSelection = false;
-            this.listLog.Location = new System.Drawing.Point(7, 322);
+            this.listLog.Location = new System.Drawing.Point(9, 402);
+            this.listLog.Margin = new System.Windows.Forms.Padding(4);
             this.listLog.MultiSelect = false;
             this.listLog.Name = "listLog";
-            this.listLog.Size = new System.Drawing.Size(512, 320);
+            this.listLog.Size = new System.Drawing.Size(639, 399);
             this.listLog.TabIndex = 8;
             this.listLog.UseCompatibleStateImageBehavior = false;
             this.listLog.View = System.Windows.Forms.View.Details;
@@ -1094,9 +1102,10 @@ namespace LuckyFuture.UI
             this.btnChat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChat.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnChat.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnChat.Location = new System.Drawing.Point(408, 86);
+            this.btnChat.Location = new System.Drawing.Point(510, 108);
+            this.btnChat.Margin = new System.Windows.Forms.Padding(4);
             this.btnChat.Name = "btnChat";
-            this.btnChat.Size = new System.Drawing.Size(59, 26);
+            this.btnChat.Size = new System.Drawing.Size(74, 32);
             this.btnChat.TabIndex = 6;
             this.btnChat.Text = "차 트";
             this.btnChat.UseVisualStyleBackColor = true;
@@ -1106,19 +1115,20 @@ namespace LuckyFuture.UI
             // 
             this.txtBalance.BackColor = System.Drawing.Color.MistyRose;
             this.txtBalance.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBalance.Location = new System.Drawing.Point(205, 89);
+            this.txtBalance.Location = new System.Drawing.Point(256, 111);
+            this.txtBalance.Margin = new System.Windows.Forms.Padding(4);
             this.txtBalance.Name = "txtBalance";
             this.txtBalance.ReadOnly = true;
-            this.txtBalance.Size = new System.Drawing.Size(119, 23);
+            this.txtBalance.Size = new System.Drawing.Size(148, 27);
             this.txtBalance.TabIndex = 2;
             this.txtBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(159, 95);
+            this.label5.Location = new System.Drawing.Point(198, 119);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 15);
+            this.label5.Size = new System.Drawing.Size(65, 19);
             this.label5.TabIndex = 4;
             this.label5.Text = "담보금";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1143,7 +1153,8 @@ namespace LuckyFuture.UI
             this.totalBuyCountDataGridViewTextBoxColumn,
             this.totalBuyOrderDataGridViewTextBoxColumn});
             this.dgvTotalQuoteInfo.DataSource = this.bsTotalQuoteInfo;
-            this.dgvTotalQuoteInfo.Location = new System.Drawing.Point(44, 454);
+            this.dgvTotalQuoteInfo.Location = new System.Drawing.Point(55, 568);
+            this.dgvTotalQuoteInfo.Margin = new System.Windows.Forms.Padding(4);
             this.dgvTotalQuoteInfo.MultiSelect = false;
             this.dgvTotalQuoteInfo.Name = "dgvTotalQuoteInfo";
             this.dgvTotalQuoteInfo.ReadOnly = true;
@@ -1158,7 +1169,7 @@ namespace LuckyFuture.UI
             this.dgvTotalQuoteInfo.ShowCellToolTips = false;
             this.dgvTotalQuoteInfo.ShowEditingIcon = false;
             this.dgvTotalQuoteInfo.ShowRowErrors = false;
-            this.dgvTotalQuoteInfo.Size = new System.Drawing.Size(474, 18);
+            this.dgvTotalQuoteInfo.Size = new System.Drawing.Size(592, 22);
             this.dgvTotalQuoteInfo.TabIndex = 9;
             this.dgvTotalQuoteInfo.VirtualMode = true;
             this.dgvTotalQuoteInfo.Visible = false;
@@ -1271,9 +1282,10 @@ namespace LuckyFuture.UI
             this.cmbUserAccounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUserAccounts.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbUserAccounts.FormattingEnabled = true;
-            this.cmbUserAccounts.Location = new System.Drawing.Point(43, 89);
+            this.cmbUserAccounts.Location = new System.Drawing.Point(54, 111);
+            this.cmbUserAccounts.Margin = new System.Windows.Forms.Padding(4);
             this.cmbUserAccounts.Name = "cmbUserAccounts";
-            this.cmbUserAccounts.Size = new System.Drawing.Size(110, 22);
+            this.cmbUserAccounts.Size = new System.Drawing.Size(136, 26);
             this.cmbUserAccounts.TabIndex = 10;
             this.cmbUserAccounts.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbUserAccounts_DrawItem);
             this.cmbUserAccounts.SelectedIndexChanged += new System.EventHandler(this.cmbUserAccounts_SelectedIndexChanged);
@@ -1319,8 +1331,8 @@ namespace LuckyFuture.UI
             dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvItemPriceInfo.DefaultCellStyle = dataGridViewCellStyle33;
             this.dgvItemPriceInfo.EnableHeadersVisualStyles = false;
-            this.dgvItemPriceInfo.Location = new System.Drawing.Point(7, 184);
-            this.dgvItemPriceInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvItemPriceInfo.Location = new System.Drawing.Point(9, 230);
+            this.dgvItemPriceInfo.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.dgvItemPriceInfo.MultiSelect = false;
             this.dgvItemPriceInfo.Name = "dgvItemPriceInfo";
             this.dgvItemPriceInfo.ReadOnly = true;
@@ -1337,7 +1349,7 @@ namespace LuckyFuture.UI
             this.dgvItemPriceInfo.ShowCellToolTips = false;
             this.dgvItemPriceInfo.ShowEditingIcon = false;
             this.dgvItemPriceInfo.ShowRowErrors = false;
-            this.dgvItemPriceInfo.Size = new System.Drawing.Size(511, 20);
+            this.dgvItemPriceInfo.Size = new System.Drawing.Size(639, 25);
             this.dgvItemPriceInfo.TabIndex = 0;
             this.dgvItemPriceInfo.VirtualMode = true;
             this.dgvItemPriceInfo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvItemPriceInfo_CellFormatting);
@@ -1461,10 +1473,10 @@ namespace LuckyFuture.UI
             this.chkAutoMode.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkAutoMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkAutoMode.ForeColor = System.Drawing.Color.Black;
-            this.chkAutoMode.Location = new System.Drawing.Point(408, 116);
+            this.chkAutoMode.Location = new System.Drawing.Point(510, 145);
             this.chkAutoMode.Margin = new System.Windows.Forms.Padding(0);
             this.chkAutoMode.Name = "chkAutoMode";
-            this.chkAutoMode.Size = new System.Drawing.Size(59, 26);
+            this.chkAutoMode.Size = new System.Drawing.Size(74, 32);
             this.chkAutoMode.TabIndex = 11;
             this.chkAutoMode.Text = "수 동";
             this.chkAutoMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1483,9 +1495,10 @@ namespace LuckyFuture.UI
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnLogout.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLogout.Location = new System.Drawing.Point(408, 54);
+            this.btnLogout.Location = new System.Drawing.Point(510, 68);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(59, 26);
+            this.btnLogout.Size = new System.Drawing.Size(74, 32);
             this.btnLogout.TabIndex = 3;
             this.btnLogout.Text = "해 제";
             this.btnLogout.UseVisualStyleBackColor = true;
@@ -1498,9 +1511,10 @@ namespace LuckyFuture.UI
             this.cmbItemList.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbItemList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.cmbItemList.FormattingEnabled = true;
-            this.cmbItemList.Location = new System.Drawing.Point(43, 117);
+            this.cmbItemList.Location = new System.Drawing.Point(54, 146);
+            this.cmbItemList.Margin = new System.Windows.Forms.Padding(4);
             this.cmbItemList.Name = "cmbItemList";
-            this.cmbItemList.Size = new System.Drawing.Size(188, 22);
+            this.cmbItemList.Size = new System.Drawing.Size(234, 25);
             this.cmbItemList.TabIndex = 13;
             this.cmbItemList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbItemList_DrawItem);
             this.cmbItemList.SelectedIndexChanged += new System.EventHandler(this.cmbItemList_SelectedIndexChanged);
@@ -1508,9 +1522,10 @@ namespace LuckyFuture.UI
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 122);
+            this.label1.Location = new System.Drawing.Point(10, 152);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 12);
+            this.label1.Size = new System.Drawing.Size(42, 15);
             this.label1.TabIndex = 14;
             this.label1.Text = "종 목";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1524,9 +1539,10 @@ namespace LuckyFuture.UI
             this.btnHide.ColorE = System.Drawing.Color.White;
             this.btnHide.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnHide.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnHide.Location = new System.Drawing.Point(473, 54);
+            this.btnHide.Location = new System.Drawing.Point(591, 68);
+            this.btnHide.Margin = new System.Windows.Forms.Padding(4);
             this.btnHide.Name = "btnHide";
-            this.btnHide.Size = new System.Drawing.Size(45, 26);
+            this.btnHide.Size = new System.Drawing.Size(56, 32);
             this.btnHide.TabIndex = 15;
             this.btnHide.Text = "<<";
             this.btnHide.UseVisualStyleBackColor = true;
@@ -1550,10 +1566,10 @@ namespace LuckyFuture.UI
             this.panel1.Controls.Add(this.groupBetting5);
             this.panel1.Controls.Add(this.groupBetting6);
             this.panel1.Controls.Add(this.groupBetType);
-            this.panel1.Location = new System.Drawing.Point(528, 45);
+            this.panel1.Location = new System.Drawing.Point(660, 56);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(360, 674);
+            this.panel1.Size = new System.Drawing.Size(450, 842);
             this.panel1.TabIndex = 16;
             // 
             // btnSettingExport
@@ -1565,9 +1581,10 @@ namespace LuckyFuture.UI
             this.btnSettingExport.ColorE = System.Drawing.Color.White;
             this.btnSettingExport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSettingExport.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSettingExport.Location = new System.Drawing.Point(259, 643);
+            this.btnSettingExport.Location = new System.Drawing.Point(324, 804);
+            this.btnSettingExport.Margin = new System.Windows.Forms.Padding(4);
             this.btnSettingExport.Name = "btnSettingExport";
-            this.btnSettingExport.Size = new System.Drawing.Size(95, 25);
+            this.btnSettingExport.Size = new System.Drawing.Size(119, 31);
             this.btnSettingExport.TabIndex = 25;
             this.btnSettingExport.Text = "내보내기";
             this.btnSettingExport.UseVisualStyleBackColor = true;
@@ -1582,9 +1599,10 @@ namespace LuckyFuture.UI
             this.btnSettingFetch.ColorE = System.Drawing.Color.White;
             this.btnSettingFetch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSettingFetch.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSettingFetch.Location = new System.Drawing.Point(5, 644);
+            this.btnSettingFetch.Location = new System.Drawing.Point(6, 805);
+            this.btnSettingFetch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSettingFetch.Name = "btnSettingFetch";
-            this.btnSettingFetch.Size = new System.Drawing.Size(95, 25);
+            this.btnSettingFetch.Size = new System.Drawing.Size(119, 31);
             this.btnSettingFetch.TabIndex = 24;
             this.btnSettingFetch.Text = "불러오기";
             this.btnSettingFetch.UseVisualStyleBackColor = true;
@@ -1605,9 +1623,11 @@ namespace LuckyFuture.UI
             this.groupOther.Controls.Add(this.chkLossPayoffN);
             this.groupOther.Controls.Add(this.txtPayoffEarnN);
             this.groupOther.Controls.Add(this.chkEarnPayoffN);
-            this.groupOther.Location = new System.Drawing.Point(4, 578);
+            this.groupOther.Location = new System.Drawing.Point(5, 722);
+            this.groupOther.Margin = new System.Windows.Forms.Padding(4);
             this.groupOther.Name = "groupOther";
-            this.groupOther.Size = new System.Drawing.Size(352, 62);
+            this.groupOther.Padding = new System.Windows.Forms.Padding(4);
+            this.groupOther.Size = new System.Drawing.Size(440, 78);
             this.groupOther.TabIndex = 23;
             this.groupOther.TabStop = false;
             this.groupOther.Text = "기타설정";
@@ -1622,9 +1642,10 @@ namespace LuckyFuture.UI
             this.btnSelOrderSell.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSelOrderSell.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSelOrderSell.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSelOrderSell.Location = new System.Drawing.Point(226, 36);
+            this.btnSelOrderSell.Location = new System.Drawing.Point(282, 45);
+            this.btnSelOrderSell.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelOrderSell.Name = "btnSelOrderSell";
-            this.btnSelOrderSell.Size = new System.Drawing.Size(59, 23);
+            this.btnSelOrderSell.Size = new System.Drawing.Size(74, 29);
             this.btnSelOrderSell.TabIndex = 80;
             this.btnSelOrderSell.Text = "매 도";
             this.btnSelOrderSell.UseVisualStyleBackColor = true;
@@ -1640,9 +1661,10 @@ namespace LuckyFuture.UI
             this.btnSelOrderBuy.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSelOrderBuy.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSelOrderBuy.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSelOrderBuy.Location = new System.Drawing.Point(162, 36);
+            this.btnSelOrderBuy.Location = new System.Drawing.Point(202, 45);
+            this.btnSelOrderBuy.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelOrderBuy.Name = "btnSelOrderBuy";
-            this.btnSelOrderBuy.Size = new System.Drawing.Size(59, 23);
+            this.btnSelOrderBuy.Size = new System.Drawing.Size(74, 29);
             this.btnSelOrderBuy.TabIndex = 79;
             this.btnSelOrderBuy.Text = "매 수";
             this.btnSelOrderBuy.UseVisualStyleBackColor = true;
@@ -1658,9 +1680,10 @@ namespace LuckyFuture.UI
             this.btnSelOrderAll.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSelOrderAll.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSelOrderAll.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSelOrderAll.Location = new System.Drawing.Point(98, 36);
+            this.btnSelOrderAll.Location = new System.Drawing.Point(122, 45);
+            this.btnSelOrderAll.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelOrderAll.Name = "btnSelOrderAll";
-            this.btnSelOrderAll.Size = new System.Drawing.Size(59, 23);
+            this.btnSelOrderAll.Size = new System.Drawing.Size(74, 29);
             this.btnSelOrderAll.TabIndex = 78;
             this.btnSelOrderAll.Text = "전 체";
             this.btnSelOrderAll.UseVisualStyleBackColor = true;
@@ -1669,9 +1692,10 @@ namespace LuckyFuture.UI
             // chkOrderSelect
             // 
             this.chkOrderSelect.AutoSize = true;
-            this.chkOrderSelect.Location = new System.Drawing.Point(12, 38);
+            this.chkOrderSelect.Location = new System.Drawing.Point(15, 48);
+            this.chkOrderSelect.Margin = new System.Windows.Forms.Padding(4);
             this.chkOrderSelect.Name = "chkOrderSelect";
-            this.chkOrderSelect.Size = new System.Drawing.Size(72, 16);
+            this.chkOrderSelect.Size = new System.Drawing.Size(89, 19);
             this.chkOrderSelect.TabIndex = 10;
             this.chkOrderSelect.Text = "선택주문";
             this.chkOrderSelect.UseVisualStyleBackColor = true;
@@ -1680,27 +1704,30 @@ namespace LuckyFuture.UI
             // txtPayoffLossN
             // 
             this.txtPayoffLossN.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPayoffLossN.Location = new System.Drawing.Point(112, 74);
+            this.txtPayoffLossN.Location = new System.Drawing.Point(140, 92);
+            this.txtPayoffLossN.Margin = new System.Windows.Forms.Padding(4);
             this.txtPayoffLossN.Name = "txtPayoffLossN";
-            this.txtPayoffLossN.Size = new System.Drawing.Size(57, 23);
+            this.txtPayoffLossN.Size = new System.Drawing.Size(70, 27);
             this.txtPayoffLossN.TabIndex = 1;
             this.txtPayoffLossN.Visible = false;
             // 
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(165, 17);
+            this.label35.Location = new System.Drawing.Point(206, 21);
+            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(17, 12);
+            this.label35.Size = new System.Drawing.Size(22, 15);
             this.label35.TabIndex = 8;
             this.label35.Text = "초";
             // 
             // label64
             // 
             this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(175, 78);
+            this.label64.Location = new System.Drawing.Point(219, 98);
+            this.label64.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(17, 12);
+            this.label64.Size = new System.Drawing.Size(22, 15);
             this.label64.TabIndex = 3;
             this.label64.Text = "틱";
             this.label64.Visible = false;
@@ -1708,18 +1735,20 @@ namespace LuckyFuture.UI
             // txtStopOrder
             // 
             this.txtStopOrder.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStopOrder.Location = new System.Drawing.Point(98, 11);
+            this.txtStopOrder.Location = new System.Drawing.Point(122, 14);
+            this.txtStopOrder.Margin = new System.Windows.Forms.Padding(4);
             this.txtStopOrder.Name = "txtStopOrder";
-            this.txtStopOrder.Size = new System.Drawing.Size(59, 23);
+            this.txtStopOrder.Size = new System.Drawing.Size(73, 27);
             this.txtStopOrder.TabIndex = 7;
             this.txtStopOrder.TextChanged += new System.EventHandler(this.txtStopOrder_TextChanged);
             // 
             // chkOrderStop
             // 
             this.chkOrderStop.AutoSize = true;
-            this.chkOrderStop.Location = new System.Drawing.Point(12, 16);
+            this.chkOrderStop.Location = new System.Drawing.Point(15, 20);
+            this.chkOrderStop.Margin = new System.Windows.Forms.Padding(4);
             this.chkOrderStop.Name = "chkOrderStop";
-            this.chkOrderStop.Size = new System.Drawing.Size(84, 16);
+            this.chkOrderStop.Size = new System.Drawing.Size(104, 19);
             this.chkOrderStop.TabIndex = 6;
             this.chkOrderStop.Text = "미체결취소";
             this.chkOrderStop.UseVisualStyleBackColor = true;
@@ -1728,9 +1757,10 @@ namespace LuckyFuture.UI
             // label65
             // 
             this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(175, 64);
+            this.label65.Location = new System.Drawing.Point(219, 80);
+            this.label65.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(17, 12);
+            this.label65.Size = new System.Drawing.Size(22, 15);
             this.label65.TabIndex = 3;
             this.label65.Text = "틱";
             this.label65.Visible = false;
@@ -1738,9 +1768,10 @@ namespace LuckyFuture.UI
             // chkLossPayoffN
             // 
             this.chkLossPayoffN.AutoSize = true;
-            this.chkLossPayoffN.Location = new System.Drawing.Point(25, 78);
+            this.chkLossPayoffN.Location = new System.Drawing.Point(31, 98);
+            this.chkLossPayoffN.Margin = new System.Windows.Forms.Padding(4);
             this.chkLossPayoffN.Name = "chkLossPayoffN";
-            this.chkLossPayoffN.Size = new System.Drawing.Size(48, 16);
+            this.chkLossPayoffN.Size = new System.Drawing.Size(59, 19);
             this.chkLossPayoffN.TabIndex = 5;
             this.chkLossPayoffN.Text = "손실";
             this.chkLossPayoffN.UseVisualStyleBackColor = true;
@@ -1750,18 +1781,20 @@ namespace LuckyFuture.UI
             // txtPayoffEarnN
             // 
             this.txtPayoffEarnN.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPayoffEarnN.Location = new System.Drawing.Point(112, 61);
+            this.txtPayoffEarnN.Location = new System.Drawing.Point(140, 76);
+            this.txtPayoffEarnN.Margin = new System.Windows.Forms.Padding(4);
             this.txtPayoffEarnN.Name = "txtPayoffEarnN";
-            this.txtPayoffEarnN.Size = new System.Drawing.Size(57, 23);
+            this.txtPayoffEarnN.Size = new System.Drawing.Size(70, 27);
             this.txtPayoffEarnN.TabIndex = 0;
             this.txtPayoffEarnN.Visible = false;
             // 
             // chkEarnPayoffN
             // 
             this.chkEarnPayoffN.AutoSize = true;
-            this.chkEarnPayoffN.Location = new System.Drawing.Point(25, 64);
+            this.chkEarnPayoffN.Location = new System.Drawing.Point(31, 80);
+            this.chkEarnPayoffN.Margin = new System.Windows.Forms.Padding(4);
             this.chkEarnPayoffN.Name = "chkEarnPayoffN";
-            this.chkEarnPayoffN.Size = new System.Drawing.Size(48, 16);
+            this.chkEarnPayoffN.Size = new System.Drawing.Size(59, 19);
             this.chkEarnPayoffN.TabIndex = 5;
             this.chkEarnPayoffN.Text = "수익";
             this.chkEarnPayoffN.UseVisualStyleBackColor = true;
@@ -1777,9 +1810,10 @@ namespace LuckyFuture.UI
             this.btnBandSetting.ColorE = System.Drawing.Color.White;
             this.btnBandSetting.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBandSetting.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnBandSetting.Location = new System.Drawing.Point(234, 646);
+            this.btnBandSetting.Location = new System.Drawing.Point(292, 808);
+            this.btnBandSetting.Margin = new System.Windows.Forms.Padding(4);
             this.btnBandSetting.Name = "btnBandSetting";
-            this.btnBandSetting.Size = new System.Drawing.Size(62, 22);
+            this.btnBandSetting.Size = new System.Drawing.Size(78, 28);
             this.btnBandSetting.TabIndex = 22;
             this.btnBandSetting.Text = "등락설정";
             this.btnBandSetting.UseVisualStyleBackColor = true;
@@ -1795,9 +1829,10 @@ namespace LuckyFuture.UI
             this.btnSettingLoad.ColorE = System.Drawing.Color.White;
             this.btnSettingLoad.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSettingLoad.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSettingLoad.Location = new System.Drawing.Point(74, 645);
+            this.btnSettingLoad.Location = new System.Drawing.Point(92, 806);
+            this.btnSettingLoad.Margin = new System.Windows.Forms.Padding(4);
             this.btnSettingLoad.Name = "btnSettingLoad";
-            this.btnSettingLoad.Size = new System.Drawing.Size(49, 22);
+            this.btnSettingLoad.Size = new System.Drawing.Size(61, 28);
             this.btnSettingLoad.TabIndex = 21;
             this.btnSettingLoad.Text = "새로고침";
             this.btnSettingLoad.UseVisualStyleBackColor = true;
@@ -1813,9 +1848,10 @@ namespace LuckyFuture.UI
             this.btnSettingSave.ColorE = System.Drawing.Color.White;
             this.btnSettingSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSettingSave.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSettingSave.Location = new System.Drawing.Point(133, 644);
+            this.btnSettingSave.Location = new System.Drawing.Point(166, 805);
+            this.btnSettingSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSettingSave.Name = "btnSettingSave";
-            this.btnSettingSave.Size = new System.Drawing.Size(95, 25);
+            this.btnSettingSave.Size = new System.Drawing.Size(119, 31);
             this.btnSettingSave.TabIndex = 20;
             this.btnSettingSave.Text = "설정저장";
             this.btnSettingSave.UseVisualStyleBackColor = true;
@@ -1833,9 +1869,11 @@ namespace LuckyFuture.UI
             this.groupStop.Controls.Add(this.chkLossStop);
             this.groupStop.Controls.Add(this.txtStopEarn);
             this.groupStop.Controls.Add(this.chkEarnStop);
-            this.groupStop.Location = new System.Drawing.Point(4, 490);
+            this.groupStop.Location = new System.Drawing.Point(5, 612);
+            this.groupStop.Margin = new System.Windows.Forms.Padding(4);
             this.groupStop.Name = "groupStop";
-            this.groupStop.Size = new System.Drawing.Size(352, 85);
+            this.groupStop.Padding = new System.Windows.Forms.Padding(4);
+            this.groupStop.Size = new System.Drawing.Size(440, 106);
             this.groupStop.TabIndex = 19;
             this.groupStop.TabStop = false;
             this.groupStop.Text = "정지설정";
@@ -1843,27 +1881,30 @@ namespace LuckyFuture.UI
             // label66
             // 
             this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(158, 17);
+            this.label66.Location = new System.Drawing.Point(198, 21);
+            this.label66.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(107, 12);
+            this.label66.Size = new System.Drawing.Size(133, 15);
             this.label66.TabIndex = 13;
             this.label66.Text = "% 하락시 강제정지";
             // 
             // txtStopProfit
             // 
             this.txtStopProfit.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStopProfit.Location = new System.Drawing.Point(98, 11);
+            this.txtStopProfit.Location = new System.Drawing.Point(122, 14);
+            this.txtStopProfit.Margin = new System.Windows.Forms.Padding(4);
             this.txtStopProfit.Name = "txtStopProfit";
-            this.txtStopProfit.Size = new System.Drawing.Size(56, 23);
+            this.txtStopProfit.Size = new System.Drawing.Size(69, 27);
             this.txtStopProfit.TabIndex = 12;
             this.txtStopProfit.TextChanged += new System.EventHandler(this.txtStopProfit_TextChanged);
             // 
             // chkProfitStop
             // 
             this.chkProfitStop.AutoSize = true;
-            this.chkProfitStop.Location = new System.Drawing.Point(11, 15);
+            this.chkProfitStop.Location = new System.Drawing.Point(14, 19);
+            this.chkProfitStop.Margin = new System.Windows.Forms.Padding(4);
             this.chkProfitStop.Name = "chkProfitStop";
-            this.chkProfitStop.Size = new System.Drawing.Size(84, 16);
+            this.chkProfitStop.Size = new System.Drawing.Size(104, 19);
             this.chkProfitStop.TabIndex = 14;
             this.chkProfitStop.Text = "실시간수익";
             this.chkProfitStop.UseVisualStyleBackColor = true;
@@ -1872,9 +1913,10 @@ namespace LuckyFuture.UI
             // chkLiqStop
             // 
             this.chkLiqStop.AutoSize = true;
-            this.chkLiqStop.Location = new System.Drawing.Point(196, 39);
+            this.chkLiqStop.Location = new System.Drawing.Point(245, 49);
+            this.chkLiqStop.Margin = new System.Windows.Forms.Padding(4);
             this.chkLiqStop.Name = "chkLiqStop";
-            this.chkLiqStop.Size = new System.Drawing.Size(72, 16);
+            this.chkLiqStop.Size = new System.Drawing.Size(89, 19);
             this.chkLiqStop.TabIndex = 9;
             this.chkLiqStop.Text = "강제청산";
             this.chkLiqStop.UseVisualStyleBackColor = true;
@@ -1883,36 +1925,40 @@ namespace LuckyFuture.UI
             // txtStopLoss
             // 
             this.txtStopLoss.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStopLoss.Location = new System.Drawing.Point(98, 59);
+            this.txtStopLoss.Location = new System.Drawing.Point(122, 74);
+            this.txtStopLoss.Margin = new System.Windows.Forms.Padding(4);
             this.txtStopLoss.Name = "txtStopLoss";
-            this.txtStopLoss.Size = new System.Drawing.Size(56, 23);
+            this.txtStopLoss.Size = new System.Drawing.Size(69, 27);
             this.txtStopLoss.TabIndex = 1;
             this.txtStopLoss.TextChanged += new System.EventHandler(this.txtStopLoss_TextChanged);
             // 
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(158, 66);
+            this.label48.Location = new System.Drawing.Point(198, 82);
+            this.label48.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(29, 12);
+            this.label48.Size = new System.Drawing.Size(37, 15);
             this.label48.TabIndex = 3;
             this.label48.Text = "만원";
             // 
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(158, 40);
+            this.label49.Location = new System.Drawing.Point(198, 50);
+            this.label49.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(29, 12);
+            this.label49.Size = new System.Drawing.Size(37, 15);
             this.label49.TabIndex = 3;
             this.label49.Text = "만원";
             // 
             // chkLossStop
             // 
             this.chkLossStop.AutoSize = true;
-            this.chkLossStop.Location = new System.Drawing.Point(11, 62);
+            this.chkLossStop.Location = new System.Drawing.Point(14, 78);
+            this.chkLossStop.Margin = new System.Windows.Forms.Padding(4);
             this.chkLossStop.Name = "chkLossStop";
-            this.chkLossStop.Size = new System.Drawing.Size(48, 16);
+            this.chkLossStop.Size = new System.Drawing.Size(59, 19);
             this.chkLossStop.TabIndex = 5;
             this.chkLossStop.Text = "손절";
             this.chkLossStop.UseVisualStyleBackColor = true;
@@ -1921,18 +1967,20 @@ namespace LuckyFuture.UI
             // txtStopEarn
             // 
             this.txtStopEarn.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStopEarn.Location = new System.Drawing.Point(98, 35);
+            this.txtStopEarn.Location = new System.Drawing.Point(122, 44);
+            this.txtStopEarn.Margin = new System.Windows.Forms.Padding(4);
             this.txtStopEarn.Name = "txtStopEarn";
-            this.txtStopEarn.Size = new System.Drawing.Size(56, 23);
+            this.txtStopEarn.Size = new System.Drawing.Size(69, 27);
             this.txtStopEarn.TabIndex = 0;
             this.txtStopEarn.TextChanged += new System.EventHandler(this.txtStopEarn_TextChanged);
             // 
             // chkEarnStop
             // 
             this.chkEarnStop.AutoSize = true;
-            this.chkEarnStop.Location = new System.Drawing.Point(11, 39);
+            this.chkEarnStop.Location = new System.Drawing.Point(14, 49);
+            this.chkEarnStop.Margin = new System.Windows.Forms.Padding(4);
             this.chkEarnStop.Name = "chkEarnStop";
-            this.chkEarnStop.Size = new System.Drawing.Size(48, 16);
+            this.chkEarnStop.Size = new System.Drawing.Size(59, 19);
             this.chkEarnStop.TabIndex = 5;
             this.chkEarnStop.Text = "익절";
             this.chkEarnStop.UseVisualStyleBackColor = true;
@@ -1982,9 +2030,11 @@ namespace LuckyFuture.UI
             this.groupPayoff1.Controls.Add(this.txtPayoffEarn);
             this.groupPayoff1.Controls.Add(this.chkLossPayoff);
             this.groupPayoff1.Controls.Add(this.chkEarnPayoff);
-            this.groupPayoff1.Location = new System.Drawing.Point(4, 348);
+            this.groupPayoff1.Location = new System.Drawing.Point(5, 435);
+            this.groupPayoff1.Margin = new System.Windows.Forms.Padding(4);
             this.groupPayoff1.Name = "groupPayoff1";
-            this.groupPayoff1.Size = new System.Drawing.Size(352, 138);
+            this.groupPayoff1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupPayoff1.Size = new System.Drawing.Size(440, 172);
             this.groupPayoff1.TabIndex = 18;
             this.groupPayoff1.TabStop = false;
             this.groupPayoff1.Text = "청산설정";
@@ -1992,9 +2042,10 @@ namespace LuckyFuture.UI
             // txtPayoffRsi
             // 
             this.txtPayoffRsi.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPayoffRsi.Location = new System.Drawing.Point(230, 107);
+            this.txtPayoffRsi.Location = new System.Drawing.Point(288, 134);
+            this.txtPayoffRsi.Margin = new System.Windows.Forms.Padding(4);
             this.txtPayoffRsi.Name = "txtPayoffRsi";
-            this.txtPayoffRsi.Size = new System.Drawing.Size(32, 23);
+            this.txtPayoffRsi.Size = new System.Drawing.Size(39, 27);
             this.txtPayoffRsi.TabIndex = 83;
             this.txtPayoffRsi.TextChanged += new System.EventHandler(this.txtPayoffRsi_TextChanged);
             // 
@@ -2002,9 +2053,10 @@ namespace LuckyFuture.UI
             // 
             this.label76.AutoSize = true;
             this.label76.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label76.Location = new System.Drawing.Point(206, 114);
+            this.label76.Location = new System.Drawing.Point(258, 142);
+            this.label76.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(24, 12);
+            this.label76.Size = new System.Drawing.Size(30, 15);
             this.label76.TabIndex = 82;
             this.label76.Text = "RSI";
             // 
@@ -2012,9 +2064,10 @@ namespace LuckyFuture.UI
             // 
             this.label75.AutoSize = true;
             this.label75.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label75.Location = new System.Drawing.Point(156, 114);
+            this.label75.Location = new System.Drawing.Point(195, 142);
+            this.label75.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(39, 12);
+            this.label75.Size = new System.Drawing.Size(48, 15);
             this.label75.TabIndex = 81;
             this.label75.Text = "%하락";
             // 
@@ -2027,9 +2080,10 @@ namespace LuckyFuture.UI
             this.btnCciLossRange.ColorE = System.Drawing.Color.White;
             this.btnCciLossRange.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCciLossRange.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCciLossRange.Location = new System.Drawing.Point(315, 107);
+            this.btnCciLossRange.Location = new System.Drawing.Point(394, 134);
+            this.btnCciLossRange.Margin = new System.Windows.Forms.Padding(4);
             this.btnCciLossRange.Name = "btnCciLossRange";
-            this.btnCciLossRange.Size = new System.Drawing.Size(20, 22);
+            this.btnCciLossRange.Size = new System.Drawing.Size(25, 28);
             this.btnCciLossRange.TabIndex = 33;
             this.btnCciLossRange.Text = "...";
             this.btnCciLossRange.UseVisualStyleBackColor = true;
@@ -2044,9 +2098,10 @@ namespace LuckyFuture.UI
             this.btnSmartRange.ColorE = System.Drawing.Color.White;
             this.btnSmartRange.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSmartRange.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSmartRange.Location = new System.Drawing.Point(315, 60);
+            this.btnSmartRange.Location = new System.Drawing.Point(394, 75);
+            this.btnSmartRange.Margin = new System.Windows.Forms.Padding(4);
             this.btnSmartRange.Name = "btnSmartRange";
-            this.btnSmartRange.Size = new System.Drawing.Size(20, 22);
+            this.btnSmartRange.Size = new System.Drawing.Size(25, 28);
             this.btnSmartRange.TabIndex = 27;
             this.btnSmartRange.Text = "...";
             this.btnSmartRange.UseVisualStyleBackColor = true;
@@ -2062,9 +2117,10 @@ namespace LuckyFuture.UI
             this.btnLossTick4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLossTick4.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLossTick4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLossTick4.Location = new System.Drawing.Point(202, 37);
+            this.btnLossTick4.Location = new System.Drawing.Point(252, 46);
+            this.btnLossTick4.Margin = new System.Windows.Forms.Padding(4);
             this.btnLossTick4.Name = "btnLossTick4";
-            this.btnLossTick4.Size = new System.Drawing.Size(25, 23);
+            this.btnLossTick4.Size = new System.Drawing.Size(31, 29);
             this.btnLossTick4.TabIndex = 80;
             this.btnLossTick4.Text = "100";
             this.btnLossTick4.UseVisualStyleBackColor = true;
@@ -2080,9 +2136,10 @@ namespace LuckyFuture.UI
             this.btnLossTick3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLossTick3.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLossTick3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLossTick3.Location = new System.Drawing.Point(176, 37);
+            this.btnLossTick3.Location = new System.Drawing.Point(220, 46);
+            this.btnLossTick3.Margin = new System.Windows.Forms.Padding(4);
             this.btnLossTick3.Name = "btnLossTick3";
-            this.btnLossTick3.Size = new System.Drawing.Size(25, 23);
+            this.btnLossTick3.Size = new System.Drawing.Size(31, 29);
             this.btnLossTick3.TabIndex = 79;
             this.btnLossTick3.Text = "100";
             this.btnLossTick3.UseVisualStyleBackColor = true;
@@ -2098,9 +2155,10 @@ namespace LuckyFuture.UI
             this.btnLossTick2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLossTick2.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLossTick2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLossTick2.Location = new System.Drawing.Point(150, 37);
+            this.btnLossTick2.Location = new System.Drawing.Point(188, 46);
+            this.btnLossTick2.Margin = new System.Windows.Forms.Padding(4);
             this.btnLossTick2.Name = "btnLossTick2";
-            this.btnLossTick2.Size = new System.Drawing.Size(25, 23);
+            this.btnLossTick2.Size = new System.Drawing.Size(31, 29);
             this.btnLossTick2.TabIndex = 78;
             this.btnLossTick2.Text = "100";
             this.btnLossTick2.UseVisualStyleBackColor = true;
@@ -2116,9 +2174,10 @@ namespace LuckyFuture.UI
             this.btnLossTick1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLossTick1.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLossTick1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLossTick1.Location = new System.Drawing.Point(124, 37);
+            this.btnLossTick1.Location = new System.Drawing.Point(155, 46);
+            this.btnLossTick1.Margin = new System.Windows.Forms.Padding(4);
             this.btnLossTick1.Name = "btnLossTick1";
-            this.btnLossTick1.Size = new System.Drawing.Size(25, 23);
+            this.btnLossTick1.Size = new System.Drawing.Size(31, 29);
             this.btnLossTick1.TabIndex = 77;
             this.btnLossTick1.Text = "100";
             this.btnLossTick1.UseVisualStyleBackColor = true;
@@ -2134,9 +2193,10 @@ namespace LuckyFuture.UI
             this.btnEarnTick4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEarnTick4.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEarnTick4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEarnTick4.Location = new System.Drawing.Point(202, 12);
+            this.btnEarnTick4.Location = new System.Drawing.Point(252, 15);
+            this.btnEarnTick4.Margin = new System.Windows.Forms.Padding(4);
             this.btnEarnTick4.Name = "btnEarnTick4";
-            this.btnEarnTick4.Size = new System.Drawing.Size(25, 23);
+            this.btnEarnTick4.Size = new System.Drawing.Size(31, 29);
             this.btnEarnTick4.TabIndex = 76;
             this.btnEarnTick4.Text = "100";
             this.btnEarnTick4.UseVisualStyleBackColor = true;
@@ -2152,9 +2212,10 @@ namespace LuckyFuture.UI
             this.btnEarnTick3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEarnTick3.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEarnTick3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEarnTick3.Location = new System.Drawing.Point(176, 12);
+            this.btnEarnTick3.Location = new System.Drawing.Point(220, 15);
+            this.btnEarnTick3.Margin = new System.Windows.Forms.Padding(4);
             this.btnEarnTick3.Name = "btnEarnTick3";
-            this.btnEarnTick3.Size = new System.Drawing.Size(25, 23);
+            this.btnEarnTick3.Size = new System.Drawing.Size(31, 29);
             this.btnEarnTick3.TabIndex = 75;
             this.btnEarnTick3.Text = "100";
             this.btnEarnTick3.UseVisualStyleBackColor = true;
@@ -2170,9 +2231,10 @@ namespace LuckyFuture.UI
             this.btnEarnTick2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEarnTick2.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEarnTick2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEarnTick2.Location = new System.Drawing.Point(150, 12);
+            this.btnEarnTick2.Location = new System.Drawing.Point(188, 15);
+            this.btnEarnTick2.Margin = new System.Windows.Forms.Padding(4);
             this.btnEarnTick2.Name = "btnEarnTick2";
-            this.btnEarnTick2.Size = new System.Drawing.Size(25, 23);
+            this.btnEarnTick2.Size = new System.Drawing.Size(31, 29);
             this.btnEarnTick2.TabIndex = 74;
             this.btnEarnTick2.Text = "100";
             this.btnEarnTick2.UseVisualStyleBackColor = true;
@@ -2188,9 +2250,10 @@ namespace LuckyFuture.UI
             this.btnEarnTick1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEarnTick1.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEarnTick1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEarnTick1.Location = new System.Drawing.Point(124, 12);
+            this.btnEarnTick1.Location = new System.Drawing.Point(155, 15);
+            this.btnEarnTick1.Margin = new System.Windows.Forms.Padding(4);
             this.btnEarnTick1.Name = "btnEarnTick1";
-            this.btnEarnTick1.Size = new System.Drawing.Size(25, 23);
+            this.btnEarnTick1.Size = new System.Drawing.Size(31, 29);
             this.btnEarnTick1.TabIndex = 73;
             this.btnEarnTick1.Text = "100";
             this.btnEarnTick1.UseVisualStyleBackColor = true;
@@ -2205,9 +2268,10 @@ namespace LuckyFuture.UI
             this.btnLossTickSet.ColorE = System.Drawing.Color.White;
             this.btnLossTickSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLossTickSet.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLossTickSet.Location = new System.Drawing.Point(229, 37);
+            this.btnLossTickSet.Location = new System.Drawing.Point(286, 46);
+            this.btnLossTickSet.Margin = new System.Windows.Forms.Padding(4);
             this.btnLossTickSet.Name = "btnLossTickSet";
-            this.btnLossTickSet.Size = new System.Drawing.Size(20, 23);
+            this.btnLossTickSet.Size = new System.Drawing.Size(25, 29);
             this.btnLossTickSet.TabIndex = 72;
             this.btnLossTickSet.Text = "...";
             this.btnLossTickSet.UseVisualStyleBackColor = true;
@@ -2222,9 +2286,10 @@ namespace LuckyFuture.UI
             this.btnEarnTickSet.ColorE = System.Drawing.Color.White;
             this.btnEarnTickSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEarnTickSet.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEarnTickSet.Location = new System.Drawing.Point(229, 12);
+            this.btnEarnTickSet.Location = new System.Drawing.Point(286, 15);
+            this.btnEarnTickSet.Margin = new System.Windows.Forms.Padding(4);
             this.btnEarnTickSet.Name = "btnEarnTickSet";
-            this.btnEarnTickSet.Size = new System.Drawing.Size(20, 23);
+            this.btnEarnTickSet.Size = new System.Drawing.Size(25, 29);
             this.btnEarnTickSet.TabIndex = 67;
             this.btnEarnTickSet.Text = "...";
             this.btnEarnTickSet.UseVisualStyleBackColor = true;
@@ -2234,18 +2299,20 @@ namespace LuckyFuture.UI
             // 
             this.label73.AutoSize = true;
             this.label73.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label73.Location = new System.Drawing.Point(92, 113);
+            this.label73.Location = new System.Drawing.Point(115, 141);
+            this.label73.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(29, 12);
+            this.label73.Size = new System.Drawing.Size(37, 15);
             this.label73.TabIndex = 35;
             this.label73.Text = "이상";
             // 
             // txtPayoffCci2
             // 
             this.txtPayoffCci2.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPayoffCci2.Location = new System.Drawing.Point(122, 107);
+            this.txtPayoffCci2.Location = new System.Drawing.Point(152, 134);
+            this.txtPayoffCci2.Margin = new System.Windows.Forms.Padding(4);
             this.txtPayoffCci2.Name = "txtPayoffCci2";
-            this.txtPayoffCci2.Size = new System.Drawing.Size(32, 23);
+            this.txtPayoffCci2.Size = new System.Drawing.Size(39, 27);
             this.txtPayoffCci2.TabIndex = 34;
             this.txtPayoffCci2.TextChanged += new System.EventHandler(this.txtPayoffCci2_TextChanged);
             // 
@@ -2253,10 +2320,10 @@ namespace LuckyFuture.UI
             // 
             this.chkCciRange.AutoSize = true;
             this.chkCciRange.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.chkCciRange.Location = new System.Drawing.Point(271, 110);
+            this.chkCciRange.Location = new System.Drawing.Point(339, 138);
             this.chkCciRange.Margin = new System.Windows.Forms.Padding(0);
             this.chkCciRange.Name = "chkCciRange";
-            this.chkCciRange.Size = new System.Drawing.Size(48, 16);
+            this.chkCciRange.Size = new System.Drawing.Size(59, 19);
             this.chkCciRange.TabIndex = 32;
             this.chkCciRange.Text = "영역";
             this.chkCciRange.UseVisualStyleBackColor = false;
@@ -2265,18 +2332,20 @@ namespace LuckyFuture.UI
             // txtPayoffCci1
             // 
             this.txtPayoffCci1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPayoffCci1.Location = new System.Drawing.Point(57, 108);
+            this.txtPayoffCci1.Location = new System.Drawing.Point(71, 135);
+            this.txtPayoffCci1.Margin = new System.Windows.Forms.Padding(4);
             this.txtPayoffCci1.Name = "txtPayoffCci1";
-            this.txtPayoffCci1.Size = new System.Drawing.Size(32, 23);
+            this.txtPayoffCci1.Size = new System.Drawing.Size(39, 27);
             this.txtPayoffCci1.TabIndex = 31;
             this.txtPayoffCci1.TextChanged += new System.EventHandler(this.txtPayoffCci1_TextChanged);
             // 
             // chkCciPayoff
             // 
             this.chkCciPayoff.AutoSize = true;
-            this.chkCciPayoff.Location = new System.Drawing.Point(11, 111);
+            this.chkCciPayoff.Location = new System.Drawing.Point(14, 139);
+            this.chkCciPayoff.Margin = new System.Windows.Forms.Padding(4);
             this.chkCciPayoff.Name = "chkCciPayoff";
-            this.chkCciPayoff.Size = new System.Drawing.Size(45, 16);
+            this.chkCciPayoff.Size = new System.Drawing.Size(52, 19);
             this.chkCciPayoff.TabIndex = 30;
             this.chkCciPayoff.Text = "CCI";
             this.chkCciPayoff.UseVisualStyleBackColor = true;
@@ -2291,9 +2360,10 @@ namespace LuckyFuture.UI
             this.btnCrossLossRange.ColorE = System.Drawing.Color.White;
             this.btnCrossLossRange.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCrossLossRange.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCrossLossRange.Location = new System.Drawing.Point(315, 83);
+            this.btnCrossLossRange.Location = new System.Drawing.Point(394, 104);
+            this.btnCrossLossRange.Margin = new System.Windows.Forms.Padding(4);
             this.btnCrossLossRange.Name = "btnCrossLossRange";
-            this.btnCrossLossRange.Size = new System.Drawing.Size(20, 22);
+            this.btnCrossLossRange.Size = new System.Drawing.Size(25, 28);
             this.btnCrossLossRange.TabIndex = 29;
             this.btnCrossLossRange.Text = "...";
             this.btnCrossLossRange.UseVisualStyleBackColor = true;
@@ -2308,9 +2378,10 @@ namespace LuckyFuture.UI
             this.btnLossRange.ColorE = System.Drawing.Color.White;
             this.btnLossRange.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLossRange.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLossRange.Location = new System.Drawing.Point(315, 35);
+            this.btnLossRange.Location = new System.Drawing.Point(394, 44);
+            this.btnLossRange.Margin = new System.Windows.Forms.Padding(4);
             this.btnLossRange.Name = "btnLossRange";
-            this.btnLossRange.Size = new System.Drawing.Size(20, 23);
+            this.btnLossRange.Size = new System.Drawing.Size(25, 29);
             this.btnLossRange.TabIndex = 26;
             this.btnLossRange.Text = "...";
             this.btnLossRange.UseVisualStyleBackColor = true;
@@ -2320,10 +2391,10 @@ namespace LuckyFuture.UI
             // 
             this.chkLossRange.AutoSize = true;
             this.chkLossRange.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.chkLossRange.Location = new System.Drawing.Point(271, 40);
+            this.chkLossRange.Location = new System.Drawing.Point(339, 50);
             this.chkLossRange.Margin = new System.Windows.Forms.Padding(0);
             this.chkLossRange.Name = "chkLossRange";
-            this.chkLossRange.Size = new System.Drawing.Size(48, 16);
+            this.chkLossRange.Size = new System.Drawing.Size(59, 19);
             this.chkLossRange.TabIndex = 28;
             this.chkLossRange.Text = "영역";
             this.chkLossRange.UseVisualStyleBackColor = false;
@@ -2333,10 +2404,10 @@ namespace LuckyFuture.UI
             // 
             this.chkCrossRange.AutoSize = true;
             this.chkCrossRange.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.chkCrossRange.Location = new System.Drawing.Point(271, 86);
-            this.chkCrossRange.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.chkCrossRange.Location = new System.Drawing.Point(339, 108);
+            this.chkCrossRange.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
             this.chkCrossRange.Name = "chkCrossRange";
-            this.chkCrossRange.Size = new System.Drawing.Size(48, 16);
+            this.chkCrossRange.Size = new System.Drawing.Size(59, 19);
             this.chkCrossRange.TabIndex = 23;
             this.chkCrossRange.Text = "영역";
             this.chkCrossRange.UseVisualStyleBackColor = false;
@@ -2346,10 +2417,10 @@ namespace LuckyFuture.UI
             // 
             this.chkSmartRange.AutoSize = true;
             this.chkSmartRange.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.chkSmartRange.Location = new System.Drawing.Point(271, 64);
+            this.chkSmartRange.Location = new System.Drawing.Point(339, 80);
             this.chkSmartRange.Margin = new System.Windows.Forms.Padding(0);
             this.chkSmartRange.Name = "chkSmartRange";
-            this.chkSmartRange.Size = new System.Drawing.Size(48, 16);
+            this.chkSmartRange.Size = new System.Drawing.Size(59, 19);
             this.chkSmartRange.TabIndex = 22;
             this.chkSmartRange.Text = "영역";
             this.chkSmartRange.UseVisualStyleBackColor = false;
@@ -2361,9 +2432,10 @@ namespace LuckyFuture.UI
             this.cmbPayoffLoss.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbPayoffLoss.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPayoffLoss.FormattingEnabled = true;
-            this.cmbPayoffLoss.Location = new System.Drawing.Point(57, 37);
+            this.cmbPayoffLoss.Location = new System.Drawing.Point(71, 46);
+            this.cmbPayoffLoss.Margin = new System.Windows.Forms.Padding(4);
             this.cmbPayoffLoss.Name = "cmbPayoffLoss";
-            this.cmbPayoffLoss.Size = new System.Drawing.Size(49, 22);
+            this.cmbPayoffLoss.Size = new System.Drawing.Size(60, 26);
             this.cmbPayoffLoss.TabIndex = 21;
             this.cmbPayoffLoss.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbPayoffLoss_DrawItem);
             this.cmbPayoffLoss.SelectedIndexChanged += new System.EventHandler(this.cmbPayoffLoss_SelectedIndexChanged);
@@ -2376,9 +2448,10 @@ namespace LuckyFuture.UI
             this.cmbCrossUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCrossUnit.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCrossUnit.FormattingEnabled = true;
-            this.cmbCrossUnit.Location = new System.Drawing.Point(179, 83);
+            this.cmbCrossUnit.Location = new System.Drawing.Point(224, 104);
+            this.cmbCrossUnit.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCrossUnit.Name = "cmbCrossUnit";
-            this.cmbCrossUnit.Size = new System.Drawing.Size(37, 22);
+            this.cmbCrossUnit.Size = new System.Drawing.Size(45, 26);
             this.cmbCrossUnit.TabIndex = 20;
             this.cmbCrossUnit.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbCrossUnit_DrawItem);
             this.cmbCrossUnit.SelectedIndexChanged += new System.EventHandler(this.cmbCrossUnit_SelectedIndexChanged);
@@ -2387,18 +2460,20 @@ namespace LuckyFuture.UI
             // 
             this.label61.AutoSize = true;
             this.label61.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label61.Location = new System.Drawing.Point(222, 88);
+            this.label61.Location = new System.Drawing.Point(278, 110);
+            this.label61.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(29, 12);
+            this.label61.Size = new System.Drawing.Size(37, 15);
             this.label61.TabIndex = 19;
             this.label61.Text = "하락";
             // 
             // txtCrossLoss
             // 
             this.txtCrossLoss.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCrossLoss.Location = new System.Drawing.Point(143, 83);
+            this.txtCrossLoss.Location = new System.Drawing.Point(179, 104);
+            this.txtCrossLoss.Margin = new System.Windows.Forms.Padding(4);
             this.txtCrossLoss.Name = "txtCrossLoss";
-            this.txtCrossLoss.Size = new System.Drawing.Size(32, 23);
+            this.txtCrossLoss.Size = new System.Drawing.Size(39, 27);
             this.txtCrossLoss.TabIndex = 18;
             this.txtCrossLoss.TextChanged += new System.EventHandler(this.txtCrossLoss_TextChanged);
             // 
@@ -2406,10 +2481,10 @@ namespace LuckyFuture.UI
             // 
             this.chkCrossLossPayoff.AutoSize = true;
             this.chkCrossLossPayoff.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.chkCrossLossPayoff.Location = new System.Drawing.Point(11, 88);
-            this.chkCrossLossPayoff.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.chkCrossLossPayoff.Location = new System.Drawing.Point(14, 110);
+            this.chkCrossLossPayoff.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
             this.chkCrossLossPayoff.Name = "chkCrossLossPayoff";
-            this.chkCrossLossPayoff.Size = new System.Drawing.Size(112, 16);
+            this.chkCrossLossPayoff.Size = new System.Drawing.Size(139, 19);
             this.chkCrossLossPayoff.TabIndex = 17;
             this.chkCrossLossPayoff.Text = "청산 교차점에서";
             this.chkCrossLossPayoff.UseVisualStyleBackColor = false;
@@ -2422,9 +2497,10 @@ namespace LuckyFuture.UI
             this.cmbSmartUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSmartUnit.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSmartUnit.FormattingEnabled = true;
-            this.cmbSmartUnit.Location = new System.Drawing.Point(179, 62);
+            this.cmbSmartUnit.Location = new System.Drawing.Point(224, 78);
+            this.cmbSmartUnit.Margin = new System.Windows.Forms.Padding(4);
             this.cmbSmartUnit.Name = "cmbSmartUnit";
-            this.cmbSmartUnit.Size = new System.Drawing.Size(37, 22);
+            this.cmbSmartUnit.Size = new System.Drawing.Size(45, 26);
             this.cmbSmartUnit.TabIndex = 16;
             this.cmbSmartUnit.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbSmartUnit_DrawItem);
             this.cmbSmartUnit.SelectedIndexChanged += new System.EventHandler(this.cmbSmartUnit_SelectedIndexChanged);
@@ -2433,18 +2509,20 @@ namespace LuckyFuture.UI
             // 
             this.label55.AutoSize = true;
             this.label55.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label55.Location = new System.Drawing.Point(222, 66);
+            this.label55.Location = new System.Drawing.Point(278, 82);
+            this.label55.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(29, 12);
+            this.label55.Size = new System.Drawing.Size(37, 15);
             this.label55.TabIndex = 15;
             this.label55.Text = "하락";
             // 
             // txtSmartLoss
             // 
             this.txtSmartLoss.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSmartLoss.Location = new System.Drawing.Point(143, 62);
+            this.txtSmartLoss.Location = new System.Drawing.Point(179, 78);
+            this.txtSmartLoss.Margin = new System.Windows.Forms.Padding(4);
             this.txtSmartLoss.Name = "txtSmartLoss";
-            this.txtSmartLoss.Size = new System.Drawing.Size(32, 23);
+            this.txtSmartLoss.Size = new System.Drawing.Size(39, 27);
             this.txtSmartLoss.TabIndex = 14;
             this.txtSmartLoss.TextChanged += new System.EventHandler(this.txtSmartLoss_TextChanged);
             // 
@@ -2452,18 +2530,20 @@ namespace LuckyFuture.UI
             // 
             this.label54.AutoSize = true;
             this.label54.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label54.Location = new System.Drawing.Point(123, 68);
+            this.label54.Location = new System.Drawing.Point(154, 85);
+            this.label54.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(17, 12);
+            this.label54.Size = new System.Drawing.Size(22, 15);
             this.label54.TabIndex = 13;
             this.label54.Text = "틱";
             // 
             // txtSmartEarn
             // 
             this.txtSmartEarn.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSmartEarn.Location = new System.Drawing.Point(88, 62);
+            this.txtSmartEarn.Location = new System.Drawing.Point(110, 78);
+            this.txtSmartEarn.Margin = new System.Windows.Forms.Padding(4);
             this.txtSmartEarn.Name = "txtSmartEarn";
-            this.txtSmartEarn.Size = new System.Drawing.Size(32, 23);
+            this.txtSmartEarn.Size = new System.Drawing.Size(39, 27);
             this.txtSmartEarn.TabIndex = 12;
             this.txtSmartEarn.TextChanged += new System.EventHandler(this.txtSmartEarn_TextChanged);
             // 
@@ -2471,10 +2551,10 @@ namespace LuckyFuture.UI
             // 
             this.chkSmartLossPayoff.AutoSize = true;
             this.chkSmartLossPayoff.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.chkSmartLossPayoff.Location = new System.Drawing.Point(11, 64);
-            this.chkSmartLossPayoff.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.chkSmartLossPayoff.Location = new System.Drawing.Point(14, 80);
+            this.chkSmartLossPayoff.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
             this.chkSmartLossPayoff.Name = "chkSmartLossPayoff";
-            this.chkSmartLossPayoff.Size = new System.Drawing.Size(72, 16);
+            this.chkSmartLossPayoff.Size = new System.Drawing.Size(89, 19);
             this.chkSmartLossPayoff.TabIndex = 11;
             this.chkSmartLossPayoff.Text = "최대수익";
             this.chkSmartLossPayoff.UseVisualStyleBackColor = false;
@@ -2484,10 +2564,10 @@ namespace LuckyFuture.UI
             // 
             this.chkForceEarnPayoff.AutoSize = true;
             this.chkForceEarnPayoff.Font = new System.Drawing.Font("Gulim", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.chkForceEarnPayoff.Location = new System.Drawing.Point(271, 17);
+            this.chkForceEarnPayoff.Location = new System.Drawing.Point(339, 21);
             this.chkForceEarnPayoff.Margin = new System.Windows.Forms.Padding(0);
             this.chkForceEarnPayoff.Name = "chkForceEarnPayoff";
-            this.chkForceEarnPayoff.Size = new System.Drawing.Size(68, 15);
+            this.chkForceEarnPayoff.Size = new System.Drawing.Size(85, 18);
             this.chkForceEarnPayoff.TabIndex = 10;
             this.chkForceEarnPayoff.Text = "강제청산";
             this.chkForceEarnPayoff.UseVisualStyleBackColor = false;
@@ -2496,36 +2576,40 @@ namespace LuckyFuture.UI
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(107, 42);
+            this.label11.Location = new System.Drawing.Point(134, 52);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(17, 12);
+            this.label11.Size = new System.Drawing.Size(22, 15);
             this.label11.TabIndex = 3;
             this.label11.Text = "틱";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(107, 17);
+            this.label12.Location = new System.Drawing.Point(134, 21);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(17, 12);
+            this.label12.Size = new System.Drawing.Size(22, 15);
             this.label12.TabIndex = 3;
             this.label12.Text = "틱";
             // 
             // txtPayoffEarn
             // 
             this.txtPayoffEarn.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPayoffEarn.Location = new System.Drawing.Point(57, 12);
+            this.txtPayoffEarn.Location = new System.Drawing.Point(71, 15);
+            this.txtPayoffEarn.Margin = new System.Windows.Forms.Padding(4);
             this.txtPayoffEarn.Name = "txtPayoffEarn";
-            this.txtPayoffEarn.Size = new System.Drawing.Size(49, 23);
+            this.txtPayoffEarn.Size = new System.Drawing.Size(60, 27);
             this.txtPayoffEarn.TabIndex = 0;
             this.txtPayoffEarn.TextChanged += new System.EventHandler(this.txtPayoffEarn_TextChanged);
             // 
             // chkLossPayoff
             // 
             this.chkLossPayoff.AutoSize = true;
-            this.chkLossPayoff.Location = new System.Drawing.Point(11, 39);
+            this.chkLossPayoff.Location = new System.Drawing.Point(14, 49);
+            this.chkLossPayoff.Margin = new System.Windows.Forms.Padding(4);
             this.chkLossPayoff.Name = "chkLossPayoff";
-            this.chkLossPayoff.Size = new System.Drawing.Size(48, 16);
+            this.chkLossPayoff.Size = new System.Drawing.Size(59, 19);
             this.chkLossPayoff.TabIndex = 8;
             this.chkLossPayoff.Text = "손실";
             this.chkLossPayoff.UseVisualStyleBackColor = true;
@@ -2534,9 +2618,10 @@ namespace LuckyFuture.UI
             // chkEarnPayoff
             // 
             this.chkEarnPayoff.AutoSize = true;
-            this.chkEarnPayoff.Location = new System.Drawing.Point(11, 17);
+            this.chkEarnPayoff.Location = new System.Drawing.Point(14, 21);
+            this.chkEarnPayoff.Margin = new System.Windows.Forms.Padding(4);
             this.chkEarnPayoff.Name = "chkEarnPayoff";
-            this.chkEarnPayoff.Size = new System.Drawing.Size(48, 16);
+            this.chkEarnPayoff.Size = new System.Drawing.Size(59, 19);
             this.chkEarnPayoff.TabIndex = 9;
             this.chkEarnPayoff.Text = "수익";
             this.chkEarnPayoff.UseVisualStyleBackColor = true;
@@ -2550,9 +2635,11 @@ namespace LuckyFuture.UI
             this.groupPayoff2.Controls.Add(this.groupBox1);
             this.groupPayoff2.Controls.Add(this.cmbCandlePayoff);
             this.groupPayoff2.Controls.Add(this.chkCandlePayoff);
-            this.groupPayoff2.Location = new System.Drawing.Point(4, 348);
+            this.groupPayoff2.Location = new System.Drawing.Point(5, 435);
+            this.groupPayoff2.Margin = new System.Windows.Forms.Padding(4);
             this.groupPayoff2.Name = "groupPayoff2";
-            this.groupPayoff2.Size = new System.Drawing.Size(352, 66);
+            this.groupPayoff2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupPayoff2.Size = new System.Drawing.Size(440, 82);
             this.groupPayoff2.TabIndex = 10;
             this.groupPayoff2.TabStop = false;
             this.groupPayoff2.Text = "청산설정";
@@ -2560,26 +2647,29 @@ namespace LuckyFuture.UI
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(224, 33);
+            this.label50.Location = new System.Drawing.Point(280, 41);
+            this.label50.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(17, 12);
+            this.label50.Size = new System.Drawing.Size(22, 15);
             this.label50.TabIndex = 16;
             this.label50.Text = "틱";
             // 
             // txtTickPayoff
             // 
-            this.txtTickPayoff.Location = new System.Drawing.Point(174, 29);
+            this.txtTickPayoff.Location = new System.Drawing.Point(218, 36);
+            this.txtTickPayoff.Margin = new System.Windows.Forms.Padding(4);
             this.txtTickPayoff.Name = "txtTickPayoff";
-            this.txtTickPayoff.Size = new System.Drawing.Size(45, 21);
+            this.txtTickPayoff.Size = new System.Drawing.Size(55, 25);
             this.txtTickPayoff.TabIndex = 15;
             this.txtTickPayoff.TextChanged += new System.EventHandler(this.txtTickPayoff_TextChanged);
             // 
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(154, 33);
+            this.label51.Location = new System.Drawing.Point(192, 41);
+            this.label51.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(17, 12);
+            this.label51.Size = new System.Drawing.Size(22, 15);
             this.label51.TabIndex = 12;
             this.label51.Text = "개";
             // 
@@ -2591,51 +2681,58 @@ namespace LuckyFuture.UI
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.checkBox2);
-            this.groupBox1.Location = new System.Drawing.Point(255, 69);
+            this.groupBox1.Location = new System.Drawing.Point(319, 86);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(297, 74);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(371, 92);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "청산설정";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(106, 45);
+            this.textBox1.Location = new System.Drawing.Point(132, 56);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(57, 21);
+            this.textBox1.Size = new System.Drawing.Size(70, 25);
             this.textBox1.TabIndex = 1;
             // 
             // label52
             // 
             this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(169, 50);
+            this.label52.Location = new System.Drawing.Point(211, 62);
+            this.label52.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(45, 12);
+            this.label52.Size = new System.Drawing.Size(57, 15);
             this.label52.TabIndex = 3;
             this.label52.Text = "틱 이상";
             // 
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(169, 23);
+            this.label53.Location = new System.Drawing.Point(211, 29);
+            this.label53.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(45, 12);
+            this.label53.Size = new System.Drawing.Size(57, 15);
             this.label53.TabIndex = 3;
             this.label53.Text = "틱 이상";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(106, 20);
+            this.textBox2.Location = new System.Drawing.Point(132, 25);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(57, 21);
+            this.textBox2.Size = new System.Drawing.Size(70, 25);
             this.textBox2.TabIndex = 0;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(27, 49);
+            this.checkBox1.Location = new System.Drawing.Point(34, 61);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(48, 16);
+            this.checkBox1.Size = new System.Drawing.Size(59, 19);
             this.checkBox1.TabIndex = 8;
             this.checkBox1.Text = "손실";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -2643,9 +2740,10 @@ namespace LuckyFuture.UI
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(27, 23);
+            this.checkBox2.Location = new System.Drawing.Point(34, 29);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(48, 16);
+            this.checkBox2.Size = new System.Drawing.Size(59, 19);
             this.checkBox2.TabIndex = 9;
             this.checkBox2.Text = "수익";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -2657,9 +2755,10 @@ namespace LuckyFuture.UI
             this.cmbCandlePayoff.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCandlePayoff.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCandlePayoff.FormattingEnabled = true;
-            this.cmbCandlePayoff.Location = new System.Drawing.Point(98, 29);
+            this.cmbCandlePayoff.Location = new System.Drawing.Point(122, 36);
+            this.cmbCandlePayoff.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCandlePayoff.Name = "cmbCandlePayoff";
-            this.cmbCandlePayoff.Size = new System.Drawing.Size(52, 22);
+            this.cmbCandlePayoff.Size = new System.Drawing.Size(64, 26);
             this.cmbCandlePayoff.TabIndex = 11;
             this.cmbCandlePayoff.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbCandlePayoff_DrawItem);
             this.cmbCandlePayoff.SelectedIndexChanged += new System.EventHandler(this.cmbCandlePayoff_SelectedIndexChanged);
@@ -2667,9 +2766,10 @@ namespace LuckyFuture.UI
             // chkCandlePayoff
             // 
             this.chkCandlePayoff.AutoSize = true;
-            this.chkCandlePayoff.Location = new System.Drawing.Point(19, 31);
+            this.chkCandlePayoff.Location = new System.Drawing.Point(24, 39);
+            this.chkCandlePayoff.Margin = new System.Windows.Forms.Padding(4);
             this.chkCandlePayoff.Name = "chkCandlePayoff";
-            this.chkCandlePayoff.Size = new System.Drawing.Size(78, 16);
+            this.chkCandlePayoff.Size = new System.Drawing.Size(95, 19);
             this.chkCandlePayoff.TabIndex = 10;
             this.chkCandlePayoff.Text = "상승/하락";
             this.chkCandlePayoff.UseVisualStyleBackColor = true;
@@ -2733,9 +2833,11 @@ namespace LuckyFuture.UI
             this.groupBetting4.Controls.Add(this.label30);
             this.groupBetting4.Controls.Add(this.cmbChartType4);
             this.groupBetting4.Controls.Add(this.label32);
-            this.groupBetting4.Location = new System.Drawing.Point(4, 43);
+            this.groupBetting4.Location = new System.Drawing.Point(5, 54);
+            this.groupBetting4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBetting4.Name = "groupBetting4";
-            this.groupBetting4.Size = new System.Drawing.Size(352, 298);
+            this.groupBetting4.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBetting4.Size = new System.Drawing.Size(440, 372);
             this.groupBetting4.TabIndex = 12;
             this.groupBetting4.TabStop = false;
             this.groupBetting4.Text = "주문설정";
@@ -2743,36 +2845,40 @@ namespace LuckyFuture.UI
             // label78
             // 
             this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(181, 198);
+            this.label78.Location = new System.Drawing.Point(226, 248);
+            this.label78.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(29, 12);
+            this.label78.Size = new System.Drawing.Size(37, 15);
             this.label78.TabIndex = 84;
             this.label78.Text = "하락";
             // 
             // label77
             // 
             this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(181, 173);
+            this.label77.Location = new System.Drawing.Point(226, 216);
+            this.label77.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(29, 12);
+            this.label77.Size = new System.Drawing.Size(37, 15);
             this.label77.TabIndex = 83;
             this.label77.Text = "상승";
             // 
             // txtCci21
             // 
             this.txtCci21.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCci21.Location = new System.Drawing.Point(144, 192);
+            this.txtCci21.Location = new System.Drawing.Point(180, 240);
+            this.txtCci21.Margin = new System.Windows.Forms.Padding(4);
             this.txtCci21.Name = "txtCci21";
-            this.txtCci21.Size = new System.Drawing.Size(36, 23);
+            this.txtCci21.Size = new System.Drawing.Size(44, 27);
             this.txtCci21.TabIndex = 82;
             this.txtCci21.TextChanged += new System.EventHandler(this.txtCci21_TextChanged);
             // 
             // txtCci11
             // 
             this.txtCci11.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCci11.Location = new System.Drawing.Point(144, 167);
+            this.txtCci11.Location = new System.Drawing.Point(180, 209);
+            this.txtCci11.Margin = new System.Windows.Forms.Padding(4);
             this.txtCci11.Name = "txtCci11";
-            this.txtCci11.Size = new System.Drawing.Size(36, 23);
+            this.txtCci11.Size = new System.Drawing.Size(44, 27);
             this.txtCci11.TabIndex = 81;
             this.txtCci11.TextChanged += new System.EventHandler(this.txtCci11_TextChanged);
             // 
@@ -2786,9 +2892,10 @@ namespace LuckyFuture.UI
             this.btnCciOrd4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCciOrd4.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCciOrd4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCciOrd4.Location = new System.Drawing.Point(143, 62);
+            this.btnCciOrd4.Location = new System.Drawing.Point(179, 78);
+            this.btnCciOrd4.Margin = new System.Windows.Forms.Padding(4);
             this.btnCciOrd4.Name = "btnCciOrd4";
-            this.btnCciOrd4.Size = new System.Drawing.Size(59, 23);
+            this.btnCciOrd4.Size = new System.Drawing.Size(74, 29);
             this.btnCciOrd4.TabIndex = 80;
             this.btnCciOrd4.Text = "CCI";
             this.btnCciOrd4.UseVisualStyleBackColor = true;
@@ -2804,9 +2911,10 @@ namespace LuckyFuture.UI
             this.btnSbOrd4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSbOrd4.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSbOrd4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSbOrd4.Location = new System.Drawing.Point(77, 62);
+            this.btnSbOrd4.Location = new System.Drawing.Point(96, 78);
+            this.btnSbOrd4.Margin = new System.Windows.Forms.Padding(4);
             this.btnSbOrd4.Name = "btnSbOrd4";
-            this.btnSbOrd4.Size = new System.Drawing.Size(59, 23);
+            this.btnSbOrd4.Size = new System.Drawing.Size(74, 29);
             this.btnSbOrd4.TabIndex = 79;
             this.btnSbOrd4.Text = "S-B선";
             this.btnSbOrd4.UseVisualStyleBackColor = true;
@@ -2815,18 +2923,20 @@ namespace LuckyFuture.UI
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(206, 252);
+            this.label74.Location = new System.Drawing.Point(258, 315);
+            this.label74.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(17, 12);
+            this.label74.Size = new System.Drawing.Size(22, 15);
             this.label74.TabIndex = 59;
             this.label74.Text = "위";
             // 
             // chkCci
             // 
             this.chkCci.AutoSize = true;
-            this.chkCci.Location = new System.Drawing.Point(15, 183);
+            this.chkCci.Location = new System.Drawing.Point(19, 229);
+            this.chkCci.Margin = new System.Windows.Forms.Padding(4);
             this.chkCci.Name = "chkCci";
-            this.chkCci.Size = new System.Drawing.Size(45, 16);
+            this.chkCci.Size = new System.Drawing.Size(52, 19);
             this.chkCci.TabIndex = 42;
             this.chkCci.Text = "CCI";
             this.chkCci.UseVisualStyleBackColor = true;
@@ -2835,18 +2945,20 @@ namespace LuckyFuture.UI
             // label80
             // 
             this.label80.AutoSize = true;
-            this.label80.Location = new System.Drawing.Point(115, 173);
+            this.label80.Location = new System.Drawing.Point(144, 216);
+            this.label80.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(29, 12);
+            this.label80.Size = new System.Drawing.Size(37, 15);
             this.label80.TabIndex = 3;
             this.label80.Text = "이상";
             // 
             // chkConc1
             // 
             this.chkConc1.AutoSize = true;
-            this.chkConc1.Location = new System.Drawing.Point(15, 91);
+            this.chkConc1.Location = new System.Drawing.Point(19, 114);
+            this.chkConc1.Margin = new System.Windows.Forms.Padding(4);
             this.chkConc1.Name = "chkConc1";
-            this.chkConc1.Size = new System.Drawing.Size(60, 16);
+            this.chkConc1.Size = new System.Drawing.Size(74, 19);
             this.chkConc1.TabIndex = 30;
             this.chkConc1.Text = "거래량";
             this.chkConc1.UseVisualStyleBackColor = true;
@@ -2855,9 +2967,10 @@ namespace LuckyFuture.UI
             // chkRsi
             // 
             this.chkRsi.AutoSize = true;
-            this.chkRsi.Location = new System.Drawing.Point(15, 220);
+            this.chkRsi.Location = new System.Drawing.Point(19, 275);
+            this.chkRsi.Margin = new System.Windows.Forms.Padding(4);
             this.chkRsi.Name = "chkRsi";
-            this.chkRsi.Size = new System.Drawing.Size(43, 16);
+            this.chkRsi.Size = new System.Drawing.Size(52, 19);
             this.chkRsi.TabIndex = 34;
             this.chkRsi.Text = "RSI";
             this.chkRsi.UseVisualStyleBackColor = true;
@@ -2866,18 +2979,20 @@ namespace LuckyFuture.UI
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(211, 94);
+            this.label33.Location = new System.Drawing.Point(264, 118);
+            this.label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(41, 12);
+            this.label33.Size = new System.Drawing.Size(52, 15);
             this.label33.TabIndex = 3;
             this.label33.Text = "개이상";
             // 
             // txtCci1
             // 
             this.txtCci1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCci1.Location = new System.Drawing.Point(77, 167);
+            this.txtCci1.Location = new System.Drawing.Point(96, 209);
+            this.txtCci1.Margin = new System.Windows.Forms.Padding(4);
             this.txtCci1.Name = "txtCci1";
-            this.txtCci1.Size = new System.Drawing.Size(36, 23);
+            this.txtCci1.Size = new System.Drawing.Size(44, 27);
             this.txtCci1.TabIndex = 43;
             this.txtCci1.TextChanged += new System.EventHandler(this.txtCci1_TextChanged);
             // 
@@ -2893,9 +3008,10 @@ namespace LuckyFuture.UI
             this.btnOrdSel4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrdSel4.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnOrdSel4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOrdSel4.Location = new System.Drawing.Point(287, 36);
+            this.btnOrdSel4.Location = new System.Drawing.Point(359, 45);
+            this.btnOrdSel4.Margin = new System.Windows.Forms.Padding(4);
             this.btnOrdSel4.Name = "btnOrdSel4";
-            this.btnOrdSel4.Size = new System.Drawing.Size(20, 23);
+            this.btnOrdSel4.Size = new System.Drawing.Size(25, 29);
             this.btnOrdSel4.TabIndex = 51;
             this.btnOrdSel4.Text = "...";
             this.btnOrdSel4.UseVisualStyleBackColor = true;
@@ -2907,9 +3023,10 @@ namespace LuckyFuture.UI
             this.cmbCciSide1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbCciSide1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCciSide1.FormattingEnabled = true;
-            this.cmbCciSide1.Location = new System.Drawing.Point(210, 166);
+            this.cmbCciSide1.Location = new System.Drawing.Point(262, 208);
+            this.cmbCciSide1.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCciSide1.Name = "cmbCciSide1";
-            this.cmbCciSide1.Size = new System.Drawing.Size(55, 22);
+            this.cmbCciSide1.Size = new System.Drawing.Size(68, 26);
             this.cmbCciSide1.TabIndex = 46;
             this.cmbCciSide1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbCciSide1_DrawItem);
             this.cmbCciSide1.SelectedIndexChanged += new System.EventHandler(this.cmbCciSide1_SelectedIndexChanged);
@@ -2917,9 +3034,10 @@ namespace LuckyFuture.UI
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(119, 93);
+            this.label31.Location = new System.Drawing.Point(149, 116);
+            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(29, 12);
+            this.label31.Size = new System.Drawing.Size(37, 15);
             this.label31.TabIndex = 3;
             this.label31.Text = "분당";
             // 
@@ -2929,9 +3047,10 @@ namespace LuckyFuture.UI
             this.cmbAvgsSide2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbAvgsSide2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAvgsSide2.FormattingEnabled = true;
-            this.cmbAvgsSide2.Location = new System.Drawing.Point(234, 269);
+            this.cmbAvgsSide2.Location = new System.Drawing.Point(292, 336);
+            this.cmbAvgsSide2.Margin = new System.Windows.Forms.Padding(4);
             this.cmbAvgsSide2.Name = "cmbAvgsSide2";
-            this.cmbAvgsSide2.Size = new System.Drawing.Size(55, 22);
+            this.cmbAvgsSide2.Size = new System.Drawing.Size(68, 26);
             this.cmbAvgsSide2.TabIndex = 58;
             this.cmbAvgsSide2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbAvgsSide2_DrawItem);
             this.cmbAvgsSide2.SelectedIndexChanged += new System.EventHandler(this.cmbAvgsSide2_SelectedIndexChanged);
@@ -2943,10 +3062,10 @@ namespace LuckyFuture.UI
             this.chkOrd44.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd44.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd44.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd44.Location = new System.Drawing.Point(254, 36);
+            this.chkOrd44.Location = new System.Drawing.Point(318, 45);
             this.chkOrd44.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd44.Name = "chkOrd44";
-            this.chkOrd44.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd44.Size = new System.Drawing.Size(38, 29);
             this.chkOrd44.TabIndex = 50;
             this.chkOrd44.Text = "10";
             this.chkOrd44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2956,27 +3075,30 @@ namespace LuckyFuture.UI
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(115, 197);
+            this.label47.Location = new System.Drawing.Point(144, 246);
+            this.label47.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(29, 12);
+            this.label47.Size = new System.Drawing.Size(37, 15);
             this.label47.TabIndex = 47;
             this.label47.Text = "이하";
             // 
             // txtConc1Min
             // 
             this.txtConc1Min.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConc1Min.Location = new System.Drawing.Point(77, 89);
+            this.txtConc1Min.Location = new System.Drawing.Point(96, 111);
+            this.txtConc1Min.Margin = new System.Windows.Forms.Padding(4);
             this.txtConc1Min.Name = "txtConc1Min";
-            this.txtConc1Min.Size = new System.Drawing.Size(35, 23);
+            this.txtConc1Min.Size = new System.Drawing.Size(43, 27);
             this.txtConc1Min.TabIndex = 31;
             this.txtConc1Min.TextChanged += new System.EventHandler(this.txtConc1Min_TextChanged);
             // 
             // label72
             // 
             this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(202, 273);
+            this.label72.Location = new System.Drawing.Point(252, 341);
+            this.label72.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(29, 12);
+            this.label72.Size = new System.Drawing.Size(37, 15);
             this.label72.TabIndex = 57;
             this.label72.Text = "아래";
             // 
@@ -2987,10 +3109,10 @@ namespace LuckyFuture.UI
             this.chkOrd43.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd43.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd43.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd43.Location = new System.Drawing.Point(222, 36);
+            this.chkOrd43.Location = new System.Drawing.Point(278, 45);
             this.chkOrd43.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd43.Name = "chkOrd43";
-            this.chkOrd43.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd43.Size = new System.Drawing.Size(38, 29);
             this.chkOrd43.TabIndex = 49;
             this.chkOrd43.Text = "5";
             this.chkOrd43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3000,18 +3122,20 @@ namespace LuckyFuture.UI
             // txtCci2
             // 
             this.txtCci2.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCci2.Location = new System.Drawing.Point(77, 191);
+            this.txtCci2.Location = new System.Drawing.Point(96, 239);
+            this.txtCci2.Margin = new System.Windows.Forms.Padding(4);
             this.txtCci2.Name = "txtCci2";
-            this.txtCci2.Size = new System.Drawing.Size(36, 23);
+            this.txtCci2.Size = new System.Drawing.Size(44, 27);
             this.txtCci2.TabIndex = 48;
             this.txtCci2.TextChanged += new System.EventHandler(this.txtCci2_TextChanged);
             // 
             // txtConc1Cnt
             // 
             this.txtConc1Cnt.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConc1Cnt.Location = new System.Drawing.Point(151, 89);
+            this.txtConc1Cnt.Location = new System.Drawing.Point(189, 111);
+            this.txtConc1Cnt.Margin = new System.Windows.Forms.Padding(4);
             this.txtConc1Cnt.Name = "txtConc1Cnt";
-            this.txtConc1Cnt.Size = new System.Drawing.Size(56, 23);
+            this.txtConc1Cnt.Size = new System.Drawing.Size(69, 27);
             this.txtConc1Cnt.TabIndex = 32;
             this.txtConc1Cnt.TextChanged += new System.EventHandler(this.txtConc1Cnt_TextChanged);
             // 
@@ -3021,9 +3145,10 @@ namespace LuckyFuture.UI
             this.cmbAvgsSide1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbAvgsSide1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAvgsSide1.FormattingEnabled = true;
-            this.cmbAvgsSide1.Location = new System.Drawing.Point(234, 246);
+            this.cmbAvgsSide1.Location = new System.Drawing.Point(292, 308);
+            this.cmbAvgsSide1.Margin = new System.Windows.Forms.Padding(4);
             this.cmbAvgsSide1.Name = "cmbAvgsSide1";
-            this.cmbAvgsSide1.Size = new System.Drawing.Size(55, 22);
+            this.cmbAvgsSide1.Size = new System.Drawing.Size(68, 26);
             this.cmbAvgsSide1.TabIndex = 56;
             this.cmbAvgsSide1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbAvgsSide1_DrawItem);
             this.cmbAvgsSide1.SelectedIndexChanged += new System.EventHandler(this.cmbAvgsSide1_SelectedIndexChanged);
@@ -3035,10 +3160,10 @@ namespace LuckyFuture.UI
             this.chkOrd42.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd42.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd42.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd42.Location = new System.Drawing.Point(190, 36);
+            this.chkOrd42.Location = new System.Drawing.Point(238, 45);
             this.chkOrd42.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd42.Name = "chkOrd42";
-            this.chkOrd42.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd42.Size = new System.Drawing.Size(38, 29);
             this.chkOrd42.TabIndex = 48;
             this.chkOrd42.Text = "2";
             this.chkOrd42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3051,9 +3176,10 @@ namespace LuckyFuture.UI
             this.cmbCciSide2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbCciSide2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCciSide2.FormattingEnabled = true;
-            this.cmbCciSide2.Location = new System.Drawing.Point(210, 190);
+            this.cmbCciSide2.Location = new System.Drawing.Point(262, 238);
+            this.cmbCciSide2.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCciSide2.Name = "cmbCciSide2";
-            this.cmbCciSide2.Size = new System.Drawing.Size(55, 22);
+            this.cmbCciSide2.Size = new System.Drawing.Size(68, 26);
             this.cmbCciSide2.TabIndex = 49;
             this.cmbCciSide2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbCciSide2_DrawItem);
             this.cmbCciSide2.SelectedIndexChanged += new System.EventHandler(this.cmbCciSide2_SelectedIndexChanged);
@@ -3061,18 +3187,20 @@ namespace LuckyFuture.UI
             // label69
             // 
             this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(115, 147);
+            this.label69.Location = new System.Drawing.Point(144, 184);
+            this.label69.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(29, 12);
+            this.label69.Size = new System.Drawing.Size(37, 15);
             this.label69.TabIndex = 41;
             this.label69.Text = "이상";
             // 
             // label71
             // 
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(135, 261);
+            this.label71.Location = new System.Drawing.Point(169, 326);
+            this.label71.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(63, 12);
+            this.label71.Size = new System.Drawing.Size(81, 15);
             this.label71.TabIndex = 41;
             this.label71.Text = "봉 200일선";
             // 
@@ -3082,9 +3210,10 @@ namespace LuckyFuture.UI
             this.cmbRsiSide2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbRsiSide2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRsiSide2.FormattingEnabled = true;
-            this.cmbRsiSide2.Location = new System.Drawing.Point(286, 218);
+            this.cmbRsiSide2.Location = new System.Drawing.Point(358, 272);
+            this.cmbRsiSide2.Margin = new System.Windows.Forms.Padding(4);
             this.cmbRsiSide2.Name = "cmbRsiSide2";
-            this.cmbRsiSide2.Size = new System.Drawing.Size(57, 22);
+            this.cmbRsiSide2.Size = new System.Drawing.Size(70, 26);
             this.cmbRsiSide2.TabIndex = 55;
             this.cmbRsiSide2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbRsiSide2_DrawItem);
             this.cmbRsiSide2.SelectedIndexChanged += new System.EventHandler(this.cmbRsiSide2_SelectedIndexChanged);
@@ -3092,9 +3221,10 @@ namespace LuckyFuture.UI
             // chkConc2
             // 
             this.chkConc2.AutoSize = true;
-            this.chkConc2.Location = new System.Drawing.Point(15, 118);
+            this.chkConc2.Location = new System.Drawing.Point(19, 148);
+            this.chkConc2.Margin = new System.Windows.Forms.Padding(4);
             this.chkConc2.Name = "chkConc2";
-            this.chkConc2.Size = new System.Drawing.Size(60, 16);
+            this.chkConc2.Size = new System.Drawing.Size(74, 19);
             this.chkConc2.TabIndex = 34;
             this.chkConc2.Text = "거래량";
             this.chkConc2.UseVisualStyleBackColor = true;
@@ -3103,9 +3233,10 @@ namespace LuckyFuture.UI
             // txtAvgsCandle
             // 
             this.txtAvgsCandle.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAvgsCandle.Location = new System.Drawing.Point(95, 256);
+            this.txtAvgsCandle.Location = new System.Drawing.Point(119, 320);
+            this.txtAvgsCandle.Margin = new System.Windows.Forms.Padding(4);
             this.txtAvgsCandle.Name = "txtAvgsCandle";
-            this.txtAvgsCandle.Size = new System.Drawing.Size(36, 23);
+            this.txtAvgsCandle.Size = new System.Drawing.Size(44, 27);
             this.txtAvgsCandle.TabIndex = 40;
             this.txtAvgsCandle.TextChanged += new System.EventHandler(this.txtAvgsCandle_TextChanged);
             // 
@@ -3116,10 +3247,10 @@ namespace LuckyFuture.UI
             this.chkOrd41.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd41.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd41.Location = new System.Drawing.Point(158, 36);
+            this.chkOrd41.Location = new System.Drawing.Point(198, 45);
             this.chkOrd41.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd41.Name = "chkOrd41";
-            this.chkOrd41.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd41.Size = new System.Drawing.Size(38, 29);
             this.chkOrd41.TabIndex = 47;
             this.chkOrd41.Text = "1";
             this.chkOrd41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3129,27 +3260,30 @@ namespace LuckyFuture.UI
             // label70
             // 
             this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(114, 221);
+            this.label70.Location = new System.Drawing.Point(142, 276);
+            this.label70.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(29, 12);
+            this.label70.Size = new System.Drawing.Size(37, 15);
             this.label70.TabIndex = 50;
             this.label70.Text = "이상";
             // 
             // txtAdx
             // 
             this.txtAdx.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAdx.Location = new System.Drawing.Point(77, 141);
+            this.txtAdx.Location = new System.Drawing.Point(96, 176);
+            this.txtAdx.Margin = new System.Windows.Forms.Padding(4);
             this.txtAdx.Name = "txtAdx";
-            this.txtAdx.Size = new System.Drawing.Size(35, 23);
+            this.txtAdx.Size = new System.Drawing.Size(43, 27);
             this.txtAdx.TabIndex = 40;
             this.txtAdx.TextChanged += new System.EventHandler(this.txtAdx_TextChanged);
             // 
             // chkAvgs
             // 
             this.chkAvgs.AutoSize = true;
-            this.chkAvgs.Location = new System.Drawing.Point(15, 260);
+            this.chkAvgs.Location = new System.Drawing.Point(19, 325);
+            this.chkAvgs.Margin = new System.Windows.Forms.Padding(4);
             this.chkAvgs.Name = "chkAvgs";
-            this.chkAvgs.Size = new System.Drawing.Size(74, 16);
+            this.chkAvgs.Size = new System.Drawing.Size(92, 19);
             this.chkAvgs.TabIndex = 39;
             this.chkAvgs.Text = "이평선S1";
             this.chkAvgs.UseVisualStyleBackColor = true;
@@ -3158,63 +3292,70 @@ namespace LuckyFuture.UI
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(328, 70);
+            this.label45.Location = new System.Drawing.Point(410, 88);
+            this.label45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(15, 12);
+            this.label45.Size = new System.Drawing.Size(18, 15);
             this.label45.TabIndex = 27;
             this.label45.Text = "%";
             // 
             // txtRsi2
             // 
             this.txtRsi2.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRsi2.Location = new System.Drawing.Point(214, 217);
+            this.txtRsi2.Location = new System.Drawing.Point(268, 271);
+            this.txtRsi2.Margin = new System.Windows.Forms.Padding(4);
             this.txtRsi2.Name = "txtRsi2";
-            this.txtRsi2.Size = new System.Drawing.Size(36, 23);
+            this.txtRsi2.Size = new System.Drawing.Size(44, 27);
             this.txtRsi2.TabIndex = 54;
             this.txtRsi2.TextChanged += new System.EventHandler(this.txtRsi2_TextChanged);
             // 
             // txtConc2Cand
             // 
             this.txtConc2Cand.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConc2Cand.Location = new System.Drawing.Point(77, 115);
+            this.txtConc2Cand.Location = new System.Drawing.Point(96, 144);
+            this.txtConc2Cand.Margin = new System.Windows.Forms.Padding(4);
             this.txtConc2Cand.Name = "txtConc2Cand";
-            this.txtConc2Cand.Size = new System.Drawing.Size(35, 23);
+            this.txtConc2Cand.Size = new System.Drawing.Size(43, 27);
             this.txtConc2Cand.TabIndex = 35;
             this.txtConc2Cand.TextChanged += new System.EventHandler(this.txtConc2Cand_TextChanged);
             // 
             // txtRsi1
             // 
             this.txtRsi1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRsi1.Location = new System.Drawing.Point(77, 217);
+            this.txtRsi1.Location = new System.Drawing.Point(96, 271);
+            this.txtRsi1.Margin = new System.Windows.Forms.Padding(4);
             this.txtRsi1.Name = "txtRsi1";
-            this.txtRsi1.Size = new System.Drawing.Size(36, 23);
+            this.txtRsi1.Size = new System.Drawing.Size(44, 27);
             this.txtRsi1.TabIndex = 51;
             this.txtRsi1.TextChanged += new System.EventHandler(this.txtRsi1_TextChanged);
             // 
             // txtBoAdjust4
             // 
             this.txtBoAdjust4.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoAdjust4.Location = new System.Drawing.Point(287, 64);
+            this.txtBoAdjust4.Location = new System.Drawing.Point(359, 80);
+            this.txtBoAdjust4.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoAdjust4.Name = "txtBoAdjust4";
-            this.txtBoAdjust4.Size = new System.Drawing.Size(35, 23);
+            this.txtBoAdjust4.Size = new System.Drawing.Size(43, 27);
             this.txtBoAdjust4.TabIndex = 25;
             this.txtBoAdjust4.TextChanged += new System.EventHandler(this.txtBoAdjust4_TextChanged);
             // 
             // label63
             // 
             this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(254, 224);
+            this.label63.Location = new System.Drawing.Point(318, 280);
+            this.label63.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(29, 12);
+            this.label63.Size = new System.Drawing.Size(37, 15);
             this.label63.TabIndex = 53;
             this.label63.Text = "이하";
             // 
             // chkAdx
             // 
             this.chkAdx.AutoSize = true;
-            this.chkAdx.Location = new System.Drawing.Point(15, 144);
+            this.chkAdx.Location = new System.Drawing.Point(19, 180);
+            this.chkAdx.Margin = new System.Windows.Forms.Padding(4);
             this.chkAdx.Name = "chkAdx";
-            this.chkAdx.Size = new System.Drawing.Size(52, 16);
+            this.chkAdx.Size = new System.Drawing.Size(62, 19);
             this.chkAdx.TabIndex = 39;
             this.chkAdx.Text = " ADX";
             this.chkAdx.UseVisualStyleBackColor = true;
@@ -3226,9 +3367,10 @@ namespace LuckyFuture.UI
             this.cmbRsiSide1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbRsiSide1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRsiSide1.FormattingEnabled = true;
-            this.cmbRsiSide1.Location = new System.Drawing.Point(144, 218);
+            this.cmbRsiSide1.Location = new System.Drawing.Point(180, 272);
+            this.cmbRsiSide1.Margin = new System.Windows.Forms.Padding(4);
             this.cmbRsiSide1.Name = "cmbRsiSide1";
-            this.cmbRsiSide1.Size = new System.Drawing.Size(55, 22);
+            this.cmbRsiSide1.Size = new System.Drawing.Size(68, 26);
             this.cmbRsiSide1.TabIndex = 52;
             this.cmbRsiSide1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbRsiSide1_DrawItem);
             this.cmbRsiSide1.SelectedIndexChanged += new System.EventHandler(this.cmbRsiSide1_SelectedIndexChanged);
@@ -3236,36 +3378,40 @@ namespace LuckyFuture.UI
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(222, 70);
+            this.label46.Location = new System.Drawing.Point(278, 88);
+            this.label46.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(57, 12);
+            this.label46.Size = new System.Drawing.Size(72, 15);
             this.label46.TabIndex = 26;
             this.label46.Text = "SB선조정";
             // 
             // label67
             // 
             this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(119, 119);
+            this.label67.Location = new System.Drawing.Point(149, 149);
+            this.label67.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(17, 12);
+            this.label67.Size = new System.Drawing.Size(22, 15);
             this.label67.TabIndex = 36;
             this.label67.Text = "봉";
             // 
             // label79
             // 
             this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(13, 68);
+            this.label79.Location = new System.Drawing.Point(16, 85);
+            this.label79.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(53, 12);
+            this.label79.Size = new System.Drawing.Size(67, 15);
             this.label79.TabIndex = 19;
             this.label79.Text = "진입체결";
             // 
             // label68
             // 
             this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(213, 120);
+            this.label68.Location = new System.Drawing.Point(266, 150);
+            this.label68.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(39, 12);
+            this.label68.Size = new System.Drawing.Size(48, 15);
             this.label68.TabIndex = 38;
             this.label68.Text = "%이상";
             // 
@@ -3275,9 +3421,10 @@ namespace LuckyFuture.UI
             this.cmbOrderType4.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbOrderType4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOrderType4.FormattingEnabled = true;
-            this.cmbOrderType4.Location = new System.Drawing.Point(238, 12);
+            this.cmbOrderType4.Location = new System.Drawing.Point(298, 15);
+            this.cmbOrderType4.Margin = new System.Windows.Forms.Padding(4);
             this.cmbOrderType4.Name = "cmbOrderType4";
-            this.cmbOrderType4.Size = new System.Drawing.Size(69, 22);
+            this.cmbOrderType4.Size = new System.Drawing.Size(85, 26);
             this.cmbOrderType4.TabIndex = 23;
             this.cmbOrderType4.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderType4_DrawItem);
             this.cmbOrderType4.SelectedIndexChanged += new System.EventHandler(this.cmbOrderType4_SelectedIndexChanged);
@@ -3285,46 +3432,50 @@ namespace LuckyFuture.UI
             // txtConc2Cnt
             // 
             this.txtConc2Cnt.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConc2Cnt.Location = new System.Drawing.Point(151, 115);
+            this.txtConc2Cnt.Location = new System.Drawing.Point(189, 144);
+            this.txtConc2Cnt.Margin = new System.Windows.Forms.Padding(4);
             this.txtConc2Cnt.Name = "txtConc2Cnt";
-            this.txtConc2Cnt.Size = new System.Drawing.Size(56, 23);
+            this.txtConc2Cnt.Size = new System.Drawing.Size(69, 27);
             this.txtConc2Cnt.TabIndex = 37;
             this.txtConc2Cnt.TextChanged += new System.EventHandler(this.txtConc2Cnt_TextChanged);
             // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(169, 15);
+            this.label28.Location = new System.Drawing.Point(211, 19);
+            this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(53, 12);
+            this.label28.Size = new System.Drawing.Size(67, 15);
             this.label28.TabIndex = 24;
             this.label28.Text = "주문타입";
             // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(128, 41);
+            this.label29.Location = new System.Drawing.Point(160, 51);
             this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(17, 12);
+            this.label29.Size = new System.Drawing.Size(22, 15);
             this.label29.TabIndex = 20;
             this.label29.Text = "개";
             // 
             // txtOrderCount4
             // 
             this.txtOrderCount4.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrderCount4.Location = new System.Drawing.Point(77, 36);
+            this.txtOrderCount4.Location = new System.Drawing.Point(96, 45);
+            this.txtOrderCount4.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrderCount4.Name = "txtOrderCount4";
-            this.txtOrderCount4.Size = new System.Drawing.Size(43, 23);
+            this.txtOrderCount4.Size = new System.Drawing.Size(53, 27);
             this.txtOrderCount4.TabIndex = 18;
             this.txtOrderCount4.TextChanged += new System.EventHandler(this.txtOrderCount4_TextChanged);
             // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(13, 41);
+            this.label30.Location = new System.Drawing.Point(16, 51);
+            this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(53, 12);
+            this.label30.Size = new System.Drawing.Size(67, 15);
             this.label30.TabIndex = 19;
             this.label30.Text = "주문수량";
             // 
@@ -3336,9 +3487,10 @@ namespace LuckyFuture.UI
             this.cmbChartType4.FormattingEnabled = true;
             this.cmbChartType4.IntegralHeight = false;
             this.cmbChartType4.ItemHeight = 15;
-            this.cmbChartType4.Location = new System.Drawing.Point(77, 12);
+            this.cmbChartType4.Location = new System.Drawing.Point(96, 15);
+            this.cmbChartType4.Margin = new System.Windows.Forms.Padding(4);
             this.cmbChartType4.Name = "cmbChartType4";
-            this.cmbChartType4.Size = new System.Drawing.Size(69, 21);
+            this.cmbChartType4.Size = new System.Drawing.Size(85, 21);
             this.cmbChartType4.TabIndex = 0;
             this.cmbChartType4.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbChartType4_DrawItem);
             this.cmbChartType4.SelectedIndexChanged += new System.EventHandler(this.cmbChartType4_SelectedIndexChanged);
@@ -3346,9 +3498,10 @@ namespace LuckyFuture.UI
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(13, 17);
+            this.label32.Location = new System.Drawing.Point(16, 21);
+            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(53, 12);
+            this.label32.Size = new System.Drawing.Size(67, 15);
             this.label32.TabIndex = 3;
             this.label32.Text = "차트타입";
             // 
@@ -3369,9 +3522,11 @@ namespace LuckyFuture.UI
             this.groupBetting1.Controls.Add(this.label3);
             this.groupBetting1.Controls.Add(this.label6);
             this.groupBetting1.Controls.Add(this.label9);
-            this.groupBetting1.Location = new System.Drawing.Point(4, 43);
+            this.groupBetting1.Location = new System.Drawing.Point(5, 54);
+            this.groupBetting1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBetting1.Name = "groupBetting1";
-            this.groupBetting1.Size = new System.Drawing.Size(324, 192);
+            this.groupBetting1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBetting1.Size = new System.Drawing.Size(405, 240);
             this.groupBetting1.TabIndex = 16;
             this.groupBetting1.TabStop = false;
             this.groupBetting1.Text = "주문설정";
@@ -3388,9 +3543,10 @@ namespace LuckyFuture.UI
             this.btnOrdSel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrdSel1.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnOrdSel1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOrdSel1.Location = new System.Drawing.Point(287, 100);
+            this.btnOrdSel1.Location = new System.Drawing.Point(359, 125);
+            this.btnOrdSel1.Margin = new System.Windows.Forms.Padding(4);
             this.btnOrdSel1.Name = "btnOrdSel1";
-            this.btnOrdSel1.Size = new System.Drawing.Size(20, 23);
+            this.btnOrdSel1.Size = new System.Drawing.Size(25, 29);
             this.btnOrdSel1.TabIndex = 56;
             this.btnOrdSel1.Text = "...";
             this.btnOrdSel1.UseVisualStyleBackColor = true;
@@ -3403,10 +3559,10 @@ namespace LuckyFuture.UI
             this.chkOrd14.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd14.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd14.Location = new System.Drawing.Point(254, 100);
+            this.chkOrd14.Location = new System.Drawing.Point(318, 125);
             this.chkOrd14.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd14.Name = "chkOrd14";
-            this.chkOrd14.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd14.Size = new System.Drawing.Size(38, 29);
             this.chkOrd14.TabIndex = 55;
             this.chkOrd14.Text = "10";
             this.chkOrd14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3420,10 +3576,10 @@ namespace LuckyFuture.UI
             this.chkOrd13.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd13.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd13.Location = new System.Drawing.Point(222, 100);
+            this.chkOrd13.Location = new System.Drawing.Point(278, 125);
             this.chkOrd13.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd13.Name = "chkOrd13";
-            this.chkOrd13.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd13.Size = new System.Drawing.Size(38, 29);
             this.chkOrd13.TabIndex = 54;
             this.chkOrd13.Text = "5";
             this.chkOrd13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3437,10 +3593,10 @@ namespace LuckyFuture.UI
             this.chkOrd12.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd12.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd12.Location = new System.Drawing.Point(190, 100);
+            this.chkOrd12.Location = new System.Drawing.Point(238, 125);
             this.chkOrd12.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd12.Name = "chkOrd12";
-            this.chkOrd12.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd12.Size = new System.Drawing.Size(38, 29);
             this.chkOrd12.TabIndex = 53;
             this.chkOrd12.Text = "2";
             this.chkOrd12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3454,10 +3610,10 @@ namespace LuckyFuture.UI
             this.chkOrd11.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd11.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd11.Location = new System.Drawing.Point(158, 100);
+            this.chkOrd11.Location = new System.Drawing.Point(198, 125);
             this.chkOrd11.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd11.Name = "chkOrd11";
-            this.chkOrd11.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd11.Size = new System.Drawing.Size(38, 29);
             this.chkOrd11.TabIndex = 52;
             this.chkOrd11.Text = "1";
             this.chkOrd11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3470,9 +3626,10 @@ namespace LuckyFuture.UI
             this.cmbOrderType1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbOrderType1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOrderType1.FormattingEnabled = true;
-            this.cmbOrderType1.Location = new System.Drawing.Point(88, 58);
+            this.cmbOrderType1.Location = new System.Drawing.Point(110, 72);
+            this.cmbOrderType1.Margin = new System.Windows.Forms.Padding(4);
             this.cmbOrderType1.Name = "cmbOrderType1";
-            this.cmbOrderType1.Size = new System.Drawing.Size(69, 22);
+            this.cmbOrderType1.Size = new System.Drawing.Size(85, 26);
             this.cmbOrderType1.TabIndex = 23;
             this.cmbOrderType1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderType1_DrawItem);
             this.cmbOrderType1.SelectedIndexChanged += new System.EventHandler(this.cmbOrderType1_SelectedIndexChanged);
@@ -3480,37 +3637,40 @@ namespace LuckyFuture.UI
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(18, 62);
+            this.label27.Location = new System.Drawing.Point(22, 78);
+            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(53, 12);
+            this.label27.Size = new System.Drawing.Size(67, 15);
             this.label27.TabIndex = 24;
             this.label27.Text = "주문타입";
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(128, 104);
+            this.label19.Location = new System.Drawing.Point(160, 130);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(17, 12);
+            this.label19.Size = new System.Drawing.Size(22, 15);
             this.label19.TabIndex = 20;
             this.label19.Text = "개";
             // 
             // txtOrderCount1
             // 
             this.txtOrderCount1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrderCount1.Location = new System.Drawing.Point(88, 100);
+            this.txtOrderCount1.Location = new System.Drawing.Point(110, 125);
+            this.txtOrderCount1.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrderCount1.Name = "txtOrderCount1";
-            this.txtOrderCount1.Size = new System.Drawing.Size(35, 23);
+            this.txtOrderCount1.Size = new System.Drawing.Size(43, 27);
             this.txtOrderCount1.TabIndex = 18;
             this.txtOrderCount1.TextChanged += new System.EventHandler(this.txtOrderCount1_TextChanged);
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(18, 102);
+            this.label20.Location = new System.Drawing.Point(22, 128);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(53, 12);
+            this.label20.Size = new System.Drawing.Size(67, 15);
             this.label20.TabIndex = 19;
             this.label20.Text = "주문수량";
             // 
@@ -3520,9 +3680,10 @@ namespace LuckyFuture.UI
             this.cmbChartType1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbChartType1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbChartType1.FormattingEnabled = true;
-            this.cmbChartType1.Location = new System.Drawing.Point(88, 23);
+            this.cmbChartType1.Location = new System.Drawing.Point(110, 29);
+            this.cmbChartType1.Margin = new System.Windows.Forms.Padding(4);
             this.cmbChartType1.Name = "cmbChartType1";
-            this.cmbChartType1.Size = new System.Drawing.Size(69, 22);
+            this.cmbChartType1.Size = new System.Drawing.Size(85, 26);
             this.cmbChartType1.TabIndex = 0;
             this.cmbChartType1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbChartType1_DrawItem);
             this.cmbChartType1.SelectedIndexChanged += new System.EventHandler(this.cmbChartType1_SelectedIndexChanged);
@@ -3534,9 +3695,10 @@ namespace LuckyFuture.UI
             this.cmbBettingCandle1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBettingCandle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBettingCandle1.FormattingEnabled = true;
-            this.cmbBettingCandle1.Location = new System.Drawing.Point(88, 148);
+            this.cmbBettingCandle1.Location = new System.Drawing.Point(110, 185);
+            this.cmbBettingCandle1.Margin = new System.Windows.Forms.Padding(4);
             this.cmbBettingCandle1.Name = "cmbBettingCandle1";
-            this.cmbBettingCandle1.Size = new System.Drawing.Size(69, 22);
+            this.cmbBettingCandle1.Size = new System.Drawing.Size(85, 26);
             this.cmbBettingCandle1.TabIndex = 0;
             this.cmbBettingCandle1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbBettingCandle1_DrawItem);
             this.cmbBettingCandle1.SelectedIndexChanged += new System.EventHandler(this.cmbBettingCandle1_SelectedIndexChanged);
@@ -3544,27 +3706,30 @@ namespace LuckyFuture.UI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(162, 151);
+            this.label3.Location = new System.Drawing.Point(202, 189);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 12);
+            this.label3.Size = new System.Drawing.Size(57, 15);
             this.label3.TabIndex = 3;
             this.label3.Text = "개 이상";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 28);
+            this.label6.Location = new System.Drawing.Point(22, 35);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.Size = new System.Drawing.Size(67, 15);
             this.label6.TabIndex = 3;
             this.label6.Text = "차트타입";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(18, 150);
+            this.label9.Location = new System.Drawing.Point(22, 188);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(65, 12);
+            this.label9.Size = new System.Drawing.Size(82, 15);
             this.label9.TabIndex = 3;
             this.label9.Text = "동일색캔들";
             // 
@@ -3589,9 +3754,11 @@ namespace LuckyFuture.UI
             this.groupBetting2.Controls.Add(this.label15);
             this.groupBetting2.Controls.Add(this.label16);
             this.groupBetting2.Controls.Add(this.label17);
-            this.groupBetting2.Location = new System.Drawing.Point(4, 43);
+            this.groupBetting2.Location = new System.Drawing.Point(5, 54);
+            this.groupBetting2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBetting2.Name = "groupBetting2";
-            this.groupBetting2.Size = new System.Drawing.Size(324, 192);
+            this.groupBetting2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBetting2.Size = new System.Drawing.Size(405, 240);
             this.groupBetting2.TabIndex = 17;
             this.groupBetting2.TabStop = false;
             this.groupBetting2.Text = "주문설정";
@@ -3608,9 +3775,10 @@ namespace LuckyFuture.UI
             this.btnOrdSel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrdSel2.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnOrdSel2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOrdSel2.Location = new System.Drawing.Point(287, 82);
+            this.btnOrdSel2.Location = new System.Drawing.Point(359, 102);
+            this.btnOrdSel2.Margin = new System.Windows.Forms.Padding(4);
             this.btnOrdSel2.Name = "btnOrdSel2";
-            this.btnOrdSel2.Size = new System.Drawing.Size(20, 23);
+            this.btnOrdSel2.Size = new System.Drawing.Size(25, 29);
             this.btnOrdSel2.TabIndex = 68;
             this.btnOrdSel2.Text = "...";
             this.btnOrdSel2.UseVisualStyleBackColor = true;
@@ -3623,10 +3791,10 @@ namespace LuckyFuture.UI
             this.chkOrd24.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd24.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd24.Location = new System.Drawing.Point(254, 82);
+            this.chkOrd24.Location = new System.Drawing.Point(318, 102);
             this.chkOrd24.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd24.Name = "chkOrd24";
-            this.chkOrd24.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd24.Size = new System.Drawing.Size(38, 29);
             this.chkOrd24.TabIndex = 67;
             this.chkOrd24.Text = "10";
             this.chkOrd24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3640,10 +3808,10 @@ namespace LuckyFuture.UI
             this.chkOrd23.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd23.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd23.Location = new System.Drawing.Point(222, 82);
+            this.chkOrd23.Location = new System.Drawing.Point(278, 102);
             this.chkOrd23.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd23.Name = "chkOrd23";
-            this.chkOrd23.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd23.Size = new System.Drawing.Size(38, 29);
             this.chkOrd23.TabIndex = 66;
             this.chkOrd23.Text = "5";
             this.chkOrd23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3657,10 +3825,10 @@ namespace LuckyFuture.UI
             this.chkOrd22.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd22.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd22.Location = new System.Drawing.Point(190, 82);
+            this.chkOrd22.Location = new System.Drawing.Point(238, 102);
             this.chkOrd22.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd22.Name = "chkOrd22";
-            this.chkOrd22.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd22.Size = new System.Drawing.Size(38, 29);
             this.chkOrd22.TabIndex = 65;
             this.chkOrd22.Text = "2";
             this.chkOrd22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3674,10 +3842,10 @@ namespace LuckyFuture.UI
             this.chkOrd21.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd21.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd21.Location = new System.Drawing.Point(158, 82);
+            this.chkOrd21.Location = new System.Drawing.Point(198, 102);
             this.chkOrd21.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd21.Name = "chkOrd21";
-            this.chkOrd21.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd21.Size = new System.Drawing.Size(38, 29);
             this.chkOrd21.TabIndex = 64;
             this.chkOrd21.Text = "1";
             this.chkOrd21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3690,9 +3858,10 @@ namespace LuckyFuture.UI
             this.cmbOrderType2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbOrderType2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOrderType2.FormattingEnabled = true;
-            this.cmbOrderType2.Location = new System.Drawing.Point(88, 50);
+            this.cmbOrderType2.Location = new System.Drawing.Point(110, 62);
+            this.cmbOrderType2.Margin = new System.Windows.Forms.Padding(4);
             this.cmbOrderType2.Name = "cmbOrderType2";
-            this.cmbOrderType2.Size = new System.Drawing.Size(69, 22);
+            this.cmbOrderType2.Size = new System.Drawing.Size(85, 26);
             this.cmbOrderType2.TabIndex = 18;
             this.cmbOrderType2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderType2_DrawItem);
             this.cmbOrderType2.SelectedIndexChanged += new System.EventHandler(this.cmbOrderType2_SelectedIndexChanged);
@@ -3700,37 +3869,40 @@ namespace LuckyFuture.UI
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(18, 54);
+            this.label25.Location = new System.Drawing.Point(22, 68);
+            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(53, 12);
+            this.label25.Size = new System.Drawing.Size(67, 15);
             this.label25.TabIndex = 19;
             this.label25.Text = "주문타입";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(131, 87);
+            this.label18.Location = new System.Drawing.Point(164, 109);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(17, 12);
+            this.label18.Size = new System.Drawing.Size(22, 15);
             this.label18.TabIndex = 17;
             this.label18.Text = "개";
             // 
             // txtOrderCount2
             // 
             this.txtOrderCount2.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrderCount2.Location = new System.Drawing.Point(88, 82);
+            this.txtOrderCount2.Location = new System.Drawing.Point(110, 102);
+            this.txtOrderCount2.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrderCount2.Name = "txtOrderCount2";
-            this.txtOrderCount2.Size = new System.Drawing.Size(35, 23);
+            this.txtOrderCount2.Size = new System.Drawing.Size(43, 27);
             this.txtOrderCount2.TabIndex = 15;
             this.txtOrderCount2.TextChanged += new System.EventHandler(this.txtOrderCount2_TextChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(17, 85);
+            this.label10.Location = new System.Drawing.Point(21, 106);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(53, 12);
+            this.label10.Size = new System.Drawing.Size(67, 15);
             this.label10.TabIndex = 16;
             this.label10.Text = "주문수량";
             // 
@@ -3741,9 +3913,10 @@ namespace LuckyFuture.UI
             this.cmbAvgType2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAvgType2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbAvgType2.FormattingEnabled = true;
-            this.cmbAvgType2.Location = new System.Drawing.Point(88, 117);
+            this.cmbAvgType2.Location = new System.Drawing.Point(110, 146);
+            this.cmbAvgType2.Margin = new System.Windows.Forms.Padding(4);
             this.cmbAvgType2.Name = "cmbAvgType2";
-            this.cmbAvgType2.Size = new System.Drawing.Size(69, 22);
+            this.cmbAvgType2.Size = new System.Drawing.Size(85, 26);
             this.cmbAvgType2.TabIndex = 5;
             this.cmbAvgType2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbAvgType2_DrawItem);
             this.cmbAvgType2.SelectedIndexChanged += new System.EventHandler(this.cmbAvgType2_SelectedIndexChanged);
@@ -3751,18 +3924,20 @@ namespace LuckyFuture.UI
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(17, 120);
+            this.label13.Location = new System.Drawing.Point(21, 150);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(65, 12);
+            this.label13.Size = new System.Drawing.Size(82, 15);
             this.label13.TabIndex = 4;
             this.label13.Text = "이동평균선";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(199, 156);
+            this.label14.Location = new System.Drawing.Point(249, 195);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 12);
+            this.label14.Size = new System.Drawing.Size(52, 15);
             this.label14.TabIndex = 14;
             this.label14.Text = "틱이상";
             // 
@@ -3772,9 +3947,10 @@ namespace LuckyFuture.UI
             this.cmbChartType2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbChartType2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbChartType2.FormattingEnabled = true;
-            this.cmbChartType2.Location = new System.Drawing.Point(88, 17);
+            this.cmbChartType2.Location = new System.Drawing.Point(110, 21);
+            this.cmbChartType2.Margin = new System.Windows.Forms.Padding(4);
             this.cmbChartType2.Name = "cmbChartType2";
-            this.cmbChartType2.Size = new System.Drawing.Size(69, 22);
+            this.cmbChartType2.Size = new System.Drawing.Size(85, 26);
             this.cmbChartType2.TabIndex = 0;
             this.cmbChartType2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbChartType2_DrawItem);
             this.cmbChartType2.SelectedIndexChanged += new System.EventHandler(this.cmbChartType2_SelectedIndexChanged);
@@ -3782,9 +3958,10 @@ namespace LuckyFuture.UI
             // txtBettingTick2
             // 
             this.txtBettingTick2.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBettingTick2.Location = new System.Drawing.Point(162, 152);
+            this.txtBettingTick2.Location = new System.Drawing.Point(202, 190);
+            this.txtBettingTick2.Margin = new System.Windows.Forms.Padding(4);
             this.txtBettingTick2.Name = "txtBettingTick2";
-            this.txtBettingTick2.Size = new System.Drawing.Size(32, 23);
+            this.txtBettingTick2.Size = new System.Drawing.Size(39, 27);
             this.txtBettingTick2.TabIndex = 13;
             this.txtBettingTick2.TextChanged += new System.EventHandler(this.txtBettingTick2_TextChanged);
             // 
@@ -3795,9 +3972,10 @@ namespace LuckyFuture.UI
             this.cmbBettingCandle2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBettingCandle2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBettingCandle2.FormattingEnabled = true;
-            this.cmbBettingCandle2.Location = new System.Drawing.Point(88, 153);
+            this.cmbBettingCandle2.Location = new System.Drawing.Point(110, 191);
+            this.cmbBettingCandle2.Margin = new System.Windows.Forms.Padding(4);
             this.cmbBettingCandle2.Name = "cmbBettingCandle2";
-            this.cmbBettingCandle2.Size = new System.Drawing.Size(52, 22);
+            this.cmbBettingCandle2.Size = new System.Drawing.Size(64, 26);
             this.cmbBettingCandle2.TabIndex = 0;
             this.cmbBettingCandle2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbBettingCandle2_DrawItem);
             this.cmbBettingCandle2.SelectedIndexChanged += new System.EventHandler(this.cmbBettingCandle2_SelectedIndexChanged);
@@ -3805,27 +3983,30 @@ namespace LuckyFuture.UI
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(143, 156);
+            this.label15.Location = new System.Drawing.Point(179, 195);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(17, 12);
+            this.label15.Size = new System.Drawing.Size(22, 15);
             this.label15.TabIndex = 3;
             this.label15.Text = "개";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(18, 21);
+            this.label16.Location = new System.Drawing.Point(22, 26);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(53, 12);
+            this.label16.Size = new System.Drawing.Size(67, 15);
             this.label16.TabIndex = 3;
             this.label16.Text = "차트타입";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(17, 155);
+            this.label17.Location = new System.Drawing.Point(21, 194);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(59, 12);
+            this.label17.Size = new System.Drawing.Size(73, 15);
             this.label17.TabIndex = 3;
             this.label17.Text = "상승/하락";
             // 
@@ -3848,9 +4029,11 @@ namespace LuckyFuture.UI
             this.groupBetting3.Controls.Add(this.cmbBettingCandle3);
             this.groupBetting3.Controls.Add(this.label21);
             this.groupBetting3.Controls.Add(this.label22);
-            this.groupBetting3.Location = new System.Drawing.Point(4, 43);
+            this.groupBetting3.Location = new System.Drawing.Point(5, 54);
+            this.groupBetting3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBetting3.Name = "groupBetting3";
-            this.groupBetting3.Size = new System.Drawing.Size(324, 192);
+            this.groupBetting3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBetting3.Size = new System.Drawing.Size(405, 240);
             this.groupBetting3.TabIndex = 15;
             this.groupBetting3.TabStop = false;
             this.groupBetting3.Text = "주문설정";
@@ -3867,9 +4050,10 @@ namespace LuckyFuture.UI
             this.btnOrdSel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrdSel3.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnOrdSel3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOrdSel3.Location = new System.Drawing.Point(287, 83);
+            this.btnOrdSel3.Location = new System.Drawing.Point(359, 104);
+            this.btnOrdSel3.Margin = new System.Windows.Forms.Padding(4);
             this.btnOrdSel3.Name = "btnOrdSel3";
-            this.btnOrdSel3.Size = new System.Drawing.Size(20, 23);
+            this.btnOrdSel3.Size = new System.Drawing.Size(25, 29);
             this.btnOrdSel3.TabIndex = 56;
             this.btnOrdSel3.Text = "...";
             this.btnOrdSel3.UseVisualStyleBackColor = true;
@@ -3882,10 +4066,10 @@ namespace LuckyFuture.UI
             this.chkOrd34.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd34.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd34.Location = new System.Drawing.Point(254, 83);
+            this.chkOrd34.Location = new System.Drawing.Point(318, 104);
             this.chkOrd34.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd34.Name = "chkOrd34";
-            this.chkOrd34.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd34.Size = new System.Drawing.Size(38, 29);
             this.chkOrd34.TabIndex = 55;
             this.chkOrd34.Text = "10";
             this.chkOrd34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3899,10 +4083,10 @@ namespace LuckyFuture.UI
             this.chkOrd33.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd33.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd33.Location = new System.Drawing.Point(222, 83);
+            this.chkOrd33.Location = new System.Drawing.Point(278, 104);
             this.chkOrd33.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd33.Name = "chkOrd33";
-            this.chkOrd33.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd33.Size = new System.Drawing.Size(38, 29);
             this.chkOrd33.TabIndex = 54;
             this.chkOrd33.Text = "5";
             this.chkOrd33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3916,10 +4100,10 @@ namespace LuckyFuture.UI
             this.chkOrd32.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd32.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd32.Location = new System.Drawing.Point(190, 83);
+            this.chkOrd32.Location = new System.Drawing.Point(238, 104);
             this.chkOrd32.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd32.Name = "chkOrd32";
-            this.chkOrd32.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd32.Size = new System.Drawing.Size(38, 29);
             this.chkOrd32.TabIndex = 53;
             this.chkOrd32.Text = "2";
             this.chkOrd32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3933,10 +4117,10 @@ namespace LuckyFuture.UI
             this.chkOrd31.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd31.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd31.Location = new System.Drawing.Point(158, 83);
+            this.chkOrd31.Location = new System.Drawing.Point(198, 104);
             this.chkOrd31.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd31.Name = "chkOrd31";
-            this.chkOrd31.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd31.Size = new System.Drawing.Size(38, 29);
             this.chkOrd31.TabIndex = 52;
             this.chkOrd31.Text = "1";
             this.chkOrd31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3949,9 +4133,10 @@ namespace LuckyFuture.UI
             this.cmbReorder3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbReorder3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbReorder3.FormattingEnabled = true;
-            this.cmbReorder3.Location = new System.Drawing.Point(87, 155);
+            this.cmbReorder3.Location = new System.Drawing.Point(109, 194);
+            this.cmbReorder3.Margin = new System.Windows.Forms.Padding(4);
             this.cmbReorder3.Name = "cmbReorder3";
-            this.cmbReorder3.Size = new System.Drawing.Size(69, 22);
+            this.cmbReorder3.Size = new System.Drawing.Size(85, 26);
             this.cmbReorder3.TabIndex = 24;
             this.cmbReorder3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbReorder3_DrawItem);
             this.cmbReorder3.SelectedIndexChanged += new System.EventHandler(this.cmbReorder3_SelectedIndexChanged);
@@ -3959,9 +4144,10 @@ namespace LuckyFuture.UI
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(18, 158);
+            this.label34.Location = new System.Drawing.Point(22, 198);
+            this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(65, 12);
+            this.label34.Size = new System.Drawing.Size(82, 15);
             this.label34.TabIndex = 23;
             this.label34.Text = "되돌림주문";
             // 
@@ -3971,9 +4157,10 @@ namespace LuckyFuture.UI
             this.cmbOrderType3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbOrderType3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOrderType3.FormattingEnabled = true;
-            this.cmbOrderType3.Location = new System.Drawing.Point(87, 51);
+            this.cmbOrderType3.Location = new System.Drawing.Point(109, 64);
+            this.cmbOrderType3.Margin = new System.Windows.Forms.Padding(4);
             this.cmbOrderType3.Name = "cmbOrderType3";
-            this.cmbOrderType3.Size = new System.Drawing.Size(69, 22);
+            this.cmbOrderType3.Size = new System.Drawing.Size(85, 26);
             this.cmbOrderType3.TabIndex = 21;
             this.cmbOrderType3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderType3_DrawItem);
             this.cmbOrderType3.SelectedIndexChanged += new System.EventHandler(this.cmbOrderType3_SelectedIndexChanged);
@@ -3981,46 +4168,50 @@ namespace LuckyFuture.UI
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(18, 55);
+            this.label26.Location = new System.Drawing.Point(22, 69);
+            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(53, 12);
+            this.label26.Size = new System.Drawing.Size(67, 15);
             this.label26.TabIndex = 22;
             this.label26.Text = "주문타입";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(128, 86);
+            this.label23.Location = new System.Drawing.Point(160, 108);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(17, 12);
+            this.label23.Size = new System.Drawing.Size(22, 15);
             this.label23.TabIndex = 20;
             this.label23.Text = "개";
             // 
             // txtOrderCount3
             // 
             this.txtOrderCount3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrderCount3.Location = new System.Drawing.Point(87, 84);
+            this.txtOrderCount3.Location = new System.Drawing.Point(109, 105);
+            this.txtOrderCount3.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrderCount3.Name = "txtOrderCount3";
-            this.txtOrderCount3.Size = new System.Drawing.Size(35, 23);
+            this.txtOrderCount3.Size = new System.Drawing.Size(43, 27);
             this.txtOrderCount3.TabIndex = 18;
             this.txtOrderCount3.TextChanged += new System.EventHandler(this.txtOrderCount3_TextChanged);
             // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(18, 86);
+            this.label24.Location = new System.Drawing.Point(22, 108);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(53, 12);
+            this.label24.Size = new System.Drawing.Size(67, 15);
             this.label24.TabIndex = 19;
             this.label24.Text = "주문수량";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(163, 123);
+            this.label8.Location = new System.Drawing.Point(204, 154);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(57, 12);
+            this.label8.Size = new System.Drawing.Size(72, 15);
             this.label8.TabIndex = 4;
             this.label8.Text = "캔들 배팅";
             // 
@@ -4030,9 +4221,10 @@ namespace LuckyFuture.UI
             this.cmbChartType3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbChartType3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbChartType3.FormattingEnabled = true;
-            this.cmbChartType3.Location = new System.Drawing.Point(87, 18);
+            this.cmbChartType3.Location = new System.Drawing.Point(109, 22);
+            this.cmbChartType3.Margin = new System.Windows.Forms.Padding(4);
             this.cmbChartType3.Name = "cmbChartType3";
-            this.cmbChartType3.Size = new System.Drawing.Size(69, 22);
+            this.cmbChartType3.Size = new System.Drawing.Size(85, 26);
             this.cmbChartType3.TabIndex = 0;
             this.cmbChartType3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbChartType3_DrawItem);
             this.cmbChartType3.SelectedIndexChanged += new System.EventHandler(this.cmbChartType3_SelectedIndexChanged);
@@ -4044,9 +4236,10 @@ namespace LuckyFuture.UI
             this.cmbBettingCandle3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBettingCandle3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBettingCandle3.FormattingEnabled = true;
-            this.cmbBettingCandle3.Location = new System.Drawing.Point(87, 120);
+            this.cmbBettingCandle3.Location = new System.Drawing.Point(109, 150);
+            this.cmbBettingCandle3.Margin = new System.Windows.Forms.Padding(4);
             this.cmbBettingCandle3.Name = "cmbBettingCandle3";
-            this.cmbBettingCandle3.Size = new System.Drawing.Size(69, 22);
+            this.cmbBettingCandle3.Size = new System.Drawing.Size(85, 26);
             this.cmbBettingCandle3.TabIndex = 0;
             this.cmbBettingCandle3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbBettingCandle3_DrawItem);
             this.cmbBettingCandle3.SelectedIndexChanged += new System.EventHandler(this.cmbBettingCandle3_SelectedIndexChanged);
@@ -4054,18 +4247,20 @@ namespace LuckyFuture.UI
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(18, 22);
+            this.label21.Location = new System.Drawing.Point(22, 28);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(53, 12);
+            this.label21.Size = new System.Drawing.Size(67, 15);
             this.label21.TabIndex = 3;
             this.label21.Text = "차트타입";
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(18, 123);
+            this.label22.Location = new System.Drawing.Point(22, 154);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(41, 12);
+            this.label22.Size = new System.Drawing.Size(52, 15);
             this.label22.TabIndex = 3;
             this.label22.Text = "교차시";
             // 
@@ -4089,9 +4284,11 @@ namespace LuckyFuture.UI
             this.groupBetting5.Controls.Add(this.cmbBettingCandle5);
             this.groupBetting5.Controls.Add(this.label42);
             this.groupBetting5.Controls.Add(this.label43);
-            this.groupBetting5.Location = new System.Drawing.Point(4, 43);
+            this.groupBetting5.Location = new System.Drawing.Point(5, 54);
+            this.groupBetting5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBetting5.Name = "groupBetting5";
-            this.groupBetting5.Size = new System.Drawing.Size(324, 192);
+            this.groupBetting5.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBetting5.Size = new System.Drawing.Size(405, 240);
             this.groupBetting5.TabIndex = 14;
             this.groupBetting5.TabStop = false;
             this.groupBetting5.Text = "주문설정";
@@ -4108,9 +4305,10 @@ namespace LuckyFuture.UI
             this.btnOrdSel5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrdSel5.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnOrdSel5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOrdSel5.Location = new System.Drawing.Point(287, 83);
+            this.btnOrdSel5.Location = new System.Drawing.Point(359, 104);
+            this.btnOrdSel5.Margin = new System.Windows.Forms.Padding(4);
             this.btnOrdSel5.Name = "btnOrdSel5";
-            this.btnOrdSel5.Size = new System.Drawing.Size(20, 23);
+            this.btnOrdSel5.Size = new System.Drawing.Size(25, 29);
             this.btnOrdSel5.TabIndex = 73;
             this.btnOrdSel5.Text = "...";
             this.btnOrdSel5.UseVisualStyleBackColor = true;
@@ -4123,10 +4321,10 @@ namespace LuckyFuture.UI
             this.chkOrd54.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd54.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd54.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd54.Location = new System.Drawing.Point(254, 83);
+            this.chkOrd54.Location = new System.Drawing.Point(318, 104);
             this.chkOrd54.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd54.Name = "chkOrd54";
-            this.chkOrd54.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd54.Size = new System.Drawing.Size(38, 29);
             this.chkOrd54.TabIndex = 72;
             this.chkOrd54.Text = "10";
             this.chkOrd54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4140,10 +4338,10 @@ namespace LuckyFuture.UI
             this.chkOrd53.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd53.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd53.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd53.Location = new System.Drawing.Point(222, 83);
+            this.chkOrd53.Location = new System.Drawing.Point(278, 104);
             this.chkOrd53.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd53.Name = "chkOrd53";
-            this.chkOrd53.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd53.Size = new System.Drawing.Size(38, 29);
             this.chkOrd53.TabIndex = 71;
             this.chkOrd53.Text = "5";
             this.chkOrd53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4157,10 +4355,10 @@ namespace LuckyFuture.UI
             this.chkOrd52.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd52.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd52.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd52.Location = new System.Drawing.Point(190, 83);
+            this.chkOrd52.Location = new System.Drawing.Point(238, 104);
             this.chkOrd52.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd52.Name = "chkOrd52";
-            this.chkOrd52.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd52.Size = new System.Drawing.Size(38, 29);
             this.chkOrd52.TabIndex = 70;
             this.chkOrd52.Text = "2";
             this.chkOrd52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4174,10 +4372,10 @@ namespace LuckyFuture.UI
             this.chkOrd51.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd51.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd51.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd51.Location = new System.Drawing.Point(158, 83);
+            this.chkOrd51.Location = new System.Drawing.Point(198, 104);
             this.chkOrd51.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd51.Name = "chkOrd51";
-            this.chkOrd51.Size = new System.Drawing.Size(30, 23);
+            this.chkOrd51.Size = new System.Drawing.Size(38, 29);
             this.chkOrd51.TabIndex = 69;
             this.chkOrd51.Text = "1";
             this.chkOrd51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4187,27 +4385,30 @@ namespace LuckyFuture.UI
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(165, 157);
+            this.label37.Location = new System.Drawing.Point(206, 196);
+            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(15, 12);
+            this.label37.Size = new System.Drawing.Size(18, 15);
             this.label37.TabIndex = 25;
             this.label37.Text = "%";
             // 
             // txtBoAdjust5
             // 
             this.txtBoAdjust5.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoAdjust5.Location = new System.Drawing.Point(90, 153);
+            this.txtBoAdjust5.Location = new System.Drawing.Point(112, 191);
+            this.txtBoAdjust5.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoAdjust5.Name = "txtBoAdjust5";
-            this.txtBoAdjust5.Size = new System.Drawing.Size(69, 23);
+            this.txtBoAdjust5.Size = new System.Drawing.Size(85, 27);
             this.txtBoAdjust5.TabIndex = 23;
             this.txtBoAdjust5.TextChanged += new System.EventHandler(this.txtBoAdjust5_TextChanged);
             // 
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(18, 157);
+            this.label44.Location = new System.Drawing.Point(22, 196);
+            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(57, 12);
+            this.label44.Size = new System.Drawing.Size(72, 15);
             this.label44.TabIndex = 24;
             this.label44.Text = "SB선조정";
             // 
@@ -4217,9 +4418,10 @@ namespace LuckyFuture.UI
             this.cmbOrderType5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbOrderType5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOrderType5.FormattingEnabled = true;
-            this.cmbOrderType5.Location = new System.Drawing.Point(90, 51);
+            this.cmbOrderType5.Location = new System.Drawing.Point(112, 64);
+            this.cmbOrderType5.Margin = new System.Windows.Forms.Padding(4);
             this.cmbOrderType5.Name = "cmbOrderType5";
-            this.cmbOrderType5.Size = new System.Drawing.Size(69, 22);
+            this.cmbOrderType5.Size = new System.Drawing.Size(85, 26);
             this.cmbOrderType5.TabIndex = 21;
             this.cmbOrderType5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderType5_DrawItem);
             this.cmbOrderType5.SelectedIndexChanged += new System.EventHandler(this.cmbOrderType5_SelectedIndexChanged);
@@ -4227,46 +4429,50 @@ namespace LuckyFuture.UI
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(18, 55);
+            this.label38.Location = new System.Drawing.Point(22, 69);
+            this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(53, 12);
+            this.label38.Size = new System.Drawing.Size(67, 15);
             this.label38.TabIndex = 22;
             this.label38.Text = "주문타입";
             // 
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(131, 87);
+            this.label39.Location = new System.Drawing.Point(164, 109);
             this.label39.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(17, 12);
+            this.label39.Size = new System.Drawing.Size(22, 15);
             this.label39.TabIndex = 20;
             this.label39.Text = "개";
             // 
             // txtOrderCount5
             // 
             this.txtOrderCount5.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrderCount5.Location = new System.Drawing.Point(90, 84);
+            this.txtOrderCount5.Location = new System.Drawing.Point(112, 105);
+            this.txtOrderCount5.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrderCount5.Name = "txtOrderCount5";
-            this.txtOrderCount5.Size = new System.Drawing.Size(35, 23);
+            this.txtOrderCount5.Size = new System.Drawing.Size(43, 27);
             this.txtOrderCount5.TabIndex = 18;
             this.txtOrderCount5.TextChanged += new System.EventHandler(this.txtOrderCount5_TextChanged);
             // 
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(18, 88);
+            this.label40.Location = new System.Drawing.Point(22, 110);
+            this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(53, 12);
+            this.label40.Size = new System.Drawing.Size(67, 15);
             this.label40.TabIndex = 19;
             this.label40.Text = "주문수량";
             // 
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(165, 122);
+            this.label41.Location = new System.Drawing.Point(206, 152);
+            this.label41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(57, 12);
+            this.label41.Size = new System.Drawing.Size(72, 15);
             this.label41.TabIndex = 4;
             this.label41.Text = "캔들 배팅";
             // 
@@ -4276,9 +4482,10 @@ namespace LuckyFuture.UI
             this.cmbChartType5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbChartType5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbChartType5.FormattingEnabled = true;
-            this.cmbChartType5.Location = new System.Drawing.Point(90, 18);
+            this.cmbChartType5.Location = new System.Drawing.Point(112, 22);
+            this.cmbChartType5.Margin = new System.Windows.Forms.Padding(4);
             this.cmbChartType5.Name = "cmbChartType5";
-            this.cmbChartType5.Size = new System.Drawing.Size(69, 22);
+            this.cmbChartType5.Size = new System.Drawing.Size(85, 26);
             this.cmbChartType5.TabIndex = 0;
             this.cmbChartType5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbChartType5_DrawItem);
             this.cmbChartType5.SelectedIndexChanged += new System.EventHandler(this.cmbChartType5_SelectedIndexChanged);
@@ -4289,9 +4496,10 @@ namespace LuckyFuture.UI
             this.cmbBettingCandle5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbBettingCandle5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBettingCandle5.FormattingEnabled = true;
-            this.cmbBettingCandle5.Location = new System.Drawing.Point(90, 119);
+            this.cmbBettingCandle5.Location = new System.Drawing.Point(112, 149);
+            this.cmbBettingCandle5.Margin = new System.Windows.Forms.Padding(4);
             this.cmbBettingCandle5.Name = "cmbBettingCandle5";
-            this.cmbBettingCandle5.Size = new System.Drawing.Size(69, 22);
+            this.cmbBettingCandle5.Size = new System.Drawing.Size(85, 26);
             this.cmbBettingCandle5.TabIndex = 0;
             this.cmbBettingCandle5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbBettingCandle5_DrawItem);
             this.cmbBettingCandle5.SelectedIndexChanged += new System.EventHandler(this.cmbBettingCandle5_SelectedIndexChanged);
@@ -4299,18 +4507,20 @@ namespace LuckyFuture.UI
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(18, 22);
+            this.label42.Location = new System.Drawing.Point(22, 28);
+            this.label42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(53, 12);
+            this.label42.Size = new System.Drawing.Size(67, 15);
             this.label42.TabIndex = 3;
             this.label42.Text = "차트타입";
             // 
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(18, 122);
+            this.label43.Location = new System.Drawing.Point(22, 152);
+            this.label43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(59, 12);
+            this.label43.Size = new System.Drawing.Size(73, 15);
             this.label43.TabIndex = 3;
             this.label43.Text = "상승/하락";
             // 
@@ -4328,9 +4538,11 @@ namespace LuckyFuture.UI
             this.groupBetting6.Controls.Add(this.label60);
             this.groupBetting6.Controls.Add(this.cmbChartType6);
             this.groupBetting6.Controls.Add(this.label62);
-            this.groupBetting6.Location = new System.Drawing.Point(4, 43);
+            this.groupBetting6.Location = new System.Drawing.Point(5, 54);
+            this.groupBetting6.Margin = new System.Windows.Forms.Padding(4);
             this.groupBetting6.Name = "groupBetting6";
-            this.groupBetting6.Size = new System.Drawing.Size(324, 188);
+            this.groupBetting6.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBetting6.Size = new System.Drawing.Size(405, 235);
             this.groupBetting6.TabIndex = 20;
             this.groupBetting6.TabStop = false;
             this.groupBetting6.Text = "주문설정";
@@ -4341,44 +4553,49 @@ namespace LuckyFuture.UI
             this.cmbBettingCross6.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbBettingCross6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBettingCross6.FormattingEnabled = true;
-            this.cmbBettingCross6.Location = new System.Drawing.Point(88, 114);
+            this.cmbBettingCross6.Location = new System.Drawing.Point(110, 142);
+            this.cmbBettingCross6.Margin = new System.Windows.Forms.Padding(4);
             this.cmbBettingCross6.Name = "cmbBettingCross6";
-            this.cmbBettingCross6.Size = new System.Drawing.Size(69, 22);
+            this.cmbBettingCross6.Size = new System.Drawing.Size(85, 26);
             this.cmbBettingCross6.TabIndex = 29;
             this.cmbBettingCross6.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbBettingCross6_DrawItem);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 118);
+            this.label4.Location = new System.Drawing.Point(22, 148);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.Size = new System.Drawing.Size(52, 15);
             this.label4.TabIndex = 28;
             this.label4.Text = "청산후";
             // 
             // label56
             // 
             this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(162, 151);
+            this.label56.Location = new System.Drawing.Point(202, 189);
+            this.label56.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(15, 12);
+            this.label56.Size = new System.Drawing.Size(18, 15);
             this.label56.TabIndex = 27;
             this.label56.Text = "%";
             // 
             // txtBoAdjust6
             // 
             this.txtBoAdjust6.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoAdjust6.Location = new System.Drawing.Point(88, 149);
+            this.txtBoAdjust6.Location = new System.Drawing.Point(110, 186);
+            this.txtBoAdjust6.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoAdjust6.Name = "txtBoAdjust6";
-            this.txtBoAdjust6.Size = new System.Drawing.Size(69, 23);
+            this.txtBoAdjust6.Size = new System.Drawing.Size(85, 27);
             this.txtBoAdjust6.TabIndex = 25;
             // 
             // label57
             // 
             this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(18, 152);
+            this.label57.Location = new System.Drawing.Point(22, 190);
+            this.label57.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(57, 12);
+            this.label57.Size = new System.Drawing.Size(72, 15);
             this.label57.TabIndex = 26;
             this.label57.Text = "SB선조정";
             // 
@@ -4388,45 +4605,49 @@ namespace LuckyFuture.UI
             this.cmbOrderType6.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbOrderType6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOrderType6.FormattingEnabled = true;
-            this.cmbOrderType6.Location = new System.Drawing.Point(88, 48);
+            this.cmbOrderType6.Location = new System.Drawing.Point(110, 60);
+            this.cmbOrderType6.Margin = new System.Windows.Forms.Padding(4);
             this.cmbOrderType6.Name = "cmbOrderType6";
-            this.cmbOrderType6.Size = new System.Drawing.Size(69, 22);
+            this.cmbOrderType6.Size = new System.Drawing.Size(85, 26);
             this.cmbOrderType6.TabIndex = 23;
             this.cmbOrderType6.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderType6_DrawItem);
             // 
             // label58
             // 
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(18, 53);
+            this.label58.Location = new System.Drawing.Point(22, 66);
+            this.label58.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(53, 12);
+            this.label58.Size = new System.Drawing.Size(67, 15);
             this.label58.TabIndex = 24;
             this.label58.Text = "주문타입";
             // 
             // label59
             // 
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(161, 84);
+            this.label59.Location = new System.Drawing.Point(201, 105);
             this.label59.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(17, 12);
+            this.label59.Size = new System.Drawing.Size(22, 15);
             this.label59.TabIndex = 20;
             this.label59.Text = "개";
             // 
             // txtOrderCount6
             // 
             this.txtOrderCount6.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrderCount6.Location = new System.Drawing.Point(88, 79);
+            this.txtOrderCount6.Location = new System.Drawing.Point(110, 99);
+            this.txtOrderCount6.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrderCount6.Name = "txtOrderCount6";
-            this.txtOrderCount6.Size = new System.Drawing.Size(69, 23);
+            this.txtOrderCount6.Size = new System.Drawing.Size(85, 27);
             this.txtOrderCount6.TabIndex = 18;
             // 
             // label60
             // 
             this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(18, 82);
+            this.label60.Location = new System.Drawing.Point(22, 102);
+            this.label60.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(53, 12);
+            this.label60.Size = new System.Drawing.Size(67, 15);
             this.label60.TabIndex = 19;
             this.label60.Text = "주문수량";
             // 
@@ -4438,18 +4659,20 @@ namespace LuckyFuture.UI
             this.cmbChartType6.FormattingEnabled = true;
             this.cmbChartType6.IntegralHeight = false;
             this.cmbChartType6.ItemHeight = 15;
-            this.cmbChartType6.Location = new System.Drawing.Point(88, 18);
+            this.cmbChartType6.Location = new System.Drawing.Point(110, 22);
+            this.cmbChartType6.Margin = new System.Windows.Forms.Padding(4);
             this.cmbChartType6.Name = "cmbChartType6";
-            this.cmbChartType6.Size = new System.Drawing.Size(69, 21);
+            this.cmbChartType6.Size = new System.Drawing.Size(85, 21);
             this.cmbChartType6.TabIndex = 0;
             this.cmbChartType6.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbChartType6_DrawItem);
             // 
             // label62
             // 
             this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(18, 24);
+            this.label62.Location = new System.Drawing.Point(22, 30);
+            this.label62.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(53, 12);
+            this.label62.Size = new System.Drawing.Size(67, 15);
             this.label62.TabIndex = 3;
             this.label62.Text = "차트타입";
             // 
@@ -4458,11 +4681,11 @@ namespace LuckyFuture.UI
             this.groupBetType.BackColor = System.Drawing.Color.Azure;
             this.groupBetType.Controls.Add(this.cmbBettingType);
             this.groupBetType.Controls.Add(this.label36);
-            this.groupBetType.Location = new System.Drawing.Point(4, 0);
+            this.groupBetType.Location = new System.Drawing.Point(5, 0);
             this.groupBetType.Margin = new System.Windows.Forms.Padding(2);
             this.groupBetType.Name = "groupBetType";
             this.groupBetType.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBetType.Size = new System.Drawing.Size(352, 40);
+            this.groupBetType.Size = new System.Drawing.Size(440, 50);
             this.groupBetType.TabIndex = 7;
             this.groupBetType.TabStop = false;
             // 
@@ -4473,9 +4696,10 @@ namespace LuckyFuture.UI
             this.cmbBettingType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBettingType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.cmbBettingType.FormattingEnabled = true;
-            this.cmbBettingType.Location = new System.Drawing.Point(88, 13);
+            this.cmbBettingType.Location = new System.Drawing.Point(110, 16);
+            this.cmbBettingType.Margin = new System.Windows.Forms.Padding(4);
             this.cmbBettingType.Name = "cmbBettingType";
-            this.cmbBettingType.Size = new System.Drawing.Size(120, 22);
+            this.cmbBettingType.Size = new System.Drawing.Size(149, 25);
             this.cmbBettingType.TabIndex = 10;
             this.cmbBettingType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbBettingType_DrawItem);
             this.cmbBettingType.SelectedIndexChanged += new System.EventHandler(this.cmbBettingType_SelectedIndexChanged);
@@ -4483,9 +4707,10 @@ namespace LuckyFuture.UI
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(20, 18);
+            this.label36.Location = new System.Drawing.Point(25, 22);
+            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(53, 12);
+            this.label36.Size = new System.Drawing.Size(67, 15);
             this.label36.TabIndex = 9;
             this.label36.Text = "배팅방식";
             // 
@@ -4501,9 +4726,10 @@ namespace LuckyFuture.UI
             this.hopeForm1.ForeColor = System.Drawing.SystemColors.Info;
             this.hopeForm1.Image = global::LuckyFuture.Properties.Resources.main_icon;
             this.hopeForm1.Location = new System.Drawing.Point(0, 0);
+            this.hopeForm1.Margin = new System.Windows.Forms.Padding(4);
             this.hopeForm1.MaximizeBox = false;
             this.hopeForm1.Name = "hopeForm1";
-            this.hopeForm1.Size = new System.Drawing.Size(895, 40);
+            this.hopeForm1.Size = new System.Drawing.Size(1119, 40);
             this.hopeForm1.TabIndex = 7;
             this.hopeForm1.Text = "Temple";
             this.hopeForm1.ThemeColor = System.Drawing.Color.DarkCyan;
@@ -4520,9 +4746,10 @@ namespace LuckyFuture.UI
             this.btnCurrent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCurrent.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnCurrent.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCurrent.Location = new System.Drawing.Point(330, 86);
+            this.btnCurrent.Location = new System.Drawing.Point(412, 108);
+            this.btnCurrent.Margin = new System.Windows.Forms.Padding(4);
             this.btnCurrent.Name = "btnCurrent";
-            this.btnCurrent.Size = new System.Drawing.Size(72, 26);
+            this.btnCurrent.Size = new System.Drawing.Size(90, 32);
             this.btnCurrent.TabIndex = 17;
             this.btnCurrent.Text = "호가창";
             this.btnCurrent.UseVisualStyleBackColor = true;
@@ -4540,9 +4767,10 @@ namespace LuckyFuture.UI
             this.btnLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLog.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnLog.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLog.Location = new System.Drawing.Point(486, 647);
+            this.btnLog.Location = new System.Drawing.Point(608, 809);
+            this.btnLog.Margin = new System.Windows.Forms.Padding(4);
             this.btnLog.Name = "btnLog";
-            this.btnLog.Size = new System.Drawing.Size(33, 45);
+            this.btnLog.Size = new System.Drawing.Size(41, 56);
             this.btnLog.TabIndex = 18;
             this.btnLog.Text = "...";
             this.btnLog.UseVisualStyleBackColor = true;
@@ -4554,9 +4782,10 @@ namespace LuckyFuture.UI
             this.chkScroll.Checked = true;
             this.chkScroll.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkScroll.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.chkScroll.Location = new System.Drawing.Point(432, 303);
+            this.chkScroll.Location = new System.Drawing.Point(540, 379);
+            this.chkScroll.Margin = new System.Windows.Forms.Padding(4);
             this.chkScroll.Name = "chkScroll";
-            this.chkScroll.Size = new System.Drawing.Size(87, 18);
+            this.chkScroll.Size = new System.Drawing.Size(109, 22);
             this.chkScroll.TabIndex = 19;
             this.chkScroll.Text = "자동스크롤";
             this.chkScroll.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -4569,9 +4798,10 @@ namespace LuckyFuture.UI
             this.chkAutoReserve.Checked = true;
             this.chkAutoReserve.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAutoReserve.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.chkAutoReserve.Location = new System.Drawing.Point(255, 120);
+            this.chkAutoReserve.Location = new System.Drawing.Point(319, 150);
+            this.chkAutoReserve.Margin = new System.Windows.Forms.Padding(4);
             this.chkAutoReserve.Name = "chkAutoReserve";
-            this.chkAutoReserve.Size = new System.Drawing.Size(72, 18);
+            this.chkAutoReserve.Size = new System.Drawing.Size(90, 22);
             this.chkAutoReserve.TabIndex = 20;
             this.chkAutoReserve.Text = "자동예약";
             this.chkAutoReserve.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -4581,11 +4811,11 @@ namespace LuckyFuture.UI
             // dtAutoReserve
             // 
             this.dtAutoReserve.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtAutoReserve.Location = new System.Drawing.Point(329, 118);
+            this.dtAutoReserve.Location = new System.Drawing.Point(411, 148);
             this.dtAutoReserve.Margin = new System.Windows.Forms.Padding(2);
             this.dtAutoReserve.Name = "dtAutoReserve";
             this.dtAutoReserve.ShowUpDown = true;
-            this.dtAutoReserve.Size = new System.Drawing.Size(73, 21);
+            this.dtAutoReserve.Size = new System.Drawing.Size(90, 25);
             this.dtAutoReserve.TabIndex = 21;
             this.dtAutoReserve.ValueChanged += new System.EventHandler(this.dtAutoReserve_ValueChanged);
             // 
@@ -4601,9 +4831,10 @@ namespace LuckyFuture.UI
             this.btnOrderBuy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrderBuy.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnOrderBuy.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOrderBuy.Location = new System.Drawing.Point(78, 294);
+            this.btnOrderBuy.Location = new System.Drawing.Point(98, 368);
+            this.btnOrderBuy.Margin = new System.Windows.Forms.Padding(4);
             this.btnOrderBuy.Name = "btnOrderBuy";
-            this.btnOrderBuy.Size = new System.Drawing.Size(83, 26);
+            this.btnOrderBuy.Size = new System.Drawing.Size(104, 32);
             this.btnOrderBuy.TabIndex = 22;
             this.btnOrderBuy.Text = "매수주문";
             this.btnOrderBuy.UseVisualStyleBackColor = true;
@@ -4621,9 +4852,10 @@ namespace LuckyFuture.UI
             this.btnOrderSell.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrderSell.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnOrderSell.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOrderSell.Location = new System.Drawing.Point(167, 294);
+            this.btnOrderSell.Location = new System.Drawing.Point(209, 368);
+            this.btnOrderSell.Margin = new System.Windows.Forms.Padding(4);
             this.btnOrderSell.Name = "btnOrderSell";
-            this.btnOrderSell.Size = new System.Drawing.Size(83, 26);
+            this.btnOrderSell.Size = new System.Drawing.Size(104, 32);
             this.btnOrderSell.TabIndex = 23;
             this.btnOrderSell.Text = "매도주문";
             this.btnOrderSell.UseVisualStyleBackColor = true;
@@ -4636,9 +4868,10 @@ namespace LuckyFuture.UI
             this.cmbOrderCnt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOrderCnt.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbOrderCnt.FormattingEnabled = true;
-            this.cmbOrderCnt.Location = new System.Drawing.Point(16, 296);
+            this.cmbOrderCnt.Location = new System.Drawing.Point(20, 370);
+            this.cmbOrderCnt.Margin = new System.Windows.Forms.Padding(4);
             this.cmbOrderCnt.Name = "cmbOrderCnt";
-            this.cmbOrderCnt.Size = new System.Drawing.Size(55, 23);
+            this.cmbOrderCnt.Size = new System.Drawing.Size(68, 27);
             this.cmbOrderCnt.TabIndex = 24;
             this.cmbOrderCnt.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderCnt_DrawItem);
             // 
@@ -4648,9 +4881,10 @@ namespace LuckyFuture.UI
             this.chkSignal.Checked = true;
             this.chkSignal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSignal.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.chkSignal.Location = new System.Drawing.Point(135, 61);
+            this.chkSignal.Location = new System.Drawing.Point(169, 76);
+            this.chkSignal.Margin = new System.Windows.Forms.Padding(4);
             this.chkSignal.Name = "chkSignal";
-            this.chkSignal.Size = new System.Drawing.Size(72, 18);
+            this.chkSignal.Size = new System.Drawing.Size(90, 22);
             this.chkSignal.TabIndex = 27;
             this.chkSignal.Text = "키움신호";
             this.chkSignal.UseVisualStyleBackColor = false;
@@ -4659,10 +4893,11 @@ namespace LuckyFuture.UI
             // txtStateLog
             // 
             this.txtStateLog.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStateLog.Location = new System.Drawing.Point(7, 647);
+            this.txtStateLog.Location = new System.Drawing.Point(9, 809);
+            this.txtStateLog.Margin = new System.Windows.Forms.Padding(4);
             this.txtStateLog.Name = "txtStateLog";
             this.txtStateLog.ReadOnly = true;
-            this.txtStateLog.Size = new System.Drawing.Size(478, 23);
+            this.txtStateLog.Size = new System.Drawing.Size(596, 27);
             this.txtStateLog.TabIndex = 28;
             // 
             // chkSelVal
@@ -4671,9 +4906,10 @@ namespace LuckyFuture.UI
             this.chkSelVal.Checked = true;
             this.chkSelVal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSelVal.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.chkSelVal.Location = new System.Drawing.Point(256, 299);
+            this.chkSelVal.Location = new System.Drawing.Point(320, 374);
+            this.chkSelVal.Margin = new System.Windows.Forms.Padding(4);
             this.chkSelVal.Name = "chkSelVal";
-            this.chkSelVal.Size = new System.Drawing.Size(67, 18);
+            this.chkSelVal.Size = new System.Drawing.Size(84, 22);
             this.chkSelVal.TabIndex = 30;
             this.chkSelVal.Text = "지정가";
             this.chkSelVal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -4683,19 +4919,21 @@ namespace LuckyFuture.UI
             // txtSelVal
             // 
             this.txtSelVal.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSelVal.Location = new System.Drawing.Point(321, 295);
+            this.txtSelVal.Location = new System.Drawing.Point(401, 369);
+            this.txtSelVal.Margin = new System.Windows.Forms.Padding(4);
             this.txtSelVal.Name = "txtSelVal";
-            this.txtSelVal.Size = new System.Drawing.Size(82, 23);
+            this.txtSelVal.Size = new System.Drawing.Size(102, 27);
             this.txtSelVal.TabIndex = 31;
             // 
             // txtValueLog
             // 
             this.txtValueLog.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtValueLog.Location = new System.Drawing.Point(7, 668);
+            this.txtValueLog.Location = new System.Drawing.Point(9, 835);
+            this.txtValueLog.Margin = new System.Windows.Forms.Padding(4);
             this.txtValueLog.Multiline = false;
             this.txtValueLog.Name = "txtValueLog";
             this.txtValueLog.ReadOnly = true;
-            this.txtValueLog.Size = new System.Drawing.Size(478, 23);
+            this.txtValueLog.Size = new System.Drawing.Size(596, 28);
             this.txtValueLog.TabIndex = 32;
             this.txtValueLog.Text = "";
             // 
@@ -4711,22 +4949,24 @@ namespace LuckyFuture.UI
             this.btnSync.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSync.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnSync.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSync.Location = new System.Drawing.Point(473, 86);
+            this.btnSync.Location = new System.Drawing.Point(591, 108);
+            this.btnSync.Margin = new System.Windows.Forms.Padding(4);
             this.btnSync.Name = "btnSync";
-            this.btnSync.Size = new System.Drawing.Size(45, 26);
+            this.btnSync.Size = new System.Drawing.Size(56, 32);
             this.btnSync.TabIndex = 33;
             this.btnSync.Text = "동기";
             this.btnSync.UseVisualStyleBackColor = true;
+            this.btnSync.Visible = false;
             this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Azure;
             this.BackgroundImage = global::LuckyFuture.Properties.Resources.form_border_1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(895, 730);
+            this.ClientSize = new System.Drawing.Size(1119, 912);
             this.Controls.Add(this.btnSync);
             this.Controls.Add(this.txtValueLog);
             this.Controls.Add(this.txtSelVal);
@@ -4770,8 +5010,9 @@ namespace LuckyFuture.UI
             this.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1920, 730);
+            this.MaximumSize = new System.Drawing.Size(2400, 912);
             this.MinimumSize = new System.Drawing.Size(190, 40);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

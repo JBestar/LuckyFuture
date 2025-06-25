@@ -46,20 +46,20 @@ namespace LuckyFuture
         private readonly WebClientEx _webClient = new WebClientEx();
 
         public event EventHandler<AuthorEventArgs> NoticeEvent;
+        //traking topasset dream
+        public const string URL_MAIN = "https://auto-366.com/traking/";    //https://auto-366.com/dream //coke999.com:82
+        public const string URL_DOWNLOAD = "https://auto-366.com/Download/traking/"; //https://auto-366.com/Download/dream
+        // public const string URL_WS2 = "ws://localhost:7082/Temp/TempWebSocket.ashx?websession="; //
+        private const string URL_CERT_LOGIN = "Login";
+        private const string URL_CERT_LOGOUT = "LogOut";
+        private const string URL_CERT_KEEPALIVE = "ActiveKeep";
+        private const string URL_UPDATE_VERSION = "Version";
+        private const string URL_UPLOAD = "Uploadpy";
+        public const string URL_NOTICE = "getnotice";
+        private const string WEBSESSION_KEY = "ci_session";
+        private string WEBTOKEN = "";
 
-        public const string URL_MAIN = "http://localhost:7082/Temp/"; //localhost:7082/
-        public const string URL_UPDATE = "http://localhost:7082/Update/"; //210.90.155.77:8080
-        public const string URL_DOWNLOAD = "http://localhost:7082/Download/";
-        public const string URL_WS2 = "ws://localhost:7082/Temp/TempWebSocket.ashx?websession="; //
-        private const string URL_CERT_LOGIN = "Login.aspx";
-        private const string URL_CERT_LOGOUT = "LogOut.aspx";
-        private const string URL_CERT_KEEPALIVE = "ActiveKeep.aspx";
-        private const string URL_UPDATE_VERSION = "Version.aspx";
-        private const string URL_UPLOAD = "Uploadpy.aspx";
-        public const string URL_NOTICE = "getnotice.aspx";
-        private const string WEBSESSION_KEY = "ASP.NET_SessionId";
-
-        private const int SEND_KEEP_ALIVE_INTERVAL = 20000; // 60000
+        private const int SEND_KEEP_ALIVE_INTERVAL = 30000; // 60000
         private const int RELOGIN_INTERVAL = 10000;
 
         string _id = "";
@@ -85,14 +85,9 @@ namespace LuckyFuture
         {
             get => _vip;
         }
-
         public string Uid
         {
             get => _id;
-        }
-        public string SessionId
-        {
-            get => _sessionId;
         }
         public AppAuthor()
         {
@@ -140,12 +135,18 @@ namespace LuckyFuture
             if (string.IsNullOrEmpty(pwd))
                 pwd = _pwd;
 
-            var param_list = new Dictionary<string, string>
+            var param = new Dictionary<string, string>
             {
                 { "post_id", "gologin" },
                 { "username", id },
                 { "password", pwd },
                 { "force", bForce ? "1" : "0" }
+            };
+
+            string encrypted = RsaCrypt.Encrypt(JsonSerializer.Serialize(param));
+            var param_list = new Dictionary<string, string>
+            {
+                { "json_", encrypted},
             };
 
             if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.POST, URL_MAIN + URL_CERT_LOGIN, param_list))
@@ -165,6 +166,13 @@ namespace LuckyFuture
                 // remained time
                 if ((APPLOGINRESULT)iLoginResult == APPLOGINRESULT.SUCCESS)
                 {
+                    string token = doc.RootElement.GetProperty("token").GetString();
+                    WEBTOKEN = token;
+
+                    string data = doc.RootElement.GetProperty("data").GetString();
+                    data = AesCrypt.Decrypt(data, WEBTOKEN);
+                    doc = JsonDocument.Parse(data);
+
                     _remainedTime = Convert.ToUInt32(doc.RootElement.GetProperty("remained").GetString());
                     var tmp = Convert.ToUInt32(doc.RootElement.GetProperty("vip").GetString());
                     _vip = tmp != 0;
@@ -193,7 +201,7 @@ namespace LuckyFuture
         }
         APPLOGINRESULT SendKeepAlive()
         {
-            var param_list = new Dictionary<string, string>
+            var param = new Dictionary<string, string>
             {
                 { "websession", _sessionId },
                 { "hostname", Environment.MachineName },
@@ -209,6 +217,12 @@ namespace LuckyFuture
                 { "memo_1", Settings.Default.IsAutoMode?"자동":"수동" },
             };
 
+            string encrypted = RsaCrypt.Encrypt(JsonSerializer.Serialize(param));
+            var param_list = new Dictionary<string, string>
+            {
+                { "json_", encrypted},
+            };
+
             if (!_httpClient.SendRequest(out string body, out _, HTTPREQUEST_TYPE.POST, URL_MAIN + URL_CERT_KEEPALIVE, param_list))
                 return APPLOGINRESULT.CANNOT_CONNECT;
 
@@ -220,6 +234,10 @@ namespace LuckyFuture
                 // remained time
                 if ((APPLOGINRESULT)iResult == APPLOGINRESULT.SUCCESS)
                 {
+                    string data = doc.RootElement.GetProperty("data").GetString();
+                    data = AesCrypt.Decrypt(data, WEBTOKEN);
+                    doc = JsonDocument.Parse(data);
+
                     _remainedTime = Convert.ToUInt32(doc.RootElement.GetProperty("remained").GetString());
                     //var tmp = Convert.ToUInt32(doc.RootElement.GetProperty("order").GetString());
                     //if (tmp >= 0 && tmp <= 10)
@@ -347,34 +365,45 @@ namespace LuckyFuture
             //Get Assembly Version	
             _version = GetAppVersion();
 
-            if (!_httpClient.SendRequest(out string body, out _, HTTPREQUEST_TYPE.GET, URL_UPDATE + URL_UPDATE_VERSION))
+            if (!_httpClient.SendRequest(out string body, out _, HTTPREQUEST_TYPE.GET, URL_MAIN + URL_UPDATE_VERSION))
                 return "";
 
             ver_data.Clear();
 
             string sUpVersion = "";
+            int iResult = 0;
 
             try
             {
                 JsonDocument doc = JsonDocument.Parse(body);
-                JsonElement rootElement = doc.RootElement;
-                sUpVersion = rootElement.GetProperty("version").GetString();
-                // update files
-                JsonElement filesArray = rootElement.GetProperty("files");
 
-                int nLength = filesArray.GetArrayLength();
-                string sKey = "", sValue = "";
-                for (int i = 0; i < nLength; i++)
+                iResult = Convert.ToInt32(doc.RootElement.GetProperty("result").GetString());
+                // remained time
+                if ((APPLOGINRESULT)iResult == APPLOGINRESULT.SUCCESS)
                 {
-                    sKey = filesArray[i].GetProperty("path").GetString();
-                    sValue = filesArray[i].GetProperty("value").GetString();
-                    ver_data.Add(sKey, sValue);
-                }
+                    string data = doc.RootElement.GetProperty("data").GetString();
+                    data = AesCrypt.Decrypt(data, WEBTOKEN);
+                    doc = JsonDocument.Parse(data);
 
-                if (_version.CompareTo(sUpVersion) > 0)
-                {
-                    sUpVersion = "";
+                    JsonElement rootElement = doc.RootElement;
+                    sUpVersion = rootElement.GetProperty("version").GetString();
+                    // update files
+                    JsonElement filesArray = rootElement.GetProperty("files");
 
+                    int nLength = filesArray.GetArrayLength();
+                    string sKey = "", sValue = "";
+                    for (int i = 0; i < nLength; i++)
+                    {
+                        sKey = filesArray[i].GetProperty("path").GetString();
+                        sValue = filesArray[i].GetProperty("value").GetString();
+                        ver_data.Add(sKey, sValue);
+                    }
+
+                    if (_version.CompareTo(sUpVersion) > 0)
+                    {
+                        sUpVersion = "";
+
+                    }
                 }
             }
             catch (Exception)
@@ -395,21 +424,21 @@ namespace LuckyFuture
             _tickGet = Environment.TickCount;
 
             DateTime dtNow = DateTime.Now;
-            if (!_httpClient.SendRequest(out string body, out _, HTTPREQUEST_TYPE.GET, "http://worldtimeapi.org/api/timezone/Asia/Seoul?t="+ dtNow.Second))
+            if (!_httpClient.SendRequest(out string body, out _, HTTPREQUEST_TYPE.GET, "http://worldtimeapi.org/api/timezone/Asia/Seoul?t=" + dtNow.Second))
                 return;
 
-//             {
-//                 "abbreviation": "KST",
-//                 "client_ip": "58.138.233.78",
-//                 "datetime": "2024-04-11T12:50:27.602350+09:00",
-//                 "day_of_week": 4,
-//                 "day_of_year": 102,
-//                 "timezone": "Asia/Seoul",
-//                 "unixtime": 1712807427,
-//                 "utc_datetime": "2024-04-11T03:50:27.602350+00:00",
-//                 "utc_offset": "+09:00",
-//                 "week_number": 15
-//             }
+            //             {
+            //                 "abbreviation": "KST",
+            //                 "client_ip": "58.138.233.78",
+            //                 "datetime": "2024-04-11T12:50:27.602350+09:00",
+            //                 "day_of_week": 4,
+            //                 "day_of_year": 102,
+            //                 "timezone": "Asia/Seoul",
+            //                 "unixtime": 1712807427,
+            //                 "utc_datetime": "2024-04-11T03:50:27.602350+00:00",
+            //                 "utc_offset": "+09:00",
+            //                 "week_number": 15
+            //             }
 
             try
             {
@@ -417,13 +446,13 @@ namespace LuckyFuture
                 JsonElement rootElement = doc.RootElement;
                 AppConfig._IpAddr = rootElement.GetProperty("client_ip").GetString();
                 string sDt = rootElement.GetProperty("datetime").GetString();
-                if(sDt.Length > 0)
+                if (sDt.Length > 0)
                 {
                     DateTime dtServ = DateTime.Parse(sDt);
                     TimeSpan tmSpan = dtServ.Subtract(dtNow);
                     AppConfig._DtDelay = (int)(tmSpan.TotalSeconds);
                 }
-                
+
             }
             catch (Exception)
             {

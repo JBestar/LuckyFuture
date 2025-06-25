@@ -233,7 +233,7 @@ namespace LuckyFutureLib.Include
             Process procKFLogin = Process.GetProcesses().FirstOrDefault<Process>(
                 delegate (Process p)
                 {
-                    if (p.ProcessName.StartsWith("nfstarter"))
+                    if (p.ProcessName.StartsWith("nfstarter") && p.MainWindowTitle.IndexOf("W Login") > 0) //MainWindowTitle="영웅문W Login"
                         return true;
                     return false;
                 }

@@ -219,7 +219,7 @@ namespace LuckyFuture.UI
             // rateDataGridViewTextBoxColumn
             // 
             this.rateDataGridViewTextBoxColumn.DataPropertyName = "Rate";
-            this.rateDataGridViewTextBoxColumn.HeaderText = "하락률";
+            this.rateDataGridViewTextBoxColumn.HeaderText = "하락";
             this.rateDataGridViewTextBoxColumn.Name = "rateDataGridViewTextBoxColumn";
             this.rateDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.rateDataGridViewTextBoxColumn.Width = 70;

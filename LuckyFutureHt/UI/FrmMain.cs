@@ -71,8 +71,8 @@ namespace LuckyFuture.UI
         public FrmSync SyncForm = new FrmSync();
 
         private bool ItemChanged{ get ; set; }
-        AppWebSocket _appSocket;
-        private Thread _CheckThread = null;
+        //AppWebSocket _appSocket;
+        //private Thread _CheckThread = null;
         /// <summary>
         /// Initialize components additionally
         /// </summary>
@@ -81,7 +81,7 @@ namespace LuckyFuture.UI
             AppConfig.ReadLossConfig();
             AppConfig.SetNetworkInterfaces();
             // supported site list
-            string[] site_names = {"더드림", "몬스타", "키움증권", "미래" }; //"레안텍", "나눔"
+            string[] site_names = {"키움증권"}; //"더드림", "몬스타", "키움증권", "미래", //"레안텍", "나눔"
             foreach (string site_name in site_names) 
 				cmbSiteList.Items.Add(site_name);
 
@@ -110,51 +110,51 @@ namespace LuckyFuture.UI
             ShowNotice();
             _tickLogout = 0;
 
-            ConectWebSocket();
+            //ConectWebSocket();
 
         }
-        private void ConectWebSocket()
-        {
-            string uri = AppAuthor.URL_WS2 + AppAuthor.Default.SessionId;
-            _appSocket = new AppWebSocket(uri);
-            _appSocket.NoticeEvent += OnAuthorNoticeReceive;
+        //private void ConectWebSocket()
+        //{
+        //    string uri = AppAuthor.URL_WS2 + AppAuthor.Default.SessionId;
+        //    _appSocket = new AppWebSocket(uri);
+        //    _appSocket.NoticeEvent += OnAuthorNoticeReceive;
 
-            _CheckThread = new Thread(CheckSocket);
-            _CheckThread.IsBackground = true;
-            _CheckThread.Start();
-        }
-        private void CheckSocket()
-        {
-            bool isDiscon = false;
-            while (true)
-            {
-                Thread.Sleep(30000);
+        //    _CheckThread = new Thread(CheckSocket);
+        //    _CheckThread.IsBackground = true;
+        //    _CheckThread.Start();
+        //}
+        //private void CheckSocket()
+        //{
+        //    bool isDiscon = false;
+        //    while (true)
+        //    {
+        //        Thread.Sleep(30000);
 
-                if (_appSocket.ConnectState.Length == 0 || _appSocket.ConnectState == "Closed")
-                {
-                    isDiscon = isDiscon == false;
+        //        if (_appSocket.ConnectState.Length == 0 || _appSocket.ConnectState == "Closed")
+        //        {
+        //            isDiscon = isDiscon == false;
 
-                    if (isDiscon)
-                        AddLog("서버 접속끊김!! 접속시도중...");
+        //            if (isDiscon)
+        //                AddLog("서버 접속끊김!! 접속시도중...");
 
-                    _appSocket.ConnectSocket();
-                }
+        //            _appSocket.ConnectSocket();
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
-        public void CloseSocketThread()
-        {
-            if (_CheckThread != null && _CheckThread.IsAlive)
-            {
-                if (_appSocket != null)
-                    _appSocket.CloseSocket();
+        //public void CloseSocketThread()
+        //{
+        //    if (_CheckThread != null && _CheckThread.IsAlive)
+        //    {
+        //        if (_appSocket != null)
+        //            _appSocket.CloseSocket();
 
-                _CheckThread.Abort();
-                _CheckThread = null;
-            }
+        //        _CheckThread.Abort();
+        //        _CheckThread = null;
+        //    }
 
-        }
+        //}
 
         private AxKFOpenAPILib.AxKFOpenAPI axKFOpenAPI;
         private bool createKFOpenApi()
@@ -346,7 +346,9 @@ namespace LuckyFuture.UI
                 {
 					cmbItemList.Items.Clear();
 				}
-			}
+                CurrentForm.InitListView();
+
+            }
         }
         private void UpdateValuationInfo()
 		{
@@ -884,7 +886,7 @@ namespace LuckyFuture.UI
                             ChangeLossTick();
                             break;
                         case CHART_EVENTTYPE.SYNCCHART_CHANGED:
-                            SyncMembersChart();
+                            //SyncMembersChart();
                             break;
                         default:
                             break;
@@ -979,54 +981,54 @@ namespace LuckyFuture.UI
             }
         }
         
-        public void SyncMembersChart()
-        {
-            if (_appSocket.ConnectState.Length == 0 || _appSocket.ConnectState == "Closed")
-            {
-                AddLog("서비스접속 실패!");
+        //public void SyncMembersChart()
+        //{
+        //    if (_appSocket.ConnectState.Length == 0 || _appSocket.ConnectState == "Closed")
+        //    {
+        //        AddLog("서비스접속 실패!");
 
-                MessageBox.Show("서비스에 접속할수 없습니다.\n 잠시후 다시 시도해주세요.", "경고");
-                return;
-            }
+        //        MessageBox.Show("서비스에 접속할수 없습니다.\n 잠시후 다시 시도해주세요.", "경고");
+        //        return;
+        //    }
 
-            if (Settings.Default.SyncMembers.Count < 1)
-                return;
+        //    if (Settings.Default.SyncMembers.Count < 1)
+        //        return;
 
-            string value = "";
-            CurrentInfo current = null;
+        //    string value = "";
+        //    CurrentInfo current = null;
 
-            if (CurrentSite != null && CurrentSite.CurrentList != null && CurrentSite.Current != null)
-            {
-                if (CurrentSite.CurrentList.Count > 50)
-                    current = CurrentSite.CurrentList[CurrentSite.CurrentList.Count - 50];
-                else if (CurrentSite.Current != null)
-                    current = CurrentSite.Current;
-                if(current != null)
-                    value = CurrentSite.ItemSymbol + "#" + current.Time.ToString("yyyy-MM-dd HH:mm:ss") + "#" + current.CurrentPriceStr;
-            }
-            else return;
+        //    if (CurrentSite != null && CurrentSite.CurrentList != null && CurrentSite.Current != null)
+        //    {
+        //        if (CurrentSite.CurrentList.Count > 50)
+        //            current = CurrentSite.CurrentList[CurrentSite.CurrentList.Count - 50];
+        //        else if (CurrentSite.Current != null)
+        //            current = CurrentSite.Current;
+        //        if(current != null)
+        //            value = CurrentSite.ItemSymbol + "#" + current.Time.ToString("yyyy-MM-dd HH:mm:ss") + "#" + current.CurrentPriceStr;
+        //    }
+        //    else return;
             
-            string users = "";
-            foreach(string member in Settings.Default.SyncMembers)
-            {
-                users += member + "#";
-            }
-            JsonObj jsonObj = new JsonObj
-            {
-                Command = "sync_chart",
-                Users = users,
-                Value = value,
-            };
+        //    string users = "";
+        //    foreach(string member in Settings.Default.SyncMembers)
+        //    {
+        //        users += member + "#";
+        //    }
+        //    JsonObj jsonObj = new JsonObj
+        //    {
+        //        Command = "sync_chart",
+        //        Users = users,
+        //        Value = value,
+        //    };
 
-            string msg = JsonSerializer.Serialize(jsonObj);
+        //    string msg = JsonSerializer.Serialize(jsonObj);
 
-            _appSocket.SendMsg(msg);
+        //    _appSocket.SendMsg(msg);
 
-            ChartForm.SetChartFrom(current.Time, current.CurrentPrice);
-            AddLog("회원 차트동기화가 적용었습니다.");
-            WriteLog("동기화:" + value);
+        //    ChartForm.SetChartFrom(current.Time, current.CurrentPrice);
+        //    AddLog("회원 차트동기화가 적용었습니다.");
+        //    WriteLog("동기화:" + value);
 
-        }
+        //}
 
 
         public void ResetDChartType()
@@ -1575,9 +1577,13 @@ namespace LuckyFuture.UI
 
 		private void btnChat_Click(object sender, EventArgs e)
 		{
-			if(!ChartForm.Visible)
-				ChartForm.Show(this);
-		}
+            if (!ChartForm.Visible)
+            {
+                ChartForm.Show(this);
+                Thread.Sleep(500);
+                ChartForm.Redraw();
+            }
+        }
 
         private void btnCurrent_Click(object sender, EventArgs e)
         {
@@ -4051,9 +4057,11 @@ namespace LuckyFuture.UI
             if (axKFOpenAPI == null)
                 return 0;
             Process procKFLogin = Common.GetKFOpenLoginProc();
-            if (procKFLogin == null)
-                return axKFOpenAPI.CommConnect(1);
-            return 1;
+            if (procKFLogin != null)
+            {
+                procKFLogin.Kill();
+            }
+            return axKFOpenAPI.CommConnect(1);
         }
         private void CloseKFLoginDlg()
         {

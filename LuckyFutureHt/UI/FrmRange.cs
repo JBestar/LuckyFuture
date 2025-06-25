@@ -51,7 +51,7 @@ namespace LuckyFuture.UI
             else if (RangeType == RANGETYPE.CciLoss)
             {
                 this.amountDataGridViewTextBoxColumn.HeaderText = "CCI";
-                this.rateDataGridViewTextBoxColumn.HeaderText = "하락률";
+                this.rateDataGridViewTextBoxColumn.HeaderText = "하락";
                 this.Text = "CCI청산 영역설정";
                 this.lbAmount.Text = "CCI";
                 this.lbAmoutUnit.Text = "이상";
