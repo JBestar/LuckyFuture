@@ -35,6 +35,7 @@ namespace LuckyFuture.Models.ValueObjects
 
 		public double MaxAveragePrice { get; set; }
         public int LossPayoffTick { get; set; }
+		public int EarnPayoffTick { get; set; }
 		public double StartCciPrice { get; set; }
         public double MaxCciPrice { get; set; }
 		public double CrossAveragePrice { get; set; }

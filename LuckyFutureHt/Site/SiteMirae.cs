@@ -341,10 +341,6 @@ namespace LuckyFuture.Site
         {
             return false;
         }
-        public override bool RequestDChart(bool bDChart = true)
-        {
-            return false;
-        }
 
         public override bool ChangeItem(string sSymbol)
         {

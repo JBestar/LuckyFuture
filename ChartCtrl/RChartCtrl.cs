@@ -387,7 +387,7 @@ namespace ChartCtrl
                 if (Settings.Default.Avg5On)
                 {
                     strLabel = "5";
-                    g.DrawString(strLabel, m_fontStr, m_arrAvgBrush[1], new PointF(iX += 20, iY));
+                    g.DrawString(strLabel, m_fontStr, m_arrAvgBrush[0], new PointF(iX += 20, iY));
                 }
                 if (Settings.Default.Avg10On)
                 {

@@ -41,7 +41,7 @@ namespace LuckyFuture.UI
         {
 
             SetDChartType((CHARTTYPE)Settings.Default.ChartType);
-            SetDChart2Type((CHARTTYPE)Settings.Default.Conc2Chart);
+            SetDChart2Type((CHARTTYPE)Settings.Default.ChartType);
         }
         public void SetChartEventHandler(EventHandler<ChartEventArgs> chartEvent)
         {

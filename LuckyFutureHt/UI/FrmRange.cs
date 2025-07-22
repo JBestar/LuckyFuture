@@ -34,10 +34,11 @@ namespace LuckyFuture.UI
         private void InitializeComponentEx()
         {
             dgvRangeInfo.DoubleBuffered(true);
-            this.lbAmount.Text = "금액";
-            this.lbAmoutUnit.Text = "만원";
-            this.lbLossUnit.Text = "% 하락";
-
+            //lbAmount.Text = "금액";
+            //lbAmoutUnit.Text = "만원";
+            //lbLoss.Text = "하락";
+            //lbLossUnit.Text = "%";
+            //lblRsi.Text = "RSI";
             //this.amountDataGridViewTextBoxColumn.HeaderText = "금액";
             //this.rateDataGridViewTextBoxColumn.HeaderText = "손실";
             if (RangeType == RANGETYPE.SmartLoss)
@@ -50,19 +51,23 @@ namespace LuckyFuture.UI
             }
             else if (RangeType == RANGETYPE.CciLoss)
             {
-                this.amountDataGridViewTextBoxColumn.HeaderText = "CCI";
-                this.rateDataGridViewTextBoxColumn.HeaderText = "하락";
                 this.Text = "CCI청산 영역설정";
-                this.lbAmount.Text = "CCI";
-                this.lbAmoutUnit.Text = "이상";
+                amountDataGridViewTextBoxColumn.HeaderText = "CCI";
+                rateDataGridViewTextBoxColumn.HeaderText = "하락";
+                lbAmount.Text = "CCI";
+                lbAmoutUnit.Text = "이상";
             }
             else
             {
                 this.Text = "손실 영역설정";
-                this.lbLossUnit.Text = "틱 변경";
-                this.paramDataGridViewTextBoxColumn.HeaderText = "";
-                this.lblRsi.Visible = false;
-                this.txtRsi.Visible = false;
+                lbLoss.Text = "손실";
+                lbLossUnit.Text = "%";
+                lbLossUnit.Text = "틱";
+                lbParaUnit.Text = "틱";
+                rateDataGridViewTextBoxColumn.HeaderText = "손실";
+                paramDataGridViewTextBoxColumn.HeaderText = "이익";
+                lblRsi.Text = "이익";
+                txtRsi.Text = "";
 
             }
         }
@@ -312,7 +317,6 @@ namespace LuckyFuture.UI
            if (RangeType == RANGETYPE.CciLoss)
             {
                 amountUnit = "이상";
-                rateUnit = "%하락";
             }
             else if(RangeType == RANGETYPE.PayoffLoss)
             {
@@ -320,26 +324,23 @@ namespace LuckyFuture.UI
             }
 
             string param = "";
-           if(RangeType == RANGETYPE.SmartLoss || RangeType == RANGETYPE.CrossLoss || RangeType == RANGETYPE.CciLoss)
-            {
 
-                try
-                {
-                    int nTemp = Int32.Parse(txtRsi.Text);
-                    if (nTemp < 1)
-                    {
-                        txtRsi.SelectAll();
-                        txtRsi.Focus();
-                        return;
-                    }
-                    param = nTemp.ToString();
-                }
-                catch
+            try
+            {
+                int nTemp = Int32.Parse(txtRsi.Text);
+                if (nTemp < 1)
                 {
                     txtRsi.SelectAll();
                     txtRsi.Focus();
                     return;
                 }
+                param = nTemp.ToString();
+            }
+            catch
+            {
+                txtRsi.SelectAll();
+                txtRsi.Focus();
+                return;
             }
 
             bool bInserted = false;

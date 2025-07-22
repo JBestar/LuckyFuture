@@ -136,6 +136,7 @@
     <Compile Include="Models\Reanteck\ConnectSocket.cs" />
     <Compile Include="Models\ValueObjects\DayProfitLossInfo.cs" />
     <Compile Include="Models\ValueObjects\CurrentInfo.cs" />
+    <Compile Include="Models\ValueObjects\PrdInfo.cs" />
     <Compile Include="Models\ValueObjects\ItemSymbolInfo.cs" />
     <Compile Include="Models\ValueObjects\ItemPriceInfo.cs" />
     <Compile Include="Models\ValueObjects\OptionMarketInfo.cs" />

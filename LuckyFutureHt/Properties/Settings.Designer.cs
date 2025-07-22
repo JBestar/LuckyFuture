@@ -1139,49 +1139,6 @@ namespace LuckyFuture.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>1#10#50#50</string>
-  <string>1#20#45#50</string>
-  <string>1#30#40#50</string>
-  <string>1#40#35#50</string>
-  <string>1#50#30#50</string>
-  <string>1#60#25#50</string>
-  <string>1#70#20#50</string>
-  <string>1#80#15#50</string>
-  <string>1#90#10#50</string>
-  <string>1#100#5#50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection CrossLossRange {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["CrossLossRange"]));
-            }
-            set {
-                this["CrossLossRange"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>1#100#50#50</string>
-  <string>1#150#40#50</string>
-  <string>1#200#30#50</string>
-  <string>1#250#20#50</string>
-  <string>1#300#10#50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection CciLossRange {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["CciLossRange"]));
-            }
-            set {
-                this["CciLossRange"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LossRangePayoff {
             get {
@@ -1388,6 +1345,49 @@ namespace LuckyFuture.Properties {
             }
             set {
                 this["SmartLossRange"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+  <string>1#10#50#50</string>
+  <string>1#20#45#50</string>
+  <string>1#30#40#50</string>
+  <string>1#40#35#50</string>
+  <string>1#50#30#50</string>
+  <string>1#60#25#50</string>
+  <string>1#70#20#50</string>
+  <string>1#80#15#50</string>
+  <string>1#90#10#50</string>
+  <string>1#100#5#50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection CrossLossRange {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["CrossLossRange"]));
+            }
+            set {
+                this["CrossLossRange"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+  <string>1#100#50#50</string>
+  <string>1#150#40#50</string>
+  <string>1#200#30#50</string>
+  <string>1#250#20#50</string>
+  <string>1#300#10#50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection CciLossRange {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["CciLossRange"]));
+            }
+            set {
+                this["CciLossRange"] = value;
             }
         }
     }

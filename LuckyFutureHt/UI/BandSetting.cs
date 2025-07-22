@@ -48,7 +48,7 @@ namespace LuckyFuture.UI
 
         private void ChangeControls()
         {
-            chkBandChart.Checked = Settings.Default.BandChart;
+            // chkBandChart.Checked = Settings.Default.BandChart;
             txtBandVal1.Text = Settings.Default.BandVal1.ToString();
             txtBandVal2.Text = Settings.Default.BandVal2.ToString();
             txtBandVal3.Text = Settings.Default.BandVal3.ToString();
@@ -56,7 +56,7 @@ namespace LuckyFuture.UI
             cmbBandChart2.SelectedIndex = Settings.Default.BandChartType2;
             cmbBandChart3.SelectedIndex = Settings.Default.BandChartType3;
             cmbBandChart4.SelectedIndex = Settings.Default.BandChartType4;
-            EnableControls();
+            // EnableControls();
         }
         private void EnableControls()
         {
@@ -82,90 +82,87 @@ namespace LuckyFuture.UI
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            Settings.Default.BandChart = chkBandChart.Checked;
-            if (chkBandChart.Checked)
+            // Settings.Default.BandChart = chkBandChart.Checked;
+            // if (chkBandChart.Checked)
+            int nVal = 0;
+            try
             {
-                int nVal = 0;
-                try
-                {
-                    nVal = Int32.Parse(txtBandVal1.Text);
-                    if (nVal < 0)
-                    {
-                        txtBandVal1.SelectAll();
-                        txtBandVal1.Focus();
-                        return;
-                    }
-                    Settings.Default.BandVal1 = nVal;
-
-                }
-                catch
+                nVal = Int32.Parse(txtBandVal1.Text);
+                if (nVal < 0)
                 {
                     txtBandVal1.SelectAll();
                     txtBandVal1.Focus();
                     return;
                 }
-
-                try
-                {
-                    nVal = Int32.Parse(txtBandVal2.Text);
-                    if (nVal < 0)
-                    {
-                        txtBandVal2.SelectAll();
-                        txtBandVal2.Focus();
-                        return;
-                    }
-                    Settings.Default.BandVal2 = nVal;
-                }
-                catch
-                {
-                    txtBandVal2.SelectAll();
-                    txtBandVal2.Focus();
-                    return;
-                }
-
-                if(Settings.Default.BandVal1 > Settings.Default.BandVal2)
-                {
-                    MessageBox.Show("등락폭구간을 정확히 입력해주세요", "경고");
-                    txtBandVal2.SelectAll();
-                    txtBandVal2.Focus();
-                    return;
-                }
-
-                try
-                {
-                    nVal = Int32.Parse(txtBandVal3.Text);
-                    if (nVal < 0)
-                    {
-                        txtBandVal3.SelectAll();
-                        txtBandVal3.Focus();
-                        return;
-                    }
-                    Settings.Default.BandVal3 = nVal;
-                }
-                catch
-                {
-                    txtBandVal3.SelectAll();
-                    txtBandVal3.Focus();
-                    return;
-                }
-
-                if (Settings.Default.BandVal2 > Settings.Default.BandVal3)
-                {
-                    MessageBox.Show("등락폭구간을 정확히 입력해주세요", "경고");
-                    txtBandVal3.SelectAll();
-                    txtBandVal3.Focus();
-                    return;
-                }
-
-
-                Settings.Default.BandChartType1 = cmbBandChart1.SelectedIndex;
-                Settings.Default.BandChartType2 = cmbBandChart2.SelectedIndex;
-                Settings.Default.BandChartType3 = cmbBandChart3.SelectedIndex;
-                Settings.Default.BandChartType4 = cmbBandChart4.SelectedIndex;
+                Settings.Default.BandVal1 = nVal;
 
             }
-            // Settings.Default.StartChartDt = dtClear.Value;
+            catch
+            {
+                txtBandVal1.SelectAll();
+                txtBandVal1.Focus();
+                return;
+            }
 
+            try
+            {
+                nVal = Int32.Parse(txtBandVal2.Text);
+                if (nVal < 0)
+                {
+                    txtBandVal2.SelectAll();
+                    txtBandVal2.Focus();
+                    return;
+                }
+                Settings.Default.BandVal2 = nVal;
+            }
+            catch
+            {
+                txtBandVal2.SelectAll();
+                txtBandVal2.Focus();
+                return;
+            }
+
+            if(Settings.Default.BandVal1 > Settings.Default.BandVal2)
+            {
+                MessageBox.Show("등락폭구간을 정확히 입력해주세요", "경고");
+                txtBandVal2.SelectAll();
+                txtBandVal2.Focus();
+                return;
+            }
+
+            try
+            {
+                nVal = Int32.Parse(txtBandVal3.Text);
+                if (nVal < 0)
+                {
+                    txtBandVal3.SelectAll();
+                    txtBandVal3.Focus();
+                    return;
+                }
+                Settings.Default.BandVal3 = nVal;
+            }
+            catch
+            {
+                txtBandVal3.SelectAll();
+                txtBandVal3.Focus();
+                return;
+            }
+
+            if (Settings.Default.BandVal2 > Settings.Default.BandVal3)
+            {
+                MessageBox.Show("등락폭구간을 정확히 입력해주세요", "경고");
+                txtBandVal3.SelectAll();
+                txtBandVal3.Focus();
+                return;
+            }
+
+
+            Settings.Default.BandChartType1 = cmbBandChart1.SelectedIndex;
+            Settings.Default.BandChartType2 = cmbBandChart2.SelectedIndex;
+            Settings.Default.BandChartType3 = cmbBandChart3.SelectedIndex;
+            Settings.Default.BandChartType4 = cmbBandChart4.SelectedIndex;
+
+            
             Settings.Default.Save();
             OnChartNoticeEvent(CHART_EVENTTYPE.SETTING_CHANGED);
 

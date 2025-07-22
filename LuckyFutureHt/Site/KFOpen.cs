@@ -1,4 +1,4 @@
-﻿// #define WRITE_LOG
+﻿#define WRITE_LOG
 
 using System;
 using System.Collections.Generic;
@@ -66,9 +66,6 @@ namespace LuckyFuture.Site
         private int m_tickAccount = 0;
         private bool m_bNeedAcc = false;
         private int m_tickOrderList = 0;
-
-        private CHARTTYPE m_DChartType = CHARTTYPE.NONE;
-        private CHARTTYPE m_CChartType = CHARTTYPE.NONE;
 
         public KFOpen()
         {
@@ -199,8 +196,7 @@ namespace LuckyFuture.Site
             else this.CurrentList.Clear();
 
             LoginState = LOGINSTATE.OK;
-            m_DChartType = CHARTTYPE.NONE;
-            m_CChartType = CHARTTYPE.NONE;
+            DChartType = CHARTTYPE.NONE;
             RequestChart();
 
             return ERRORCODE.SUCCESS;
@@ -220,7 +216,7 @@ namespace LuckyFuture.Site
                     ItemPrecision = itemSymbol.Precision;
                     Settings.Default.PriceFormat = Common.GetPriceFormat(CurItemSymbol.Precision);
 
-                    OnFutureSiteLogEvent(CurItemSymbol.ItemName);
+                    // OnFutureSiteLogEvent(CurItemSymbol.ItemName);
                     return ERRORCODE.PREPARE_FAILED;
                 } else
                     return ERRORCODE.UNKNOWN_FAILED;
@@ -642,45 +638,82 @@ namespace LuckyFuture.Site
             Thread.Sleep(500);
             RequestRChart();
             Thread.Sleep(500);
-            RequestDChart(true);
-            if(Settings.Default.BettingType == (int)BETTYPE.BOLINE)
-            {
-                Thread.Sleep(500);
-                RequestDChart(false);
-            }
+            RequestDChart((CHARTTYPE)Settings.Default.ChartType);
             
+            /*
+            RequestData("NQU25", "RQ_13", "0113");
+
+            Thread.Sleep(10000);
+
+            RequestData("ESU25", "RQ_13", "0114");
+            */
         }
 
-        public override bool RequestDChart(bool bDChart)
+        private bool RequestData(string symbol, string sRQName, string sScreenNo)
         {
             if (this.CurrentUserAccount == null)
                 return false;
+
+            string sTrCode = "opt10001";
+
+            axKFOpenAPI.SetInputValue("종목코드", symbol);
+
+            TIMETYPE timeType = TIMETYPE.TIMETYPE_TICK;
+            string sTimeUnit = "60";
             
+            switch (timeType)
+            {
+                case TIMETYPE.TIMETYPE_TICK:
+                    sTrCode = "opc10001";
+                    axKFOpenAPI.SetInputValue("시간단위", sTimeUnit);
+                    break;
+                case TIMETYPE.TIMETYPE_MIN:
+                    sTrCode = "opc10002";
+                    axKFOpenAPI.SetInputValue("시간단위", sTimeUnit);
+                    break;
+                case TIMETYPE.TIMETYPE_DAY:
+                    sTrCode = "opc10003";
+                    axKFOpenAPI.SetInputValue("조회일자", DateTime.Now.ToString("yyyyMMdd"));
+                    break;
+                case TIMETYPE.TIMETYPE_WEEK:
+                    sTrCode = "opc10004";
+                    axKFOpenAPI.SetInputValue("조회일자", DateTime.Now.ToString("yyyyMMdd"));
+                    break;
+                case TIMETYPE.TIMETYPE_MONTH:
+                    sTrCode = "opc10005";
+                    axKFOpenAPI.SetInputValue("조회일자", DateTime.Now.ToString("yyyyMMdd"));
+                    break;
+                case TIMETYPE.TIMETYPE_YEAR:
+                    sTrCode = "opc10006";
+                    axKFOpenAPI.SetInputValue("조회일자", DateTime.Now.ToString("yyyyMMdd"));
+                    break;
+                default:
+                    break;
+            }
+
+            int iResCode = axKFOpenAPI.CommRqData(sRQName, sTrCode, "", sScreenNo);      //종목정보조회
+
+            WriteLog(symbol + " RequestData=" + iResCode);
+
+            if (iResCode == 0)
+                return true;
+            return false;
+
+        }
+
+        public override bool RequestDChart(CHARTTYPE chartType)
+        {
+            if (this.CurrentUserAccount == null)
+                return false;
+
+            if (DChartType == chartType)
+                return true;
+
+            DChartType = chartType;
+
             axKFOpenAPI.SetInputValue("종목코드", ItemSymbol);
             string sTrCode = "";
             string sTimeUnit = "";
-            CHARTTYPE chartType = CHARTTYPE.NONE;
-
-            if (bDChart)
-            {
-                if ((CHARTTYPE)Settings.Default.ChartType != m_DChartType)
-                {
-                    m_DChartType = (CHARTTYPE)Settings.Default.ChartType;
-                    if ((CHARTTYPE)Settings.Default.Conc2Chart == m_DChartType)
-                        m_CChartType = (CHARTTYPE)Settings.Default.Conc2Chart;
-                    chartType = m_DChartType;
-                }
-                else return true;
-            } 
-            else
-            {
-                if (Settings.Default.BettingType == (int)BETTYPE.BOLINE && (CHARTTYPE)Settings.Default.Conc2Chart != m_CChartType)
-                {
-                    m_CChartType = (CHARTTYPE)Settings.Default.Conc2Chart;
-                    chartType = m_CChartType;
-                }
-                else return true;
-            }
             
             switch (chartType)
             {
@@ -739,11 +772,11 @@ namespace LuckyFuture.Site
                 default:
                     break;
             }
-            WriteLog("<KFOpen> RequestDChart sTrCode = " + sTrCode);
+            WriteLog(string.Format("<KFOpen> RequestDChart sTrCode = {0}, sTimeUnit = {1}", sTrCode, sTimeUnit));
             if (sTrCode.Length < 1)
                 return false;
             axKFOpenAPI.SetInputValue("시간단위", sTimeUnit);
-            int iResCode = axKFOpenAPI.CommRqData(bDChart?"RQ_0": "RQ_2", sTrCode, "", "0100");
+            int iResCode = axKFOpenAPI.CommRqData("RQ_0", sTrCode, "", "0100");
 
             if (iResCode == 0)
                 return true;
@@ -789,7 +822,7 @@ namespace LuckyFuture.Site
                     break;
             }
 
-            WriteLog("<KFOpen> RequestRChart sTrCode = " + sTrCode);
+            WriteLog(string.Format("<KFOpen> RequestRChart sTrCode = {0}, sTimeUnit = {1}", sTrCode, sTimeUnit));
             if (sTrCode.Length < 1)
                 return false;
 
@@ -800,6 +833,22 @@ namespace LuckyFuture.Site
             return false ;
         }
 
+        public override bool ChangePrd(string sSymbol)
+        {
+            if (PrdList == null || PrdList.Count < 1)
+                return false;
+            if (sSymbol != CurPrd.Code)
+            {
+                CurPrd = PrdList.FirstOrDefault(p => p.Code == sSymbol);
+                if(CurPrd != null)
+                {
+                    ItemList = CurPrd.ItemList;
+                    return true;
+                }
+            }
+
+            return false;
+        }
         public override bool ChangeItem(string sSymbol)
         {
             if (ItemList == null || ItemList.Count < 1)
@@ -1097,17 +1146,12 @@ namespace LuckyFuture.Site
                     nLastTick = int.Parse(sSValue.Trim());
                 }
                 int nTickCnt = 0;
-                bool bCChart = !bDChart;
-                if (!bCChart && Settings.Default.ChartType == Settings.Default.Conc2Chart)
-                    bCChart = true;
-
+                
                 lock (CtrlProperty._DItemList) lock(CtrlProperty._CItemList)
                 {
                     nLen = nLen > 300 ? 300 : nLen;
-                    if(bDChart)
-                        CtrlProperty._DItemList.Clear();
-                    if(bCChart)
-                        CtrlProperty._CItemList.Clear();
+                    CtrlProperty._DItemList.Clear();
+                    CtrlProperty._CItemList.Clear();
                     
                     for (int iRow = nLen - 1; iRow >= 0; iRow--)
                     {
@@ -1144,17 +1188,12 @@ namespace LuckyFuture.Site
                             nTickCnt = nLastTick;
                         else nTickCnt = (int)CtrlProperty._DTimeUnitAmt;
 
-                        if (bDChart)
-                        {
-                            newDItem = new DItem(fStartPrice * CtrlProperty._nValueRate, fCurPrice * CtrlProperty._nValueRate, fLowPrice * CtrlProperty._nValueRate, fHighPrice * CtrlProperty._nValueRate,
-                            CtrlProperty.GetTimeStamp(dtStart), CtrlProperty.GetTimeStamp(dtEnd), CtrlProperty._DItemList.Count(), nTickCnt, nConc);
-                            CtrlProperty._DItemList.Add(newDItem);
-                        }
-                        if (bCChart)
-                        {
-                            newCItem = new CItem(CtrlProperty.GetTimeStamp(dtStart), CtrlProperty.GetTimeStamp(dtEnd), nTickCnt, nConc);
-                            CtrlProperty._CItemList.Add(newCItem);
-                        }
+                        newDItem = new DItem(fStartPrice * CtrlProperty._nValueRate, fCurPrice * CtrlProperty._nValueRate, fLowPrice * CtrlProperty._nValueRate, fHighPrice * CtrlProperty._nValueRate,
+                        CtrlProperty.GetTimeStamp(dtStart), CtrlProperty.GetTimeStamp(dtEnd), CtrlProperty._DItemList.Count(), nTickCnt, nConc);
+                        CtrlProperty._DItemList.Add(newDItem);
+                        
+                        newCItem = new CItem(CtrlProperty.GetTimeStamp(dtStart), CtrlProperty.GetTimeStamp(dtEnd), nTickCnt, nConc);
+                        CtrlProperty._CItemList.Add(newCItem);
 
                     }
                 }
@@ -1660,8 +1699,8 @@ namespace LuckyFuture.Site
 
         private void ParseItemlistMsg()
         {
-            if (ItemList.Count > 0) return;
-            ItemList.Clear();
+            if (PrdList.Count > 0) return;
+            PrdList.Clear();
 
             string[] items; 
             if (Settings.Default.SignalSiteOn)
@@ -1679,6 +1718,7 @@ namespace LuckyFuture.Site
             double dTemp = 0;
             int nTemp = 0;
             string log = "";
+            PrdInfo newPrd;
             ItemSymbolInfo newItem;
 
             foreach (string item in futureItems)
@@ -1687,9 +1727,129 @@ namespace LuckyFuture.Site
                 if (Settings.Default.SignalSiteOn && !Array.Exists(items, it => it == item))
                     continue;
 
+                newPrd = new PrdInfo();
+                newPrd.Code = item;
+                if (item == "6M")
+                {
+                    newPrd.Name = "멕시코 페소";
+                } else if (item == "6S")
+                {
+                    newPrd.Name = "스위스 프랑";
+                } else if (item == "6L")
+                {
+                    newPrd.Name = "브라질 헤알";
+                }
+                else if (item == "NKD")
+                {
+                    newPrd.Name = "니케이225 달러";
+                }
+                else if (item == "EMD")
+                {
+                    newPrd.Name = "미니 S&P MidCap 400";
+                }
+                else if (item == "6C")
+                {
+                    newPrd.Name = "캐나다 달러";
+                }
+                else if (item == "6B")
+                {
+                    newPrd.Name = "파운드";
+                }
+                else if (item == "6A")
+                {
+                    newPrd.Name = "호주달러";
+                }
+                else if (item == "RTY")
+                {
+                    newPrd.Name = "미니 Russell 2000";
+                }
+                else if (item == "GD")
+                {
+                    newPrd.Name = "S&P GSCI";
+                }
+                else if (item == "6E")
+                {
+                    newPrd.Name = "유로 FX";
+                }
+                else if (item == "M6A")
+                {
+                    newPrd.Name = "Micro AUD";
+                }
+                else if (item == "RS1")
+                {
+                    newPrd.Name = "미니 Russell 1000";
+                }
+                else if (item == "M6B")
+                {
+                    newPrd.Name = "Micro GBP";
+                }
+                else if (item == "LE")
+                {
+                    newPrd.Name = "Live Cattle";    //생우
+                }
+                else if (item == "GF")
+                {
+                    newPrd.Name = "Feeder Cattle";    //비육우
+                }
+                else if (item == "HE")
+                {
+                    newPrd.Name = "Lean Hogs";      //돈육
+                }
+                else if (item == "ES")
+                {
+                    newPrd.Name = "미니 S&P 500";      
+                }
+                else if (item == "MCD")
+                {
+                    newPrd.Name = "Micro CAD";
+                }
+                else if (item == "6J")
+                {
+                    newPrd.Name = "일본엔";
+                }
+                else if (item == "NQ")
+                {
+                    newPrd.Name = "미니 나스닥 100";
+                }
+                else if (item == "MNQ")
+                {
+                    newPrd.Name = "Micro 미니 나스닥 100";
+                }
+                else if (item == "M6E")
+                {
+                    newPrd.Name = "Micro 유로";
+                }
+                else if (item == "M2K")
+                {
+                    newPrd.Name = "Micro 미니 Russell 2000";
+                }
+                else if (item == "E7")
+                {
+                    newPrd.Name = "미니 유로 FX";
+                }
+                else if (item == "SR3")
+                {
+                    newPrd.Name = "3-Month SOFR";
+                }
+                else if (item == "MSF")
+                {
+                    newPrd.Name = "Micro CHF";
+                }
+                else if (item == "MES")
+                {
+                    newPrd.Name = "Micro 미니 S&P 500";
+                }
+                else if (item == "6N")
+                {
+                    newPrd.Name = "뉴질랜드 달러";
+                } else
+                {
+                    newPrd.Name = item;
+                }
+                newPrd.ItemList = new List<ItemSymbolInfo>();
                 string futureCodeList = axKFOpenAPI.GetGlobalFutureCodelist(item);
                 string[] futureCodes = futureCodeList.Split(';');
-                // WriteLog(string.Format(">>>Item={0} codeCnt={1}", item, futureCodes.Length));
+                WriteLog(string.Format(">>>Item={0} codeCnt={1}", item, futureCodes.Length));
                 foreach(string code in futureCodes)
                 {
                     string codeInfo = axKFOpenAPI.GetGlobalFutOpCodeInfoByCode(code);
@@ -1730,77 +1890,82 @@ namespace LuckyFuture.Site
                     }
                     newItem.Exchange = EXCH_RATE;
                     newItem.ItemName = futureObject.arti_hnm;
-                    if(futureObject.arti_hnm.IndexOf("Euro FX") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Euro FX", "유로");
-                    } else if (futureObject.arti_hnm.IndexOf("British Pound") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("British Pound", "파운드");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("Japanese Yen") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Japanese Yen", "일본엔");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("Australian Dollar") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Australian Dollar", "호주달러");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("Mini S&P 500") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Mini S&P 500", "미니S&P");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("Mini NASDAQ 100") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Mini NASDAQ 100", "나스닥");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("Canadian Dollar") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Canadian Dollar", "캐나다 달러");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("Mexican pesos") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Mexican pesos", "멕시코 페소");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("Swiss Franc") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Swiss Franc", "스위스 프랑");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("Brazilian Real") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Brazilian Real", "브라질 헤알");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("New Zealand Dollars") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("New Zealand Dollars", "뉴질랜드 달러");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("Feeder Cattle") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Feeder Cattle", "비육우");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("Lean Hogs") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Lean Hogs", "돈육");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("Live Cattle") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Live Cattle", "생우");
-                    }
-                    else if (futureObject.arti_hnm.IndexOf("Nikkei 225 Dollar") == 0)
-                    {
-                        newItem.ItemName = newItem.ItemName.Replace("Nikkei 225 Dollar", "니케이225 달러");
-                    }
+                    //if(futureObject.arti_hnm.IndexOf("Euro FX") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Euro FX", "유로");
+                    //} else if (futureObject.arti_hnm.IndexOf("British Pound") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("British Pound", "파운드");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("Japanese Yen") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Japanese Yen", "일본엔");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("Australian Dollar") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Australian Dollar", "호주달러");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("Mini S&P 500") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Mini S&P 500", "미니S&P");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("Mini NASDAQ 100") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Mini NASDAQ 100", "나스닥");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("Canadian Dollar") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Canadian Dollar", "캐나다 달러");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("Mexican pesos") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Mexican pesos", "멕시코 페소");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("Swiss Franc") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Swiss Franc", "스위스 프랑");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("Brazilian Real") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Brazilian Real", "브라질 헤알");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("New Zealand Dollars") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("New Zealand Dollars", "뉴질랜드 달러");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("Feeder Cattle") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Feeder Cattle", "비육우");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("Lean Hogs") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Lean Hogs", "돈육");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("Live Cattle") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Live Cattle", "생우");
+                    //}
+                    //else if (futureObject.arti_hnm.IndexOf("Nikkei 225 Dollar") == 0)
+                    //{
+                    //    newItem.ItemName = newItem.ItemName.Replace("Nikkei 225 Dollar", "니케이225 달러");
+                    //}
+
+                    newPrd.ItemList.Add(newItem);
 
                     if (ItemSymbol.Length > 0 && ItemSymbol == newItem.Symbol)
                     {
+                        CurPrd = newPrd;
                         ItemSymbol = newItem.Symbol;
                         CurItemSymbol = newItem;
+                        ItemList = newPrd.ItemList;
                     }
                     else if (ItemSymbol.Length < 1 && newItem.Symbol.IndexOf("NQ") >= 0)
                     {
+                        CurPrd = newPrd;
                         ItemSymbol = newItem.Symbol;
                         CurItemSymbol = newItem;
-                    } 
-                    ItemList.Add(newItem);
+                        ItemList = newPrd.ItemList;
+                    }
 
                     log = string.Format("{0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12} | {13} | {14} | {15} | {16}",
                         futureObject.stk_code,
@@ -1821,18 +1986,21 @@ namespace LuckyFuture.Site
                         futureObject.atv_code,
                         futureObject.pre_gvol
                         );
-                    WriteLog(log);
+                    // WriteLog(log);
                     WriteLog("ParseItemlistMsg() Item=" + newItem.Symbol + " Precision=" + newItem.Precision +
                         " OverTick=" + newItem.OverTick + " Exchange=" + newItem.Exchange + " ValueTick=" + newItem.ValueTick);
-                    if(!Settings.Default.SignalSiteOn)
-                        break;
+                    //if(!Settings.Default.SignalSiteOn)
+                    //    break;
                 }
+                PrdList.Add(newPrd);
             }
 
 
-            if (ItemSymbol.Length < 1 && ItemList.Count > 0)
+            if (ItemSymbol.Length < 1 && PrdList.Count > 0)
             {
-                CurItemSymbol = ItemList.First();
+                CurPrd = PrdList.First();
+                ItemList = CurPrd.ItemList;
+                CurItemSymbol = CurPrd.ItemList.First();
                 ItemSymbol = CurItemSymbol.Symbol;
             }
 
@@ -1951,6 +2119,18 @@ namespace LuckyFuture.Site
                     tMValue = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 2); //멀티
                     OnReceiveRequidateOrder(sTrCode, sRQName);
                 }
+                else if (sRQName == "RQ_13")		//종목정보조회 1
+                {
+                    tSValue = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 1); //싱글
+                    tMValue = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 2); //멀티
+                    WriteLog("종목정보1: sValue=" + tSValue + " mValue=" + tMValue);
+                }
+                else if (sRQName == "RQ_14")		//종목정보조회 2
+                {
+                    tSValue = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 1); //싱글
+                    tMValue = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 2); //멀티
+                    WriteLog("종목정보2: sValue=" + tSValue + " mValue=" + tMValue);
+                }
 
             }
             catch (Exception ex)
@@ -1965,6 +2145,7 @@ namespace LuckyFuture.Site
             string sJongmok = e.sJongmokCode;
             string sRealType = e.sRealType;
             string sRealData = e.sRealData;
+            // WriteLog("실시간자료: 종목=" + sJongmok + " 자료=" + sRealType);
             if (sJongmok != ItemSymbol)
                 return;
             //string sValue = "";

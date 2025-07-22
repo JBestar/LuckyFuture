@@ -305,6 +305,7 @@ namespace LuckyFuture.Site
 			this.TotalQuoteList = this.CreateTotalQuoteInfo();
 			this.OrderList = new List<OrderInfo>();
 			this.LiquidOrder = null;
+			this.PrdList = new List<PrdInfo>();
 			this.ItemList = new List<ItemSymbolInfo>();
 			this.CurrentList = new List<CurrentInfo>();
 			this.StartPriceRow = new QuoteInfo();
@@ -332,9 +333,19 @@ namespace LuckyFuture.Site
 		public abstract bool LiquidateOrder(OrderInfo orderInfo);
 		public abstract bool DoSellOrder(QuoteInfo quoteInfo, int nQuantity = 1, bool bMarketPrice = false);
 		public abstract bool DoBuyOrder(QuoteInfo quoteInfo, int nQuantity = 1, bool bMarketPrice = false);
+		public virtual bool ChangePrd(string sSymbol)
+        {
+			return true;
+        }
 		public abstract bool ChangeItem(string sSymbol);
-        public abstract bool RequestRChart();
-        public abstract bool RequestDChart(bool bDChart = true);
+		public virtual bool RequestRChart()
+        {
+			return true;
+        }
+        public virtual bool RequestDChart(CHARTTYPE chartType)
+        {
+			return true;
+        }
         protected abstract List<QuoteInfo> CreateQuoteInfo();
 		protected virtual List<TotalQuoteInfo> CreateTotalQuoteInfo()
 		{
@@ -381,6 +392,7 @@ namespace LuckyFuture.Site
 		public List<UserAccountInfo> UserAccounts { get; set; }
 		public UserAccountInfo CurrentUserAccount { get; set; }
 		public long ItemId { get; set; }
+        public PrdInfo CurPrd { get; set; }
         public string ItemSymbol { get; set; }
 		public ItemSymbolInfo CurItemSymbol { get; set; }
 		public int ItemPrecision { get; set; }
@@ -391,6 +403,7 @@ namespace LuckyFuture.Site
         public OrderVal LiquidOrder { get; set; }
 
         public List<ItemSymbolInfo> ItemList { get; set; }
+		public List<PrdInfo> PrdList { get; set; }
 		public CurrentInfo Current { get; set; }
 		public List<CurrentInfo> CurrentList { get; set; }
 		public List<QuoteInfo> QuoteList { get; set; }
@@ -408,6 +421,7 @@ namespace LuckyFuture.Site
 		public int SellAcceptable { get; set; }
 		public int BuyAcceptable { get; set; }		
 		public double StartPrice { get; set; }
+		public CHARTTYPE DChartType { get; set; }
 
 	}
 }

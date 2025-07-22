@@ -315,14 +315,6 @@ namespace LuckyFuture.Site
 				
 			return ERRORCODE.UNKNOWN_FAILED;
 		}
-		public override bool RequestRChart()
-		{
-			return false;
-		}
-        public override bool RequestDChart(bool bChart = true)
-        {
-            return false;
-        }
 
         public override bool ChangeItem(string sSymbol)
         {

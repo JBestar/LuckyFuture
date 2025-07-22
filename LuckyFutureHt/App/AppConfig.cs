@@ -332,10 +332,12 @@ namespace LuckyFuture
                             Rate = int.Parse(infos[2]),
                             RateUnit = "틱",
                             Enabled = int.Parse(infos[0]),
-                            Param = "",
+                            Param = "0",
                             ActionDelete = "삭제"
                         };
-                        if (infos.Length < 4)
+                        if (infos.Length > 3 && infos[3].Length > 0)
+                            lossInfo.Param = infos[3];
+                        else if(infos.Length < 4)
                             bReset = true;
                         PayoffLossConfs.Add(lossInfo);
                     }
@@ -435,7 +437,7 @@ namespace LuckyFuture
                             Amount = int.Parse(infos[1]),
                             AmountUnit = "이상",
                             Rate = int.Parse(infos[2]),
-                            RateUnit = "%하락",
+                            RateUnit = "%",
                             Enabled = int.Parse(infos[0]),
                             Param = "50",
                             ActionDelete = "삭제"
