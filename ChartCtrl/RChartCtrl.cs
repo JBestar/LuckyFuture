@@ -424,31 +424,33 @@ namespace ChartCtrl
             {
                 int iY = mMousePt.Y;
                 int iX = mMousePt.X;
-                int nWidth = 100;
-                int nHeight = 160;
+                int nWidth = 200;
+                int nHeight = 130; //160
 
                 if (Settings.Default.AvgLine)
                 {
-                    // nHeight += (mHoverItem.GetAvgValueCount() + 1) * 15;
-                    if(Settings.Default.Avg5On)
-                        nHeight += 15;
+                    nHeight += 15;
+                    int avgCnt = 0;
+                    if (Settings.Default.Avg5On)
+                        avgCnt++;
                     if (Settings.Default.Avg10On)
-                        nHeight += 15;
+                        avgCnt++;
                     if (Settings.Default.Avg20On)
-                        nHeight += 15;
+                        avgCnt++;
                     if (Settings.Default.Avg60On)
-                        nHeight += 15;
+                        avgCnt++;
                     if (Settings.Default.Avg120On)
-                        nHeight += 15;
+                        avgCnt++;
                     if (Settings.Default.Avg200On)
-                        nHeight += 15;
+                        avgCnt++;
+                    nHeight += (int)(Math.Ceiling((double)avgCnt / 2) * 15);
                 }
 
                 if (Settings.Default.BoLine)
-                    nHeight += 4 * 15;
+                    nHeight += 30;
 
                 if(mHoverItem.Orders != null && mHoverItem.Orders.Count > 0)
-                    nHeight += 45;
+                    nHeight += 30;
 
                 if (iY + nHeight > CtrlProperty._ClientH - CtrlProperty._nTimeAxisBand)
                     iY = CtrlProperty._ClientH - nHeight - CtrlProperty._nTimeAxisBand;
@@ -460,41 +462,56 @@ namespace ChartCtrl
                 g.FillRectangle(mBrushOpaque, new RectangleF(iX, iY, nWidth, nHeight));
                 g.DrawRectangle(Pens.Black, new Rectangle(iX, iY, nWidth, nHeight));
 
-                string strComment = "일자:" + string.Format(CtrlProperty._tDayPattern, CtrlProperty.GetTime(mHoverItem.TmStart));
+                string strComment = "시간:" + string.Format(CtrlProperty._tDayPattern, CtrlProperty.GetTime(mHoverItem.TmStart)) + " " + string.Format(CtrlProperty._tTmPattern, CtrlProperty.GetTime(mHoverItem.TmStart));
                 g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 5));
-
-                strComment = "시간:" + string.Format(CtrlProperty._tTmPattern, CtrlProperty.GetTime(mHoverItem.TmStart));
-                g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
 
                 strComment = "시가:" + string.Format(CtrlProperty._tValueFormat, mHoverItem.Start / CtrlProperty._nValueRate);
                 g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 20));
 
                 strComment = "고가:" + string.Format(CtrlProperty._tValueFormat, mHoverItem.Max / CtrlProperty._nValueRate);
-                g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
+                g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 105, iY));
 
                 strComment = "저가:" + string.Format(CtrlProperty._tValueFormat, mHoverItem.Min / CtrlProperty._nValueRate);
                 g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
 
                 strComment = "종가:" + string.Format(CtrlProperty._tValueFormat, mHoverItem.End / CtrlProperty._nValueRate);
-                g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
+                g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 105, iY));
 
                 strComment = "ADX:" + string.Format("{0:N2}", mHoverItem.Adx);
                 g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
 
                 strComment = "CCI:" + string.Format("{0:N2}", mHoverItem.Cci);
-                g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
+                g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 105, iY));
 
                 strComment = "RSI:" + string.Format("{0:N2}", mHoverItem.Rsi);
                 g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
 
                 strComment = "거래량:" + string.Format(CtrlProperty._tValueFormat, mHoverItem.Conc);
+                g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 105, iY));
+
+                strComment = "[MACD]:" + string.Format("{0:N2}", mHoverItem.MacdVal);
                 g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
+
+                strComment = "시그널:" + string.Format(CtrlProperty._tValueFormat, mHoverItem.MacdSig);
+                g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 105, iY));
+
+                if (mHoverItem.BollAvg != 0)
+                {
+                    strComment = "[볼린저밴드]";
+                    g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
+                    strComment = "%B:" +string.Format(CtrlProperty._tValueFormat, mHoverItem.BollPerb);
+                    g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 105, iY));
+                    strComment = "상한:" + string.Format(CtrlProperty._tValueFormat, (mHoverItem.BollAvg + 2 * mHoverItem.BollDev) / CtrlProperty._nValueRate);
+                    g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
+                    strComment = "하한:" + string.Format(CtrlProperty._tValueFormat, (mHoverItem.BollAvg - 2 * mHoverItem.BollDev) / CtrlProperty._nValueRate);
+                    g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 105, iY));
+                }
 
                 if (Settings.Default.AvgLine)
                 {
                     strComment = "[가격 이동평균]";
                     g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
-
+                    int j = 0;
                     for (int i = 0; i < mHoverItem.Avgs.Length; i++)
                     {
                         if (i == 0 && !Settings.Default.Avg5On)
@@ -519,7 +536,8 @@ namespace ChartCtrl
                                 strComment += "   :";
                             else strComment += "     :";
                             strComment += string.Format(CtrlProperty._tValueFormat, mHoverItem.Avgs[i] / CtrlProperty._nValueRate);
-                            g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
+                            g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + (j%2==0?5:105), iY += (j % 2 == 0 ? 15 : 0)));
+                            j++;
                         }
 
                     }
@@ -528,21 +546,25 @@ namespace ChartCtrl
                 {
                     strComment = "[하늘-주황선]";
                     g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
+                    if (mHoverItem.Est_Crossed)
+                        g.DrawString("교차:" + mHoverItem.Est_Cross.ToString(), m_fontStr, Brushes.Black, new PointF(iX + 105, iY ));
+                    //else g.DrawString("유지", m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
                     for (int i = 0; i < mHoverItem.Bos.Length; i++)
                     {
                         if (mHoverItem.Bos[i] > 0)
                         {
                             strComment = i == 0 ? "하늘:" : "주황:";
                             strComment += string.Format(CtrlProperty._tValueFormat, mHoverItem.Bos[i] / CtrlProperty._nValueRate);
-                            g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
+                            g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + (i==0?5:105), iY += (i == 0 ? 15 : 0)));
                         }
 
                     }
-                    if (mHoverItem.Est_Crossed)
-                        g.DrawString("교차:" + mHoverItem.Est_Cross.ToString() , m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
-                    //else g.DrawString("유지", m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
+                    
                 }
-                if(mHoverItem.Orders != null && mHoverItem.Orders.Count > 0 )
+                
+                
+
+                if (mHoverItem.Orders != null && mHoverItem.Orders.Count > 0 )
                 {
                     
                     OrderVal orderInfo = CtrlProperty._OrderList[mHoverItem.Orders.Last()];
@@ -556,7 +578,7 @@ namespace ChartCtrl
                         g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
 
                         strComment = "체결:" + string.Format(CtrlProperty._tValueFormat, orderInfo.AveragePrice);
-                        g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 5, iY += 15));
+                        g.DrawString(strComment, m_fontStr, Brushes.Black, new PointF(iX + 105, iY ));
                     }
                     
                 }

@@ -47,8 +47,8 @@ namespace LuckyFuture
 
         public event EventHandler<AuthorEventArgs> NoticeEvent;
         //traking topasset dream
-        public const string URL_MAIN = "http://coke999.com:82/traking/";    //https://auto-366.com/dream //coke999.com:82
-        public const string URL_DOWNLOAD = "http://coke999.com:82/Download/traking/"; //https://auto-366.com/Download/dream
+        public const string URL_MAIN = "https://auto-366.com/traking/";    //https://auto-366.com/dream //coke999.com:82
+        public const string URL_DOWNLOAD = "https://auto-366.com/Download/traking/"; //https://auto-366.com/Download/dream
         // public const string URL_WS2 = "ws://localhost:7082/Temp/TempWebSocket.ashx?websession="; //
         private const string URL_CERT_LOGIN = "Login";
         private const string URL_CERT_LOGOUT = "LogOut";

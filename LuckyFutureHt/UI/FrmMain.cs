@@ -100,7 +100,7 @@ namespace LuckyFuture.UI
             InitializeSetting();
 
             btnHide.Text = "<<";
-            formHeight = 720;
+            formHeight = 750;
             this.ClientSize = new Size(890, formHeight);
 
 			this.ChartForm.Visible = false;
@@ -376,7 +376,8 @@ namespace LuckyFuture.UI
 			{
                 CurrentInfo current = CurrentSite.Current;
 
-                 if (Settings.Default.BandChart && Math.Abs(Environment.TickCount - _tickBand ) > 30000 )
+                 if ((Settings.Default.BettingType == (int)BETTYPE.BOLINE || Settings.Default.BettingType == (int)BETTYPE.CROSS) && 
+                    Settings.Default.BandChart && Math.Abs(Environment.TickCount - _tickBand ) > 30000 )
                  {
                     int nConc = GetConcPerMin();
                      if (Settings.Default.BandVal1 > 0 && nConc < Settings.Default.BandVal1)
@@ -1432,7 +1433,7 @@ namespace LuckyFuture.UI
                 {
                     if (CurrentSite.ChangePrd(prdSymbol))
                     {
-                        ChangeItem(0);
+                        ChangeItem(0, false);
                         ShowItemInfo();
                     }
 
@@ -1440,7 +1441,7 @@ namespace LuckyFuture.UI
             }
 
         }
-        private void ChangeItem(int itemIndex)
+        private void ChangeItem(int itemIndex, bool bLog=true)
 		{
             if (CurrentSite == null || CurrentSite.ItemList == null || CurrentSite.ItemList.Count < itemIndex + 1)
                 return;
@@ -1455,6 +1456,9 @@ namespace LuckyFuture.UI
                     ItemChanged = true;
                     if (CurrentSite.ChangeItem(itemSymbol))
                     {
+                        if(bLog)
+                            AddLog(CurrentSite.ItemList[itemIndex].ItemName);
+
                         if (SignalSite != null)
                             SignalSite.ChangeItem(itemSymbol);
                         Thread.Sleep(1000);
@@ -2402,7 +2406,8 @@ namespace LuckyFuture.UI
             bool enableSmart = false;
             bool enableCross = false;
             bool enableCci = false;
-            
+            bool enableBoll = false;
+
             // string strCom = "개(최대 " + Settings.Default.OrderMax.ToString() + "개)";
             string strCom = "개";
             if (cmbBettingType.SelectedIndex == (int)BETTYPE.EQUIVALENT)
@@ -2484,6 +2489,7 @@ namespace LuckyFuture.UI
                 enableSmart = true;
                 enableCross = true;
                 enableCci = true;
+                enableBoll = true;
             }
             else if (cmbBettingType.SelectedIndex == (int)BETTYPE.BOLINE)
             {
@@ -2586,6 +2592,13 @@ namespace LuckyFuture.UI
             chkCciRange.Visible = enableCci;
             btnCciLossRange.Visible = enableCci;
 
+            chkPerbPayoff.Visible = enableBoll;
+            txtPayoffPerbDown.Visible = enableBoll;
+            txtPayoffPerbUp.Visible = enableBoll;
+            chkPayoffMacd.Visible = enableBoll;
+            label95.Visible = enableBoll;
+            label96.Visible = enableBoll;
+
             chkEarnPayoff.Checked = Settings.Default.EarnPayoff;
 			chkForceEarnPayoff.Checked = Settings.Default.ForceEarnPayoff;
             chkSmartLossPayoff.Checked = Settings.Default.SmartLossPayoff;
@@ -2612,6 +2625,16 @@ namespace LuckyFuture.UI
             txtPayoffCci1.Text = Settings.Default.CciPayoffValue1.ToString();
             txtPayoffCci2.Text = Settings.Default.CciPayoffValue2.ToString();
             txtPayoffRsi.Text = Settings.Default.CciPayoffValue3.ToString();
+
+            chkPerbPayoff.Checked = Settings.Default.BollPayoff;
+            txtPayoffPerbDown.Text = Settings.Default.BollPayoffDown.ToString();
+            txtPayoffPerbUp.Text = Settings.Default.BollPayoffUp.ToString();
+            chkPayoffMacd.Checked = Settings.Default.MacdPayoff;
+
+            chkPerbPayoff2.Checked = Settings.Default.BollPayoff;
+            txtPayoffPerbDown2.Text = Settings.Default.BollPayoffDown.ToString();
+            txtPayoffPerbUp2.Text = Settings.Default.BollPayoffUp.ToString();
+            chkPayoffMacd2.Checked = Settings.Default.MacdPayoff;
 
             chkLiqStop.Checked = Settings.Default.LiquidStop;
             chkEarnStop.Checked = Settings.Default.EarnStop;
@@ -2722,6 +2745,13 @@ namespace LuckyFuture.UI
             txtAvgsCandle_3.Enabled = chkAvgs_3.Checked;
             cmbAvgsSide1_3.Enabled = chkAvgs_3.Checked;
             cmbAvgsSide2_3.Enabled = chkAvgs_3.Checked;
+
+            txtPayoffPerbDown.Enabled = chkPerbPayoff.Checked;
+            txtPayoffPerbUp.Enabled = chkPerbPayoff.Checked;
+
+            txtPayoffPerbDown2.Enabled = chkPerbPayoff2.Checked;
+            txtPayoffPerbUp2.Enabled = chkPerbPayoff2.Checked;
+
         }
 
         private void chkEarnPayoff_CheckedChanged(object sender, EventArgs e)
@@ -2955,6 +2985,21 @@ namespace LuckyFuture.UI
                     }
                 }
 
+                Settings.Default.BollPayoff = chkPerbPayoff2.Checked;
+                try
+                {
+                    Settings.Default.BollPayoffDown = float.Parse(txtPayoffPerbDown2.Text);
+                    Settings.Default.BollPayoffUp = float.Parse(txtPayoffPerbUp2.Text);
+                }
+                catch
+                {
+                    txtPayoffPerbDown2.Focus();
+                    txtPayoffPerbUp2.Focus();
+                    return;
+                }
+                Settings.Default.MacdPayoff = chkPayoffMacd.Checked;
+
+                
                 log += "주문(방식:이평언오버";
                 log += ", 차트타입:" + cmbChartType2.SelectedItem.ToString();
                 log += ", 주문타입:" + (Settings.Default.OrderType == 0 ? "시장가" : "지정가");
@@ -2964,8 +3009,17 @@ namespace LuckyFuture.UI
                 log += ") ";
 
                 if (chkCandlePayoff.Checked && txtTickPayoff.Visible)
-                    log += "청산( 상승/하락:" + cmbCandlePayoff.SelectedItem.ToString() + "개 " + Settings.Default.TickPayoffCount + "틱)";
+                    log += "청산( 상승/하락:" + cmbCandlePayoff.SelectedItem.ToString() + "개 " + Settings.Default.TickPayoffCount + "틱";
 
+                if (chkPerbPayoff.Checked)
+                {
+                    log += ", 볼린저밴드 %B:" + Settings.Default.BollPayoffDown + "이하" + Settings.Default.BollPayoffUp + "이상";
+                }
+                if (chkPayoffMacd.Checked)
+                {
+                    log += ", Macd전환";
+                }
+                log += ")";
             }
             else if (cmbBettingType.SelectedIndex == (int)BETTYPE.CROSS)       //이평선교차
             {
@@ -3838,8 +3892,32 @@ namespace LuckyFuture.UI
                         log += Settings.Default.CciPayoffValue1 + "이상" + Settings.Default.CciPayoffValue2+"%하락 RSI:"+ Settings.Default.CciPayoffValue3;
                 }
 
+                if (chkPerbPayoff.Visible)
+                {
+                    Settings.Default.BollPayoff = chkPerbPayoff.Checked;
+                    try
+                    {
+                        Settings.Default.BollPayoffDown = float.Parse(txtPayoffPerbDown.Text);
+                        Settings.Default.BollPayoffUp = float.Parse(txtPayoffPerbUp.Text);
+                    }
+                    catch
+                    {
+                        // txtPayoffPerbDown.SelectAll();
+                        txtPayoffPerbDown.Focus();
+                        txtPayoffPerbUp.Focus();
+                        return;
+                    }
+                    if (chkPerbPayoff.Checked)
+                    {
+                        log += ", 볼린저밴드 %B:" + Settings.Default.BollPayoffDown + "이하" + Settings.Default.BollPayoffUp + "이상";
+                    }
+                    Settings.Default.MacdPayoff = chkPayoffMacd.Checked;
+                    if (chkPayoffMacd.Checked)
+                    {
+                        log += ", Macd전환";
+                    }
+                }
                 log += ") ";
-
             }
 
             log += "정지(";
@@ -4049,7 +4127,7 @@ namespace LuckyFuture.UI
 
                     if (AppConfig.SaveConfig(saveFileDialog.FileName))
                     {
-                        MessageBox.Show(new Form { TopMost = true }, " 설정이 보관되었습니다.", "설정 내보내기", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(new Form { TopMost = true }, " 내보내기가 완료되었습니다.", "설정 내보내기", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
@@ -5575,6 +5653,54 @@ namespace LuckyFuture.UI
                 e.Graphics.DrawString(cmbPrdList.Items[e.Index].ToString(), e.Font,
                  new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
             }
+        }
+
+        private void chkPerbPayoff_CheckedChanged(object sender, EventArgs e)
+        {
+            EnableSettingControls();
+            saveSetting();
+        }
+
+        private void txtPayoffPerbDown_TextChanged(object sender, EventArgs e)
+        {
+            saveSetting();
+
+        }
+
+        private void txtPayoffPerbUp_TextChanged(object sender, EventArgs e)
+        {
+            saveSetting();
+
+        }
+
+        private void chkPayoffMacd_CheckedChanged(object sender, EventArgs e)
+        {
+            saveSetting();
+        }
+
+        private void chkPerbPayoff2_CheckedChanged(object sender, EventArgs e)
+        {
+            EnableSettingControls();
+            saveSetting();
+
+        }
+
+        private void txtPayoffPerbDown2_TextChanged(object sender, EventArgs e)
+        {
+            saveSetting();
+
+        }
+
+        private void txtPayoffPerbUp2_TextChanged(object sender, EventArgs e)
+        {
+            saveSetting();
+
+        }
+
+        private void chkPayoffMacd2_CheckedChanged(object sender, EventArgs e)
+        {
+            saveSetting();
+
         }
     }
 }

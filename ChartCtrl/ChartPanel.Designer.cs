@@ -818,7 +818,7 @@ namespace ChartCtrl
             this.txtSpec.Multiline = false;
             this.txtSpec.Name = "txtSpec";
             this.txtSpec.ReadOnly = true;
-            this.txtSpec.Size = new System.Drawing.Size(491, 20);
+            this.txtSpec.Size = new System.Drawing.Size(591, 20);
             this.txtSpec.TabIndex = 31;
             this.txtSpec.Text = "";
             // 

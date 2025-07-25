@@ -1,4 +1,6 @@
-﻿using ChartCtrl;
+﻿// #define DEBUG_LOG
+
+using ChartCtrl;
 using LuckyFutureLib.Include;
 using LuckyFuture.Models.ValueObjects;
 using LuckyFuture.Properties;
@@ -355,15 +357,19 @@ namespace LuckyFuture.Logic
             double dCurRsi = 0;
             if (Settings.Default.BettingType == (int)BETTYPE.UPDOWN)
             {
-                lastCandlelist = frmMain.GetCandleList(Settings.Default.CandlePayoffCount);
+                lastCandlelist = frmMain.GetCandleList(Settings.Default.CandlePayoffCount+1);
 
-                if (lastCandlelist.Count < Settings.Default.CandlePayoffCount)
+                if (lastCandlelist.Count < Settings.Default.CandlePayoffCount+1)
                     return false;
 
                 avgType = (CH_AVGTYPE)Settings.Default.AvgType;
                 fTickDiff = Math.Abs(lastCandlelist.First().GetAvgVal(avgType) - lastCandlelist.Last().GetAvgVal(avgType));
                 fTickConf = Settings.Default.ItemOverTick * Settings.Default.TickPayoffCount;
                 iFirstIdx = lastCandlelist.First().Index;
+
+#if DEBUG_LOG
+                Trace.TraceInformation("NeedToCancel() BETTYPE.UPDOWN 틱={0:N2}(설정:이평선={1}, {2}개 틱={3})", fTickDiff, (int)avgType, Settings.Default.CandlePayoffCount, fTickConf);
+#endif
             }
             else if (Settings.Default.BettingType == (int)BETTYPE.CROSS)
             {
@@ -543,32 +549,63 @@ namespace LuckyFuture.Logic
                             }
                             else if (Settings.Default.BettingType == (int)BETTYPE.UPDOWN)
                             {
+                                string logPayoff = "";
+                                bool bBollPayoff = CheckBollPayoff(o.TradeType, lastCandlelist.Last(), ref logPayoff);
+
                                 if (o.TradeType == TRADETYPE.BUY)
                                 {
-                                    if (fTickDiff >= fTickConf && lastCandlelist.Count<DItem>(d => d.GetTrendDown(avgType, iFirstIdx) == CH_TRENDTYPE.DOWN) >= Settings.Default.CandlePayoffCount)
+                                    if (bBollPayoff && fTickDiff >= fTickConf && lastCandlelist.Count<DItem>(d => d.GetTrendDown(avgType, iFirstIdx) == CH_TRENDTYPE.DOWN) >= Settings.Default.CandlePayoffCount+1)
+                                    {
+
+                                        log = String.Format("[청산] 하락:{0:N2}틱", fTickDiff / Settings.Default.ItemOverTick);
+                                        if (logPayoff.Length > 0)
+                                            log += logPayoff;
+                                        this.frmMain.AddLog(log);
                                         return true;
+                                    }
                                 }
                                 else if (o.TradeType == TRADETYPE.SELL) //매도
                                 {
-                                    if (fTickDiff >= fTickConf && lastCandlelist.Count<DItem>(d => d.GetTrendUp(avgType, iFirstIdx) == CH_TRENDTYPE.UP) >= Settings.Default.CandlePayoffCount)
+                                    if (bBollPayoff && fTickDiff >= fTickConf && lastCandlelist.Count<DItem>(d => d.GetTrendUp(avgType, iFirstIdx) == CH_TRENDTYPE.UP) >= Settings.Default.CandlePayoffCount+1)
+                                    {
+                                        log = String.Format("[청산] 상승:{0:N2}틱", fTickDiff / Settings.Default.ItemOverTick);
+                                        if (logPayoff.Length > 0)
+                                            log += logPayoff;
+                                        this.frmMain.AddLog(log);
                                         return true;
+                                    }
                                 }
                             }
                             if (Settings.Default.BettingType == (int)BETTYPE.CROSS)
                             {
-                                string logTrade = "";
+                                string logPayoff = "";
+                                bool bBollPayoff = CheckBollPayoff(o.TradeType, lastCandlelist.Last(), ref logPayoff);
 
                                 if (Settings.Default.Reorder)
                                 {
-                                    bool bTradeChanged = CheckTradeChange(ref logTrade);
+                                    string logTrade = "";
 
+                                    bool bTradeChanged = CheckTradeChange(ref logTrade);
+                                    
                                     if (o.TradeType == TRADETYPE.BUY)   //매수
                                     {
                                         if (lastCandlelist.Last().GetCrossTrend(CH_AVGTYPE.LINE_1, CH_AVGTYPE.LINE_2) == CH_TRENDTYPE.DOWN && bTradeChanged)
                                         {
                                             if (!Settings.Default.OrderSelectOn || (Settings.Default.OrderSelectOn && Settings.Default.OrderSelectType == 0))
+                                            {
+
+                                                log = "[청산] 되돌림주문 ";
+                                                if (logTrade.Length > 0)
+                                                    log += logTrade;
+
+                                                if (logPayoff.Length > 0)
+                                                    log += logPayoff;
+
+                                                this.frmMain.AddLog(log);
+
                                                 _reorderToCancel = true;
-                                            return true;
+                                                return true;
+                                            }
                                         }
                                     }
                                     else if (o.TradeType == TRADETYPE.SELL) //매도
@@ -576,8 +613,18 @@ namespace LuckyFuture.Logic
                                         if (lastCandlelist.Last().GetCrossTrend(CH_AVGTYPE.LINE_1, CH_AVGTYPE.LINE_2) == CH_TRENDTYPE.UP && bTradeChanged)
                                         {
                                             if (!Settings.Default.OrderSelectOn || (Settings.Default.OrderSelectOn && Settings.Default.OrderSelectType == 0))
+                                            {
+                                                log = "[청산] 되돌림주문 ";
+                                                if (logTrade.Length > 0)
+                                                    log += logTrade;
+
+                                                if (logPayoff.Length > 0)
+                                                    log += logPayoff;
+                                                this.frmMain.AddLog(log);
+
                                                 _reorderToCancel = true;
-                                            return true;
+                                                return true;
+                                            }
                                         }
                                     }
                                 }
@@ -588,19 +635,23 @@ namespace LuckyFuture.Logic
                                         && lastCandlelist.Last().Orders.Count < 1 && (o.CrossAveragePrice == 0 || o.CrossAveragePrice < dCurPrice))
                                     {
                                         o.CrossAveragePrice = dCurPrice; //교차점에서 현재가
-                                                                         // Trace.TraceInformation("<LogicAuto> BUY AveragePrice = {0}, CrossAveragePrice = {1} ", dAvgPrice, o.CrossAveragePrice);
+#if DEBUG_LOG
+                                        Trace.TraceInformation("<LogicAuto> BETTYPE.CROSS TRADETYPE.BUY AveragePrice = {0}, CrossAveragePrice = {1} ", dAvgPrice, o.CrossAveragePrice);
+#endif
                                     }
 
 
                                     if (Settings.Default.EarnPayoff && Settings.Default.EarnPayoffMoney >= 0
-                                        && dDeltaTick >= Settings.Default.EarnPayoffMoney * Settings.Default.ItemOverTick)
+                                        && dDeltaTick >= Settings.Default.EarnPayoffMoney * Settings.Default.ItemOverTick && bBollPayoff)
                                     {
                                         log = "[청산] 수익:" + Math.Abs(dDeltaTick) / Settings.Default.ItemOverTick + "틱";
                                         if (Settings.Default.EarnPayoff)
                                             log += "(설정:" + Settings.Default.EarnPayoffMoney.ToString() + "틱)";
+                                        if (logPayoff.Length > 0)
+                                            log += logPayoff;
                                         this.frmMain.AddLog(log);
+                                        return true;
                                     }
-                                    return true;
 
                                 }
                                 else if (o.TradeType == TRADETYPE.SELL) //매도
@@ -609,15 +660,19 @@ namespace LuckyFuture.Logic
                                         && lastCandlelist.Last().Orders.Count < 1 && (o.CrossAveragePrice == 0 || o.CrossAveragePrice > dCurPrice))
                                     {
                                         o.CrossAveragePrice = dCurPrice; //교차점에서 현재가
-                                                                         // Trace.TraceInformation("<LogicAuto> SELL AveragePrice = {0}, CrossAveragePrice = {1} ", dAvgPrice, o.CrossAveragePrice);
+#if DEBUG_LOG
+                                        Trace.TraceInformation("<LogicAuto> BETTYPE.CROSS, TRADETYPE.SELL AveragePrice = {0}, CrossAveragePrice = {1} ", dAvgPrice, o.CrossAveragePrice);
+#endif
                                     }
 
                                     if (Settings.Default.EarnPayoff && Settings.Default.EarnPayoffMoney >= 0
-                                        && dDeltaTick <= -Settings.Default.EarnPayoffMoney * Settings.Default.ItemOverTick)
+                                        && dDeltaTick <= -Settings.Default.EarnPayoffMoney * Settings.Default.ItemOverTick && bBollPayoff)
                                     {
                                         log = "[청산] 수익:" + Math.Abs(dDeltaTick) / Settings.Default.ItemOverTick + "틱";
                                         if (Settings.Default.EarnPayoff)
                                             log += "(설정:" + Settings.Default.EarnPayoffMoney.ToString() + "틱)";
+                                        if (logPayoff.Length > 0)
+                                            log += logPayoff;
                                         this.frmMain.AddLog(log);
                                         return true;
                                     }
@@ -658,7 +713,9 @@ namespace LuckyFuture.Logic
                                         && lastCandlelist.Last().Orders.Count < 1 && (o.CrossAveragePrice == 0 || o.CrossAveragePrice < dCurPrice)/* && bTradeChanged*/)
                                     {
                                         o.CrossAveragePrice = dCurPrice; //교차점에서 현재가
-                                                                         // Trace.TraceInformation("<LogicAuto> BUY AveragePrice = {0}, CrossAveragePrice = {1} ", dAvgPrice, o.CrossAveragePrice);
+#if DEBUG_LOG
+                                        Trace.TraceInformation("<LogicAuto> BETTYPE.BOLINE, TRADETYPE.BUY AveragePrice = {0}, CrossAveragePrice = {1} ", dAvgPrice, o.CrossAveragePrice);
+#endif
                                     }
 
                                     if ((Settings.Default.EarnPayoff && Settings.Default.EarnPayoffMoney >= 0
@@ -709,7 +766,9 @@ namespace LuckyFuture.Logic
                                         && lastCandlelist.Last().Orders.Count < 1 && (o.CrossAveragePrice == 0 || o.CrossAveragePrice > dCurPrice)/* && bTradeChanged*/)
                                     {
                                         o.CrossAveragePrice = dCurPrice; //교차점에서 현재가
-                                                                         // Trace.TraceInformation("<LogicAuto> SELL AveragePrice = {0}, CrossAveragePrice = {1} ", dAvgPrice, o.CrossAveragePrice);
+#if DEBUG_LOG
+                                        Trace.TraceInformation("<LogicAuto> BETTYPE.BOLINE, TRADETYPE.SELL AveragePrice = {0}, CrossAveragePrice = {1} ", dAvgPrice, o.CrossAveragePrice);
+#endif
                                     }
 
                                     if ((Settings.Default.EarnPayoff && Settings.Default.EarnPayoffMoney >= 0
@@ -912,7 +971,7 @@ namespace LuckyFuture.Logic
                         {
                             o.EarnPayoffTick = nTick;
 
-                            log += string.Format("손실영역변경: {0:N0}원 이익={1}틱)", lValuation, nTick);
+                            log += string.Format("손실영역변경: {0:N0}원 이익={1}틱", lValuation, nTick);
                             this.frmMain.AddLog(log);
                             m_boLiquid = true;
                         }
@@ -931,7 +990,7 @@ namespace LuckyFuture.Logic
                         {
                             o.LossPayoffTick = nTick;
 
-                            log += string.Format("손실영역변경: {0:N0}원 손실={1}틱)", lValuation, nTick);
+                            log += string.Format("손실영역변경: {0:N0}원 손실={1}틱", lValuation, nTick);
                             this.frmMain.AddLog(log);
                             m_boLiquid = true;
                         }
@@ -984,7 +1043,7 @@ namespace LuckyFuture.Logic
                         {
                             o.EarnPayoffTick = nTick;
 
-                            log += string.Format("손실영역변경: {0:N0}원 이익={1}틱)", lValuation, nTick);
+                            log += string.Format("손실영역변경: {0:N0}원 이익={1}틱", lValuation, nTick);
                             this.frmMain.AddLog(log);
                             m_boLiquid = true;
                         }
@@ -1065,6 +1124,8 @@ namespace LuckyFuture.Logic
                             string.Format(Settings.Default.PriceFormat, dMaxAveragePrice), lValuation, nPercent, dCurRsi, nRsi));
                         return true;
                     }
+                    Trace.TraceInformation("[청산] 스마트영역청산 최대수익가:{0}({1:N0}원)(설정:{2}%이상), Rsi={3:N2}(설정:{4}이하)",
+                            string.Format(Settings.Default.PriceFormat, dMaxAveragePrice), lValuation, nPercent, dCurRsi, nRsi);
                 }
                 else if (Settings.Default.SmartEarnTick >= 0 && Settings.Default.SmartLossTick >= 0
                                         && dMaxAveragePrice - dAvgPrice >= Settings.Default.SmartEarnTick * Settings.Default.ItemOverTick)
@@ -1079,6 +1140,8 @@ namespace LuckyFuture.Logic
                         this.frmMain.AddLog("[청산]스마트청산 최대수익가:" + string.Format(Settings.Default.PriceFormat, dMaxAveragePrice) + " (설정:" + Settings.Default.SmartLossTick.ToString() + (Settings.Default.SmartLossUnit == 0 ? "%)" : "틱)"));
                         return true;
                     }
+                    Trace.TraceInformation("[청산] 스마트청산 최대수익가:{0} (설정:{1}{2})",
+                            string.Format(Settings.Default.PriceFormat, dMaxAveragePrice), Settings.Default.SmartLossTick, Settings.Default.SmartLossUnit == 0 ? "%)" : "틱)");
                 }
             }
             else if (tradeType == TRADETYPE.SELL)
@@ -1104,6 +1167,8 @@ namespace LuckyFuture.Logic
                             string.Format(Settings.Default.PriceFormat, dMaxAveragePrice), lValuation, nPercent, dCurRsi, nRsi));
                         return true;
                     }
+                    Trace.TraceInformation("[청산] 스마트영역청산 최대수익가:{0}({1:N0}원)(설정:{2}%이상), Rsi={3:N2}(설정:{4}이하)",
+                            string.Format(Settings.Default.PriceFormat, dMaxAveragePrice), lValuation, nPercent, dCurRsi, nRsi);
                 }
                 else if (Settings.Default.SmartEarnTick >= 0 && Settings.Default.SmartLossTick >= 0
                         && dAvgPrice - dMaxAveragePrice >= Settings.Default.SmartEarnTick * Settings.Default.ItemOverTick)
@@ -1118,6 +1183,8 @@ namespace LuckyFuture.Logic
                         this.frmMain.AddLog("[청산] 스마트청산 최대수익가:" + string.Format(Settings.Default.PriceFormat, dMaxAveragePrice) + " (설정:" + Settings.Default.SmartLossTick.ToString() + (Settings.Default.SmartLossUnit == 0 ? "%)" : "틱)"));
                         return true;
                     }
+                    Trace.TraceInformation("[청산] 스마트청산 최대수익가:{0} (설정:{1}{2})",
+                            string.Format(Settings.Default.PriceFormat, dMaxAveragePrice), Settings.Default.SmartLossTick, Settings.Default.SmartLossUnit == 0 ? "%)" : "틱)");
                 }
             }
 
@@ -1211,8 +1278,9 @@ namespace LuckyFuture.Logic
         }
         private bool CheckCrossLossPayoff(TRADETYPE tradeType, double dCurPrice, double dAvgPrice, double dCrossAveragePrice, double dCurRsi, int orderQty)
         {
-            // Trace.TraceInformation("<LogicAuto> CheckCrossLossPayoff AveragePrice = {0}, CrossAveragePrice = {1} ", dAvgPrice, dCrossAveragePrice);
-
+#if DEBUG_LOG
+            Trace.TraceInformation("<LogicAuto> CheckCrossLossPayoff AveragePrice = {0}, CrossAveragePrice = {1} ", dAvgPrice, dCrossAveragePrice);
+#endif
             double dSmartEarn = 0;
             if (tradeType == TRADETYPE.BUY)
             {
@@ -1233,12 +1301,13 @@ namespace LuckyFuture.Logic
                     if (nRsi > 0 && dCurRsi < nRsi && nPercent > 0 && lLossVal > 0 && lLossVal > lValuation * nPercent / 100)
                     {
                         m_boLiquid = true;
-                        //Trace.TraceInformation(string.Format("교차점에서 하락청산 교차점:{0}({1:N0}) 설정:{2}%", string.Format(Settings.Default.PriceFormat, dCrossAveragePrice), lValuation, nPercent));
-
                         this.frmMain.AddLog(string.Format("교차점에서 하락청산 교차점:{0}({1:N0}원)(설정:{2}%이상하락), Rsi={3:N2}(설정:{4}이하) ",
                             string.Format(Settings.Default.PriceFormat, dCrossAveragePrice), lValuation, nPercent, dCurRsi, nRsi));
                         return true;
                     }
+#if DEBUG_LOG
+                    Trace.TraceInformation(string.Format("교차점에서 하락청산 교차점:{0}({1:N0}) 설정:{2}%", string.Format(Settings.Default.PriceFormat, dCrossAveragePrice), lValuation, nPercent));
+#endif
                 }
                 else if (Settings.Default.CrossLossTick >= 0)
                 {
@@ -1249,11 +1318,12 @@ namespace LuckyFuture.Logic
                     if (dCrossAveragePrice - dCurPrice >= dSmartEarn)
                     {
                         m_boLiquid = true;
-                        //Trace.TraceInformation("교차점에서 하락청산 교차점:" + string.Format(Settings.Default.PriceFormat, dCrossAveragePrice) + " 설정:" + Settings.Default.CrossLossTick.ToString() + (Settings.Default.CrossLossUnit == 0 ? "%" : "틱"));
-
                         this.frmMain.AddLog("교차점에서 하락청산 교차점:" + string.Format(Settings.Default.PriceFormat, dCrossAveragePrice) + " 설정:" + Settings.Default.CrossLossTick.ToString() + (Settings.Default.CrossLossUnit == 0 ? "%" : "틱"));
                         return true;
                     }
+#if DEBUG_LOG
+                    Trace.TraceInformation("교차점에서 하락청산 교차점:" + string.Format(Settings.Default.PriceFormat, dCrossAveragePrice) + " 설정:" + Settings.Default.CrossLossTick.ToString() + (Settings.Default.CrossLossUnit == 0 ? "%" : "틱"));
+#endif
                 }
 
             }
@@ -1275,13 +1345,14 @@ namespace LuckyFuture.Logic
                     long lLossVal = (long)((dCurPrice - dCrossAveragePrice) / CurrentSite.CurItemSymbol.OverTick * CurrentSite.CurItemSymbol.ValueTick * CurrentSite.CurItemSymbol.Exchange * orderQty);
                     if (nPercent > 0 && lLossVal > 0 && lLossVal > lValuation * nPercent / 100)
                     {
-                        //Trace.TraceInformation("교차점에서 하락청산 교차점:{0}({1:N0}) 설정:{2}%", string.Format(Settings.Default.PriceFormat, dCrossAveragePrice), lValuation, nPercent);
-
                         m_boLiquid = true;
                         this.frmMain.AddLog(string.Format("교차점에서 하락청산 교차점:{0}({1:N0}원) (설정:{2}%이상상승), Rsi={3:N2}(설정:{4}이상)",
                             string.Format(Settings.Default.PriceFormat, dCrossAveragePrice), lValuation, nPercent, dCurRsi, nRsi));
                         return true;
                     }
+#if DEBUG_LOG
+                    Trace.TraceInformation("교차점에서 하락청산 교차점:{0}({1:N0}) 설정:{2}%", string.Format(Settings.Default.PriceFormat, dCrossAveragePrice), lValuation, nPercent);
+#endif
                 }
                 else if (Settings.Default.CrossLossPayoff && Settings.Default.CrossLossTick >= 0 && dCrossAveragePrice > 0)
                 {
@@ -1291,13 +1362,13 @@ namespace LuckyFuture.Logic
 
                     if (dCurPrice - dCrossAveragePrice >= dSmartEarn)
                     {
-                        //Trace.TraceInformation("교차점에서 하락청산 교차점:" + string.Format(Settings.Default.PriceFormat, dCrossAveragePrice) + " 설정:" + Settings.Default.CrossLossTick.ToString() + (Settings.Default.CrossLossUnit == 0 ? "%" : "틱"));
-
                         m_boLiquid = true;
                         this.frmMain.AddLog("교차점에서 하락청산 교차점:" + string.Format(Settings.Default.PriceFormat, dCrossAveragePrice) + " 설정:" + Settings.Default.CrossLossTick.ToString() + (Settings.Default.CrossLossUnit == 0 ? "%" : "틱"));
                         return true;
                     }
-
+#if DEBUG_LOG
+                    Trace.TraceInformation("교차점에서 하락청산 교차점:" + string.Format(Settings.Default.PriceFormat, dCrossAveragePrice) + " 설정:" + Settings.Default.CrossLossTick.ToString() + (Settings.Default.CrossLossUnit == 0 ? "%" : "틱"));
+#endif
                 }
             }
             return false;
@@ -1316,11 +1387,12 @@ namespace LuckyFuture.Logic
                 {
                     bChanged = false;
                     int nConc = frmMain.GetConcPerMin(Settings.Default.Conc1Min);
-                    // Trace.TraceInformation("<LogicAuto> TradeChanged() 1: {0} > {1} per {2}MIN ", nConc, Settings.Default.Conc1Cnt, Settings.Default.Conc1Min);
+#if DEBUG_LOG
+                    // Trace.TraceInformation("CheckTradeChange() {0}분당거래{1}(설정:{2}) ", Settings.Default.Conc1Min, nConc, Settings.Default.Conc1Cnt);
+#endif
                     if (nConc > Settings.Default.Conc1Cnt)
                     {
                         log = string.Format("{0}분당거래{1}(설정:{2}) ", Settings.Default.Conc1Min, nConc, Settings.Default.Conc1Cnt);
-                        // Trace.TraceInformation(log);
                         bChanged = true;
                     }
                 }
@@ -1338,7 +1410,13 @@ namespace LuckyFuture.Logic
                         int nConcSum = 0;
                         lastCandlelist.ForEach(c => nConcSum += c.Conc);
                         nConcSum -= lastCandlelist[lastCandlelist.Count - 1].Conc;
-                        // Trace.TraceInformation("<LogicAuto> TradeChanged() 2: {0} >= {1} * {2}% / {3} ", lastCandlelist[lastCandlelist.Count - 1].Conc, nConcSum, Settings.Default.Conc2Cnt, Settings.Default.Conc2Candle);
+#if DEBUG_LOG
+                        //Trace.TraceInformation("CheckTradeChange() {0}차트 거래량 {1}봉평균{2} 현재:{3}(설정:{4}%) ", Common.GetChartTypeStr(CurrentSite.DChartType),
+                        //            Settings.Default.Conc2Candle,
+                        //            nConcSum / Settings.Default.Conc2Candle,
+                        //            lastCandlelist[lastCandlelist.Count - 1].Conc,
+                        //            Settings.Default.Conc2Cnt);
+#endif
                         if (lastCandlelist[lastCandlelist.Count - 1].Conc >= nConcSum * Settings.Default.Conc2Cnt / 100 / Settings.Default.Conc2Candle)
                         {
                             log += string.Format("{0}차트 거래량 {1}봉평균{2} 현재:{3}(설정:{4}%) ",
@@ -1348,7 +1426,6 @@ namespace LuckyFuture.Logic
                                     lastCandlelist[lastCandlelist.Count - 1].Conc,
                                     Settings.Default.Conc2Cnt
                                 );
-                            // Trace.TraceInformation(log);
                             bChanged = true;
                         }
 
@@ -1360,100 +1437,162 @@ namespace LuckyFuture.Logic
             {
                 bChanged = false;
                 List<DItem> lastCandlelist = frmMain.GetCandleList(1, true);
+#if DEBUG_LOG
+                //Trace.TraceInformation("CheckTradeChange() ADX:{0:N2}(설정:{1}이상) ", lastCandlelist[0].Adx, Settings.Default.AdxCnt);
+#endif
                 if (lastCandlelist.Count > 0 && lastCandlelist[0].Adx > Settings.Default.AdxCnt)
                 {
                     log += string.Format("ADX:{0:N2}(설정:{1}이상) ", lastCandlelist[0].Adx, Settings.Default.AdxCnt);
-                    // Trace.TraceInformation(log);
                     bChanged = true;
                 }
             }
 
             return bChanged;
         }
-        private TRADETYPE GetTradeCondition(ref string log)
+        private TRADETYPE GetTradeCondition(ref string log, TRADETYPE selType)
         {
-            TRADETYPE tradeType = TRADETYPE.NONE;
             if (!Settings.Default.CciOn && !Settings.Default.RsiOn && !Settings.Default.AvgsOn)
-                return TRADETYPE.BOTH;
+                return selType;
 
             List<DItem> lastCandlelist = frmMain.GetCandleList(2, true);
             if (lastCandlelist.Count < 2)
-                return tradeType;
+                return TRADETYPE.NONE;
             if (Settings.Default.CciOn)
             {
-                if (Settings.Default.BoOrdType == 0)
+#if DEBUG_LOG
+                Trace.TraceInformation("GetTradeCondition() CCI:{0:N2}, {1:N2}", lastCandlelist[0].Cci, lastCandlelist[1].Cci);
+#endif
+                if(selType == TRADETYPE.BUY)
                 {
-                    if (lastCandlelist[0].Cci != 0 && /*lastCandlelist[0].Cci < Settings.Default.CciRange1 &&*/ lastCandlelist[1].Cci > Settings.Default.CciRange1)
+                    if (Settings.Default.BettingType == (int)BETTYPE.BOLINE && Settings.Default.BoOrdType == 1)     //CCI
                     {
-                        log += string.Format("CCI:{0:N2}(설정:{1}이상)", lastCandlelist[1].Cci, Settings.Default.CciRange1);
-                        // Trace.TraceInformation(log);
-                        tradeType = Settings.Default.CciSide1 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
-
-                    }
-                    else if (lastCandlelist[0].Cci != 0 && /*lastCandlelist[0].Cci > Settings.Default.CciRange2 &&*/ lastCandlelist[1].Cci < Settings.Default.CciRange2)
+                        if (Settings.Default.CciSide1 == 0 && lastCandlelist[0].Cci != 0 && lastCandlelist[1].Cci > Settings.Default.CciRange1 + Settings.Default.CciRange11)
+                        {
+                            log += string.Format("CCI:{0:N2}(설정:{1}상승 {2}이상)", lastCandlelist[1].Cci, Settings.Default.CciRange1, Settings.Default.CciRange11);
+                            return TRADETYPE.BUY;
+                        }
+                        if (Settings.Default.CciSide2 == 0 && lastCandlelist[0].Cci != 0 && lastCandlelist[1].Cci < Settings.Default.CciRange2 - Settings.Default.CciRange21)
+                        {
+                            log += string.Format("CCI:{0:N2}(설정:{1}하락 {2}이하)", lastCandlelist[1].Cci, Settings.Default.CciRange2, Settings.Default.CciRange21);
+                            return TRADETYPE.BUY;
+                        }
+                    } else
                     {
-                        log += string.Format("CCI:{0:N2}(설정:{1}이하)", lastCandlelist[1].Cci, Settings.Default.CciRange2);
-                        // Trace.TraceInformation(log);
-                        tradeType = Settings.Default.CciSide2 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
+                        if (Settings.Default.CciSide1 == 0 && lastCandlelist[0].Cci != 0 && lastCandlelist[1].Cci > Settings.Default.CciRange1)
+                        {
+                            log += string.Format("CCI:{0:N2}(설정:{1}이상)", lastCandlelist[1].Cci, Settings.Default.CciRange1);
+                            return TRADETYPE.BUY;
+                        }
+                        else if (Settings.Default.CciSide2 == 0 && lastCandlelist[0].Cci != 0 && lastCandlelist[1].Cci < Settings.Default.CciRange2)
+                        {
+                            log += string.Format("CCI:{0:N2}(설정:{1}이하)", lastCandlelist[1].Cci, Settings.Default.CciRange2);
+                            return TRADETYPE.BUY;
+                        }
                     }
-                    else return TRADETYPE.NONE;
-                }
-                else
+                    
+                } else if (selType == TRADETYPE.SELL)
                 {
-                    if (lastCandlelist[0].Cci != 0 && /*lastCandlelist[0].Cci < Settings.Default.CciRange1 &&*/ lastCandlelist[1].Cci > Settings.Default.CciRange1 + Settings.Default.CciRange11)
+                    if (Settings.Default.BettingType == (int)BETTYPE.BOLINE && Settings.Default.BoOrdType == 1)     //CCI
                     {
-                        log += string.Format("CCI:{0:N2}(설정:{1}상승 {2}이상)", lastCandlelist[1].Cci, Settings.Default.CciRange1, Settings.Default.CciRange11);
-                        // Trace.TraceInformation(log);
-                        tradeType = Settings.Default.CciSide1 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
+                        if (Settings.Default.CciSide1 == 1 && lastCandlelist[0].Cci != 0 && lastCandlelist[1].Cci > Settings.Default.CciRange1 + Settings.Default.CciRange11)
+                        {
+                            log += string.Format("CCI:{0:N2}(설정:{1}상승 {2}이상)", lastCandlelist[1].Cci, Settings.Default.CciRange1, Settings.Default.CciRange11);
+                            return TRADETYPE.SELL;
+                        }
+                        if (Settings.Default.CciSide2 == 1 && lastCandlelist[0].Cci != 0 && lastCandlelist[1].Cci < Settings.Default.CciRange2 - Settings.Default.CciRange21)
+                        {
+                            log += string.Format("CCI:{0:N2}(설정:{1}하락 {2}이하)", lastCandlelist[1].Cci, Settings.Default.CciRange2, Settings.Default.CciRange21);
+                            return TRADETYPE.SELL;
+                        }
+                    } else
+                    {
+                        if (Settings.Default.CciSide1 == 1 && lastCandlelist[0].Cci != 0 && lastCandlelist[1].Cci > Settings.Default.CciRange1)
+                        {
+                            log += string.Format("CCI:{0:N2}(설정:{1}이상)", lastCandlelist[1].Cci, Settings.Default.CciRange1);
+                            return TRADETYPE.SELL;
+                        }
+                        else if (Settings.Default.CciSide2 == 1 && lastCandlelist[0].Cci != 0 && lastCandlelist[1].Cci < Settings.Default.CciRange2)
+                        {
+                            log += string.Format("CCI:{0:N2}(설정:{1}이하)", lastCandlelist[1].Cci, Settings.Default.CciRange2);
+                            return TRADETYPE.SELL;
+                        }
+                    }
+                    
+                } else
+                {
+                    if (Settings.Default.BettingType == (int)BETTYPE.BOLINE && Settings.Default.BoOrdType == 1)     //CCI
+                    {
+                        if (lastCandlelist[0].Cci != 0 && lastCandlelist[1].Cci > Settings.Default.CciRange1 + Settings.Default.CciRange11)
+                        {
+                            log += string.Format("CCI:{0:N2}(설정:{1}상승 {2}이상)", lastCandlelist[1].Cci, Settings.Default.CciRange1, Settings.Default.CciRange11);
+                            return Settings.Default.CciSide1 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
 
+                        }
+                        else if (lastCandlelist[0].Cci != 0 && lastCandlelist[1].Cci < Settings.Default.CciRange2 - Settings.Default.CciRange21)
+                        {
+                            log += string.Format("CCI:{0:N2}(설정:{1}하락 {2}이하)", lastCandlelist[1].Cci, Settings.Default.CciRange2, Settings.Default.CciRange21);
+                            return Settings.Default.CciSide2 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
+                        }
                     }
-                    else if (lastCandlelist[0].Cci != 0 && /*lastCandlelist[0].Cci > Settings.Default.CciRange2 &&*/ lastCandlelist[1].Cci < Settings.Default.CciRange2 - Settings.Default.CciRange21)
+                    else
                     {
-                        log += string.Format("CCI:{0:N2}(설정:{1}하락 {2}이하)", lastCandlelist[1].Cci, Settings.Default.CciRange2, Settings.Default.CciRange21);
-                        // Trace.TraceInformation(log);
-                        tradeType = Settings.Default.CciSide2 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
+                        if (lastCandlelist[0].Cci != 0 && lastCandlelist[1].Cci > Settings.Default.CciRange1)
+                        {
+                            log += string.Format("CCI:{0:N2}(설정:{1}이상)", lastCandlelist[1].Cci, Settings.Default.CciRange1);
+                            return Settings.Default.CciSide1 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
+
+                        }
+                        else if (lastCandlelist[0].Cci != 0 && lastCandlelist[1].Cci < Settings.Default.CciRange2)
+                        {
+                            log += string.Format("CCI:{0:N2}(설정:{1}이하)", lastCandlelist[1].Cci, Settings.Default.CciRange2);
+                            return Settings.Default.CciSide2 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
+                        }
                     }
-                    else return TRADETYPE.NONE;
                 }
-
             }
             if (Settings.Default.RsiOn)
             {
-                if (lastCandlelist[0].Rsi > 0 && /*lastCandlelist[0].Rsi < Settings.Default.RsiRange1 &&*/ lastCandlelist[1].Rsi > Settings.Default.RsiRange1)
+#if DEBUG_LOG
+                Trace.TraceInformation("GetTradeCondition() RSI:{0:N2}, {1:N2}", lastCandlelist[0].Rsi, lastCandlelist[1].Rsi);
+#endif
+                if (selType == TRADETYPE.BUY)
                 {
-                    log += string.Format("RSI:{0:N2}(설정:{1}이상)", lastCandlelist[1].Rsi, Settings.Default.RsiRange1);
-                    // Trace.TraceInformation(log);
-                    TRADETYPE tradeType2 = Settings.Default.RsiSide1 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
-                    if (tradeType == TRADETYPE.NONE)
-                        tradeType = tradeType2;
-                    else if (tradeType != tradeType2)
+                    if(Settings.Default.RsiSide1 == 0 && lastCandlelist[0].Rsi > 0 && lastCandlelist[1].Rsi > Settings.Default.RsiRange1)
                     {
-                        return TRADETYPE.NONE;
-                    }
-                    //if CCI Tradetype == RSI Tradetype, Continue;
-                }
-                else if (lastCandlelist[0].Rsi > 0 && /*lastCandlelist[0].Rsi > Settings.Default.RsiRange2 &&*/ lastCandlelist[1].Rsi < Settings.Default.RsiRange2)
-                {
-                    log += string.Format("RSI:{0:N2}(설정:{1}이하)", lastCandlelist[1].Rsi, Settings.Default.RsiRange2);
-                    // Trace.TraceInformation(log);
-                    TRADETYPE tradeType2 = Settings.Default.RsiSide2 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
-                    if (tradeType == TRADETYPE.NONE)
-                        tradeType = tradeType2;
-                    else if (tradeType != tradeType2)
+                        return TRADETYPE.BUY;
+                    } else if(Settings.Default.RsiSide2 == 0 && lastCandlelist[0].Rsi > 0 && lastCandlelist[1].Rsi < Settings.Default.RsiRange2)
                     {
-                        return TRADETYPE.NONE;
+                        return TRADETYPE.BUY;
                     }
-                    //if CCI Tradetype == RSI Tradetype, Continue;
                 }
-                else
+                else if (selType == TRADETYPE.SELL)
                 {
-                    return TRADETYPE.NONE;
+                    if (Settings.Default.RsiSide1 == 1 && lastCandlelist[0].Rsi > 0 && lastCandlelist[1].Rsi > Settings.Default.RsiRange1)
+                    {
+                        return TRADETYPE.SELL;
+                    }
+                    else if (Settings.Default.RsiSide2 == 1 && lastCandlelist[0].Rsi > 0 && lastCandlelist[1].Rsi < Settings.Default.RsiRange2)
+                    {
+                        return TRADETYPE.SELL;
+                    }
+                } else
+                {
+                    if (lastCandlelist[0].Rsi > 0 && lastCandlelist[1].Rsi > Settings.Default.RsiRange1)
+                    {
+                        log += string.Format("RSI:{0:N2}(설정:{1}이상)", lastCandlelist[1].Rsi, Settings.Default.RsiRange1);
+                        return Settings.Default.RsiSide1 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
+                    }
+                    else if (lastCandlelist[0].Rsi > 0 && lastCandlelist[1].Rsi < Settings.Default.RsiRange2)
+                    {
+                        log += string.Format("RSI:{0:N2}(설정:{1}이하)", lastCandlelist[1].Rsi, Settings.Default.RsiRange2);
+                        return Settings.Default.RsiSide2 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
+                    }
                 }
             }
             if (Settings.Default.AvgsOn)
             {
                 if (Settings.Default.AvgsCandle < 1)
-                    return tradeType;
+                    return TRADETYPE.NONE;
 
                 List<DItem> lastCandlelist2 = frmMain.GetCandleList(Settings.Default.AvgsCandle, false);
                 if (lastCandlelist2.Count < Settings.Default.AvgsCandle)
@@ -1464,43 +1603,122 @@ namespace LuckyFuture.Logic
                 int upDown = lastCandlelist2[0].AvgPos;
                 if (upDown == 0)
                     return TRADETYPE.NONE;
-                else if (upDown == 1)
+
+                if (selType == TRADETYPE.BUY)
                 {
-                    if (lastCandlelist2.Count<DItem>(d => d.AvgPos == upDown) >= lastCandlelist2.Count)
+                    if (upDown == 1 && Settings.Default.AvgsSide1 == 0)
                     {
-                        log += string.Format("이평선S1:{0}봉 U ", Settings.Default.AvgsCandle); //200일선 위상태
-                        // Trace.TraceInformation(log);
-                        TRADETYPE tradeType3 = Settings.Default.AvgsSide1 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
-                        if (tradeType == TRADETYPE.NONE)
-                            tradeType = tradeType3;
-                        else if (tradeType != tradeType3)
+                        if (lastCandlelist2.Count<DItem>(d => d.AvgPos == upDown) >= lastCandlelist2.Count)
                         {
-                            return TRADETYPE.NONE;
+                            log += string.Format("이평S1:{0}봉 U ", Settings.Default.AvgsCandle); //200일선 위상태
+                            return TRADETYPE.BUY;
                         }
                     }
-                    else return TRADETYPE.NONE;
-                }
-                else if (upDown == -1)
-                {
-                    if (lastCandlelist2.Count<DItem>(d => d.AvgPos == upDown) >= lastCandlelist2.Count)
+                    else if (upDown == -1 && Settings.Default.AvgsSide2 == 0)
                     {
-
-                        log += string.Format("이평선S1:{0}봉 D ", Settings.Default.AvgsCandle); //200일선 아래
-                        // Trace.TraceInformation(log);
-                        TRADETYPE tradeType3 = Settings.Default.AvgsSide2 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
-                        if (tradeType == TRADETYPE.NONE)
-                            tradeType = tradeType3;
-                        else if (tradeType != tradeType3)
+                        if (lastCandlelist2.Count<DItem>(d => d.AvgPos == upDown) >= lastCandlelist2.Count)
                         {
-                            return TRADETYPE.NONE;
+
+                            log += string.Format("이평S1:{0}봉 D ", Settings.Default.AvgsCandle); //200일선 아래
+                            return TRADETYPE.BUY;
                         }
                     }
-                    else return TRADETYPE.NONE;
-                }
+                } else if (selType == TRADETYPE.SELL)
+                {
+                    if (upDown == 1 && Settings.Default.AvgsSide1 == 1)
+                    {
+                        if (lastCandlelist2.Count<DItem>(d => d.AvgPos == upDown) >= lastCandlelist2.Count)
+                        {
+                            log += string.Format("이평S1:{0}봉 U ", Settings.Default.AvgsCandle); //200일선 위상태
+                            return TRADETYPE.SELL;
+                        }
+                    }
+                    else if (upDown == -1 && Settings.Default.AvgsSide2 == 1)
+                    {
+                        if (lastCandlelist2.Count<DItem>(d => d.AvgPos == upDown) >= lastCandlelist2.Count)
+                        {
 
+                            log += string.Format("이평S1:{0}봉 D ", Settings.Default.AvgsCandle); //200일선 아래
+                            return TRADETYPE.SELL;
+                        }
+                    }
+                } else
+                {
+                    if (upDown == 1)
+                    {
+                        if (lastCandlelist2.Count<DItem>(d => d.AvgPos == upDown) >= lastCandlelist2.Count)
+                        {
+                            log += string.Format("이평S1:{0}봉 U ", Settings.Default.AvgsCandle); //200일선 위상태
+                            return Settings.Default.AvgsSide1 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
+                        }
+                    }
+                    else if (upDown == -1)
+                    {
+                        if (lastCandlelist2.Count<DItem>(d => d.AvgPos == upDown) >= lastCandlelist2.Count)
+                        {
+
+                            log += string.Format("이평S1:{0}봉 D ", Settings.Default.AvgsCandle); //200일선 아래
+                            return Settings.Default.AvgsSide2 == 0 ? TRADETYPE.BUY : TRADETYPE.SELL;
+                        }
+                    }
+                }
+            }
+            return TRADETYPE.NONE;
+        }
+        private bool CheckBollPayoff(TRADETYPE tradeType, DItem lastCandle, ref string log)
+        {
+            if (!Settings.Default.BollPayoff && !Settings.Default.MacdPayoff)
+                return true;
+
+            bool bPayoff = true;
+            if (Settings.Default.BollPayoff)
+            {
+                if(tradeType == TRADETYPE.BUY)
+                {
+                    if (lastCandle.BollPerb >= Settings.Default.BollPayoffUp)
+                    {
+                        log += string.Format("볼린저밴드 %B:{0:N2}(설정:{1}이상)", lastCandle.BollPerb, Settings.Default.BollPayoffUp);
+                        bPayoff = true;
+                    }
+                    else bPayoff = false;
+
+                }
+                else if (tradeType == TRADETYPE.SELL)
+                {
+                    if (lastCandle.BollPerb <= Settings.Default.BollPayoffDown)
+                    {
+                        log += string.Format("볼린저밴드 %B:{0:N2}(설정:{1}이하)", lastCandle.BollPerb, Settings.Default.BollPayoffDown);
+                        bPayoff = true;
+                    }
+                    else bPayoff = false;
+
+                }
             }
 
-            return tradeType;
+            if (Settings.Default.MacdPayoff && bPayoff)
+            {
+                float fMacd = lastCandle.MacdVal - lastCandle.MacdSig;
+                if (tradeType == TRADETYPE.BUY)
+                {
+                    if (fMacd >= 0)
+                    {
+                        log += string.Format(", MACD 양수({0:N2})", fMacd);
+                        bPayoff = true;
+                    }
+                    else bPayoff = false;
+
+                }
+                else if (tradeType == TRADETYPE.SELL)
+                {
+                    if (fMacd < 0)
+                    {
+                        log += string.Format(", MACD 음수({0:N2})", fMacd);
+                        bPayoff = true;
+                    }
+                    else bPayoff = false;
+                }
+            }
+            return bPayoff;
         }
         private bool TraceIntervalLog()
         {
@@ -1561,7 +1779,7 @@ namespace LuckyFuture.Logic
             {
                 if (lasDItemlist[0].Adx > 0)
                 {
-                    sValue = string.Format(" ADX:{0:N2} |", lasDItemlist[0].Adx);
+                    sValue = string.Format("ADX:{0:N2} |", lasDItemlist[0].Adx);
                     this.frmMain.AppendValue(sValue);
                     log += sValue;
                     sValue = "";
@@ -1588,6 +1806,28 @@ namespace LuckyFuture.Logic
                     log += sValue;
                     sValue = "";
                 }
+
+                if (lasDItemlist[0].BollAvg != 0)
+                {
+                    sValue = string.Format(" 볼%B:{0:N2} |", lasDItemlist[0].BollPerb);
+                    if (lasDItemlist[0].BollPerb < 0.5)
+                        this.frmMain.AppendValue(sValue, new object[1]);
+                    else
+                        this.frmMain.AppendValue(sValue, new object[2]);
+                    log += sValue;
+                    sValue = "";
+                }
+
+                if (lasDItemlist[0].MacdSig != 0)
+                {
+                    sValue = string.Format(" MACD:{0:N2} |", lasDItemlist[0].MacdVal-lasDItemlist[0].MacdSig);
+                    if (lasDItemlist[0].MacdVal - lasDItemlist[0].MacdSig < 0)
+                        this.frmMain.AppendValue(sValue, new object[1]);
+                    else
+                        this.frmMain.AppendValue(sValue, new object[2]);
+                    log += sValue;
+                    sValue = "";
+                }
             }
 
             if (Settings.Default.AvgsCandle > 0)
@@ -1601,7 +1841,7 @@ namespace LuckyFuture.Logic
                     {
                         if (lastCandlelist2.Count<DItem>(d => d.AvgPos == upDown) >= lastCandlelist2.Count)
                         {
-                            sValue += string.Format(" 이평선S1:{0}봉 U ", Settings.Default.AvgsCandle); //200일선 위상태
+                            sValue += string.Format(" 이평S1:{0}봉 U ", Settings.Default.AvgsCandle); //200일선 위상태
                         }
                     }
                     else if (upDown == -1)
@@ -1609,8 +1849,7 @@ namespace LuckyFuture.Logic
                         if (lastCandlelist2.Count<DItem>(d => d.AvgPos == upDown) >= lastCandlelist2.Count)
                         {
 
-                            sValue += string.Format(" 이평선S1:{0}봉 D ", Settings.Default.AvgsCandle);  //200일선 아래상태
-                            // Trace.TraceInformation(log);
+                            sValue += string.Format(" 이평S1:{0}봉 D ", Settings.Default.AvgsCandle);  //200일선 아래상태
                         }
                     }
                 }
@@ -1757,7 +1996,7 @@ namespace LuckyFuture.Logic
                     {
                         m_tickOrder = Environment.TickCount;
                     }
-                    if (_currentSite.Type != SITETYPE.KIWOOM && DoOrder(nQuantity * 2))
+                    if (DoOrder(nQuantity * 2))
                     {
                         return true;
                     }
@@ -1769,7 +2008,7 @@ namespace LuckyFuture.Logic
                     {
                         m_tickOrder = Environment.TickCount;
                     }
-                    if (_currentSite.Type != SITETYPE.KIWOOM && DoOrder(nQuantity * 2))
+                    if (DoOrder(nQuantity * 2))
                     {
                         return true;
                     }
@@ -1785,6 +2024,10 @@ namespace LuckyFuture.Logic
         {
             bool bNeedLast = false;
             int nCandleCnt = Settings.Default.BettingCandleCount;
+            if (Settings.Default.BettingType == (int)BETTYPE.UPDOWN)
+            {
+                nCandleCnt = Settings.Default.BettingCandleCount + 1;
+            }
             if (Settings.Default.BettingType == (int)BETTYPE.CROSS || Settings.Default.BettingType == (int)BETTYPE.HYBRID)
             {
                 bNeedLast = Settings.Default.BettingCandleComplete == 0;
@@ -1793,7 +2036,6 @@ namespace LuckyFuture.Logic
             else if (Settings.Default.BettingType == (int)BETTYPE.BOLINE || Settings.Default.BettingType == (int)BETTYPE.BOT1)
             {
                 bNeedLast = true;
-                nCandleCnt = Settings.Default.BettingCandleCount;
             }
 
             if (nCandleCnt < 1)
@@ -1826,11 +2068,19 @@ namespace LuckyFuture.Logic
                 float fTickConf = Settings.Default.ItemOverTick * Settings.Default.BettingTickCount;
 
                 int iFirstIdx = lastCandlelist.First().Index;
-
-                if (fTickDiff >= fTickConf && lastCandlelist.Count<DItem>(d => d.GetTrendUp(avgType, iFirstIdx) == CH_TRENDTYPE.UP) >= Settings.Default.BettingCandleCount)
+#if DEBUG_LOG
+                Trace.TraceInformation("SelectTradeType() BETTYPE.UPDOWN 틱={0:N2}(설정:이평선={1}, {2}개 틱={3})", fTickDiff, (int)avgType, Settings.Default.BettingCandleCount, fTickConf);
+#endif
+                if (fTickDiff >= fTickConf && lastCandlelist.Count<DItem>(d => d.GetTrendUp(avgType, iFirstIdx) == CH_TRENDTYPE.UP) >= Settings.Default.BettingCandleCount + 1)
+                {
+                    log += String.Format("틱={0:N2}(설정:{1}개 틱={2})", fTickDiff, Settings.Default.BettingCandleCount, fTickConf);
                     trade_type = TRADETYPE.BUY;
-                else if (fTickDiff >= fTickConf && lastCandlelist.Count<DItem>(d => d.GetTrendDown(avgType, iFirstIdx) == CH_TRENDTYPE.DOWN) >= Settings.Default.BettingCandleCount)
+                }
+                else if (fTickDiff >= fTickConf && lastCandlelist.Count<DItem>(d => d.GetTrendDown(avgType, iFirstIdx) == CH_TRENDTYPE.DOWN) >= Settings.Default.BettingCandleCount + 1)
+                {
+                    log += String.Format("틱={0:N2}(설정:{1}개 틱={2})", fTickDiff, Settings.Default.BettingCandleCount, fTickConf);
                     trade_type = TRADETYPE.SELL;
+                }
                 else trade_type = TRADETYPE.NONE;
             }
             else if (Settings.Default.BettingType == (int)BETTYPE.CROSS || Settings.Default.BettingType == (int)BETTYPE.HYBRID)
@@ -1839,18 +2089,24 @@ namespace LuckyFuture.Logic
                 bool bTradeChanged = CheckTradeChange(ref logTrade);
                 if (bTradeChanged)
                 {
+
                     if (logTrade.Length > 0)
+                    {
                         log += logTrade;
+#if DEBUG_LOG
+                        Trace.TraceInformation(logTrade);
+#endif
+                    }
                     logTrade = "";
 
                     CH_TRENDTYPE trend_type = lastCandlelist.Last().GetCrossTrend(CH_AVGTYPE.LINE_1, CH_AVGTYPE.LINE_2);
                     if (trend_type == CH_TRENDTYPE.UP)
                     {
-                        trade_type = GetTradeCondition(ref logTrade);
-                        if (trade_type == TRADETYPE.BOTH)
-                            trade_type = TRADETYPE.BUY;
-                        else if (trade_type == TRADETYPE.SELL)
-                            trade_type = TRADETYPE.NONE;
+                        trade_type = GetTradeCondition(ref logTrade, TRADETYPE.BUY);
+#if DEBUG_LOG
+                        if (logTrade.Length > 0) 
+                            Trace.TraceInformation(logTrade);
+#endif
                         if (trade_type != TRADETYPE.NONE)
                         {
                             if (logTrade.Length > 0)
@@ -1859,11 +2115,11 @@ namespace LuckyFuture.Logic
                     }
                     else if (trend_type == CH_TRENDTYPE.DOWN)
                     {
-                        trade_type = GetTradeCondition(ref logTrade);
-                        if (trade_type == TRADETYPE.BOTH)
-                            trade_type = TRADETYPE.SELL;
-                        else if (trade_type == TRADETYPE.BUY)
-                            trade_type = TRADETYPE.NONE;
+                        trade_type = GetTradeCondition(ref logTrade, TRADETYPE.SELL);
+#if DEBUG_LOG
+                        if (logTrade.Length > 0)
+                            Trace.TraceInformation(logTrade);
+#endif
                         if (trade_type != TRADETYPE.NONE)
                         {
                             if (logTrade.Length > 0)
@@ -1884,11 +2140,19 @@ namespace LuckyFuture.Logic
                     if (bTradeChanged)
                     {
                         if (logTrade.Length > 0)
+                        {
                             log += logTrade;
+#if DEBUG_LOG
+                            Trace.TraceInformation(logTrade);
+#endif
+                        }
                         logTrade = "";
-                        trade_type = GetTradeCondition(ref logTrade);
-                        if (trade_type == TRADETYPE.BOTH)
-                            trade_type = TRADETYPE.NONE;
+                        trade_type = GetTradeCondition(ref logTrade, TRADETYPE.NONE);
+#if DEBUG_LOG
+                        if (logTrade.Length > 0)
+                            Trace.TraceInformation(logTrade);
+#endif
+                        
                         if (trade_type != TRADETYPE.NONE)
                         {
                             if (logTrade.Length > 0)
@@ -1905,15 +2169,20 @@ namespace LuckyFuture.Logic
                         string logTrade = "";
                         bool bTradeChanged = CheckTradeChange(ref logTrade);
                         if (logTrade.Length > 0)
+                        {
                             log += logTrade;
+#if DEBUG_LOG
+                            Trace.TraceInformation(logTrade);
+#endif
+                        }
                         logTrade = "";
                         if (lastCandlelist.Count<DItem>(d => d.Est_Type == RESULTSTATE.BUY) >= lastCandlelist.Count && bTradeChanged)
                         {
-                            trade_type = GetTradeCondition(ref logTrade);
-                            if (trade_type == TRADETYPE.BOTH)
-                                trade_type = TRADETYPE.BUY;
-                            else if (trade_type == TRADETYPE.SELL)
-                                trade_type = TRADETYPE.NONE;
+                            trade_type = GetTradeCondition(ref logTrade, TRADETYPE.BUY);
+#if DEBUG_LOG
+                            if (logTrade.Length > 0)
+                                Trace.TraceInformation(logTrade);
+#endif
                             if (trade_type != TRADETYPE.NONE)
                             {
                                 if (logTrade.Length > 0)
@@ -1923,11 +2192,11 @@ namespace LuckyFuture.Logic
                         }
                         else if (lastCandlelist.Count<DItem>(d => d.Est_Type == RESULTSTATE.SELL) >= lastCandlelist.Count && bTradeChanged)
                         {
-                            trade_type = GetTradeCondition(ref logTrade);
-                            if (trade_type == TRADETYPE.BOTH)
-                                trade_type = TRADETYPE.SELL;
-                            else if (trade_type == TRADETYPE.BUY)
-                                trade_type = TRADETYPE.NONE;
+                            trade_type = GetTradeCondition(ref logTrade, TRADETYPE.SELL);
+#if DEBUG_LOG
+                            if (logTrade.Length > 0)
+                                Trace.TraceInformation(logTrade);
+#endif
                             if (trade_type != TRADETYPE.NONE)
                             {
                                 if (logTrade.Length > 0)

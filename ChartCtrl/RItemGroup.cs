@@ -33,6 +33,7 @@ namespace ChartCtrl
         float[] m_grayValues = { 6, 6 };
         Pen[] m_arrAvgPen = new Pen[5] ;
         Pen[] m_arrBoPen = new Pen[2];
+        Pen[] m_arrBollPen = new Pen[3];
 
         public int Count()
         {
@@ -50,6 +51,8 @@ namespace ChartCtrl
                 new Pen(Settings.Default.AvgLineColor3, nLineWidth), new Pen(Settings.Default.AvgLineColor4, nLineWidth), 
                 new Pen(Settings.Default.AvgLineColor5, nLineWidth), new Pen(Settings.Default.AvgLineColor6, nLineWidth)};
             m_arrBoPen = new Pen[] { new Pen(Settings.Default.BoLineColor1, nLineWidth), new Pen(Settings.Default.BoLineColor2, nLineWidth) };
+            m_arrBollPen = new Pen[] { new Pen(Settings.Default.BollMidColor, nLineWidth), new Pen(Settings.Default.BollUpColor, nLineWidth),
+                new Pen(Settings.Default.BollDownColor, nLineWidth)};
 
         }
         public void Add(RItem item)
@@ -109,6 +112,8 @@ namespace ChartCtrl
                     DrawAvgLine(g);
                 if (Settings.Default.BoLine)
                     DrawBoLine(g);
+                if(Settings.Default.BollBand)
+                    DrawBollLine(g);
             }
             catch (Exception) { }
         }
@@ -315,6 +320,69 @@ namespace ChartCtrl
                 pt2List.Clear();
             }
 
+
+        }
+
+        public void DrawBollLine(Graphics g)
+        {
+            if (listRItem.Count < 1)
+                return;
+            try
+            {
+                List<PointF> pt1List = new List<PointF>();
+                List<PointF> pt2List = new List<PointF>();
+                List<PointF> pt3List = new List<PointF>();
+
+                RItem itemPrev = listRItem.First();
+                RItem itemNext = null;
+                //캔들차트
+                float fTmPrevX, fTmNextX;
+                int i;
+                for (i = 1; i < listRItem.Count; i++)
+                {
+                    itemNext = listRItem[i];
+
+                    fTmPrevX = itemPrev.Index * CtrlProperty._nItemWidth + CtrlProperty._nItemWidth / 2;
+                    fTmNextX = fTmPrevX + CtrlProperty._nItemWidth;//itemNext.Index * CtrlProperty._nItemWidth + CtrlProperty._nItemWidth / 2;
+                    if (fTmPrevX >= CtrlProperty._nTimeOrigin - CtrlProperty._nItemWidth && fTmNextX <= CtrlProperty._nTimeMax)
+                    {
+                        if (itemPrev.BollAvg != 0 && itemNext.BollAvg != 0)
+                        {
+                            //if (pt1List.Count == 0)
+                            //    pt1List.Add(new PointF(fTmPrevX, itemPrev.BollAvg));
+                            pt1List.Add(new PointF(fTmNextX, itemNext.BollAvg));
+
+                            //if (pt2List.Count == 0)
+                            //    pt2List.Add(new PointF(fTmPrevX, itemPrev.BollAvg + 2 * itemPrev.BollDev));
+                            pt2List.Add(new PointF(fTmNextX, itemNext.BollAvg + 2 * itemNext.BollDev));
+
+                            //if (pt3List.Count == 0)
+                            //    pt3List.Add(new PointF(fTmPrevX, itemPrev.BollAvg - 2 * itemPrev.BollDev));
+                            pt3List.Add(new PointF(fTmNextX, itemNext.BollAvg - 2 * itemNext.BollDev));
+                        }
+                    }
+
+                    itemPrev = itemNext;
+
+                }
+
+                if (pt1List.Count > 0)
+                {
+                    g.DrawCurve(m_arrBollPen[0], pt1List.ToArray());
+                    pt1List.Clear();
+                }
+                if (pt2List.Count > 0)
+                {
+                    g.DrawCurve(m_arrBollPen[1], pt2List.ToArray());
+                    pt2List.Clear();
+                }
+                if (pt3List.Count > 0)
+                {
+                    g.DrawCurve(m_arrBollPen[2], pt3List.ToArray());
+                    pt3List.Clear();
+                }
+            }
+            catch (Exception) { }
 
         }
 

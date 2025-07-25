@@ -30,6 +30,8 @@ namespace ChartCtrl
             SetAdx();
             SetCci(true);
             SetRsi();
+            SetBollinger();
+            SetMacd();
         }
 
         /// Declare Member Variables
@@ -54,6 +56,14 @@ namespace ChartCtrl
         private float m_fAum;           //AU
         private float m_fAdm;           //AD
         private float m_fRsi;           //RSI
+
+        private float m_fBollAvg;       //SMA for Bollinger Band
+        private float m_fBollDev;       //Deviation for Bollinger Band
+        private float m_fBollPerb;      //%B for Bollinger Band
+
+        private float[] m_arrEma = new float[2];         //지수이동평균 12,26
+        private float m_fMacdVal;       //MACD value
+        private float m_fMacdSig;       //MACD signal 
 
         private bool m_bBet;           //배팅상태
         private float[] m_arrAvg = new float[CtrlProperty._arrAvgItems.Length];         //이동평균값1~5
@@ -203,6 +213,41 @@ namespace ChartCtrl
                 else return 0;
             }
 
+        }
+        public float BollPerb
+        {
+            get
+            {
+                return m_fBollPerb;
+            }
+        }
+        public float BollAvg
+        {
+            get
+            {
+                return m_fBollAvg;
+            }
+        }
+        public float BollDev
+        {
+            get
+            {
+                return m_fBollDev;
+            }
+        }
+        public float MacdVal
+        {
+            get
+            {
+                return m_fMacdVal;
+            }
+        }
+        public float MacdSig
+        {
+            get
+            {
+                return m_fMacdSig;
+            }
         }
         /// Declare Member Functions
         public bool IsCompleted()
@@ -641,7 +686,7 @@ namespace ChartCtrl
                 m_fAdm = fAdSum / CtrlProperty._nRsiCnt;
                 m_fRsi = m_fAum * 100 / (m_fAum + m_fAdm);
 
-                //                 Trace.TraceInformation("<RItem> SetRsi() AUM:{0}, ADM:{1}, RSI:{2}",
+                //                 Trace.TraceInformation("<DItem> SetRsi() AUM:{0}, ADM:{1}, RSI:{2}",
                 //                     m_fAum, m_fAdm, m_fRsi);
             }
             else if (m_iIndex > CtrlProperty._nRsiCnt && CtrlProperty._DItemList.Count > m_iIndex - 1)
@@ -659,10 +704,124 @@ namespace ChartCtrl
                     m_fRsi = m_fAum * 100 / (m_fAum + m_fAdm);
                     // m_fAdx = m_fDx * k + prevItem.m_fAdx * (1 - k);
                 }
-                //                 Trace.TraceInformation("<RItem> SetRsi() AUM:{0}, ADM:{1}, RSI:{2}",
+                //                 Trace.TraceInformation("<DItem> SetRsi() AUM:{0}, ADM:{1}, RSI:{2}",
                 //                     m_fAum, m_fAdm, m_fRsi);
             }
 
+        }
+
+        public void SetBollinger()
+        {
+            if (CtrlProperty._DItemList == null)
+                return;
+
+            double fSum = 0;
+            float fLbb = 0;
+            //20 SMA
+            int i = 2;
+            if (CtrlProperty._arrAvgItems[i] > 1 && m_iIndex >= CtrlProperty._arrAvgItems[i] - 1 && CtrlProperty._DItemList.Count > m_iIndex - 1)
+            {
+
+                List<DItem> listSubItems = CtrlProperty._DItemList.GetRange(m_iIndex - CtrlProperty._arrAvgItems[i] + 1, CtrlProperty._arrAvgItems[i] - 1);
+                if (listSubItems.Count > 0 && m_arrAvg[i] > 0)
+                {
+                    m_fBollAvg = m_arrAvg[i];
+                    fSum = listSubItems.Sum(it => Math.Pow(it.m_fEndVal - m_fBollAvg, 2));
+                    fSum += Math.Pow(m_fEndVal - m_fBollAvg, 2);
+                    m_fBollDev = (float)Math.Sqrt(fSum / CtrlProperty._arrAvgItems[i]);
+
+                    fLbb = m_fBollAvg - m_fBollDev * 2;
+                    m_fBollPerb = (m_fEndVal - fLbb) / (m_fBollDev * 4);
+
+                    // Trace.TraceInformation("<DItem> SetBollinger() BollAvg:{0}, BollDev:{1}, BollPerb:{2}", m_fBollAvg, m_fBollDev, m_fBollPerb);
+                }
+            }
+        }
+
+        public void SetMacd()
+        {
+            List<DItem> listSubItems = null;
+
+            DItem prevItem = null;
+
+            float fSum = 0;
+            float k = 0;
+
+            //EMA = 12
+            int avgCnt = 12;
+            if (m_iIndex >= avgCnt - 1 && CtrlProperty._DItemList.Count > m_iIndex - 1)
+            {
+
+                if (m_iIndex == avgCnt - 1)
+                {
+                    listSubItems = CtrlProperty._DItemList.GetRange(m_iIndex - avgCnt + 1, avgCnt - 1);
+                    if (listSubItems.Count > 0)
+                    {
+                        fSum = listSubItems.Sum(it => it.m_fEndVal);
+                        fSum += m_fEndVal;
+                        m_arrEma[0] = fSum / avgCnt;
+                    }
+                }
+                else
+                {
+                    prevItem = CtrlProperty._DItemList[m_iIndex - 1];
+                    k = 2 / ((float)avgCnt + 1);
+                    m_arrEma[0] = m_fEndVal * k + prevItem.m_arrEma[0] * (1 - k);
+                }
+            }
+
+            //EMA = 26
+            avgCnt = 26;
+            if (m_iIndex >= avgCnt - 1 && CtrlProperty._DItemList.Count > m_iIndex - 1)
+            {
+
+                if (m_iIndex == avgCnt - 1)
+                {
+                    listSubItems = CtrlProperty._DItemList.GetRange(m_iIndex - avgCnt + 1, avgCnt - 1);
+                    if (listSubItems.Count > 0)
+                    {
+                        fSum = listSubItems.Sum(it => it.m_fEndVal);
+                        fSum += m_fEndVal;
+                        m_arrEma[1] = fSum / avgCnt;
+                        m_fMacdVal = (m_arrEma[0] - m_arrEma[1]) / CtrlProperty._nValueRate;     //MACD
+                    }
+                }
+                else
+                {
+                    prevItem = CtrlProperty._DItemList[m_iIndex - 1];
+                    k = 2 / ((float)avgCnt + 1);
+                    m_arrEma[1] = m_fEndVal * k + prevItem.m_arrEma[1] * (1 - k);
+                    m_fMacdVal = (m_arrEma[0] - m_arrEma[1]) / CtrlProperty._nValueRate;         //MACD
+                }
+                // Trace.TraceInformation("<DItem> SetMacd() Ema1:{0}, Ema2:{1}, MacdVal={2}", m_arrEma[0], m_arrEma[1], m_fMacdVal);
+            }
+
+            //MACD signal
+            int sigCnt = 9;
+            int totCnt = avgCnt + sigCnt - 1;
+            if (m_iIndex >= totCnt - 1 && CtrlProperty._DItemList.Count > m_iIndex - 1)
+            {
+
+                if (m_iIndex == totCnt - 1)
+                {
+                    listSubItems = CtrlProperty._DItemList.GetRange(m_iIndex - sigCnt + 1, sigCnt - 1);
+                    if (listSubItems.Count > 0)
+                    {
+                        fSum = listSubItems.Sum(it => it.m_fMacdVal);
+                        fSum += m_fMacdVal;
+                        m_fMacdSig = fSum / sigCnt;             //MACD signal
+                    }
+                }
+                else
+                {
+                    prevItem = CtrlProperty._DItemList[m_iIndex - 1];
+                    k = 2 / ((float)sigCnt + 1);
+                    m_fMacdSig = m_fMacdVal * k + prevItem.m_fMacdSig * (1 - k); //MACD signal
+                }
+
+                // Trace.TraceInformation("<DItem> SetMacd() MacdVal:{0}, MacdSig:{1}, MacdHist:{2}", m_fMacdVal, m_fMacdSig, m_fMacdVal-m_fMacdSig);
+
+            }
         }
     }
 }

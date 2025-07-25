@@ -1,4 +1,4 @@
-﻿#define WRITE_LOG
+﻿// #define WRITE_LOG
 
 using System;
 using System.Collections.Generic;
@@ -81,7 +81,7 @@ namespace LuckyFuture.Site
 
         private void InitializeComponent()
         {
-            Trace.TraceInformation("<KFOpen> Register KF_OnReceiver");
+            // Trace.TraceInformation("<KFOpen> Register KF_OnReceiver");
             /*
             //Connection Event Handler
             axKFOpenAPI.OnEventConnect += KF_OnEventConnect;
@@ -208,7 +208,7 @@ namespace LuckyFuture.Site
             //종목변경
             if (CurItemSymbol != null && this.ItemSymbol != CurItemSymbol.Symbol)
             {
-                Trace.TraceInformation("<KFOpen> Check() ChangeItem");
+                // Trace.TraceInformation("<KFOpen> Check() ChangeItem");
                 ItemSymbolInfo itemSymbol = ItemList.FirstOrDefault<ItemSymbolInfo>(it => it.Symbol == ItemSymbol);
                 if(itemSymbol != null)
                 {
@@ -1124,7 +1124,7 @@ namespace LuckyFuture.Site
                 return;
             int nLen = sMValues.Length / 140;
             WriteLog("<KFOpen> OnRecieveDChartData sTrCode = " + sTrCode);
-            Trace.TraceInformation("<KFOpen> OnRecieveDChartData = " + nLen);
+            // Trace.TraceInformation("<KFOpen> OnRecieveDChartData = " + nLen);
 
             CtrlProperty.SetValueRate(Common.GetPrecisionRate(ItemSymbol, CurItemSymbol.Precision), Common.GetValueFormat(ItemPrecision + 1), (float)CurItemSymbol.OverTick);
             try
@@ -1212,7 +1212,7 @@ namespace LuckyFuture.Site
             int nLen = sMValues.Length / 140;
             CtrlProperty.SetValueRate(Common.GetPrecisionRate(ItemSymbol, CurItemSymbol.Precision), Common.GetValueFormat(ItemPrecision + 1), (float)CurItemSymbol.OverTick);
             WriteLog("<KFOpen> OnRecieveRChartData sTrCode = " + sTrCode);
-            Trace.TraceInformation("<KFOpen> OnRecieveRChartData = " + nLen);
+            // Trace.TraceInformation("<KFOpen> OnRecieveRChartData = " + nLen);
 
             try
             {

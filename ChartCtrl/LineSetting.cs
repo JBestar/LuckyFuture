@@ -48,6 +48,12 @@ namespace ChartCtrl
             textBBox1.BackColor = Settings.Default.BoLineColor1;
             textBBox2.BackColor = Settings.Default.BoLineColor2;
             textBBox3.Text = Settings.Default.BoLineAdjustR.ToString();
+
+            chkBollShow.Checked = Settings.Default.BollBand;
+            textBollMid.BackColor = Settings.Default.BollMidColor;
+            textBollUp.BackColor = Settings.Default.BollUpColor;
+            textBollDown.BackColor = Settings.Default.BollDownColor;
+
             enableControls();
         }
 
@@ -125,6 +131,11 @@ namespace ChartCtrl
             Settings.Default.BoLine = chkBoShow.Checked;
             Settings.Default.BoLineColor1 = textBBox1.BackColor;
             Settings.Default.BoLineColor2 = textBBox2.BackColor;
+
+            Settings.Default.BollBand = chkBollShow.Checked;
+            Settings.Default.BollMidColor = textBollMid.BackColor;
+            Settings.Default.BollUpColor = textBollUp.BackColor;
+            Settings.Default.BollDownColor = textBollDown.BackColor;
 
             Settings.Default.Save();
             OnChartNoticeEvent(CHART_EVENTTYPE.SETTING_CHANGED);
@@ -216,6 +227,33 @@ namespace ChartCtrl
             if (colorPickDlg.ShowDialog() == DialogResult.OK)
             {
                 textABox6.BackColor = colorPickDlg.Color;
+            }
+        }
+
+        private void textBollMid_Click(object sender, EventArgs e)
+        {
+            colorPickDlg.Color = textBollMid.BackColor;
+            if (colorPickDlg.ShowDialog() == DialogResult.OK)
+            {
+                textBollMid.BackColor = colorPickDlg.Color;
+            }
+        }
+
+        private void textBollUp_Click(object sender, EventArgs e)
+        {
+            colorPickDlg.Color = textBollUp.BackColor;
+            if (colorPickDlg.ShowDialog() == DialogResult.OK)
+            {
+                textBollUp.BackColor = colorPickDlg.Color;
+            }
+        }
+
+        private void textBollDown_Click(object sender, EventArgs e)
+        {
+            colorPickDlg.Color = textBollDown.BackColor;
+            if (colorPickDlg.ShowDialog() == DialogResult.OK)
+            {
+                textBollDown.BackColor = colorPickDlg.Color;
             }
         }
     }
