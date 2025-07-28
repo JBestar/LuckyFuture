@@ -118,22 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="form_border" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\form_border.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="form_border_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\form_border_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="main_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\main_icon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Alarm01" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\Alarm01.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="form_border" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\form_border.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="login_bg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\login_bg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="form_border_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\form_border_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Alarm01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\Alarm01.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="login_bg_dr" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\login_bg_dr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="login_bg_cmg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\login_bg_cmg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -821,7 +821,7 @@ namespace LuckyFuture.UI
             this.MinimumSize = new System.Drawing.Size(190, 40);
             this.Name = "FrmCurrent";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Temple";
+            this.Text = "CMG";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuoteInfo)).EndInit();

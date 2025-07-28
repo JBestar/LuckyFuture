@@ -314,9 +314,17 @@ namespace LuckyFuture.Logic
                 return false;
 
             // has order list
-            if (_currentSite == null || (_currentSite.OrderList != null && _currentSite.OrderList.Count > 0))
+            if (_currentSite == null)
                 return false;
 
+            if (_currentSite.OrderList.Count > 1)
+                return false;
+
+            if (!Settings.Default.BothOrder && _currentSite.OrderList.Count > 0)
+                return false;
+
+            if (Settings.Default.BothOrder && Settings.Default.OrderType == 0)
+                return false;
             lock (_objLock)
             {
 
@@ -327,6 +335,12 @@ namespace LuckyFuture.Logic
             }
 
             _tradeTypeToOrder = SelectTradeType();
+
+            if (Settings.Default.BothOrder && _currentSite.OrderList.Count > 0 && _tradeTypeToOrder != TRADETYPE.NONE)
+            {
+                if (_currentSite.OrderList.FirstOrDefault(o => o.TradeType == _tradeTypeToOrder) == null)
+                    return true;
+            }
 
             return _tradeTypeToOrder != TRADETYPE.NONE;
         }
@@ -1124,8 +1138,10 @@ namespace LuckyFuture.Logic
                             string.Format(Settings.Default.PriceFormat, dMaxAveragePrice), lValuation, nPercent, dCurRsi, nRsi));
                         return true;
                     }
+#if DEBUG_LOG
                     Trace.TraceInformation("[청산] 스마트영역청산 최대수익가:{0}({1:N0}원)(설정:{2}%이상), Rsi={3:N2}(설정:{4}이하)",
                             string.Format(Settings.Default.PriceFormat, dMaxAveragePrice), lValuation, nPercent, dCurRsi, nRsi);
+#endif
                 }
                 else if (Settings.Default.SmartEarnTick >= 0 && Settings.Default.SmartLossTick >= 0
                                         && dMaxAveragePrice - dAvgPrice >= Settings.Default.SmartEarnTick * Settings.Default.ItemOverTick)
@@ -1140,8 +1156,10 @@ namespace LuckyFuture.Logic
                         this.frmMain.AddLog("[청산]스마트청산 최대수익가:" + string.Format(Settings.Default.PriceFormat, dMaxAveragePrice) + " (설정:" + Settings.Default.SmartLossTick.ToString() + (Settings.Default.SmartLossUnit == 0 ? "%)" : "틱)"));
                         return true;
                     }
+#if DEBUG_LOG
                     Trace.TraceInformation("[청산] 스마트청산 최대수익가:{0} (설정:{1}{2})",
                             string.Format(Settings.Default.PriceFormat, dMaxAveragePrice), Settings.Default.SmartLossTick, Settings.Default.SmartLossUnit == 0 ? "%)" : "틱)");
+#endif
                 }
             }
             else if (tradeType == TRADETYPE.SELL)
@@ -1167,8 +1185,10 @@ namespace LuckyFuture.Logic
                             string.Format(Settings.Default.PriceFormat, dMaxAveragePrice), lValuation, nPercent, dCurRsi, nRsi));
                         return true;
                     }
+#if DEBUG_LOG
                     Trace.TraceInformation("[청산] 스마트영역청산 최대수익가:{0}({1:N0}원)(설정:{2}%이상), Rsi={3:N2}(설정:{4}이하)",
                             string.Format(Settings.Default.PriceFormat, dMaxAveragePrice), lValuation, nPercent, dCurRsi, nRsi);
+#endif
                 }
                 else if (Settings.Default.SmartEarnTick >= 0 && Settings.Default.SmartLossTick >= 0
                         && dAvgPrice - dMaxAveragePrice >= Settings.Default.SmartEarnTick * Settings.Default.ItemOverTick)
@@ -1183,8 +1203,10 @@ namespace LuckyFuture.Logic
                         this.frmMain.AddLog("[청산] 스마트청산 최대수익가:" + string.Format(Settings.Default.PriceFormat, dMaxAveragePrice) + " (설정:" + Settings.Default.SmartLossTick.ToString() + (Settings.Default.SmartLossUnit == 0 ? "%)" : "틱)"));
                         return true;
                     }
+#if DEBUG_LOG
                     Trace.TraceInformation("[청산] 스마트청산 최대수익가:{0} (설정:{1}{2})",
                             string.Format(Settings.Default.PriceFormat, dMaxAveragePrice), Settings.Default.SmartLossTick, Settings.Default.SmartLossUnit == 0 ? "%)" : "틱)");
+#endif
                 }
             }
 
@@ -1306,7 +1328,8 @@ namespace LuckyFuture.Logic
                         return true;
                     }
 #if DEBUG_LOG
-                    Trace.TraceInformation(string.Format("교차점에서 하락청산 교차점:{0}({1:N0}) 설정:{2}%", string.Format(Settings.Default.PriceFormat, dCrossAveragePrice), lValuation, nPercent));
+                    Trace.TraceInformation(string.Format("교차점에서 하락청산 교차점:{0}({1:N0}원)(설정:{2}%이상하락), Rsi={3:N2}(설정:{4}이하) ",
+                            string.Format(Settings.Default.PriceFormat, dCrossAveragePrice), lValuation, nPercent, dCurRsi, nRsi));
 #endif
                 }
                 else if (Settings.Default.CrossLossTick >= 0)
@@ -1343,7 +1366,7 @@ namespace LuckyFuture.Logic
                     }
 
                     long lLossVal = (long)((dCurPrice - dCrossAveragePrice) / CurrentSite.CurItemSymbol.OverTick * CurrentSite.CurItemSymbol.ValueTick * CurrentSite.CurItemSymbol.Exchange * orderQty);
-                    if (nPercent > 0 && lLossVal > 0 && lLossVal > lValuation * nPercent / 100)
+                    if (nRsi > 0 && dCurRsi > nRsi && nPercent > 0 && lLossVal > 0 && lLossVal > lValuation * nPercent / 100)
                     {
                         m_boLiquid = true;
                         this.frmMain.AddLog(string.Format("교차점에서 하락청산 교차점:{0}({1:N0}원) (설정:{2}%이상상승), Rsi={3:N2}(설정:{4}이상)",
@@ -1351,7 +1374,8 @@ namespace LuckyFuture.Logic
                         return true;
                     }
 #if DEBUG_LOG
-                    Trace.TraceInformation("교차점에서 하락청산 교차점:{0}({1:N0}) 설정:{2}%", string.Format(Settings.Default.PriceFormat, dCrossAveragePrice), lValuation, nPercent);
+                    Trace.TraceInformation("교차점에서 하락청산 교차점:{0}({1:N0}원) (설정:{2}%이상상승), Rsi={3:N2}(설정:{4}이상)",
+                            string.Format(Settings.Default.PriceFormat, dCrossAveragePrice), lValuation, nPercent, dCurRsi, nRsi);
 #endif
                 }
                 else if (Settings.Default.CrossLossPayoff && Settings.Default.CrossLossTick >= 0 && dCrossAveragePrice > 0)

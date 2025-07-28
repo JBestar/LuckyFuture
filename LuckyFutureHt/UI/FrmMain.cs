@@ -387,7 +387,7 @@ namespace LuckyFuture.UI
                             _tickBand = Environment.TickCount;
                             AddLog("차트타입변경(거래량:" + Settings.Default.BandVal1.ToString()+"미만 "+Common.GetChartTypeStr((CHARTTYPE)Settings.Default.BandChartType1) + "봉)");
                             SetDChartType((CHARTTYPE)Settings.Default.BandChartType1);
-                             
+                            SetChartType((CHARTTYPE)Settings.Default.BandChartType1);
                          }
                          
                      } else if(nConc >= Settings.Default.BandVal1 && nConc < Settings.Default.BandVal2)
@@ -397,16 +397,18 @@ namespace LuckyFuture.UI
                             _tickBand = Environment.TickCount;
                             AddLog("차트타입변경(거래량:" + Settings.Default.BandVal1.ToString() + "이상 "+ Common.GetChartTypeStr((CHARTTYPE)Settings.Default.BandChartType2) + "봉)");
                             SetDChartType((CHARTTYPE)Settings.Default.BandChartType2);
-                         }
-                     } else if(nConc >= Settings.Default.BandVal2 && nConc < Settings.Default.BandVal3)
+                            SetChartType((CHARTTYPE)Settings.Default.BandChartType2);
+                        }
+                    } else if(nConc >= Settings.Default.BandVal2 && nConc < Settings.Default.BandVal3)
                      {
                          if ((CHARTTYPE)Settings.Default.BandChartType3 != FrmChart.Default._ChartType)
                          {
                             _tickBand = Environment.TickCount;
                             AddLog("차트타입변경(거래량:" + Settings.Default.BandVal2.ToString() + "이상 "+ Common.GetChartTypeStr((CHARTTYPE)Settings.Default.BandChartType3) + "봉)");
                             SetDChartType((CHARTTYPE)Settings.Default.BandChartType3);
-                         }
-                     }
+                            SetChartType((CHARTTYPE)Settings.Default.BandChartType3);
+                        }
+                    }
                      else if (nConc >= Settings.Default.BandVal3)
                      {
                          if ((CHARTTYPE)Settings.Default.BandChartType4 != FrmChart.Default._ChartType)
@@ -414,8 +416,9 @@ namespace LuckyFuture.UI
                             _tickBand = Environment.TickCount;
                             AddLog("차트타입변경(거래량:" + Settings.Default.BandVal3.ToString() + "이상 " + Common.GetChartTypeStr((CHARTTYPE)Settings.Default.BandChartType4) + "봉)");
                             SetDChartType((CHARTTYPE)Settings.Default.BandChartType4);
-                         }
-                     }
+                            SetChartType((CHARTTYPE)Settings.Default.BandChartType4);
+                        }
+                    }
                  }
                 if(!Settings.Default.SignalSiteOn)
                     ChartForm.SetRTValue(current.CurrentPrice, current.Time, 1, current.ConclusionQty);
@@ -525,8 +528,7 @@ namespace LuckyFuture.UI
 				}
 				catch(Exception ex)
 				{
-					//TraceEx.TraceException(ex);
-                    string exMessage = ex.Message;
+					string exMessage = ex.Message;
                     return;
                 }
 			}
@@ -1039,7 +1041,16 @@ namespace LuckyFuture.UI
         //    WriteLog("동기화:" + value);
 
         //}
-
+        public void SetChartType(CHARTTYPE chartType)
+        {
+            if(Settings.Default.BettingType == (int)BETTYPE.CROSS)
+            {
+                cmbChartType3.SelectedIndex = (int)chartType;
+            } else if(Settings.Default.BettingType == (int)BETTYPE.BOLINE)
+            {
+                cmbChartType4.SelectedIndex = (int)chartType;
+            }
+        }
 
         public void SetDChartType(CHARTTYPE chartType)
         {
@@ -1981,12 +1992,6 @@ namespace LuckyFuture.UI
             label45.Visible = index == 0;
             label46.Visible = index == 0;
 
-
-
-
-
-
-
             btnSbOrd4.Invalidate();
             btnCciOrd4.Invalidate();
         }
@@ -2653,6 +2658,7 @@ namespace LuckyFuture.UI
             txtPayoffLossN.Text = Settings.Default.LossPayoffMoneyN.ToString();
             chkOrderSelect.Checked = Settings.Default.OrderSelectOn;
             ChangeOrdSelBtn(Settings.Default.OrderSelectType);
+            chkBothOrder.Checked = Settings.Default.BothOrder;
 
             dtAutoReserve.Value = Settings.Default.AutoReserveTime;
             chkAutoReserve.Checked = Settings.Default.AutoReserveOn;
@@ -3105,7 +3111,7 @@ namespace LuckyFuture.UI
                 }
 
                 Settings.Default.Conc2On = chkConc2_3.Checked;
-                if (chkConc2.Checked)
+                if (chkConc2_3.Checked)
                 {
                     try
                     {
@@ -4059,11 +4065,26 @@ namespace LuckyFuture.UI
                 }
             }
             Settings.Default.OrderSelectOn = chkOrderSelect.Checked;
+            Settings.Default.BothOrder = chkBothOrder.Checked;
+
+            log += "기타(";
+            if (chkOrderSelect.Checked)
+            {
+                log += "선택주문:"+(Settings.Default.OrderSelectType==0?"전체":(Settings.Default.OrderSelectType==1)?"매수":"매도");
+                log += ",";
+            }
+            if (chkBothOrder.Checked)
+            {
+                log += " 양방향 매수/매도,";
+            }
+            if (chkOrderStop.Checked)
+            {
+                log += " 미체결취소:"+Settings.Default.OrderStopDelay+"초";
+            }
+            log += ")";
 
             Settings.Default.Save();
             AppAuthor.Default.UploadConfig();
-
-
 
             log = "[설정저장]" + log;
             AddLog(log);
@@ -4585,7 +4606,8 @@ namespace LuckyFuture.UI
 
         private void cmbChartType3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            saveSetting();
+            // saveSetting();
+            Settings.Default.ChartType = cmbChartType3.SelectedIndex;
         }
 
         private void cmbOrderType3_SelectedIndexChanged(object sender, EventArgs e)
@@ -4610,7 +4632,8 @@ namespace LuckyFuture.UI
 
         private void cmbChartType4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            saveSetting();
+            // saveSetting();
+            Settings.Default.ChartType = cmbChartType4.SelectedIndex;
         }
 
         private void cmbOrderType4_SelectedIndexChanged(object sender, EventArgs e)
@@ -5701,6 +5724,11 @@ namespace LuckyFuture.UI
         {
             saveSetting();
 
+        }
+
+        private void chkBothOrder_CheckedChanged(object sender, EventArgs e)
+        {
+            saveSetting();
         }
     }
 }

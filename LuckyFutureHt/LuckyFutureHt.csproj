@@ -7,7 +7,7 @@
     <ProjectGuid>{FCB91A59-3804-4633-92AC-CC3F0492664D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>LuckyFuture</RootNamespace>
-    <AssemblyName>Temple</AssemblyName>
+    <AssemblyName>CMG</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -342,6 +342,7 @@
   <ItemGroup>
     <Content Include="main.ico" />
     <Content Include="main_icon.ico" />
+    <None Include="res\login_bg_cmg.png" />
     <None Include="res\login_bg_dr.png" />
     <None Include="res\Alarm01.wav" />
     <None Include="Resources\Alarm01.bmp" />

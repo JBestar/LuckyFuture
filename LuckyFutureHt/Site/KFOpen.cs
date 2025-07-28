@@ -297,6 +297,7 @@ namespace LuckyFuture.Site
 
             CurrentList.Clear();
             OrderList.Clear();
+            RequestOrderList(false, false);
             RequestOrderList(false, true);
         }
 
@@ -335,7 +336,7 @@ namespace LuckyFuture.Site
 
             if (quoteInfo != null)
             {
-                double nOrderRange = 40 * CurItemSymbol.OverTick;
+                double nOrderRange = 400 * CurItemSymbol.OverTick;
                 if (quoteInfo.Price < Current.CurrentPrice - nOrderRange || quoteInfo.Price > Current.CurrentPrice + nOrderRange)
                 {
                     OnFutureSiteLogEvent("[주문] 주문 가격이 초과 됨");
@@ -409,7 +410,7 @@ namespace LuckyFuture.Site
 
             if (quoteInfo != null)
             {
-                double nOrderRange = 40 * CurItemSymbol.OverTick;
+                double nOrderRange = 400 * CurItemSymbol.OverTick;
                 if (quoteInfo.Price < Current.CurrentPrice - nOrderRange || quoteInfo.Price > Current.CurrentPrice + nOrderRange)
                 {
                     OnFutureSiteLogEvent("[주문] 주문 가격이 초과 됨");
@@ -889,13 +890,17 @@ namespace LuckyFuture.Site
             if (Settings.Default.SignalSiteOn)
                 return;
 
-            OrderList.Clear();
+            // OrderList.Clear();
             // OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.ORDER);            
             Thread.Sleep(200);
-            if(bRequidate)
+            if (bRequidate)
+            {
                 RequestRequidateOrder();
-            else //Thread.Sleep(100);
+            }
+            else
+            {
                 RequestOutstandOrder();
+            }
 
             if (bAccount)
             {
@@ -908,6 +913,9 @@ namespace LuckyFuture.Site
 
             if (this.CurrentUserAccount == null)
                 return CONSTATE.NO_LOGIN;
+
+            OrderList.RemoveAll(o => o.OrderType == "체결");
+
             string strAccount = this.CurrentUserAccount.UserAccountId;
             string strAccPwd = UserPassword;
 
@@ -932,6 +940,9 @@ namespace LuckyFuture.Site
 
             if (Math.Abs(Environment.TickCount - m_tickOrderList) < 500)
                 return CONSTATE.SUCCESSS;
+
+            OrderList.RemoveAll(o => o.OrderType == "미체결");
+
             m_tickOrderList = Environment.TickCount;
             string strAccount = this.CurrentUserAccount.UserAccountId;
             string strAccPwd = UserPassword;
@@ -945,7 +956,6 @@ namespace LuckyFuture.Site
 
             int iResCode = axKFOpenAPI.CommRqData("RQ_6", "opw30001", "", "0112");     //미체결내역조회
 
-            WriteLog("<<RequestOutstandOrder");
             if (iResCode == 0)
                 return CONSTATE.SUCCESSS;
             return (CONSTATE)iResCode;
@@ -1345,7 +1355,7 @@ namespace LuckyFuture.Site
         {
             
             int nRowCnt = axKFOpenAPI.GetRepeatCnt(sTrCode, sRQName);
-            // WriteLog(">>OnReceiveRequidateOrder cnt="+nRowCnt);
+            WriteLog(">>OnReceiveRequidateOrder cnt="+nRowCnt);
 
             try
             {
@@ -1417,7 +1427,7 @@ namespace LuckyFuture.Site
         private void OnReceiveOutstandOrder(string sTrCode, string sRQName)
         {
             int nRowCnt = axKFOpenAPI.GetRepeatCnt(sTrCode, sRQName);
-            // WriteLog(">>OnReceiveOutstandOrder cnt=" + nRowCnt);
+            WriteLog(">>OnReceiveOutstandOrder cnt=" + nRowCnt);
 
             try
             {
@@ -1456,7 +1466,7 @@ namespace LuckyFuture.Site
                         Qty = string.Format("{0}[{1}]", sTradeTypeNo == "1" ? "매도" : "매수", nQty),
                         AveragePrice = sAveragePrice,
                         MaxAveragePrice = Math.Round(dAveragePrice, 6),
-                        CurrentPrice = Current.CurrentPrice.ToString(),
+                        CurrentPrice = Current != null ? Current.CurrentPrice.ToString(): "0",
                         Valuation = 0L,
                         Action = "취소",
                         TradeType = sTradeTypeNo == "1" ? TRADETYPE.SELL:TRADETYPE.BUY,
@@ -2114,7 +2124,7 @@ namespace LuckyFuture.Site
                 {
                     //tValues = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 2); //멀티
                 }
-                else if (sRQName == "RQ_12")     //해외파생지정청산대상조회	opw30023
+                else if (sRQName == "RQ_12")     //해외파생지정청산대상조회	opw30023 ; 체결리스트
                 {
                     tMValue = axKFOpenAPI.GetCommFullData(sTrCode, sRQName, 2); //멀티
                     OnReceiveRequidateOrder(sTrCode, sRQName);
@@ -2580,6 +2590,8 @@ namespace LuckyFuture.Site
                     OrderQty = qty,
                 };
                 RequestOrderList(true, true);
+                RequestOrderList(false, false);
+
                 OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.LIQUID);
                 if (logMsg.Length > 0)
                     OnFutureSiteLogEvent(logMsg);

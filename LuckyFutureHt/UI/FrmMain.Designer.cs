@@ -137,6 +137,7 @@ namespace LuckyFuture.UI
             this.btnSettingExport = new ReaLTaiizor.Controls.DreamButton();
             this.btnSettingFetch = new ReaLTaiizor.Controls.DreamButton();
             this.groupOther = new System.Windows.Forms.GroupBox();
+            this.chkBothOrder = new System.Windows.Forms.CheckBox();
             this.btnSelOrderSell = new ReaLTaiizor.Controls.DreamButton();
             this.btnSelOrderBuy = new ReaLTaiizor.Controls.DreamButton();
             this.btnSelOrderAll = new ReaLTaiizor.Controls.DreamButton();
@@ -1664,6 +1665,7 @@ namespace LuckyFuture.UI
             // 
             // groupOther
             // 
+            this.groupOther.Controls.Add(this.chkBothOrder);
             this.groupOther.Controls.Add(this.btnSelOrderSell);
             this.groupOther.Controls.Add(this.btnSelOrderBuy);
             this.groupOther.Controls.Add(this.btnSelOrderAll);
@@ -1685,6 +1687,18 @@ namespace LuckyFuture.UI
             this.groupOther.TabIndex = 23;
             this.groupOther.TabStop = false;
             this.groupOther.Text = "기타설정";
+            // 
+            // chkBothOrder
+            // 
+            this.chkBothOrder.AutoSize = true;
+            this.chkBothOrder.Location = new System.Drawing.Point(15, 20);
+            this.chkBothOrder.Margin = new System.Windows.Forms.Padding(4);
+            this.chkBothOrder.Name = "chkBothOrder";
+            this.chkBothOrder.Size = new System.Drawing.Size(109, 19);
+            this.chkBothOrder.TabIndex = 81;
+            this.chkBothOrder.Text = "양방향 주문";
+            this.chkBothOrder.UseVisualStyleBackColor = true;
+            this.chkBothOrder.CheckedChanged += new System.EventHandler(this.chkBothOrder_CheckedChanged);
             // 
             // btnSelOrderSell
             // 
@@ -1768,7 +1782,7 @@ namespace LuckyFuture.UI
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(206, 21);
+            this.label35.Location = new System.Drawing.Point(364, 20);
             this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(22, 15);
@@ -1789,17 +1803,17 @@ namespace LuckyFuture.UI
             // txtStopOrder
             // 
             this.txtStopOrder.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStopOrder.Location = new System.Drawing.Point(122, 14);
+            this.txtStopOrder.Location = new System.Drawing.Point(311, 15);
             this.txtStopOrder.Margin = new System.Windows.Forms.Padding(4);
             this.txtStopOrder.Name = "txtStopOrder";
-            this.txtStopOrder.Size = new System.Drawing.Size(73, 27);
+            this.txtStopOrder.Size = new System.Drawing.Size(45, 27);
             this.txtStopOrder.TabIndex = 7;
             this.txtStopOrder.TextChanged += new System.EventHandler(this.txtStopOrder_TextChanged);
             // 
             // chkOrderStop
             // 
             this.chkOrderStop.AutoSize = true;
-            this.chkOrderStop.Location = new System.Drawing.Point(15, 20);
+            this.chkOrderStop.Location = new System.Drawing.Point(202, 20);
             this.chkOrderStop.Margin = new System.Windows.Forms.Padding(4);
             this.chkOrderStop.Name = "chkOrderStop";
             this.chkOrderStop.Size = new System.Drawing.Size(104, 19);
@@ -5429,7 +5443,7 @@ namespace LuckyFuture.UI
             this.hopeForm1.Name = "hopeForm1";
             this.hopeForm1.Size = new System.Drawing.Size(1119, 40);
             this.hopeForm1.TabIndex = 7;
-            this.hopeForm1.Text = "Temple";
+            this.hopeForm1.Text = "CMG";
             this.hopeForm1.ThemeColor = System.Drawing.Color.DarkCyan;
             // 
             // btnCurrent
@@ -5730,7 +5744,7 @@ namespace LuckyFuture.UI
             this.MinimumSize = new System.Drawing.Size(190, 40);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Temple";
+            this.Text = "CMG";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuoteInfo)).EndInit();
@@ -6147,6 +6161,7 @@ namespace LuckyFuture.UI
         private System.Windows.Forms.Label label98;
         private System.Windows.Forms.TextBox txtPayoffPerbDown2;
         private System.Windows.Forms.CheckBox chkPerbPayoff2;
+        private System.Windows.Forms.CheckBox chkBothOrder;
         // private AxKFOpenAPILib.AxKFOpenAPI axKFOpenAPI;
     }
 }

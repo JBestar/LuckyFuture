@@ -147,6 +147,7 @@ namespace LuckyFuture
                             case "BollPayoffDown": Settings.Default.BollPayoffDown = float.Parse(value); break;
                             case "BollPayoffUp": Settings.Default.BollPayoffUp = float.Parse(value); break;
                             case "MacdPayoff": Settings.Default.MacdPayoff = bool.Parse(value); break;
+                            case "BothOrder": Settings.Default.BothOrder = bool.Parse(value); break;
                             default: break;
                         }
                     }
@@ -290,6 +291,7 @@ namespace LuckyFuture
                 AddElement(document, itemListElement, "BollPayoffDown", Settings.Default.BollPayoffDown.ToString());
                 AddElement(document, itemListElement, "BollPayoffUp", Settings.Default.BollPayoffUp.ToString());
                 AddElement(document, itemListElement, "MacdPayoff", Settings.Default.MacdPayoff.ToString());
+                AddElement(document, itemListElement, "BothOrder", Settings.Default.BothOrder.ToString());
 
                 document.Save(filePath);
                 return true;
