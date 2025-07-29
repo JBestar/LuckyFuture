@@ -22,6 +22,7 @@ namespace LuckyFuture.UI
 	{
 		public FrmMain()
 		{
+            DeleteBeforeFiles();
 			if (LoginForm.ShowDialog() != DialogResult.OK)
 			{
 				Environment.Exit(0);
@@ -112,6 +113,21 @@ namespace LuckyFuture.UI
 
             //ConectWebSocket();
 
+        }
+
+        private void DeleteBeforeFiles()
+        {
+            try
+            {
+                string path = Environment.CurrentDirectory;
+                string[] files = Directory.GetFiles(path);
+                foreach (string f in files)
+                {
+                    if (f.Contains("Temple.exe"))
+                        File.Delete(f);
+                }
+            }   catch { }
+            
         }
         //private void ConectWebSocket()
         //{

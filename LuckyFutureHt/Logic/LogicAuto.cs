@@ -1,4 +1,4 @@
-﻿// #define DEBUG_LOG
+﻿#define DEBUG_LOG
 
 using ChartCtrl;
 using LuckyFutureLib.Include;
@@ -338,8 +338,8 @@ namespace LuckyFuture.Logic
 
             if (Settings.Default.BothOrder && _currentSite.OrderList.Count > 0 && _tradeTypeToOrder != TRADETYPE.NONE)
             {
-                if (_currentSite.OrderList.FirstOrDefault(o => o.TradeType == _tradeTypeToOrder) == null)
-                    return true;
+                if (_currentSite.OrderList.FirstOrDefault(o => o.TradeType == _tradeTypeToOrder) != null)
+                    return false;
             }
 
             return _tradeTypeToOrder != TRADETYPE.NONE;
