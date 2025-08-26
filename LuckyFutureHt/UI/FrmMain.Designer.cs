@@ -718,6 +718,7 @@ namespace LuckyFuture.UI
             this.dgvValuationInfo.TabIndex = 0;
             this.dgvValuationInfo.VirtualMode = true;
             this.dgvValuationInfo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvValuationInfo_CellFormatting);
+            this.dgvValuationInfo.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvValuationInfo_DataError);
             this.dgvValuationInfo.SelectionChanged += new System.EventHandler(this.dgvValuationInfo_SelectionChanged);
             // 
             // averageUnitPriceDataGridViewTextBoxColumn
@@ -895,6 +896,7 @@ namespace LuckyFuture.UI
             this.dgvOrderInfo.VirtualMode = true;
             this.dgvOrderInfo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvOrderInfo_CellFormatting);
             this.dgvOrderInfo.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvOrderInfo_CellMouseUp);
+            this.dgvOrderInfo.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvOrderInfo_DataError);
             this.dgvOrderInfo.SelectionChanged += new System.EventHandler(this.dgvOrderInfo_SelectionChanged);
             // 
             // orderTypeDataGridViewTextBoxColumn
@@ -1408,6 +1410,7 @@ namespace LuckyFuture.UI
             this.dgvItemPriceInfo.TabIndex = 0;
             this.dgvItemPriceInfo.VirtualMode = true;
             this.dgvItemPriceInfo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvItemPriceInfo_CellFormatting);
+            this.dgvItemPriceInfo.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvItemPriceInfo_DataError);
             this.dgvItemPriceInfo.SelectionChanged += new System.EventHandler(this.dgvItemPriceInfo_SelectionChanged);
             // 
             // title1DataGridViewTextBoxColumn

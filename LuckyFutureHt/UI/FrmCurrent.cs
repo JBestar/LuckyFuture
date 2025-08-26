@@ -14,7 +14,7 @@ using LuckyFuture.Models.ValueObjects;
 using LuckyFutureLib.Include;
 using LuckyFuture.Properties;
 using LuckyFuture.Logic;
-using ChartCtrl;
+using System.Diagnostics;
 
 namespace LuckyFuture.UI
 {
@@ -593,5 +593,31 @@ namespace LuckyFuture.UI
         {
             this.Hide();
         }
-    }
+
+        private void dgvQuoteInfo_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+			// Trace.TraceInformation("<FrmCurrent> dgvQuoteInfo_DataError");
+			e.Cancel = true;
+			e.ThrowException = false;
+		}
+
+		private void dgvCurrentInfo_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+			// Trace.TraceInformation("<FrmCurrent> dgvCurrentInfo_DataError");
+			e.Cancel = true;
+			e.ThrowException = false;
+		}
+
+		private void dgvItemPriceInfo_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+			e.Cancel = true;
+			e.ThrowException = false;
+		}
+
+		private void dgvTotalQuoteInfo_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+			e.Cancel = true;
+			e.ThrowException = false;
+		}
+	}
 }

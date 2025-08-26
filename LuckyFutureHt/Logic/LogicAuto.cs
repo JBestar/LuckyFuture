@@ -1,4 +1,4 @@
-﻿#define DEBUG_LOG
+﻿// #define DEBUG_LOG
 
 using ChartCtrl;
 using LuckyFutureLib.Include;
@@ -439,11 +439,17 @@ namespace LuckyFuture.Logic
 
                             if (o.TradeType == TRADETYPE.BUY) //Change max CCI value
                             {
+                                if (_currentSite.OrderList.FirstOrDefault(u => u.TradeType == TRADETYPE.SELL && u.OrderType == "미체결") != null)
+                                    return false;
+
                                 if (dCurCci > o.MaxCciPrice)
                                     o.MaxCciPrice = dCurCci;
                             }
                             else if (o.TradeType == TRADETYPE.SELL)
                             {
+                                if (_currentSite.OrderList.FirstOrDefault(u => u.TradeType == TRADETYPE.BUY && u.OrderType == "미체결") != null)
+                                    return false;
+
                                 if (dCurCci < o.MaxCciPrice)
                                     o.MaxCciPrice = dCurCci;
                             }
@@ -720,6 +726,9 @@ namespace LuckyFuture.Logic
                             }
                             else if (Settings.Default.BettingType == (int)BETTYPE.BOLINE)           //Check Equivalent Candle 
                             {
+                                string logPayoff = "";
+                                bool bBollPayoff = CheckBollPayoff(o.TradeType, lastCandlelist.Last(), ref logPayoff);
+
                                 string logTrade = "";
                                 if (o.TradeType == TRADETYPE.BUY)   //매수
                                 {
@@ -733,7 +742,7 @@ namespace LuckyFuture.Logic
                                     }
 
                                     if ((Settings.Default.EarnPayoff && Settings.Default.EarnPayoffMoney >= 0
-                                        && dDeltaTick >= Settings.Default.EarnPayoffMoney * Settings.Default.ItemOverTick)
+                                        && dDeltaTick >= Settings.Default.EarnPayoffMoney * Settings.Default.ItemOverTick && bBollPayoff)
                                             || (!Settings.Default.EarnPayoff && dDeltaTick >= 0))
                                     {
                                         bool bTradeChanged = CheckTradeChange(ref logTrade);
@@ -743,6 +752,8 @@ namespace LuckyFuture.Logic
                                             log = "[강제청산] 수익:" + Math.Abs(dDeltaTick) / Settings.Default.ItemOverTick + "틱";
                                             if (Settings.Default.EarnPayoff)
                                                 log += "(설정:" + Settings.Default.EarnPayoffMoney.ToString() + "틱)";
+                                            if (logPayoff.Length > 0)
+                                                log += logPayoff;
                                             this.frmMain.AddLog(log);
                                             m_boLiquid = true;
                                             return true;
@@ -757,6 +768,8 @@ namespace LuckyFuture.Logic
                                                 log = "[청산] 수익:" + Math.Abs(dDeltaTick) / Settings.Default.ItemOverTick + "틱";
                                                 if (Settings.Default.EarnPayoff)
                                                     log += "(설정:" + Settings.Default.EarnPayoffMoney.ToString() + "틱)";
+                                                if (logPayoff.Length > 0)
+                                                    log += logPayoff;
                                                 this.frmMain.AddLog(log);
                                                 if (Settings.Default.BoOrdType == 0)
                                                 {
@@ -786,7 +799,7 @@ namespace LuckyFuture.Logic
                                     }
 
                                     if ((Settings.Default.EarnPayoff && Settings.Default.EarnPayoffMoney >= 0
-                                        && dDeltaTick <= -Settings.Default.EarnPayoffMoney * Settings.Default.ItemOverTick)
+                                        && dDeltaTick <= -Settings.Default.EarnPayoffMoney * Settings.Default.ItemOverTick && bBollPayoff)
                                             || (!Settings.Default.EarnPayoff && dDeltaTick <= 0))
                                     {
                                         bool bTradeChanged = CheckTradeChange(ref logTrade);
@@ -795,6 +808,8 @@ namespace LuckyFuture.Logic
                                             log = "[강제청산] 수익:" + Math.Abs(dDeltaTick) / Settings.Default.ItemOverTick + "틱";
                                             if (Settings.Default.EarnPayoff)
                                                 log += "(설정:" + Settings.Default.EarnPayoffMoney.ToString() + "틱)";
+                                            if (logPayoff.Length > 0)
+                                                log += logPayoff;
                                             this.frmMain.AddLog(log);
                                             m_boLiquid = true;
                                             return true;
@@ -808,6 +823,8 @@ namespace LuckyFuture.Logic
                                                 log = "[청산] 수익:" + Math.Abs(dDeltaTick) / Settings.Default.ItemOverTick + "틱";
                                                 if (Settings.Default.EarnPayoff)
                                                     log += "(설정:" + Settings.Default.EarnPayoffMoney.ToString() + "틱)";
+                                                if (logPayoff.Length > 0)
+                                                    log += logPayoff;
                                                 this.frmMain.AddLog(log);
                                                 if (Settings.Default.BoOrdType == 0)
                                                 {

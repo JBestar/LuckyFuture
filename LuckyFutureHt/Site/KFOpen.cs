@@ -476,9 +476,9 @@ namespace LuckyFuture.Site
             if (iRet == (int)ERRORCOM.SUCCESS)
             {
                 if (orderInfo.TradeTypeNo == "1")
-                    OnFutureSiteLogEvent("[주문취소] 매도주문 요청");
+                    OnFutureSiteLogEvent("[주문취소] 매도주문");
                 else if (orderInfo.TradeTypeNo == "2")
-                    OnFutureSiteLogEvent("[주문취소] 매수주문 요청");
+                    OnFutureSiteLogEvent("[주문취소] 매수주문");
             }
             else ShowErrorLog((ERRORCOM)iRet);
 
@@ -576,8 +576,8 @@ namespace LuckyFuture.Site
 
             Settings.Default.ItemOverTick = (float)CurItemSymbol.OverTick;
 
-            double upLimitPrice = CurItemSymbol.MidPrice + CurItemSymbol.OverTick * 1000.0;
-            double downLimitPrice = CurItemSymbol.MidPrice - CurItemSymbol.OverTick * 1000.0;
+            double upLimitPrice = CurItemSymbol.MidPrice + CurItemSymbol.OverTick * 2000.0;
+            double downLimitPrice = CurItemSymbol.MidPrice - CurItemSymbol.OverTick * 2000.0;
             double tick = CurItemSymbol.OverTick;
             if (downLimitPrice < 1E-06)
             {

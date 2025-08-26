@@ -303,6 +303,7 @@ namespace LuckyFuture.UI
 		private int _tickLogout;
         private bool _bLoadConfig;
         private int _tickBand;
+        private int _tickBandCheck;
         // 호가고정
         public bool IsFixed => this.chkFixed.Checked;
 		private string LogPath;
@@ -393,46 +394,55 @@ namespace LuckyFuture.UI
                 CurrentInfo current = CurrentSite.Current;
 
                  if ((Settings.Default.BettingType == (int)BETTYPE.BOLINE || Settings.Default.BettingType == (int)BETTYPE.CROSS) && 
-                    Settings.Default.BandChart && Math.Abs(Environment.TickCount - _tickBand ) > 30000 )
+                    Settings.Default.BandChart && Math.Abs(Environment.TickCount - _tickBand ) > 30000 && Math.Abs(Environment.TickCount - _tickBandCheck) > 3000)
                  {
-                    int nConc = GetConcPerMin();
-                     if (Settings.Default.BandVal1 > 0 && nConc < Settings.Default.BandVal1)
-                     {
-                         if((CHARTTYPE)Settings.Default.BandChartType1 != FrmChart.Default._ChartType)
-                         {
-                            _tickBand = Environment.TickCount;
-                            AddLog("차트타입변경(거래량:" + Settings.Default.BandVal1.ToString()+"미만 "+Common.GetChartTypeStr((CHARTTYPE)Settings.Default.BandChartType1) + "봉)");
-                            SetDChartType((CHARTTYPE)Settings.Default.BandChartType1);
-                            SetChartType((CHARTTYPE)Settings.Default.BandChartType1);
-                         }
-                         
-                     } else if(nConc >= Settings.Default.BandVal1 && nConc < Settings.Default.BandVal2)
-                     {
-                         if ((CHARTTYPE)Settings.Default.BandChartType2 != FrmChart.Default._ChartType)
-                         {
-                            _tickBand = Environment.TickCount;
-                            AddLog("차트타입변경(거래량:" + Settings.Default.BandVal1.ToString() + "이상 "+ Common.GetChartTypeStr((CHARTTYPE)Settings.Default.BandChartType2) + "봉)");
-                            SetDChartType((CHARTTYPE)Settings.Default.BandChartType2);
-                            SetChartType((CHARTTYPE)Settings.Default.BandChartType2);
+                    _tickBandCheck = Environment.TickCount;
+                    if (Settings.Default.BettingType == (int)BETTYPE.BOLINE && !Settings.Default.BothOrder &&
+                         CurrentSite.OrderList != null && CurrentSite.OrderList.FirstOrDefault(o => o.OrderType == "체결") != null)
+                    {
+
+                    } else
+                    {
+
+                        int nConc = GetConcPerMin();
+                        if (Settings.Default.BandVal1 > 0 && nConc < Settings.Default.BandVal1)
+                        {
+                            if ((CHARTTYPE)Settings.Default.BandChartType1 != FrmChart.Default._ChartType)
+                            {
+                                _tickBand = Environment.TickCount;
+                                AddLog("차트타입변경(거래량:" + Settings.Default.BandVal1.ToString() + "미만 " + Common.GetChartTypeStr((CHARTTYPE)Settings.Default.BandChartType1) + "봉)");
+                                SetDChartType((CHARTTYPE)Settings.Default.BandChartType1);
+                                SetChartType((CHARTTYPE)Settings.Default.BandChartType1);
+                            }
+
+                        } else if (nConc >= Settings.Default.BandVal1 && nConc < Settings.Default.BandVal2)
+                        {
+                            if ((CHARTTYPE)Settings.Default.BandChartType2 != FrmChart.Default._ChartType)
+                            {
+                                _tickBand = Environment.TickCount;
+                                AddLog("차트타입변경(거래량:" + Settings.Default.BandVal1.ToString() + "이상 " + Common.GetChartTypeStr((CHARTTYPE)Settings.Default.BandChartType2) + "봉)");
+                                SetDChartType((CHARTTYPE)Settings.Default.BandChartType2);
+                                SetChartType((CHARTTYPE)Settings.Default.BandChartType2);
+                            }
+                        } else if (nConc >= Settings.Default.BandVal2 && nConc < Settings.Default.BandVal3)
+                        {
+                            if ((CHARTTYPE)Settings.Default.BandChartType3 != FrmChart.Default._ChartType)
+                            {
+                                _tickBand = Environment.TickCount;
+                                AddLog("차트타입변경(거래량:" + Settings.Default.BandVal2.ToString() + "이상 " + Common.GetChartTypeStr((CHARTTYPE)Settings.Default.BandChartType3) + "봉)");
+                                SetDChartType((CHARTTYPE)Settings.Default.BandChartType3);
+                                SetChartType((CHARTTYPE)Settings.Default.BandChartType3);
+                            }
                         }
-                    } else if(nConc >= Settings.Default.BandVal2 && nConc < Settings.Default.BandVal3)
-                     {
-                         if ((CHARTTYPE)Settings.Default.BandChartType3 != FrmChart.Default._ChartType)
-                         {
-                            _tickBand = Environment.TickCount;
-                            AddLog("차트타입변경(거래량:" + Settings.Default.BandVal2.ToString() + "이상 "+ Common.GetChartTypeStr((CHARTTYPE)Settings.Default.BandChartType3) + "봉)");
-                            SetDChartType((CHARTTYPE)Settings.Default.BandChartType3);
-                            SetChartType((CHARTTYPE)Settings.Default.BandChartType3);
-                        }
-                    }
-                     else if (nConc >= Settings.Default.BandVal3)
-                     {
-                         if ((CHARTTYPE)Settings.Default.BandChartType4 != FrmChart.Default._ChartType)
-                         {
-                            _tickBand = Environment.TickCount;
-                            AddLog("차트타입변경(거래량:" + Settings.Default.BandVal3.ToString() + "이상 " + Common.GetChartTypeStr((CHARTTYPE)Settings.Default.BandChartType4) + "봉)");
-                            SetDChartType((CHARTTYPE)Settings.Default.BandChartType4);
-                            SetChartType((CHARTTYPE)Settings.Default.BandChartType4);
+                        else if (nConc >= Settings.Default.BandVal3)
+                        {
+                            if ((CHARTTYPE)Settings.Default.BandChartType4 != FrmChart.Default._ChartType)
+                            {
+                                _tickBand = Environment.TickCount;
+                                AddLog("차트타입변경(거래량:" + Settings.Default.BandVal3.ToString() + "이상 " + Common.GetChartTypeStr((CHARTTYPE)Settings.Default.BandChartType4) + "봉)");
+                                SetDChartType((CHARTTYPE)Settings.Default.BandChartType4);
+                                SetChartType((CHARTTYPE)Settings.Default.BandChartType4);
+                            }
                         }
                     }
                  }
@@ -2557,6 +2567,7 @@ namespace LuckyFuture.UI
                 enableSmart = true;
                 enableCross = true;
                 enableCci = true;
+                enableBoll = true;
             }
             else if (cmbBettingType.SelectedIndex == (int)BETTYPE.HYBRID)
             {
@@ -5745,6 +5756,24 @@ namespace LuckyFuture.UI
         private void chkBothOrder_CheckedChanged(object sender, EventArgs e)
         {
             saveSetting();
+        }
+
+        private void dgvValuationInfo_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+            e.ThrowException = false;
+        }
+
+        private void dgvOrderInfo_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+            e.ThrowException = false;
+        }
+
+        private void dgvItemPriceInfo_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+            e.ThrowException = false;
         }
     }
 }
