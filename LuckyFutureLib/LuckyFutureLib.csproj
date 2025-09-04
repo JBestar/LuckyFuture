@@ -48,6 +48,7 @@
     <Compile Include="Include\AesCrypt.cs" />
     <Compile Include="Include\Common.cs" />
     <Compile Include="Include\Extension.cs" />
+    <Compile Include="Include\HttpClientFx.cs" />
     <Compile Include="Include\HttpClientEx.cs" />
     <Compile Include="Include\LockEx.cs" />
     <Compile Include="Include\RsaCrypt.cs" />

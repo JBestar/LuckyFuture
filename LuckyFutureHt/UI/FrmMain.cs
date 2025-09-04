@@ -57,6 +57,7 @@ namespace LuckyFuture.UI
 		private FrmUpdate UpdateForm { get => FrmUpdate.Default; }
 		private FrmChart ChartForm { get => FrmChart.Default; }
         private FrmCurrent CurrentForm { get => FrmCurrent.Default; }
+        private FrmCurrent2 CurrentForm2 { get => FrmCurrent2.Default; }
         private FrmLog LogForm { get => FrmLog.Default; }
         // private FrmSetting SettingForm { get => FrmSetting.Default; }
         private BandSetting SettingBand { get => BandSetting.Default; }
@@ -82,7 +83,7 @@ namespace LuckyFuture.UI
             AppConfig.ReadLossConfig();
             AppConfig.SetNetworkInterfaces();
             // supported site list
-            string[] site_names = {"키움증권"}; //"더드림", "몬스타", "키움증권", "미래", //"레안텍", "나눔"
+            string[] site_names = {"키움증권", "CMG"}; //"더드림", "몬스타", "키움증권", "미래", //"레안텍", "나눔"
             foreach (string site_name in site_names) 
 				cmbSiteList.Items.Add(site_name);
 
@@ -106,6 +107,7 @@ namespace LuckyFuture.UI
 
 			this.ChartForm.Visible = false;
             this.CurrentForm.Visible = false;
+            this.CurrentForm2.Visible = false;
             this.LogForm.Visible = false;
 
             ShowNotice();
@@ -129,49 +131,7 @@ namespace LuckyFuture.UI
             }   catch { }
             
         }
-        //private void ConectWebSocket()
-        //{
-        //    string uri = AppAuthor.URL_WS2 + AppAuthor.Default.SessionId;
-        //    _appSocket = new AppWebSocket(uri);
-        //    _appSocket.NoticeEvent += OnAuthorNoticeReceive;
-
-        //    _CheckThread = new Thread(CheckSocket);
-        //    _CheckThread.IsBackground = true;
-        //    _CheckThread.Start();
-        //}
-        //private void CheckSocket()
-        //{
-        //    bool isDiscon = false;
-        //    while (true)
-        //    {
-        //        Thread.Sleep(30000);
-
-        //        if (_appSocket.ConnectState.Length == 0 || _appSocket.ConnectState == "Closed")
-        //        {
-        //            isDiscon = isDiscon == false;
-
-        //            if (isDiscon)
-        //                AddLog("서버 접속끊김!! 접속시도중...");
-
-        //            _appSocket.ConnectSocket();
-        //        }
-
-        //    }
-        //}
-
-        //public void CloseSocketThread()
-        //{
-        //    if (_CheckThread != null && _CheckThread.IsAlive)
-        //    {
-        //        if (_appSocket != null)
-        //            _appSocket.CloseSocket();
-
-        //        _CheckThread.Abort();
-        //        _CheckThread = null;
-        //    }
-
-        //}
-
+        
         private AxKFOpenAPILib.AxKFOpenAPI axKFOpenAPI;
         private bool createKFOpenApi()
         {
@@ -216,7 +176,7 @@ namespace LuckyFuture.UI
                 cmbBettingCandle1.Items.Add(i + 1);
                 cmbBettingCandle2.Items.Add(i + 1);
                 cmbCandlePayoff.Items.Add(i + 1);
-                cmbOrderCnt.Items.Add((i+1).ToString() + "개");
+                cmbOrderCnt.Items.Add(i+1);
             }
             //이평선교차
             cmbBettingCandle3.Items.Add("미완성");
@@ -372,6 +332,7 @@ namespace LuckyFuture.UI
 					cmbItemList.Items.Clear();
                 }
                 CurrentForm.InitListView();
+                CurrentForm2.InitListView();
 
             }
         }
@@ -449,8 +410,11 @@ namespace LuckyFuture.UI
                 if(!Settings.Default.SignalSiteOn)
                     ChartForm.SetRTValue(current.CurrentPrice, current.Time, 1, current.ConclusionQty);
 				LogicAuto.Default.OnLogicNoticeReceive();
-                CurrentForm.UpdateCurrentInfo();
-			}
+
+                if (this.CurrentSiteType == SITETYPE.CMG)
+                   CurrentForm2.UpdateCurrentInfo();
+                else CurrentForm.UpdateCurrentInfo();
+            }
         }
 
         private void UpdateCurrentInfo2()
@@ -459,7 +423,6 @@ namespace LuckyFuture.UI
             {
                 CurrentInfo current = SignalSite.Current;
                 ChartForm.SetRTValue(current.CurrentPrice, current.Time, 1, current.ConclusionQty);
-                // CurrentForm.UpdateCurrentInfo();
             }
         }
 
@@ -1086,12 +1049,12 @@ namespace LuckyFuture.UI
 
         public void SetDChartInfo(CHARTTYPE chartType)
         {
+            ChartForm.SetDChartType(chartType);
+
             if(CurrentSite != null)
                 CurrentSite.RequestDChart(chartType);
             if (SignalSite != null)
                 SignalSite.RequestDChart(chartType);
-
-            ChartForm.SetDChartType(chartType);
         }
         public void SetDChart2Info(CHARTTYPE chartType)
         {
@@ -1193,8 +1156,8 @@ namespace LuckyFuture.UI
 		{
 			if (this.SelectedUserAccount != null && this.ValuationInfo != null && this.ValuationInfo.Count > 0)
 			{
-				long lBalance = this.SelectedUserAccount.Balance + this.ValuationInfo[0].TotalValuation;
-                txtBalance.Text = lBalance.ToString("N0");
+				double lBalance = this.SelectedUserAccount.Balance + this.ValuationInfo[0].TotalValuation;
+                txtBalance.Text = lBalance.ToString("N2");
                 if (noticeType == SITE_NOTICEEVENTTYPE.PREPARE)
                 {
                     AppAuthor.Default.SetUserAccount("", "", SelectedUserAccount.Balance - ValuationInfo[0].CurrentProfit, SelectedUserAccount.Balance);
@@ -1252,7 +1215,7 @@ namespace LuckyFuture.UI
         }
         private void EnableControls()
 		{
-            chkSignal.Visible = !((SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.KIWOOM/* || (SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.MIRAE2*/); 
+            chkSignal.Visible = !((SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.KIWOOM || (SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.CMG); 
 
             bool running  = LogicAuto.Default.IsRunning;
 			cmbSiteList.Enabled = !running;
@@ -1341,6 +1304,10 @@ namespace LuckyFuture.UI
             {
                 CurrentForm.Close();
             }
+            if (!CurrentForm2.IsDisposed)
+            {
+                CurrentForm2.Close();
+            }
             if (!LogForm.IsDisposed)
             {
                 LogForm.Close();
@@ -1373,11 +1340,6 @@ namespace LuckyFuture.UI
 					txtPassword.Focus();
 					return;
 				}
-//                 if (this.CurrentSiteType == SITETYPE.MIRAE)
-//                 {
-//                     chkSignal.Checked = false;
-//                     Settings.Default.SignalSiteOn = chkSignal.Checked;
-//                 }
 
                 string id = txtId.Text;
                 string acc = "";
@@ -1466,15 +1428,12 @@ namespace LuckyFuture.UI
             {
                 string prdSymbol = CurrentSite.PrdList[prdIndex].Code;
 
-                if (this.CurrentSiteType == SITETYPE.KIWOOM)
+                if (CurrentSite.ChangePrd(prdSymbol))
                 {
-                    if (CurrentSite.ChangePrd(prdSymbol))
-                    {
-                        ChangeItem(0, false);
-                        ShowItemInfo();
-                    }
-
+                    ChangeItem(0, false);
+                    ShowItemInfo();
                 }
+
             }
 
         }
@@ -1488,7 +1447,8 @@ namespace LuckyFuture.UI
 				string itemSymbol = CurrentSite.ItemList[itemIndex].Symbol;
                 
 				if(this.CurrentSiteType == SITETYPE.DREAM || this.CurrentSiteType == SITETYPE.TOPASSET
-                    || this.CurrentSiteType == SITETYPE.KIWOOM || this.CurrentSiteType == SITETYPE.MIRAE2)
+                    || this.CurrentSiteType == SITETYPE.KIWOOM || this.CurrentSiteType == SITETYPE.MIRAE2
+                    || this.CurrentSiteType == SITETYPE.CMG)
                 {
                     ItemChanged = true;
                     if (CurrentSite.ChangeItem(itemSymbol))
@@ -1677,10 +1637,22 @@ namespace LuckyFuture.UI
 
         private void btnCurrent_Click(object sender, EventArgs e)
         {
-            if (!CurrentForm.Visible)
+            if (!LogicAuto.Default.IsRunning)
+                return;
+            if(this.CurrentSiteType == SITETYPE.CMG)
             {
-                CurrentForm.Show(this);
+                if (!CurrentForm2.Visible)
+                {
+                    CurrentForm2.Show(this);
+                }
+            } else
+            {
+                if (!CurrentForm.Visible)
+                {
+                    CurrentForm.Show(this);
+                }
             }
+            
         }
 
         private void btnLog_Click(object sender, EventArgs e)
@@ -4797,7 +4769,8 @@ namespace LuckyFuture.UI
                     AddLog("매수 주문가:" + quoteInfo.Price);
                 }
 
-                CurrentSite.DoBuyOrder(quoteInfo, cmbOrderCnt.SelectedIndex + 1, quoteInfo==null);
+                int ordCnt = Int32.Parse(cmbOrderCnt.Text);
+                CurrentSite.DoBuyOrder(quoteInfo, ordCnt, quoteInfo==null);
                        
             }
             catch (Exception) { }
@@ -4830,7 +4803,8 @@ namespace LuckyFuture.UI
                 };
                 AddLog("매도 주문가:" + quoteInfo.Price);
             }
-            CurrentSite.DoSellOrder(quoteInfo, cmbOrderCnt.SelectedIndex + 1, quoteInfo==null);
+            int ordCnt = Int32.Parse(cmbOrderCnt.Text);
+            CurrentSite.DoSellOrder(quoteInfo, ordCnt, quoteInfo==null);
         }
 
         private void cmbOrderCnt_DrawItem(object sender, DrawItemEventArgs e)

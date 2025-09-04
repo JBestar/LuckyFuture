@@ -47,7 +47,7 @@ namespace LuckyFuture.Models.ValueObjects
 		// Token: 0x170002A8 RID: 680
 		// (get) Token: 0x06000DB9 RID: 3513 RVA: 0x0004CBB0 File Offset: 0x0004ADB0
 		// (set) Token: 0x06000DBA RID: 3514 RVA: 0x0004CBB8 File Offset: 0x0004ADB8
-		public long? Valuation { get; set; }
+		public double Valuation { get; set; }
 
 		// Token: 0x170002A9 RID: 681
 		// (get) Token: 0x06000DBB RID: 3515 RVA: 0x0004CBC1 File Offset: 0x0004ADC1
@@ -58,7 +58,7 @@ namespace LuckyFuture.Models.ValueObjects
         public string OrderDate { get; set; }
 
         public string OrderNo { get; set; }
-		public int OrderQty { get; set; }
+		public double OrderQty { get; set; }
 		public TRADETYPE TradeType { get; set; }
         public string SymbolName { get; set; }
         public string TradeTypeNo { get; set; }

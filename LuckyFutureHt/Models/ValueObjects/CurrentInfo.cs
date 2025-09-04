@@ -11,7 +11,9 @@ namespace LuckyFuture.Models.ValueObjects
 	{
 		public DateTime Time { get; set; }
 		public double CurrentPrice { get; set; }
-		public string CurrentPriceStr { get; set; }
+		public double CurrentPrice2 { get; set; }
+        public string CurrentPriceStr { get; set; }
+        public string CurrentPrice2Str { get; set; }
 		public int ConclusionQty { get; set; }
 		public TRADETYPE TradeType { get; set; }
 	}

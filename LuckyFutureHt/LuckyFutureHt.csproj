@@ -79,6 +79,18 @@
     <Reference Include="ReaLTaiizor, Version=3.7.8.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ReaLTaiizor.3.7.8.3\lib\net48\ReaLTaiizor.dll</HintPath>
     </Reference>
+    <Reference Include="SocketIO.Core, Version=3.1.2.0, Culture=neutral, PublicKeyToken=c9a3629195a82104, processorArchitecture=MSIL">
+      <HintPath>..\packages\SocketIO.Core.3.1.2\lib\netstandard2.0\SocketIO.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SocketIO.Serializer.Core, Version=3.1.2.0, Culture=neutral, PublicKeyToken=c9a3629195a82104, processorArchitecture=MSIL">
+      <HintPath>..\packages\SocketIO.Serializer.Core.3.1.2\lib\netstandard2.0\SocketIO.Serializer.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SocketIO.Serializer.SystemTextJson, Version=3.1.2.0, Culture=neutral, PublicKeyToken=c9a3629195a82104, processorArchitecture=MSIL">
+      <HintPath>..\packages\SocketIO.Serializer.SystemTextJson.3.1.2\lib\netstandard2.0\SocketIO.Serializer.SystemTextJson.dll</HintPath>
+    </Reference>
+    <Reference Include="SocketIOClient, Version=3.1.2.0, Culture=neutral, PublicKeyToken=c9a3629195a82104, processorArchitecture=MSIL">
+      <HintPath>..\packages\SocketIOClient.3.1.2\lib\net462\SocketIOClient.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -88,6 +100,9 @@
     <Reference Include="System.Design" />
     <Reference Include="System.IO.Pipelines, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Pipelines.9.0.0\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Json, Version=4.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Json.4.8.0\lib\net462\System.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
@@ -152,10 +167,17 @@
     <Compile Include="Models\ValueObjects\ValuationInfo.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Site\FutureSite.cs" />
+    <Compile Include="Site\MetaTrader.cs" />
     <Compile Include="Site\KFOpen.cs" />
     <Compile Include="Site\SiteMirae.cs" />
     <Compile Include="Site\SiteReantek.cs" />
     <Compile Include="Site\SiteVisionAsset.cs" />
+    <Compile Include="UI\FrmCurrent2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FrmCurrent2.Designer.cs">
+      <DependentUpon>FrmCurrent2.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\FrmOrdCnt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,6 +258,10 @@
     <Compile Include="UI\BandSetting.Designer.cs">
       <DependentUpon>BandSetting.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\FrmCurrent2.resx">
+      <DependentUpon>FrmCurrent2.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\FrmOrdCnt.resx">
       <DependentUpon>FrmOrdCnt.cs</DependentUpon>
     </EmbeddedResource>

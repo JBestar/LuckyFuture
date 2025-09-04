@@ -106,7 +106,7 @@ namespace LuckyFuture
 
         }
 
-        public void SetUserAccount(string userName = "", string siteName = "", long startMoney = -1, long currentMoney = -1)
+        public void SetUserAccount(string userName = "", string siteName = "", double startMoney = -1, double currentMoney = -1)
         {
             if (!string.IsNullOrEmpty(userName))
                 _userName = userName;
@@ -115,10 +115,10 @@ namespace LuckyFuture
                 _siteName = siteName;
 
             if (startMoney >= 0)
-                _startMoney = startMoney;
+                _startMoney = (long)startMoney;
 
             if (currentMoney >= 0)
-                _currentMoney = currentMoney;
+                _currentMoney = (long)currentMoney;
         }
 
         public APPLOGINRESULT Login(string id, string pwd, bool force)

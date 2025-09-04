@@ -30,12 +30,13 @@ namespace LuckyFuture.Site
 	{
 		NONE = -1,
         KIWOOM = 0,
-        DREAM = 1,
-        TOPASSET = 2,
-        //MIRAE = 3,
-        MIRAE2 = 3,
-        VISION_ASSET = 4,
-        RELEASE = 100,
+		CMG = 1,
+        DREAM = 2,
+        TOPASSET = 3,
+        //MIRAE = 4,
+        MIRAE2 = 4,
+        VISION_ASSET = 5,
+        //RELEASE = 100,
 	}
 
 	public enum SITE_NOTICEEVENTTYPE
@@ -331,8 +332,8 @@ namespace LuckyFuture.Site
 
 		public abstract bool CancelOrder(OrderInfo orderInfo);
 		public abstract bool LiquidateOrder(OrderInfo orderInfo);
-		public abstract bool DoSellOrder(QuoteInfo quoteInfo, int nQuantity = 1, bool bMarketPrice = false);
-		public abstract bool DoBuyOrder(QuoteInfo quoteInfo, int nQuantity = 1, bool bMarketPrice = false);
+		public abstract bool DoSellOrder(QuoteInfo quoteInfo, double nQuantity = 1, bool bMarketPrice = false);
+		public abstract bool DoBuyOrder(QuoteInfo quoteInfo, double nQuantity = 1, bool bMarketPrice = false);
 		public virtual bool ChangePrd(string sSymbol)
         {
 			return true;

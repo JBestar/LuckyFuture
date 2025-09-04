@@ -122,7 +122,7 @@ namespace ChartCtrl
         public string AveragePrice { get; set; }
         public DateTime OrderTime { get; set; }
         public long OrderTm { get; set; }
-        public int OrderQty { get; set; }
+        public double OrderQty { get; set; }
         public RESULTSTATE ResultState { get; set; }
         public CONCSTATE ConcState { get; set; }
         public TIMETYPE TimeType { get; set; }

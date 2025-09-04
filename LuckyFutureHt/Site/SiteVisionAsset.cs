@@ -855,7 +855,7 @@ namespace LuckyFuture.Site
 					this.ValuationList[0].TotalValuation = list.Sum((UnliquidationOrder o) => o.Valuation);
 					//this.ValuationList[0].LossCut = list.Sum((UnliquidationOrder o) => o.LossCut);
 					this.ValuationList[0].TotalProfit = this.DayProfitLoss.TotalProfit;
-					this.ValuationList[0].CurrentProfit = this.DayProfitLoss.TotalProfit - this.DayProfitLoss.TotalCommission + this.ValuationList[0].TotalValuation;
+					this.ValuationList[0].CurrentProfit = (long)(this.DayProfitLoss.TotalProfit - this.DayProfitLoss.TotalCommission + this.ValuationList[0].TotalValuation);
                     return;
                 }
 				if (this.ValuationList.Any<ValuationInfo>() && list.Any<UnliquidationOrder>())
@@ -866,7 +866,7 @@ namespace LuckyFuture.Site
 					this.ValuationList[0].TotalValuation = list.Sum((UnliquidationOrder o) => o.Valuation);
 					//this.ValuationList[0].LossCut = list.Sum((UnliquidationOrder o) => o.LossCut);
                     this.ValuationList[0].TotalProfit = this.DayProfitLoss.TotalProfit;
-                    this.ValuationList[0].CurrentProfit = this.DayProfitLoss.TotalProfit - this.DayProfitLoss.TotalCommission + this.ValuationList[0].TotalValuation;
+                    this.ValuationList[0].CurrentProfit = (long)(this.DayProfitLoss.TotalProfit - this.DayProfitLoss.TotalCommission + this.ValuationList[0].TotalValuation);
 					return;
 				}
 				this.ValuationList[0].Balance = "-";
@@ -915,7 +915,7 @@ namespace LuckyFuture.Site
 						CurrentPrice = currentPrice.ToString(priceStringFormat),
 						AveragePrice = (totalPrice / (double)totalQty).ToString(averageStringFormat),
 						Qty = string.Format("{0}[{1}]", EnumHelper.GetEnumDescription(last.order.TradeType), totalQty),
-						Valuation = new long?(g.Sum(_ => this._orderModule.CalculateValuation(_.order, _.item, currentPrice, ClientState.Currencies))),
+						Valuation = g.Sum(_ => this._orderModule.CalculateValuation(_.order, _.item, currentPrice, ClientState.Currencies)),
 						Action = "청산"
 					}).GetEnumerator()
 				)
@@ -969,7 +969,7 @@ namespace LuckyFuture.Site
 						AveragePrice = element.tmp.tmp1.g.Key.Price.ToString(element.priceStringFormat),
 						Qty = string.Format("{0}[{1}]", EnumHelper.GetEnumDescription(element.tmp.tmp1.last.order.TradeType),
 							element.tmp.tmp1.g.Sum(_ => _.order.NotConclusionQty)),
-						Valuation = new long?(0L),
+						Valuation = 0,
 						Action = "취소",
 						OrderTime = Environment.TickCount
 					}).GetEnumerator()
@@ -1024,7 +1024,7 @@ namespace LuckyFuture.Site
 
 			// 계좌정보 
 			UserAccount ua = ClientState.UserAccounts.FirstOrDefault<UserAccount>(u => u.UserAccountId.ToString() == this.CurrentUserAccount.UserAccountId);
-			long totalValuation = this.ValuationList[0].TotalValuation;
+			long totalValuation = (long)this.ValuationList[0].TotalValuation;
 
 			long num = 0L;
 			long num2 = 0L;
@@ -1494,7 +1494,7 @@ namespace LuckyFuture.Site
 			return true;
 		}
 
-		public override bool DoSellOrder(QuoteInfo quoteInfo, int nQuantity = 1, bool bMarketPrice = false)
+		public override bool DoSellOrder(QuoteInfo quoteInfo, double nQuantity = 1, bool bMarketPrice = false)
 		{
 			
             if (this.CurrentUserAccount == null)
@@ -1520,13 +1520,13 @@ namespace LuckyFuture.Site
 				{
 					OrderType = OrderType.New,
 					TradeType = TradeType.Sell,
-					Qty = nQuantity,
+					Qty = (int) nQuantity,
 					Price = quoteInfo.Price,
 					PriceType = bMarketPrice?PriceType.Market:PriceType.Limit,
 					ApplyLeverage = ua.Leverage,
 					OrderSignalType = this._userAccountModule.GetOrderSignalType(ua, ClientState.UserAccountSpecs, ClientState.Item),
 					OrderRouteType = OrderRouteType.QuoteInfoGrid,
-					ProcessCount = Convert.ToInt32(quoteInfo.AskQty) + nQuantity,
+					ProcessCount = Convert.ToInt32(quoteInfo.AskQty) + (int)nQuantity,
 					Symbol = CurItemSymbol.Symbol,
 					MarketId = ClientState.Market.MarketId,
 					UserAccountId = ua.UserAccountId
@@ -1597,7 +1597,7 @@ namespace LuckyFuture.Site
 			return true;
 		}
 
-		public override bool DoBuyOrder(QuoteInfo quoteInfo, int nQuantity = 1, bool bMarketPrice = false)
+		public override bool DoBuyOrder(QuoteInfo quoteInfo, double nQuantity = 1, bool bMarketPrice = false)
 		{
             if (this.CurrentUserAccount == null)
 				return false;
@@ -1621,7 +1621,7 @@ namespace LuckyFuture.Site
 				{
 					OrderType = OrderType.New,
 					TradeType = TradeType.Buy,
-					Qty = nQuantity,
+					Qty = (int) nQuantity,
 					Price = quoteInfo.Price,
 					PriceType = bMarketPrice?PriceType.Market:PriceType.Limit,
 					ApplyLeverage = this.CurrentUserAccount.Leverage,
@@ -1631,7 +1631,7 @@ namespace LuckyFuture.Site
 						ClientState.Item
 					),
 					OrderRouteType = OrderRouteType.QuoteInfoGrid,
-					ProcessCount = Convert.ToInt32(quoteInfo.BidQty) + nQuantity,
+					ProcessCount = Convert.ToInt32(quoteInfo.BidQty) + (int) nQuantity,
 					Symbol = CurItemSymbol.Symbol,
 					MarketId = ClientState.Market.MarketId,
 					UserAccountId = ua.UserAccountId

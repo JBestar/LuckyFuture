@@ -10,7 +10,7 @@ namespace LuckyFuture.Models.ValueObjects
 	{  
 		public string UserAccountId { get; set; }
 		public string UserAccountStr { get; set; }
-		public long Balance { get; set; }
+		public double Balance { get; set; }
 		public int Leverage { get; set; }
 
 		public long TotalProfit { get; set; }

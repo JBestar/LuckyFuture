@@ -18,6 +18,8 @@ namespace LuckyFuture.Models.ValueObjects
         public int Precision { get; set; }
         public double MidPrice { get; set; }
         public int index { get; set; }
-
+        public double MinVolume { get; set; }
+        public double MaxVolume { get; set; }
+        public double VolumeStep { get; set; }
     }
 }

@@ -24,11 +24,13 @@ namespace Goodbyte.TradingSystem.Domain.Entities
 		// (set) Token: 0x060004F4 RID: 1268 RVA: 0x00016904 File Offset: 0x00014B04
 		[DataMember]
 		public double CurrentPrice { get; set; }
+        [DataMember]
+        public double CurrentPrice2 { get; set; }
 
-		// Token: 0x17000242 RID: 578
-		// (get) Token: 0x060004F5 RID: 1269 RVA: 0x0001690D File Offset: 0x00014B0D
-		// (set) Token: 0x060004F6 RID: 1270 RVA: 0x00016915 File Offset: 0x00014B15
-		[DataMember]
+        // Token: 0x17000242 RID: 578
+        // (get) Token: 0x060004F5 RID: 1269 RVA: 0x0001690D File Offset: 0x00014B0D
+        // (set) Token: 0x060004F6 RID: 1270 RVA: 0x00016915 File Offset: 0x00014B15
+        [DataMember]
 		public double StartPrice { get; set; }
 
 		// Token: 0x17000243 RID: 579

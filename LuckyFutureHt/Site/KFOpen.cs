@@ -302,7 +302,7 @@ namespace LuckyFuture.Site
         }
 
 
-        public override bool DoSellOrder(QuoteInfo quoteInfo, int nQuantity = 1, bool bMarketPrice = false)
+        public override bool DoSellOrder(QuoteInfo quoteInfo, double nQuantity = 1, bool bMarketPrice = false)
         {
             
             if (this.CurrentUserAccount == null || string.IsNullOrEmpty(CurrentUserAccount.UserAccountId))
@@ -351,7 +351,7 @@ namespace LuckyFuture.Site
             string strAccNo = CurrentUserAccount.UserAccountId;
             int iOrderType = 1;             //1:신규매도, 2:신규매수 3:매도취소, 4:매수취소, 5:매도정정, 6:매수정정
             string strCode = ItemSymbol;
-            int iQty = nQuantity;
+            int iQty = (int)nQuantity;
             string strPrice = "0";
             string strStopPrice = "0";      // 주문구분 3:STOP, 4:STOP LIMIT 인 경우, 값 셋팅(단, 2:STOP 인 경우, strPrice = "0" 셋팅) 
             string strOrderGubun = "1";     // 2:지정가, 1:시장가, 3:STOP, 4:STOP LIMIT
@@ -375,7 +375,7 @@ namespace LuckyFuture.Site
 
         }
         
-        public override bool DoBuyOrder(QuoteInfo quoteInfo, int nQuantity = 1, bool bMarketPrice = false)
+        public override bool DoBuyOrder(QuoteInfo quoteInfo, double nQuantity = 1, bool bMarketPrice = false)
         {
 
             if (this.CurrentUserAccount == null || string.IsNullOrEmpty(CurrentUserAccount.UserAccountId))
@@ -424,7 +424,7 @@ namespace LuckyFuture.Site
             string strAccNo = CurrentUserAccount.UserAccountId;
             int iOrderType = 2;             //1:신규매도, 2:신규매수 3:매도취소, 4:매수취소, 5:매도정정, 6:매수정정
             string strCode = ItemSymbol;
-            int iQty = nQuantity;
+            int iQty = (int)nQuantity;
             string strPrice = "0";
             string strStopPrice = "0";      // 주문구분 3:STOP, 4:STOP LIMIT 인 경우, 값 셋팅(단, 2:STOP 인 경우, strPrice = "0" 셋팅) 
             string strOrderGubun = "1";     // 2:지정가, 1:시장가, 3:STOP, 4:STOP LIMIT
@@ -464,7 +464,7 @@ namespace LuckyFuture.Site
             string strAccNo = CurrentUserAccount.UserAccountId;  //계좌번호
             int iOrderType = orderInfo.TradeTypeNo == "1"? 3:4;             //주문유형 (1:신규매도, 2:신규매수 3:매도취소, 4:매수취소, 5:매도정정, 6:매수정정)
             string strCode = orderInfo.Symbol;       //종목코드
-            int iQty = orderInfo.OrderQty;                   //주문수량
+            int iQty = (int)orderInfo.OrderQty;                   //주문수량
             string strPrice = "0";          //주문단가
             string strStopPrice = "0";      //stop단가 주문구분 3:STOP, 4:STOP LIMIT 인 경우, 값 셋팅(단, 2:STOP 인 경우, strPrice = "0" 셋팅) 
             string strOrderGubun = "2";     //거래구분( 2:지정가, 1:시장가, 3:STOP, 4:STOP LIMIT)
@@ -993,9 +993,10 @@ namespace LuckyFuture.Site
 
                     if(!Settings.Default.SignalSiteOn)
                         OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.VALUATION);
+                    WriteLog(String.Format("OnReceiveValuation Balance={0}, Valuation={1}, Profit={2}", lBalance, lValuation, lProfit));
                 }
 
-                if(sMValue.Length > 180)
+                if (sMValue.Length > 180)
                 {
                     try
                     {
@@ -1052,7 +1053,7 @@ namespace LuckyFuture.Site
                             if (nOrderCnt > 0)
                             {
                                 OrderInfo orderInfo;
-                                long? lValSum = 0;
+                                double lValSum = 0;
                                 double dAveragePrice = 0.0;
                                 double dAveragePriceSum = 0.0;
                                 for (int iRow = 0; iRow < nOrderCnt; iRow++)
@@ -1073,8 +1074,8 @@ namespace LuckyFuture.Site
                                         dAveragePrice = double.Parse(orderInfo.AveragePrice);
                                         dAveragePriceSum += dAveragePrice;
                                         orderInfo.Valuation = orderInfo.TradeTypeNo == "1" ?
-                                            (long?)((dAveragePrice - current.CurrentPrice) / CurItemSymbol.OverTick * CurItemSymbol.ValueTick * CurItemSymbol.Exchange * orderInfo.OrderQty) :
-                                            (long?)((current.CurrentPrice - dAveragePrice) / CurItemSymbol.OverTick * CurItemSymbol.ValueTick * CurItemSymbol.Exchange * orderInfo.OrderQty);
+                                            ((dAveragePrice - current.CurrentPrice) / CurItemSymbol.OverTick * CurItemSymbol.ValueTick * CurItemSymbol.Exchange * orderInfo.OrderQty) :
+                                            ((current.CurrentPrice - dAveragePrice) / CurItemSymbol.OverTick * CurItemSymbol.ValueTick * CurItemSymbol.Exchange * orderInfo.OrderQty);
                                         if (orderInfo.TradeType == TRADETYPE.SELL)  //매도
                                         {
                                             if (current.CurrentPrice < orderInfo.MaxAveragePrice)
@@ -1689,8 +1690,7 @@ namespace LuckyFuture.Site
             List<QuoteInfo> list = new List<QuoteInfo>();
             foreach (OrderInfo order in orders)
             {
-                for (int i = 0; i < order.OrderQty; i++)
-                    list.Add(this.FindQuoteInfo(this.QuoteList, Double.Parse(order.AveragePrice)));
+                list.Add(this.FindQuoteInfo(this.QuoteList, Double.Parse(order.AveragePrice)));
             }
             if (list.Any<QuoteInfo>())
             {

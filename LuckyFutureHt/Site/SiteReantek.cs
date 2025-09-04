@@ -853,7 +853,7 @@ namespace LuckyFuture.Site
             catch (Exception) { }
         }
 
-        public override bool DoSellOrder(QuoteInfo quoteInfo, int nQuantity = 1, bool bMarketPrice = false)
+        public override bool DoSellOrder(QuoteInfo quoteInfo, double nQuantity = 1, bool bMarketPrice = false)
         {
 
             if (this.CurrentUserAccount == null)
@@ -901,7 +901,7 @@ namespace LuckyFuture.Site
                 msg = "주문창#[클릭주문] 1번  [Mileage : 0] 지장가매도버튼 클릭 " + CurItemSymbol.Symbol + "#";
             }
             if (_ConnSock.RequestOrder(TRADETYPE.SELL, CurItemSymbol.Symbol, 
-                string.Format(Settings.Default.PriceFormat, bMarketPrice ? 0 : quoteInfo.Price), nQuantity, bMarketPrice))
+                string.Format(Settings.Default.PriceFormat, bMarketPrice ? 0 : quoteInfo.Price), (int)nQuantity, bMarketPrice))
             {
                 _orderTrade = TRADETYPE.SELL;
                 _orderTick = Environment.TickCount;
@@ -917,7 +917,7 @@ namespace LuckyFuture.Site
 
         }
 
-        public override bool DoBuyOrder(QuoteInfo quoteInfo, int nQuantity = 1, bool bMarketPrice = false)
+        public override bool DoBuyOrder(QuoteInfo quoteInfo, double nQuantity = 1, bool bMarketPrice = false)
         {
 
 
@@ -968,7 +968,7 @@ namespace LuckyFuture.Site
                 msg = "주문창#[클릭주문] 1번  [Mileage : 0] 지장가매수버튼 클릭 " + CurItemSymbol.Symbol + "#";
             }
             if (_ConnSock.RequestOrder(TRADETYPE.BUY, CurItemSymbol.Symbol,
-                string.Format(Settings.Default.PriceFormat, bMarketPrice ? 0 : quoteInfo.Price), nQuantity, bMarketPrice))
+                string.Format(Settings.Default.PriceFormat, bMarketPrice ? 0 : quoteInfo.Price), (int)nQuantity, bMarketPrice))
             {
                 _orderTrade = TRADETYPE.BUY;
                 _orderTick = Environment.TickCount;
@@ -994,7 +994,7 @@ namespace LuckyFuture.Site
                 return false;
             }
 
-            if(_ConnSock.RequestCancel(orderInfo.TradeType, orderInfo.Symbol, orderInfo.AveragePrice, orderInfo.OrderQty, long.Parse(orderInfo.OrderNo)))
+            if(_ConnSock.RequestCancel(orderInfo.TradeType, orderInfo.Symbol, orderInfo.AveragePrice, (int)orderInfo.OrderQty, long.Parse(orderInfo.OrderNo)))
             {
                 if (orderInfo.TradeType == TRADETYPE.SELL)
                     OnFutureSiteLogEvent("[주문취소] 매도주문이 취소되었습니다.");
@@ -1014,7 +1014,7 @@ namespace LuckyFuture.Site
                 return false;
             
             if(_ConnSock.RequestOrder(orderInfo.TradeType == TRADETYPE.SELL ? TRADETYPE.BUY:TRADETYPE.SELL,
-                orderInfo.Symbol, string.Format(Settings.Default.PriceFormat, 0), orderInfo.OrderQty, true))
+                orderInfo.Symbol, string.Format(Settings.Default.PriceFormat, 0), (int)orderInfo.OrderQty, true))
             {
                 if (orderInfo.TradeType == TRADETYPE.SELL)
                     OnFutureSiteLogEvent("[청산] 매도주문이 청산되었습니다.");
@@ -1102,7 +1102,7 @@ namespace LuckyFuture.Site
                         {
 
                             OrderInfo orderInfo;
-                            long? lValSum = 0;
+                            double lValSum = 0;
                             double dAveragePrice = 0.0;
                             double dAveragePriceSum = 0.0;
                             for (int iRow = 0; iRow < nOrderCnt; iRow++)
@@ -1123,8 +1123,8 @@ namespace LuckyFuture.Site
                                     dAveragePrice = double.Parse(orderInfo.AveragePrice);
                                     dAveragePriceSum += dAveragePrice;
                                     orderInfo.Valuation = orderInfo.TradeType == TRADETYPE.SELL ?
-                                        (long?)((dAveragePrice - current.CurrentPrice) / CurItemSymbol.OverTick * CurItemSymbol.ValueTick * CurItemSymbol.Exchange * orderInfo.OrderQty) :
-                                        (long?)((current.CurrentPrice - dAveragePrice) / CurItemSymbol.OverTick * CurItemSymbol.ValueTick * CurItemSymbol.Exchange * orderInfo.OrderQty);
+                                        ((dAveragePrice - current.CurrentPrice) / CurItemSymbol.OverTick * CurItemSymbol.ValueTick * CurItemSymbol.Exchange * orderInfo.OrderQty) :
+                                        ((current.CurrentPrice - dAveragePrice) / CurItemSymbol.OverTick * CurItemSymbol.ValueTick * CurItemSymbol.Exchange * orderInfo.OrderQty);
 
                                     if (orderInfo.TradeType == TRADETYPE.SELL)  //매도
                                     {
@@ -1426,20 +1426,20 @@ namespace LuckyFuture.Site
                         if (orderInfo != null)
                         {
                             if (orderInfo.TradeType == tradeType)
-                                nQty += orderInfo.OrderQty;
+                                nQty += (int)orderInfo.OrderQty;
                             else if(nQty > orderInfo.OrderQty)
                             {
                                 this.LiquidOrder.OrderType = "되돌림";
                                 this.LiquidOrder.ConcState = CONCSTATE.RECONC;
                                 this.LiquidOrder.ResultState = tradeType == TRADETYPE.BUY ? RESULTSTATE.BUY : RESULTSTATE.SELL;
-                                nQty = nQty - orderInfo.OrderQty;
+                                nQty = nQty - (int)orderInfo.OrderQty;
                             } else
                             {
                                 this.LiquidOrder.OrderType = "청산";
                                 this.LiquidOrder.ConcState = CONCSTATE.LIQUID;
                                 this.LiquidOrder.ResultState = orderInfo.TradeType == TRADETYPE.BUY ? RESULTSTATE.BUY : RESULTSTATE.SELL;
                                 tradeType = orderInfo.TradeType;
-                                nQty = orderInfo.OrderQty - nQty ;
+                                nQty = (int)orderInfo.OrderQty - nQty ;
                             }
                             this.OrderList.Remove(orderInfo);
                             
@@ -1831,8 +1831,7 @@ namespace LuckyFuture.Site
             List<QuoteInfo> list = new List<QuoteInfo>();
             foreach (OrderInfo order in orders)
             {
-                for (int i = 0; i < order.OrderQty; i++)
-                    list.Add(this.FindQuoteInfo(this.QuoteList, Double.Parse(order.AveragePrice)));                
+                list.Add(this.FindQuoteInfo(this.QuoteList, Double.Parse(order.AveragePrice)));                
             }
             if (list.Any<QuoteInfo>())
             {
