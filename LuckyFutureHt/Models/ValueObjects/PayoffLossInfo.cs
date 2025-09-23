@@ -13,6 +13,7 @@ namespace LuckyFuture.Models.ValueObjects
         public long Amount { get; set; }
         public int Rate { get; set; }
         public string Param { get; set; }
+        public string Param2 { get; set; }
         public string AmountUnit { get; set; }
         public string RateUnit { get; set; }
         public int Enabled { get; set; }

@@ -326,52 +326,52 @@
     <Setting Name="PayoffLossRange" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;string&gt;1#0#50#&lt;/string&gt;
-  &lt;string&gt;1#10#40#&lt;/string&gt;
-  &lt;string&gt;1#30#30#&lt;/string&gt;
-  &lt;string&gt;1#50#20#&lt;/string&gt;
-  &lt;string&gt;1#70#10#&lt;/string&gt;
-  &lt;string&gt;1#100#5#&lt;/string&gt;
+  &lt;string&gt;1#0#50#0#0&lt;/string&gt;
+  &lt;string&gt;1#10#40#0#0&lt;/string&gt;
+  &lt;string&gt;1#30#30#0#0&lt;/string&gt;
+  &lt;string&gt;1#50#20#0#0&lt;/string&gt;
+  &lt;string&gt;1#70#10#0#0&lt;/string&gt;
+  &lt;string&gt;1#100#5#0#0&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="SmartLossRange" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;string&gt;1#10#50#50&lt;/string&gt;
-  &lt;string&gt;1#20#45#50&lt;/string&gt;
-  &lt;string&gt;1#30#40#50&lt;/string&gt;
-  &lt;string&gt;1#40#35#50&lt;/string&gt;
-  &lt;string&gt;1#50#30#50&lt;/string&gt;
-  &lt;string&gt;1#60#25#50&lt;/string&gt;
-  &lt;string&gt;1#70#20#50&lt;/string&gt;
-  &lt;string&gt;1#80#15#50&lt;/string&gt;
-  &lt;string&gt;1#90#10#50&lt;/string&gt;
-  &lt;string&gt;1#100#5#50&lt;/string&gt;
+  &lt;string&gt;1#10#50#50#30&lt;/string&gt;
+  &lt;string&gt;1#20#45#50#30&lt;/string&gt;
+  &lt;string&gt;1#30#40#50#30&lt;/string&gt;
+  &lt;string&gt;1#40#35#50#30&lt;/string&gt;
+  &lt;string&gt;1#50#30#50#30&lt;/string&gt;
+  &lt;string&gt;1#60#25#50#30&lt;/string&gt;
+  &lt;string&gt;1#70#20#50#30&lt;/string&gt;
+  &lt;string&gt;1#80#15#50#30&lt;/string&gt;
+  &lt;string&gt;1#90#10#50#30&lt;/string&gt;
+  &lt;string&gt;1#100#5#50#30&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="CrossLossRange" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;string&gt;1#10#50#50&lt;/string&gt;
-  &lt;string&gt;1#20#45#50&lt;/string&gt;
-  &lt;string&gt;1#30#40#50&lt;/string&gt;
-  &lt;string&gt;1#40#35#50&lt;/string&gt;
-  &lt;string&gt;1#50#30#50&lt;/string&gt;
-  &lt;string&gt;1#60#25#50&lt;/string&gt;
-  &lt;string&gt;1#70#20#50&lt;/string&gt;
-  &lt;string&gt;1#80#15#50&lt;/string&gt;
-  &lt;string&gt;1#90#10#50&lt;/string&gt;
-  &lt;string&gt;1#100#5#50&lt;/string&gt;
+  &lt;string&gt;1#10#50#50#30&lt;/string&gt;
+  &lt;string&gt;1#20#45#50#30&lt;/string&gt;
+  &lt;string&gt;1#30#40#50#30&lt;/string&gt;
+  &lt;string&gt;1#40#35#50#30&lt;/string&gt;
+  &lt;string&gt;1#50#30#50#30&lt;/string&gt;
+  &lt;string&gt;1#60#25#50#30&lt;/string&gt;
+  &lt;string&gt;1#70#20#50#30&lt;/string&gt;
+  &lt;string&gt;1#80#15#50#30&lt;/string&gt;
+  &lt;string&gt;1#90#10#50#30&lt;/string&gt;
+  &lt;string&gt;1#100#5#50#30&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="CciLossRange" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;string&gt;1#100#50#50&lt;/string&gt;
-  &lt;string&gt;1#150#40#50&lt;/string&gt;
-  &lt;string&gt;1#200#30#50&lt;/string&gt;
-  &lt;string&gt;1#250#20#50&lt;/string&gt;
-  &lt;string&gt;1#300#10#50&lt;/string&gt;
+  &lt;string&gt;1#100#50#50#30&lt;/string&gt;
+  &lt;string&gt;1#150#40#50#30&lt;/string&gt;
+  &lt;string&gt;1#200#30#50#30&lt;/string&gt;
+  &lt;string&gt;1#250#20#50#30&lt;/string&gt;
+  &lt;string&gt;1#300#10#50#30&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="BollPayoff" Type="System.Boolean" Scope="User">
@@ -388,6 +388,33 @@
     </Setting>
     <Setting Name="BothOrder" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ReturnOption" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PayoffWithEarn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CrossAvgLine1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CrossAvgLine2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ReverseOrder" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ReverseOrdCnt1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ReverseOrdSel1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ReverseOrdCnt2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ReverseOrdSel2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

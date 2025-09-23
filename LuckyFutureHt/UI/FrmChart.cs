@@ -101,7 +101,75 @@ namespace LuckyFuture.UI
 
 
         }
-        
+        public bool SetRChartType(CHARTTYPE chartType)
+        {
+            TIMETYPE tt;
+            TIMEUNIT tu;
+            int[] arrAvgCnt = { 5, 10, 20, 60, 120 };
+            switch (chartType)
+            {
+                case CHARTTYPE.MIN_1:
+                    tt = TIMETYPE.TIMETYPE_MIN;
+                    tu = TIMEUNIT.TIMEUNIT_1;
+                    break;
+                case CHARTTYPE.MIN_5:
+                    tt = TIMETYPE.TIMETYPE_MIN;
+                    tu = TIMEUNIT.TIMEUNIT_5;
+                    break;
+                case CHARTTYPE.MIN_15:
+                    tt = TIMETYPE.TIMETYPE_MIN;
+                    tu = TIMEUNIT.TIMEUNIT_15;
+                    break;
+                case CHARTTYPE.MIN_30:
+                    tt = TIMETYPE.TIMETYPE_MIN;
+                    tu = TIMEUNIT.TIMEUNIT_30;
+                    break;
+                case CHARTTYPE.TICK_60:
+                    tt = TIMETYPE.TIMETYPE_TICK;
+                    tu = TIMEUNIT.TIMEUNIT_60;
+                    break;
+                case CHARTTYPE.TICK_90:
+                    tt = TIMETYPE.TIMETYPE_TICK;
+                    tu = TIMEUNIT.TIMEUNIT_90;
+                    break;
+                case CHARTTYPE.TICK_120:
+                    tt = TIMETYPE.TIMETYPE_TICK;
+                    tu = TIMEUNIT.TIMEUNIT_120;
+                    break;
+                case CHARTTYPE.TICK_240:
+                    tt = TIMETYPE.TIMETYPE_TICK;
+                    tu = TIMEUNIT.TIMEUNIT_240;
+                    break;
+                case CHARTTYPE.TICK_350:
+                    tt = TIMETYPE.TIMETYPE_TICK;
+                    tu = TIMEUNIT.TIMEUNIT_350;
+                    break;
+                case CHARTTYPE.TICK_400:
+                    tt = TIMETYPE.TIMETYPE_TICK;
+                    tu = TIMEUNIT.TIMEUNIT_400;
+                    break;
+                case CHARTTYPE.TICK_600:
+                    tt = TIMETYPE.TIMETYPE_TICK;
+                    tu = TIMEUNIT.TIMEUNIT_600;
+                    break;
+                case CHARTTYPE.TICK_750:
+                    tt = TIMETYPE.TIMETYPE_TICK;
+                    tu = TIMEUNIT.TIMEUNIT_750;
+                    break;
+                case CHARTTYPE.TICK_990:
+                    tt = TIMETYPE.TIMETYPE_TICK;
+                    tu = TIMEUNIT.TIMEUNIT_990;
+                    break;
+                default:
+                    tt = TIMETYPE.TIMETYPE_TICK;
+                    tu = TIMEUNIT.TIMEUNIT_60;
+                    break;
+            }
+
+            return chartFuture.SetRChartType(tt, tu, arrAvgCnt, Settings.Default.BoLineAdjust);
+
+        }
+
         public bool SetDChartType(CHARTTYPE chartType)
         {
             _ChartType = chartType;

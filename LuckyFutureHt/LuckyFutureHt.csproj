@@ -190,6 +190,12 @@
     <Compile Include="UI\FrmLock.Designer.cs">
       <DependentUpon>FrmLock.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\FrmRange2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FrmRange2.Designer.cs">
+      <DependentUpon>FrmRange2.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\FrmSync.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -267,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FrmLock.resx">
       <DependentUpon>FrmLock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FrmRange2.resx">
+      <DependentUpon>FrmRange2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FrmSync.resx">
       <DependentUpon>FrmSync.cs</DependentUpon>

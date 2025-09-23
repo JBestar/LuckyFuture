@@ -1,7 +1,7 @@
 ﻿
 namespace LuckyFuture.UI
 {
-    partial class FrmRange
+    partial class FrmRange2
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace LuckyFuture.UI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRange));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRange2));
             this.btnOk = new ReaLTaiizor.Controls.DreamButton();
             this.btnCancel = new ReaLTaiizor.Controls.DreamButton();
             this.lbLossUnit = new System.Windows.Forms.Label();
@@ -38,22 +38,25 @@ namespace LuckyFuture.UI
             this.lbAmoutUnit = new System.Windows.Forms.Label();
             this.txtAmout = new System.Windows.Forms.TextBox();
             this.dgvRangeInfo = new System.Windows.Forms.DataGridView();
-            this.enabledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.StageName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Spec = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RateUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.paramDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ActionDelete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.EndColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bsRangeInfo = new System.Windows.Forms.BindingSource(this.components);
             this.btnAdd = new ReaLTaiizor.Controls.DreamButton();
             this.lbAmount = new System.Windows.Forms.Label();
             this.lbLoss = new System.Windows.Forms.Label();
+            this.txtRsi2 = new System.Windows.Forms.TextBox();
             this.lblRsi = new System.Windows.Forms.Label();
             this.txtRsi = new System.Windows.Forms.TextBox();
-            this.lbParaUnit = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.StageName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Spec = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RateUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paramDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.param2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActionDelete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.EndColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enabledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bsRangeInfo = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRangeInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsRangeInfo)).BeginInit();
             this.SuspendLayout();
@@ -104,7 +107,7 @@ namespace LuckyFuture.UI
             // 
             this.lbLossUnit.AutoSize = true;
             this.lbLossUnit.Font = new System.Drawing.Font("Gulim", 9F);
-            this.lbLossUnit.Location = new System.Drawing.Point(262, 430);
+            this.lbLossUnit.Location = new System.Drawing.Point(257, 435);
             this.lbLossUnit.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbLossUnit.Name = "lbLossUnit";
             this.lbLossUnit.Size = new System.Drawing.Size(18, 15);
@@ -113,7 +116,7 @@ namespace LuckyFuture.UI
             // 
             // txtPercent
             // 
-            this.txtPercent.Location = new System.Drawing.Point(214, 425);
+            this.txtPercent.Location = new System.Drawing.Point(209, 430);
             this.txtPercent.Margin = new System.Windows.Forms.Padding(2);
             this.txtPercent.Name = "txtPercent";
             this.txtPercent.Size = new System.Drawing.Size(43, 25);
@@ -124,7 +127,7 @@ namespace LuckyFuture.UI
             // 
             this.lbAmoutUnit.AutoSize = true;
             this.lbAmoutUnit.Font = new System.Drawing.Font("Gulim", 9F);
-            this.lbAmoutUnit.Location = new System.Drawing.Point(115, 431);
+            this.lbAmoutUnit.Location = new System.Drawing.Point(112, 435);
             this.lbAmoutUnit.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbAmoutUnit.Name = "lbAmoutUnit";
             this.lbAmoutUnit.Size = new System.Drawing.Size(37, 15);
@@ -133,7 +136,7 @@ namespace LuckyFuture.UI
             // 
             // txtAmout
             // 
-            this.txtAmout.Location = new System.Drawing.Point(68, 425);
+            this.txtAmout.Location = new System.Drawing.Point(65, 429);
             this.txtAmout.Margin = new System.Windows.Forms.Padding(2);
             this.txtAmout.Name = "txtAmout";
             this.txtAmout.Size = new System.Drawing.Size(43, 25);
@@ -159,12 +162,13 @@ namespace LuckyFuture.UI
             this.rateDataGridViewTextBoxColumn,
             this.RateUnit,
             this.paramDataGridViewTextBoxColumn,
+            this.param2DataGridViewTextBoxColumn,
             this.ActionDelete,
             this.EndColumn});
             this.dgvRangeInfo.DataSource = this.bsRangeInfo;
             this.dgvRangeInfo.EnableHeadersVisualStyles = false;
             this.dgvRangeInfo.GridColor = System.Drawing.SystemColors.Window;
-            this.dgvRangeInfo.Location = new System.Drawing.Point(15, 15);
+            this.dgvRangeInfo.Location = new System.Drawing.Point(10, 15);
             this.dgvRangeInfo.Margin = new System.Windows.Forms.Padding(4);
             this.dgvRangeInfo.MultiSelect = false;
             this.dgvRangeInfo.Name = "dgvRangeInfo";
@@ -176,23 +180,105 @@ namespace LuckyFuture.UI
             this.dgvRangeInfo.ShowCellToolTips = false;
             this.dgvRangeInfo.ShowEditingIcon = false;
             this.dgvRangeInfo.ShowRowErrors = false;
-            this.dgvRangeInfo.Size = new System.Drawing.Size(518, 398);
+            this.dgvRangeInfo.Size = new System.Drawing.Size(528, 398);
             this.dgvRangeInfo.TabIndex = 14;
             this.dgvRangeInfo.VirtualMode = true;
             this.dgvRangeInfo.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvRangeInfo_CellMouseClick);
             this.dgvRangeInfo.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvRangeInfo_EditingControlShowing);
             // 
-            // enabledDataGridViewCheckBoxColumn
+            // btnAdd
             // 
-            this.enabledDataGridViewCheckBoxColumn.DataPropertyName = "Enabled";
-            this.enabledDataGridViewCheckBoxColumn.FalseValue = "0";
-            this.enabledDataGridViewCheckBoxColumn.FillWeight = 30F;
-            this.enabledDataGridViewCheckBoxColumn.HeaderText = "";
-            this.enabledDataGridViewCheckBoxColumn.MinimumWidth = 6;
-            this.enabledDataGridViewCheckBoxColumn.Name = "enabledDataGridViewCheckBoxColumn";
-            this.enabledDataGridViewCheckBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.enabledDataGridViewCheckBoxColumn.TrueValue = "1";
-            this.enabledDataGridViewCheckBoxColumn.Width = 20;
+            this.btnAdd.ColorA = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.btnAdd.ColorB = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.btnAdd.ColorC = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
+            this.btnAdd.ColorD = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
+            this.btnAdd.ColorE = System.Drawing.Color.White;
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Gulim", 9F);
+            this.btnAdd.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAdd.Location = new System.Drawing.Point(454, 427);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(79, 32);
+            this.btnAdd.TabIndex = 63;
+            this.btnAdd.Text = "추가";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // lbAmount
+            // 
+            this.lbAmount.AutoSize = true;
+            this.lbAmount.Font = new System.Drawing.Font("Gulim", 9F);
+            this.lbAmount.Location = new System.Drawing.Point(25, 434);
+            this.lbAmount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbAmount.Name = "lbAmount";
+            this.lbAmount.Size = new System.Drawing.Size(37, 15);
+            this.lbAmount.TabIndex = 64;
+            this.lbAmount.Text = "금액";
+            // 
+            // lbLoss
+            // 
+            this.lbLoss.AutoSize = true;
+            this.lbLoss.Font = new System.Drawing.Font("Gulim", 9F);
+            this.lbLoss.Location = new System.Drawing.Point(168, 435);
+            this.lbLoss.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbLoss.Name = "lbLoss";
+            this.lbLoss.Size = new System.Drawing.Size(37, 15);
+            this.lbLoss.TabIndex = 65;
+            this.lbLoss.Text = "하락";
+            // 
+            // txtRsi2
+            // 
+            this.txtRsi2.Location = new System.Drawing.Point(394, 447);
+            this.txtRsi2.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRsi2.Name = "txtRsi2";
+            this.txtRsi2.Size = new System.Drawing.Size(43, 25);
+            this.txtRsi2.TabIndex = 66;
+            this.txtRsi2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lblRsi
+            // 
+            this.lblRsi.AutoSize = true;
+            this.lblRsi.Font = new System.Drawing.Font("Gulim", 9F);
+            this.lblRsi.Location = new System.Drawing.Point(297, 434);
+            this.lblRsi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRsi.Name = "lblRsi";
+            this.lblRsi.Size = new System.Drawing.Size(30, 15);
+            this.lblRsi.TabIndex = 67;
+            this.lblRsi.Text = "RSI";
+            // 
+            // txtRsi
+            // 
+            this.txtRsi.Location = new System.Drawing.Point(394, 418);
+            this.txtRsi.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRsi.Name = "txtRsi";
+            this.txtRsi.Size = new System.Drawing.Size(43, 25);
+            this.txtRsi.TabIndex = 68;
+            this.txtRsi.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Gulim", 9F);
+            this.label1.Location = new System.Drawing.Point(333, 422);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 15);
+            this.label1.TabIndex = 70;
+            this.label1.Text = "매수(B)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Gulim", 9F);
+            this.label2.Location = new System.Drawing.Point(333, 450);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 15);
+            this.label2.TabIndex = 71;
+            this.label2.Text = "매도(S)";
             // 
             // StageName
             // 
@@ -204,15 +290,6 @@ namespace LuckyFuture.UI
             this.StageName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.StageName.Width = 55;
             // 
-            // amountDataGridViewTextBoxColumn
-            // 
-            this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
-            this.amountDataGridViewTextBoxColumn.HeaderText = "금액";
-            this.amountDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
-            this.amountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.amountDataGridViewTextBoxColumn.Width = 55;
-            // 
             // Spec
             // 
             this.Spec.DataPropertyName = "AmountUnit";
@@ -220,16 +297,7 @@ namespace LuckyFuture.UI
             this.Spec.MinimumWidth = 6;
             this.Spec.Name = "Spec";
             this.Spec.ReadOnly = true;
-            this.Spec.Width = 45;
-            // 
-            // rateDataGridViewTextBoxColumn
-            // 
-            this.rateDataGridViewTextBoxColumn.DataPropertyName = "Rate";
-            this.rateDataGridViewTextBoxColumn.HeaderText = "하락";
-            this.rateDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.rateDataGridViewTextBoxColumn.Name = "rateDataGridViewTextBoxColumn";
-            this.rateDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.rateDataGridViewTextBoxColumn.Width = 60;
+            this.Spec.Width = 35;
             // 
             // RateUnit
             // 
@@ -238,15 +306,23 @@ namespace LuckyFuture.UI
             this.RateUnit.MinimumWidth = 6;
             this.RateUnit.Name = "RateUnit";
             this.RateUnit.ReadOnly = true;
-            this.RateUnit.Width = 45;
+            this.RateUnit.Width = 35;
             // 
             // paramDataGridViewTextBoxColumn
             // 
             this.paramDataGridViewTextBoxColumn.DataPropertyName = "Param";
-            this.paramDataGridViewTextBoxColumn.HeaderText = "RSI";
+            this.paramDataGridViewTextBoxColumn.HeaderText = "RSI-B";
             this.paramDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.paramDataGridViewTextBoxColumn.Name = "paramDataGridViewTextBoxColumn";
-            this.paramDataGridViewTextBoxColumn.Width = 60;
+            this.paramDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // param2DataGridViewTextBoxColumn
+            // 
+            this.param2DataGridViewTextBoxColumn.DataPropertyName = "Param2";
+            this.param2DataGridViewTextBoxColumn.HeaderText = "RSI-S";
+            this.param2DataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.param2DataGridViewTextBoxColumn.Name = "param2DataGridViewTextBoxColumn";
+            this.param2DataGridViewTextBoxColumn.Width = 50;
             // 
             // ActionDelete
             // 
@@ -268,92 +344,51 @@ namespace LuckyFuture.UI
             this.EndColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.EndColumn.Width = 20;
             // 
+            // enabledDataGridViewCheckBoxColumn
+            // 
+            this.enabledDataGridViewCheckBoxColumn.DataPropertyName = "Enabled";
+            this.enabledDataGridViewCheckBoxColumn.FalseValue = "0";
+            this.enabledDataGridViewCheckBoxColumn.FillWeight = 30F;
+            this.enabledDataGridViewCheckBoxColumn.HeaderText = "";
+            this.enabledDataGridViewCheckBoxColumn.MinimumWidth = 6;
+            this.enabledDataGridViewCheckBoxColumn.Name = "enabledDataGridViewCheckBoxColumn";
+            this.enabledDataGridViewCheckBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.enabledDataGridViewCheckBoxColumn.TrueValue = "1";
+            this.enabledDataGridViewCheckBoxColumn.Width = 20;
+            // 
+            // amountDataGridViewTextBoxColumn
+            // 
+            this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
+            this.amountDataGridViewTextBoxColumn.HeaderText = "금액";
+            this.amountDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+            this.amountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.amountDataGridViewTextBoxColumn.Width = 55;
+            // 
+            // rateDataGridViewTextBoxColumn
+            // 
+            this.rateDataGridViewTextBoxColumn.DataPropertyName = "Rate";
+            this.rateDataGridViewTextBoxColumn.HeaderText = "하락";
+            this.rateDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.rateDataGridViewTextBoxColumn.Name = "rateDataGridViewTextBoxColumn";
+            this.rateDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.rateDataGridViewTextBoxColumn.Width = 55;
+            // 
             // bsRangeInfo
             // 
             this.bsRangeInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.PayoffLossInfo);
             // 
-            // btnAdd
-            // 
-            this.btnAdd.ColorA = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.btnAdd.ColorB = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.btnAdd.ColorC = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
-            this.btnAdd.ColorD = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
-            this.btnAdd.ColorE = System.Drawing.Color.White;
-            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Font = new System.Drawing.Font("Gulim", 9F);
-            this.btnAdd.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAdd.Location = new System.Drawing.Point(454, 419);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(79, 32);
-            this.btnAdd.TabIndex = 63;
-            this.btnAdd.Text = "추가";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // lbAmount
-            // 
-            this.lbAmount.AutoSize = true;
-            this.lbAmount.Font = new System.Drawing.Font("Gulim", 9F);
-            this.lbAmount.Location = new System.Drawing.Point(28, 430);
-            this.lbAmount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbAmount.Name = "lbAmount";
-            this.lbAmount.Size = new System.Drawing.Size(37, 15);
-            this.lbAmount.TabIndex = 64;
-            this.lbAmount.Text = "금액";
-            // 
-            // lbLoss
-            // 
-            this.lbLoss.AutoSize = true;
-            this.lbLoss.Font = new System.Drawing.Font("Gulim", 9F);
-            this.lbLoss.Location = new System.Drawing.Point(170, 430);
-            this.lbLoss.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbLoss.Name = "lbLoss";
-            this.lbLoss.Size = new System.Drawing.Size(37, 15);
-            this.lbLoss.TabIndex = 65;
-            this.lbLoss.Text = "하락";
-            // 
-            // lblRsi
-            // 
-            this.lblRsi.AutoSize = true;
-            this.lblRsi.Font = new System.Drawing.Font("Gulim", 9F);
-            this.lblRsi.Location = new System.Drawing.Point(309, 430);
-            this.lblRsi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblRsi.Name = "lblRsi";
-            this.lblRsi.Size = new System.Drawing.Size(30, 15);
-            this.lblRsi.TabIndex = 67;
-            this.lblRsi.Text = "RSI";
-            // 
-            // txtRsi
-            // 
-            this.txtRsi.Location = new System.Drawing.Point(347, 424);
-            this.txtRsi.Margin = new System.Windows.Forms.Padding(2);
-            this.txtRsi.Name = "txtRsi";
-            this.txtRsi.Size = new System.Drawing.Size(43, 25);
-            this.txtRsi.TabIndex = 68;
-            this.txtRsi.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lbParaUnit
-            // 
-            this.lbParaUnit.AutoSize = true;
-            this.lbParaUnit.Font = new System.Drawing.Font("Gulim", 9F);
-            this.lbParaUnit.Location = new System.Drawing.Point(394, 430);
-            this.lbParaUnit.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbParaUnit.Name = "lbParaUnit";
-            this.lbParaUnit.Size = new System.Drawing.Size(0, 15);
-            this.lbParaUnit.TabIndex = 69;
-            // 
-            // FrmRange
+            // FrmRange2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(548, 551);
-            this.Controls.Add(this.lbParaUnit);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtRsi);
             this.Controls.Add(this.lblRsi);
+            this.Controls.Add(this.txtRsi2);
             this.Controls.Add(this.lbLoss);
             this.Controls.Add(this.lbAmount);
             this.Controls.Add(this.btnAdd);
@@ -370,7 +405,7 @@ namespace LuckyFuture.UI
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FrmRange";
+            this.Name = "FrmRange2";
             this.Text = "청산영역설정";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Setting_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRangeInfo)).EndInit();
@@ -392,8 +427,11 @@ namespace LuckyFuture.UI
         private ReaLTaiizor.Controls.DreamButton btnAdd;
         private System.Windows.Forms.Label lbAmount;
         private System.Windows.Forms.Label lbLoss;
+        private System.Windows.Forms.TextBox txtRsi2;
         private System.Windows.Forms.Label lblRsi;
         private System.Windows.Forms.TextBox txtRsi;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn enabledDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn StageName;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
@@ -401,8 +439,8 @@ namespace LuckyFuture.UI
         private System.Windows.Forms.DataGridViewTextBoxColumn rateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn RateUnit;
         private System.Windows.Forms.DataGridViewTextBoxColumn paramDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn param2DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewButtonColumn ActionDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn EndColumn;
-        private System.Windows.Forms.Label lbParaUnit;
     }
 }

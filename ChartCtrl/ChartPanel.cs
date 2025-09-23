@@ -700,41 +700,41 @@ namespace ChartCtrl
                     case TIMETYPE.TIMETYPE_TICK: btnTimeTick_Click(); break;
                     default: break;
                 }
-
+                bool bRedraw = true;
                 if (iTimeType == TIMETYPE.TIMETYPE_TICK)
                 {
                     switch (nTimeUnit)
                     {
-                        case TIMEUNIT.TIMEUNIT_1: btnTkUnit01_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_5: btnTkUnit02_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_30: btnTkUnit03_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_60: btnTkUnit1_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_90: btnTkUnit2_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_120: btnTkUnit3_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_240: btnTkUnit4_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_350: btnTkUnit5_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_400: btnTkUnit6_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_600: btnTkUnit7_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_750: btnTkUnit8_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_990: btnTkUnit9_Click(false); break;
+                        case TIMEUNIT.TIMEUNIT_1: btnTkUnit01_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_5: btnTkUnit02_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_30: btnTkUnit03_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_60: btnTkUnit1_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_90: btnTkUnit2_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_120: btnTkUnit3_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_240: btnTkUnit4_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_350: btnTkUnit5_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_400: btnTkUnit6_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_600: btnTkUnit7_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_750: btnTkUnit8_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_990: btnTkUnit9_Click(bRedraw); break;
                         default: break;
                     }
                 } else if (iTimeType == TIMETYPE.TIMETYPE_SEC || iTimeType == TIMETYPE.TIMETYPE_MIN  )
                 {
                     switch (nTimeUnit)
                     {
-                        case TIMEUNIT.TIMEUNIT_1: btnTmUnit1_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_3: btnTmUnit2_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_5: btnTmUnit3_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_15: btnTmUnit4_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_30: btnTmUnit5_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_60: btnTmUnit6_Click(false); break;
-                        case TIMEUNIT.TIMEUNIT_120: btnTmUnit7_Click(false); break;
+                        case TIMEUNIT.TIMEUNIT_1: btnTmUnit1_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_3: btnTmUnit2_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_5: btnTmUnit3_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_15: btnTmUnit4_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_30: btnTmUnit5_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_60: btnTmUnit6_Click(bRedraw); break;
+                        case TIMEUNIT.TIMEUNIT_120: btnTmUnit7_Click(bRedraw); break;
                         default: break;
                     }
                 } else
                 {
-                    btnTmUnit1_Click(false);
+                    btnTmUnit1_Click(bRedraw);
                 }
 
                 bResult = true;

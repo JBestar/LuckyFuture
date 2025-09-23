@@ -12,7 +12,7 @@ namespace LuckyFuture.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.0.3.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -1308,12 +1308,12 @@ namespace LuckyFuture.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
-  <string>1#0#50#</string>
-  <string>1#10#40#</string>
-  <string>1#30#30#</string>
-  <string>1#50#20#</string>
-  <string>1#70#10#</string>
-  <string>1#100#5#</string>
+  <string>1#0#50#0#0</string>
+  <string>1#10#40#0#0</string>
+  <string>1#30#30#0#0</string>
+  <string>1#50#20#0#0</string>
+  <string>1#70#10#0#0</string>
+  <string>1#100#5#0#0</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection PayoffLossRange {
             get {
@@ -1328,16 +1328,16 @@ namespace LuckyFuture.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
-  <string>1#10#50#50</string>
-  <string>1#20#45#50</string>
-  <string>1#30#40#50</string>
-  <string>1#40#35#50</string>
-  <string>1#50#30#50</string>
-  <string>1#60#25#50</string>
-  <string>1#70#20#50</string>
-  <string>1#80#15#50</string>
-  <string>1#90#10#50</string>
-  <string>1#100#5#50</string>
+  <string>1#10#50#50#30</string>
+  <string>1#20#45#50#30</string>
+  <string>1#30#40#50#30</string>
+  <string>1#40#35#50#30</string>
+  <string>1#50#30#50#30</string>
+  <string>1#60#25#50#30</string>
+  <string>1#70#20#50#30</string>
+  <string>1#80#15#50#30</string>
+  <string>1#90#10#50#30</string>
+  <string>1#100#5#50#30</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection SmartLossRange {
             get {
@@ -1352,16 +1352,16 @@ namespace LuckyFuture.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
-  <string>1#10#50#50</string>
-  <string>1#20#45#50</string>
-  <string>1#30#40#50</string>
-  <string>1#40#35#50</string>
-  <string>1#50#30#50</string>
-  <string>1#60#25#50</string>
-  <string>1#70#20#50</string>
-  <string>1#80#15#50</string>
-  <string>1#90#10#50</string>
-  <string>1#100#5#50</string>
+  <string>1#10#50#50#30</string>
+  <string>1#20#45#50#30</string>
+  <string>1#30#40#50#30</string>
+  <string>1#40#35#50#30</string>
+  <string>1#50#30#50#30</string>
+  <string>1#60#25#50#30</string>
+  <string>1#70#20#50#30</string>
+  <string>1#80#15#50#30</string>
+  <string>1#90#10#50#30</string>
+  <string>1#100#5#50#30</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection CrossLossRange {
             get {
@@ -1376,11 +1376,11 @@ namespace LuckyFuture.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
-  <string>1#100#50#50</string>
-  <string>1#150#40#50</string>
-  <string>1#200#30#50</string>
-  <string>1#250#20#50</string>
-  <string>1#300#10#50</string>
+  <string>1#100#50#50#30</string>
+  <string>1#150#40#50#30</string>
+  <string>1#200#30#50#30</string>
+  <string>1#250#20#50#30</string>
+  <string>1#300#10#50#30</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection CciLossRange {
             get {
@@ -1448,6 +1448,114 @@ namespace LuckyFuture.Properties {
             }
             set {
                 this["BothOrder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte ReturnOption {
+            get {
+                return ((byte)(this["ReturnOption"]));
+            }
+            set {
+                this["ReturnOption"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PayoffWithEarn {
+            get {
+                return ((bool)(this["PayoffWithEarn"]));
+            }
+            set {
+                this["PayoffWithEarn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CrossAvgLine1 {
+            get {
+                return ((int)(this["CrossAvgLine1"]));
+            }
+            set {
+                this["CrossAvgLine1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int CrossAvgLine2 {
+            get {
+                return ((int)(this["CrossAvgLine2"]));
+            }
+            set {
+                this["CrossAvgLine2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ReverseOrder {
+            get {
+                return ((bool)(this["ReverseOrder"]));
+            }
+            set {
+                this["ReverseOrder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int ReverseOrdCnt1 {
+            get {
+                return ((int)(this["ReverseOrdCnt1"]));
+            }
+            set {
+                this["ReverseOrdCnt1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int ReverseOrdSel1 {
+            get {
+                return ((int)(this["ReverseOrdSel1"]));
+            }
+            set {
+                this["ReverseOrdSel1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int ReverseOrdCnt2 {
+            get {
+                return ((int)(this["ReverseOrdCnt2"]));
+            }
+            set {
+                this["ReverseOrdCnt2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ReverseOrdSel2 {
+            get {
+                return ((int)(this["ReverseOrdSel2"]));
+            }
+            set {
+                this["ReverseOrdSel2"] = value;
             }
         }
     }

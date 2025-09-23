@@ -69,6 +69,7 @@ namespace LuckyFuture
                             case "OrderType": Settings.Default.OrderType = int.Parse(value); break;
                             case "OrderMax": Settings.Default.OrderMax = int.Parse(value); break;
                             case "Reorder": Settings.Default.Reorder = bool.Parse(value); break;
+                            case "ReturnOption": Settings.Default.ReturnOption = byte.Parse(value); break;
                             case "BoLineAdjust": Settings.Default.BoLineAdjust = int.Parse(value); break;
                             case "BettingEnter": Settings.Default.BettingEnter = bool.Parse(value); break;
                             case "LiquidStop": Settings.Default.LiquidStop = bool.Parse(value); break;
@@ -147,7 +148,15 @@ namespace LuckyFuture
                             case "BollPayoffDown": Settings.Default.BollPayoffDown = float.Parse(value); break;
                             case "BollPayoffUp": Settings.Default.BollPayoffUp = float.Parse(value); break;
                             case "MacdPayoff": Settings.Default.MacdPayoff = bool.Parse(value); break;
+                            case "PayoffWithEarn": Settings.Default.PayoffWithEarn = bool.Parse(value); break;
                             case "BothOrder": Settings.Default.BothOrder = bool.Parse(value); break;
+                            case "CrossAvgLine1": Settings.Default.CrossAvgLine1 = int.Parse(value); break;
+                            case "CrossAvgLine2": Settings.Default.CrossAvgLine2 = int.Parse(value); break;
+                            case "ReverseOrder": Settings.Default.ReverseOrder = bool.Parse(value); break;
+                            case "ReverseOrdCnt1": Settings.Default.ReverseOrdCnt1 = int.Parse(value); break;
+                            case "ReverseOrdSel1": Settings.Default.ReverseOrdSel1 = int.Parse(value); break;
+                            case "ReverseOrdCnt2": Settings.Default.ReverseOrdCnt2 = int.Parse(value); break;
+                            case "ReverseOrdSel2": Settings.Default.ReverseOrdSel2 = int.Parse(value); break;
                             default: break;
                         }
                     }
@@ -211,6 +220,7 @@ namespace LuckyFuture
                 AddElement(document, itemListElement, "OrderType", Settings.Default.OrderType.ToString());
                 AddElement(document, itemListElement, "OrderMax", Settings.Default.OrderMax.ToString());
                 AddElement(document, itemListElement, "Reorder", Settings.Default.Reorder.ToString());
+                AddElement(document, itemListElement, "ReturnOption", Settings.Default.ReturnOption.ToString());
                 //Except ServerTimeDelay
                 AddElement(document, itemListElement, "BoLineAdjust", Settings.Default.BoLineAdjust.ToString());
                 AddElement(document, itemListElement, "BettingEnter", Settings.Default.BettingEnter.ToString());
@@ -291,7 +301,15 @@ namespace LuckyFuture
                 AddElement(document, itemListElement, "BollPayoffDown", Settings.Default.BollPayoffDown.ToString());
                 AddElement(document, itemListElement, "BollPayoffUp", Settings.Default.BollPayoffUp.ToString());
                 AddElement(document, itemListElement, "MacdPayoff", Settings.Default.MacdPayoff.ToString());
+                AddElement(document, itemListElement, "PayoffWithEarn", Settings.Default.PayoffWithEarn.ToString());
                 AddElement(document, itemListElement, "BothOrder", Settings.Default.BothOrder.ToString());
+                AddElement(document, itemListElement, "CrossAvgLine1", Settings.Default.CrossAvgLine1.ToString());
+                AddElement(document, itemListElement, "CrossAvgLine2", Settings.Default.CrossAvgLine2.ToString());
+                AddElement(document, itemListElement, "ReverseOrder", Settings.Default.ReverseOrder.ToString());
+                AddElement(document, itemListElement, "ReverseOrdCnt1", Settings.Default.ReverseOrdCnt1.ToString());
+                AddElement(document, itemListElement, "ReverseOrdSel1", Settings.Default.ReverseOrdSel1.ToString());
+                AddElement(document, itemListElement, "ReverseOrdCnt2", Settings.Default.ReverseOrdCnt2.ToString());
+                AddElement(document, itemListElement, "ReverseOrdSel2", Settings.Default.ReverseOrdSel2.ToString());
 
                 document.Save(filePath);
                 return true;
@@ -348,11 +366,15 @@ namespace LuckyFuture
                             RateUnit = "틱",
                             Enabled = int.Parse(infos[0]),
                             Param = "0",
+                            Param2 = "0",
                             ActionDelete = "삭제"
                         };
                         if (infos.Length > 3 && infos[3].Length > 0)
                             lossInfo.Param = infos[3];
-                        else if(infos.Length < 4)
+                        if (infos.Length > 4 && infos[4].Length > 0)
+                            lossInfo.Param2 = infos[4];
+
+                        if (infos.Length < 5)
                             bReset = true;
                         PayoffLossConfs.Add(lossInfo);
                     }
@@ -361,7 +383,7 @@ namespace LuckyFuture
                         Settings.Default.PayoffLossRange.Clear();
                         foreach (PayoffLossInfo lossConf in PayoffLossConfs)
                         {
-                            Settings.Default.PayoffLossRange.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param);
+                            Settings.Default.PayoffLossRange.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param + "#" + lossConf.Param2);
                         }
                     }
 
@@ -384,12 +406,17 @@ namespace LuckyFuture
                             RateUnit = "%",
                             Enabled = int.Parse(infos[0]),
                             Param = "50",
+                            Param2 = "30",
                             ActionDelete = "삭제"
                         };
 
                         if (infos.Length > 3 && infos[3].Length > 0)
                             lossInfo.Param = infos[3];
-                        else bReset = true;
+                        if (infos.Length > 4 && infos[4].Length > 0)
+                            lossInfo.Param2 = infos[4];
+
+                        if (infos.Length < 5)
+                            bReset = true;
                         SmartLossConfs.Add(lossInfo);
                     }
                     if (bReset)
@@ -397,7 +424,7 @@ namespace LuckyFuture
                         Settings.Default.SmartLossRange.Clear();
                         foreach(PayoffLossInfo lossConf in SmartLossConfs)
                         {
-                            Settings.Default.SmartLossRange.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param);
+                            Settings.Default.SmartLossRange.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param + "#" + lossConf.Param2);
                         }
                     }
 
@@ -420,11 +447,16 @@ namespace LuckyFuture
                             RateUnit = "%",
                             Enabled = int.Parse(infos[0]),
                             Param = "50",
+                            Param2 = "30",
                             ActionDelete = "삭제"
                         };
                         if (infos.Length > 3 && infos[3].Length > 0)
                             lossInfo.Param = infos[3];
-                        else bReset = true;
+                        if (infos.Length > 4 && infos[4].Length > 0)
+                            lossInfo.Param2 = infos[4];
+
+                        if (infos.Length < 5)
+                            bReset = true;
                         CrossLossConfs.Add(lossInfo);
                     }
                     if (bReset)
@@ -432,7 +464,7 @@ namespace LuckyFuture
                         Settings.Default.CrossLossRange.Clear();
                         foreach (PayoffLossInfo lossConf in CrossLossConfs)
                         {
-                            Settings.Default.CrossLossRange.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param);
+                            Settings.Default.CrossLossRange.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param + "#" + lossConf.Param2);
                         }
                     }
 
@@ -455,11 +487,16 @@ namespace LuckyFuture
                             RateUnit = "%",
                             Enabled = int.Parse(infos[0]),
                             Param = "50",
+                            Param2 = "30",
                             ActionDelete = "삭제"
                         };
                         if (infos.Length > 3 && infos[3].Length > 0)
                             lossInfo.Param = infos[3];
-                        else bReset = true;
+                        if (infos.Length > 4 && infos[4].Length > 0)
+                            lossInfo.Param2 = infos[4];
+
+                        if (infos.Length < 5)
+                            bReset = true;
                         CciLossConfs.Add(lossInfo);
                     }
                     if (bReset)
@@ -467,7 +504,7 @@ namespace LuckyFuture
                         Settings.Default.CciLossRange.Clear();
                         foreach (PayoffLossInfo lossConf in CciLossConfs)
                         {
-                            Settings.Default.CciLossRange.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param);
+                            Settings.Default.CciLossRange.Add(lossConf.Enabled.ToString() + "#" + lossConf.Amount.ToString() + "#" + lossConf.Rate.ToString() + "#" + lossConf.Param + "#" + lossConf.Param2);
                         }
                     }
 

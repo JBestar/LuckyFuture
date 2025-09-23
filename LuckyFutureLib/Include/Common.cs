@@ -108,6 +108,21 @@ namespace LuckyFutureLib.Include
                 default: break;
             }
 
+            return strType;
+        }
+        public static string GetAvgTypeStr(int avgType)
+        {
+            string strType = "";
+            switch (avgType)
+            {
+                case 0: strType = "5평선"; break;
+                case 1: strType = "10평선"; break;
+                case 2: strType = "20평선"; break;
+                case 3: strType = "60평선"; break;
+                case 4: strType = "120평선"; break;
+                case 5: strType = "200평선"; break;
+                default: break;
+            }
 
             return strType;
         }
