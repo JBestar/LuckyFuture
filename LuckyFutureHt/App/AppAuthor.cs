@@ -179,16 +179,7 @@ namespace LuckyFuture
                     _id = id;
                     _pwd = pwd;
 
-                    try
-                    {
-                        tmp = Convert.ToUInt32(doc.RootElement.GetProperty("order").GetString());
-                        if (tmp >= 0 && tmp <= 10)
-                            Settings.Default.OrderMax = (int)tmp;
-                    }
-                    catch (KeyNotFoundException)
-                    {
-                        Settings.Default.OrderMax = 10;
-                    }
+                    Settings.Default.OrderMax = 100;
 
                 }
             }
@@ -239,10 +230,7 @@ namespace LuckyFuture
                     doc = JsonDocument.Parse(data);
 
                     _remainedTime = Convert.ToUInt32(doc.RootElement.GetProperty("remained").GetString());
-                    //var tmp = Convert.ToUInt32(doc.RootElement.GetProperty("order").GetString());
-                    //if (tmp >= 0 && tmp <= 10)
-                    //    Settings.Default.OrderMax = (int)tmp;
-
+                    
                 }
 
 

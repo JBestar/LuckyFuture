@@ -29,7 +29,7 @@ namespace LuckyFuture.UI
             dtClear.Visible = false;
 
             string[] chartTypeList = { "1분", "60틱", "90틱", "120틱",
-                    "240틱", "350틱", "400틱", "600틱", "750틱", "990틱"};
+                    "240틱", "350틱", "400틱", "600틱", "750틱", "990틱", "5분", "15분", "30분"};
             foreach (string s in chartTypeList)
             {
                 cmbBandChart1.Items.Add(s);
@@ -122,7 +122,7 @@ namespace LuckyFuture.UI
                 return;
             }
 
-            if(Settings.Default.BandVal1 > Settings.Default.BandVal2)
+            if (Settings.Default.BandVal1 > Settings.Default.BandVal2)
             {
                 MessageBox.Show("등락폭구간을 정확히 입력해주세요", "경고");
                 txtBandVal2.SelectAll();
@@ -162,10 +162,12 @@ namespace LuckyFuture.UI
             Settings.Default.BandChartType3 = cmbBandChart3.SelectedIndex;
             Settings.Default.BandChartType4 = cmbBandChart4.SelectedIndex;
 
-            
+
             Settings.Default.Save();
             OnChartNoticeEvent(CHART_EVENTTYPE.SETTING_CHANGED);
 
+            MessageBox.Show("설정이 저장되었습니다.", "저장성공");
+            Hide();
         }
 
 

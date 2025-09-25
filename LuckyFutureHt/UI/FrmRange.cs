@@ -61,7 +61,6 @@ namespace LuckyFuture.UI
             {
                 this.Text = "손실 영역설정";
                 lbLoss.Text = "손실";
-                lbLossUnit.Text = "%";
                 lbLossUnit.Text = "틱";
                 lbParaUnit.Text = "틱";
                 rateDataGridViewTextBoxColumn.HeaderText = "손실";
@@ -237,7 +236,7 @@ namespace LuckyFuture.UI
             {
                 if (e.RowIndex >= 0 && this.RangeInfo[e.RowIndex] == this.SelectedRangeInfo)
                 {
-                    if (e.ColumnIndex == 7)
+                    if (e.ColumnIndex == 8)
                     {
                         if (this.SelectedRangeInfo != null)
                         {

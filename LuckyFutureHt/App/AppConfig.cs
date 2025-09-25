@@ -67,7 +67,7 @@ namespace LuckyFuture
                             case "BettingCandleComplete": Settings.Default.BettingCandleComplete = int.Parse(value); break;
                             case "OrderCount": Settings.Default.OrderCount = int.Parse(value); break;
                             case "OrderType": Settings.Default.OrderType = int.Parse(value); break;
-                            case "OrderMax": Settings.Default.OrderMax = int.Parse(value); break;
+                            // case "OrderMax": Settings.Default.OrderMax = int.Parse(value); break;
                             case "Reorder": Settings.Default.Reorder = bool.Parse(value); break;
                             case "ReturnOption": Settings.Default.ReturnOption = byte.Parse(value); break;
                             case "BoLineAdjust": Settings.Default.BoLineAdjust = int.Parse(value); break;
@@ -218,7 +218,7 @@ namespace LuckyFuture
                 AddElement(document, itemListElement, "BettingCandleComplete", Settings.Default.BettingCandleComplete.ToString());
                 AddElement(document, itemListElement, "OrderCount", Settings.Default.OrderCount.ToString());
                 AddElement(document, itemListElement, "OrderType", Settings.Default.OrderType.ToString());
-                AddElement(document, itemListElement, "OrderMax", Settings.Default.OrderMax.ToString());
+                //AddElement(document, itemListElement, "OrderMax", Settings.Default.OrderMax.ToString());
                 AddElement(document, itemListElement, "Reorder", Settings.Default.Reorder.ToString());
                 AddElement(document, itemListElement, "ReturnOption", Settings.Default.ReturnOption.ToString());
                 //Except ServerTimeDelay

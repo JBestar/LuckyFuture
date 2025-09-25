@@ -3100,10 +3100,10 @@ namespace LuckyFuture.UI
             this.cmbOrderLine2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbOrderLine2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOrderLine2.FormattingEnabled = true;
-            this.cmbOrderLine2.Location = new System.Drawing.Point(344, 41);
+            this.cmbOrderLine2.Location = new System.Drawing.Point(355, 41);
             this.cmbOrderLine2.Margin = new System.Windows.Forms.Padding(4);
             this.cmbOrderLine2.Name = "cmbOrderLine2";
-            this.cmbOrderLine2.Size = new System.Drawing.Size(63, 26);
+            this.cmbOrderLine2.Size = new System.Drawing.Size(82, 26);
             this.cmbOrderLine2.TabIndex = 126;
             this.cmbOrderLine2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderLine2_DrawItem);
             this.cmbOrderLine2.SelectedIndexChanged += new System.EventHandler(this.cmbOrderLine2_SelectedIndexChanged);
@@ -3117,7 +3117,7 @@ namespace LuckyFuture.UI
             this.cmbOrderLine1.Location = new System.Drawing.Point(269, 42);
             this.cmbOrderLine1.Margin = new System.Windows.Forms.Padding(4);
             this.cmbOrderLine1.Name = "cmbOrderLine1";
-            this.cmbOrderLine1.Size = new System.Drawing.Size(63, 26);
+            this.cmbOrderLine1.Size = new System.Drawing.Size(82, 26);
             this.cmbOrderLine1.TabIndex = 125;
             this.cmbOrderLine1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderLine1_DrawItem);
             this.cmbOrderLine1.SelectedIndexChanged += new System.EventHandler(this.cmbOrderLine1_SelectedIndexChanged);
@@ -3125,7 +3125,7 @@ namespace LuckyFuture.UI
             // label100
             // 
             this.label100.AutoSize = true;
-            this.label100.Location = new System.Drawing.Point(196, 45);
+            this.label100.Location = new System.Drawing.Point(194, 45);
             this.label100.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label100.Name = "label100";
             this.label100.Size = new System.Drawing.Size(67, 15);
@@ -5696,6 +5696,7 @@ namespace LuckyFuture.UI
             this.chkSignal.TabIndex = 27;
             this.chkSignal.Text = "키움신호";
             this.chkSignal.UseVisualStyleBackColor = false;
+            this.chkSignal.Visible = false;
             this.chkSignal.CheckedChanged += new System.EventHandler(this.chkSignal_CheckedChanged);
             // 
             // txtStateLog
