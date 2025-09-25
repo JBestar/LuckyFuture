@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31112.23
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChartCtrl", "ChartCtrl\ChartCtrl.csproj", "{9C7138E8-1540-492C-AAC2-3FEB96A77596}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuckyFutureHt", "LuckyFutureHt\LuckyFutureHt.csproj", "{FCB91A59-3804-4633-92AC-CC3F0492664D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuckyFutureLib", "LuckyFutureLib\LuckyFutureLib.csproj", "{3D29E089-9D9C-4B84-8CCC-B02013DEC522}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuckyFutureCmg", "LuckyFutureCmg\LuckyFutureCmg.csproj", "{EFCC99BB-9E56-4B88-AA34-9EDB044E87C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3D29E089-9D9C-4B84-8CCC-B02013DEC522}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D29E089-9D9C-4B84-8CCC-B02013DEC522}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D29E089-9D9C-4B84-8CCC-B02013DEC522}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFCC99BB-9E56-4B88-AA34-9EDB044E87C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFCC99BB-9E56-4B88-AA34-9EDB044E87C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFCC99BB-9E56-4B88-AA34-9EDB044E87C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFCC99BB-9E56-4B88-AA34-9EDB044E87C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
