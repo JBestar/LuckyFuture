@@ -294,6 +294,67 @@ namespace LuckyFuture.UI
             this.label30 = new System.Windows.Forms.Label();
             this.cmbChartType4 = new System.Windows.Forms.ComboBox();
             this.label32 = new System.Windows.Forms.Label();
+            this.groupBetting3 = new System.Windows.Forms.GroupBox();
+            this.cmbOrderLine2 = new System.Windows.Forms.ComboBox();
+            this.cmbOrderLine1 = new System.Windows.Forms.ComboBox();
+            this.label100 = new System.Windows.Forms.Label();
+            this.chkBandChart_3 = new System.Windows.Forms.CheckBox();
+            this.label81 = new System.Windows.Forms.Label();
+            this.label82 = new System.Windows.Forms.Label();
+            this.btnBandSetting_3 = new ReaLTaiizor.Controls.DreamButton();
+            this.txtCci21_3 = new System.Windows.Forms.TextBox();
+            this.txtCci11_3 = new System.Windows.Forms.TextBox();
+            this.label83 = new System.Windows.Forms.Label();
+            this.chkCci_3 = new System.Windows.Forms.CheckBox();
+            this.label84 = new System.Windows.Forms.Label();
+            this.chkConc1_3 = new System.Windows.Forms.CheckBox();
+            this.chkRsi_3 = new System.Windows.Forms.CheckBox();
+            this.label85 = new System.Windows.Forms.Label();
+            this.txtCci1_3 = new System.Windows.Forms.TextBox();
+            this.cmbCciSide1_3 = new System.Windows.Forms.ComboBox();
+            this.label86 = new System.Windows.Forms.Label();
+            this.cmbAvgsSide2_3 = new System.Windows.Forms.ComboBox();
+            this.label87 = new System.Windows.Forms.Label();
+            this.txtConc1Min_3 = new System.Windows.Forms.TextBox();
+            this.label88 = new System.Windows.Forms.Label();
+            this.txtCci2_3 = new System.Windows.Forms.TextBox();
+            this.txtConc1Cnt_3 = new System.Windows.Forms.TextBox();
+            this.cmbAvgsSide1_3 = new System.Windows.Forms.ComboBox();
+            this.cmbCciSide2_3 = new System.Windows.Forms.ComboBox();
+            this.label89 = new System.Windows.Forms.Label();
+            this.label90 = new System.Windows.Forms.Label();
+            this.cmbRsiSide2_3 = new System.Windows.Forms.ComboBox();
+            this.chkConc2_3 = new System.Windows.Forms.CheckBox();
+            this.txtAvgsCandle_3 = new System.Windows.Forms.TextBox();
+            this.label91 = new System.Windows.Forms.Label();
+            this.txtAdx_3 = new System.Windows.Forms.TextBox();
+            this.chkAvgs_3 = new System.Windows.Forms.CheckBox();
+            this.txtRsi2_3 = new System.Windows.Forms.TextBox();
+            this.txtConc2Cand_3 = new System.Windows.Forms.TextBox();
+            this.txtRsi1_3 = new System.Windows.Forms.TextBox();
+            this.label92 = new System.Windows.Forms.Label();
+            this.chkAdx_3 = new System.Windows.Forms.CheckBox();
+            this.cmbRsiSide1_3 = new System.Windows.Forms.ComboBox();
+            this.label93 = new System.Windows.Forms.Label();
+            this.label94 = new System.Windows.Forms.Label();
+            this.txtConc2Cnt_3 = new System.Windows.Forms.TextBox();
+            this.btnOrdSel3 = new ReaLTaiizor.Controls.DreamButton();
+            this.chkOrd34 = new System.Windows.Forms.CheckBox();
+            this.chkOrd33 = new System.Windows.Forms.CheckBox();
+            this.chkOrd32 = new System.Windows.Forms.CheckBox();
+            this.chkOrd31 = new System.Windows.Forms.CheckBox();
+            this.cmbReorder3 = new System.Windows.Forms.ComboBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.cmbOrderType3 = new System.Windows.Forms.ComboBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtOrderCount3 = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbChartType3 = new System.Windows.Forms.ComboBox();
+            this.cmbBettingCandle3 = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.groupBetting6 = new System.Windows.Forms.GroupBox();
             this.cmbBettingCross6 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -362,67 +423,6 @@ namespace LuckyFuture.UI
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.groupBetting3 = new System.Windows.Forms.GroupBox();
-            this.cmbOrderLine2 = new System.Windows.Forms.ComboBox();
-            this.cmbOrderLine1 = new System.Windows.Forms.ComboBox();
-            this.label100 = new System.Windows.Forms.Label();
-            this.chkBandChart_3 = new System.Windows.Forms.CheckBox();
-            this.label81 = new System.Windows.Forms.Label();
-            this.label82 = new System.Windows.Forms.Label();
-            this.btnBandSetting_3 = new ReaLTaiizor.Controls.DreamButton();
-            this.txtCci21_3 = new System.Windows.Forms.TextBox();
-            this.txtCci11_3 = new System.Windows.Forms.TextBox();
-            this.label83 = new System.Windows.Forms.Label();
-            this.chkCci_3 = new System.Windows.Forms.CheckBox();
-            this.label84 = new System.Windows.Forms.Label();
-            this.chkConc1_3 = new System.Windows.Forms.CheckBox();
-            this.chkRsi_3 = new System.Windows.Forms.CheckBox();
-            this.label85 = new System.Windows.Forms.Label();
-            this.txtCci1_3 = new System.Windows.Forms.TextBox();
-            this.cmbCciSide1_3 = new System.Windows.Forms.ComboBox();
-            this.label86 = new System.Windows.Forms.Label();
-            this.cmbAvgsSide2_3 = new System.Windows.Forms.ComboBox();
-            this.label87 = new System.Windows.Forms.Label();
-            this.txtConc1Min_3 = new System.Windows.Forms.TextBox();
-            this.label88 = new System.Windows.Forms.Label();
-            this.txtCci2_3 = new System.Windows.Forms.TextBox();
-            this.txtConc1Cnt_3 = new System.Windows.Forms.TextBox();
-            this.cmbAvgsSide1_3 = new System.Windows.Forms.ComboBox();
-            this.cmbCciSide2_3 = new System.Windows.Forms.ComboBox();
-            this.label89 = new System.Windows.Forms.Label();
-            this.label90 = new System.Windows.Forms.Label();
-            this.cmbRsiSide2_3 = new System.Windows.Forms.ComboBox();
-            this.chkConc2_3 = new System.Windows.Forms.CheckBox();
-            this.txtAvgsCandle_3 = new System.Windows.Forms.TextBox();
-            this.label91 = new System.Windows.Forms.Label();
-            this.txtAdx_3 = new System.Windows.Forms.TextBox();
-            this.chkAvgs_3 = new System.Windows.Forms.CheckBox();
-            this.txtRsi2_3 = new System.Windows.Forms.TextBox();
-            this.txtConc2Cand_3 = new System.Windows.Forms.TextBox();
-            this.txtRsi1_3 = new System.Windows.Forms.TextBox();
-            this.label92 = new System.Windows.Forms.Label();
-            this.chkAdx_3 = new System.Windows.Forms.CheckBox();
-            this.cmbRsiSide1_3 = new System.Windows.Forms.ComboBox();
-            this.label93 = new System.Windows.Forms.Label();
-            this.label94 = new System.Windows.Forms.Label();
-            this.txtConc2Cnt_3 = new System.Windows.Forms.TextBox();
-            this.btnOrdSel3 = new ReaLTaiizor.Controls.DreamButton();
-            this.chkOrd34 = new System.Windows.Forms.CheckBox();
-            this.chkOrd33 = new System.Windows.Forms.CheckBox();
-            this.chkOrd32 = new System.Windows.Forms.CheckBox();
-            this.chkOrd31 = new System.Windows.Forms.CheckBox();
-            this.cmbReorder3 = new System.Windows.Forms.ComboBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.cmbOrderType3 = new System.Windows.Forms.ComboBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.txtOrderCount3 = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cmbChartType3 = new System.Windows.Forms.ComboBox();
-            this.cmbBettingCandle3 = new System.Windows.Forms.ComboBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
             this.groupBetType = new System.Windows.Forms.GroupBox();
             this.cmbBettingType = new System.Windows.Forms.ComboBox();
             this.label36 = new System.Windows.Forms.Label();
@@ -462,11 +462,11 @@ namespace LuckyFuture.UI
             this.groupPayoff2.SuspendLayout();
             this.groupPayoff3.SuspendLayout();
             this.groupBetting4.SuspendLayout();
+            this.groupBetting3.SuspendLayout();
             this.groupBetting6.SuspendLayout();
             this.groupBetting5.SuspendLayout();
             this.groupBetting2.SuspendLayout();
             this.groupBetting1.SuspendLayout();
-            this.groupBetting3.SuspendLayout();
             this.groupBetType.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1630,11 +1630,11 @@ namespace LuckyFuture.UI
             this.panel1.Controls.Add(this.groupPayoff2);
             this.panel1.Controls.Add(this.groupPayoff3);
             this.panel1.Controls.Add(this.groupBetting4);
+            this.panel1.Controls.Add(this.groupBetting3);
             this.panel1.Controls.Add(this.groupBetting6);
             this.panel1.Controls.Add(this.groupBetting5);
             this.panel1.Controls.Add(this.groupBetting2);
             this.panel1.Controls.Add(this.groupBetting1);
-            this.panel1.Controls.Add(this.groupBetting3);
             this.panel1.Controls.Add(this.groupBetType);
             this.panel1.Location = new System.Drawing.Point(660, 56);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
@@ -3172,7 +3172,7 @@ namespace LuckyFuture.UI
             this.btnCciOrd4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCciOrd4.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCciOrd4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCciOrd4.Location = new System.Drawing.Point(190, 99);
+            this.btnCciOrd4.Location = new System.Drawing.Point(190, 100);
             this.btnCciOrd4.Margin = new System.Windows.Forms.Padding(4);
             this.btnCciOrd4.Name = "btnCciOrd4";
             this.btnCciOrd4.Size = new System.Drawing.Size(87, 29);
@@ -3191,7 +3191,7 @@ namespace LuckyFuture.UI
             this.btnSbOrd4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSbOrd4.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSbOrd4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSbOrd4.Location = new System.Drawing.Point(96, 99);
+            this.btnSbOrd4.Location = new System.Drawing.Point(96, 100);
             this.btnSbOrd4.Margin = new System.Windows.Forms.Padding(4);
             this.btnSbOrd4.Name = "btnSbOrd4";
             this.btnSbOrd4.Size = new System.Drawing.Size(91, 29);
@@ -3288,7 +3288,7 @@ namespace LuckyFuture.UI
             this.btnOrdSel4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrdSel4.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnOrdSel4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOrdSel4.Location = new System.Drawing.Point(399, 66);
+            this.btnOrdSel4.Location = new System.Drawing.Point(399, 69);
             this.btnOrdSel4.Margin = new System.Windows.Forms.Padding(4);
             this.btnOrdSel4.Name = "btnOrdSel4";
             this.btnOrdSel4.Size = new System.Drawing.Size(29, 29);
@@ -3342,7 +3342,7 @@ namespace LuckyFuture.UI
             this.chkOrd44.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd44.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd44.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd44.Location = new System.Drawing.Point(347, 66);
+            this.chkOrd44.Location = new System.Drawing.Point(347, 69);
             this.chkOrd44.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd44.Name = "chkOrd44";
             this.chkOrd44.Size = new System.Drawing.Size(50, 29);
@@ -3389,7 +3389,7 @@ namespace LuckyFuture.UI
             this.chkOrd43.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd43.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd43.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd43.Location = new System.Drawing.Point(295, 66);
+            this.chkOrd43.Location = new System.Drawing.Point(295, 69);
             this.chkOrd43.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd43.Name = "chkOrd43";
             this.chkOrd43.Size = new System.Drawing.Size(50, 29);
@@ -3440,7 +3440,7 @@ namespace LuckyFuture.UI
             this.chkOrd42.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd42.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd42.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd42.Location = new System.Drawing.Point(243, 66);
+            this.chkOrd42.Location = new System.Drawing.Point(243, 69);
             this.chkOrd42.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd42.Name = "chkOrd42";
             this.chkOrd42.Size = new System.Drawing.Size(50, 29);
@@ -3527,7 +3527,7 @@ namespace LuckyFuture.UI
             this.chkOrd41.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkOrd41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOrd41.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd41.Location = new System.Drawing.Point(191, 66);
+            this.chkOrd41.Location = new System.Drawing.Point(191, 69);
             this.chkOrd41.Margin = new System.Windows.Forms.Padding(0);
             this.chkOrd41.Name = "chkOrd41";
             this.chkOrd41.Size = new System.Drawing.Size(50, 29);
@@ -3733,7 +3733,7 @@ namespace LuckyFuture.UI
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(167, 75);
+            this.label29.Location = new System.Drawing.Point(167, 76);
             this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(22, 15);
@@ -3743,7 +3743,7 @@ namespace LuckyFuture.UI
             // txtOrderCount4
             // 
             this.txtOrderCount4.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrderCount4.Location = new System.Drawing.Point(96, 69);
+            this.txtOrderCount4.Location = new System.Drawing.Point(96, 70);
             this.txtOrderCount4.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrderCount4.Name = "txtOrderCount4";
             this.txtOrderCount4.Size = new System.Drawing.Size(67, 27);
@@ -3768,7 +3768,7 @@ namespace LuckyFuture.UI
             this.cmbChartType4.FormattingEnabled = true;
             this.cmbChartType4.IntegralHeight = false;
             this.cmbChartType4.ItemHeight = 16;
-            this.cmbChartType4.Location = new System.Drawing.Point(96, 15);
+            this.cmbChartType4.Location = new System.Drawing.Point(96, 14);
             this.cmbChartType4.Margin = new System.Windows.Forms.Padding(4);
             this.cmbChartType4.Name = "cmbChartType4";
             this.cmbChartType4.Size = new System.Drawing.Size(85, 22);
@@ -3785,6 +3785,788 @@ namespace LuckyFuture.UI
             this.label32.Size = new System.Drawing.Size(67, 15);
             this.label32.TabIndex = 3;
             this.label32.Text = "차트타입";
+            // 
+            // groupBetting3
+            // 
+            this.groupBetting3.Controls.Add(this.cmbOrderLine2);
+            this.groupBetting3.Controls.Add(this.cmbOrderLine1);
+            this.groupBetting3.Controls.Add(this.label100);
+            this.groupBetting3.Controls.Add(this.chkBandChart_3);
+            this.groupBetting3.Controls.Add(this.label81);
+            this.groupBetting3.Controls.Add(this.label82);
+            this.groupBetting3.Controls.Add(this.btnBandSetting_3);
+            this.groupBetting3.Controls.Add(this.txtCci21_3);
+            this.groupBetting3.Controls.Add(this.txtCci11_3);
+            this.groupBetting3.Controls.Add(this.label83);
+            this.groupBetting3.Controls.Add(this.chkCci_3);
+            this.groupBetting3.Controls.Add(this.label84);
+            this.groupBetting3.Controls.Add(this.chkConc1_3);
+            this.groupBetting3.Controls.Add(this.chkRsi_3);
+            this.groupBetting3.Controls.Add(this.label85);
+            this.groupBetting3.Controls.Add(this.txtCci1_3);
+            this.groupBetting3.Controls.Add(this.cmbCciSide1_3);
+            this.groupBetting3.Controls.Add(this.label86);
+            this.groupBetting3.Controls.Add(this.cmbAvgsSide2_3);
+            this.groupBetting3.Controls.Add(this.label87);
+            this.groupBetting3.Controls.Add(this.txtConc1Min_3);
+            this.groupBetting3.Controls.Add(this.label88);
+            this.groupBetting3.Controls.Add(this.txtCci2_3);
+            this.groupBetting3.Controls.Add(this.txtConc1Cnt_3);
+            this.groupBetting3.Controls.Add(this.cmbAvgsSide1_3);
+            this.groupBetting3.Controls.Add(this.cmbCciSide2_3);
+            this.groupBetting3.Controls.Add(this.label89);
+            this.groupBetting3.Controls.Add(this.label90);
+            this.groupBetting3.Controls.Add(this.cmbRsiSide2_3);
+            this.groupBetting3.Controls.Add(this.chkConc2_3);
+            this.groupBetting3.Controls.Add(this.txtAvgsCandle_3);
+            this.groupBetting3.Controls.Add(this.label91);
+            this.groupBetting3.Controls.Add(this.txtAdx_3);
+            this.groupBetting3.Controls.Add(this.chkAvgs_3);
+            this.groupBetting3.Controls.Add(this.txtRsi2_3);
+            this.groupBetting3.Controls.Add(this.txtConc2Cand_3);
+            this.groupBetting3.Controls.Add(this.txtRsi1_3);
+            this.groupBetting3.Controls.Add(this.label92);
+            this.groupBetting3.Controls.Add(this.chkAdx_3);
+            this.groupBetting3.Controls.Add(this.cmbRsiSide1_3);
+            this.groupBetting3.Controls.Add(this.label93);
+            this.groupBetting3.Controls.Add(this.label94);
+            this.groupBetting3.Controls.Add(this.txtConc2Cnt_3);
+            this.groupBetting3.Controls.Add(this.btnOrdSel3);
+            this.groupBetting3.Controls.Add(this.chkOrd34);
+            this.groupBetting3.Controls.Add(this.chkOrd33);
+            this.groupBetting3.Controls.Add(this.chkOrd32);
+            this.groupBetting3.Controls.Add(this.chkOrd31);
+            this.groupBetting3.Controls.Add(this.cmbReorder3);
+            this.groupBetting3.Controls.Add(this.label34);
+            this.groupBetting3.Controls.Add(this.cmbOrderType3);
+            this.groupBetting3.Controls.Add(this.label26);
+            this.groupBetting3.Controls.Add(this.label23);
+            this.groupBetting3.Controls.Add(this.txtOrderCount3);
+            this.groupBetting3.Controls.Add(this.label24);
+            this.groupBetting3.Controls.Add(this.label8);
+            this.groupBetting3.Controls.Add(this.cmbChartType3);
+            this.groupBetting3.Controls.Add(this.cmbBettingCandle3);
+            this.groupBetting3.Controls.Add(this.label21);
+            this.groupBetting3.Controls.Add(this.label22);
+            this.groupBetting3.Location = new System.Drawing.Point(5, 54);
+            this.groupBetting3.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBetting3.Name = "groupBetting3";
+            this.groupBetting3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBetting3.Size = new System.Drawing.Size(440, 372);
+            this.groupBetting3.TabIndex = 15;
+            this.groupBetting3.TabStop = false;
+            this.groupBetting3.Text = "주문설정";
+            // 
+            // cmbOrderLine2
+            // 
+            this.cmbOrderLine2.BackColor = System.Drawing.Color.White;
+            this.cmbOrderLine2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbOrderLine2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOrderLine2.FormattingEnabled = true;
+            this.cmbOrderLine2.Location = new System.Drawing.Point(347, 41);
+            this.cmbOrderLine2.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbOrderLine2.Name = "cmbOrderLine2";
+            this.cmbOrderLine2.Size = new System.Drawing.Size(83, 26);
+            this.cmbOrderLine2.TabIndex = 126;
+            this.cmbOrderLine2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderLine2_DrawItem);
+            this.cmbOrderLine2.SelectedIndexChanged += new System.EventHandler(this.cmbOrderLine2_SelectedIndexChanged);
+            // 
+            // cmbOrderLine1
+            // 
+            this.cmbOrderLine1.BackColor = System.Drawing.Color.White;
+            this.cmbOrderLine1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbOrderLine1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOrderLine1.FormattingEnabled = true;
+            this.cmbOrderLine1.Location = new System.Drawing.Point(259, 41);
+            this.cmbOrderLine1.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbOrderLine1.Name = "cmbOrderLine1";
+            this.cmbOrderLine1.Size = new System.Drawing.Size(83, 26);
+            this.cmbOrderLine1.TabIndex = 125;
+            this.cmbOrderLine1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderLine1_DrawItem);
+            this.cmbOrderLine1.SelectedIndexChanged += new System.EventHandler(this.cmbOrderLine1_SelectedIndexChanged);
+            // 
+            // label100
+            // 
+            this.label100.AutoSize = true;
+            this.label100.Location = new System.Drawing.Point(191, 45);
+            this.label100.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label100.Name = "label100";
+            this.label100.Size = new System.Drawing.Size(67, 15);
+            this.label100.TabIndex = 124;
+            this.label100.Text = "크로스선";
+            // 
+            // chkBandChart_3
+            // 
+            this.chkBandChart_3.AutoSize = true;
+            this.chkBandChart_3.Location = new System.Drawing.Point(198, 18);
+            this.chkBandChart_3.Margin = new System.Windows.Forms.Padding(4);
+            this.chkBandChart_3.Name = "chkBandChart_3";
+            this.chkBandChart_3.Size = new System.Drawing.Size(89, 19);
+            this.chkBandChart_3.TabIndex = 123;
+            this.chkBandChart_3.Text = "등락설정";
+            this.chkBandChart_3.UseVisualStyleBackColor = true;
+            this.chkBandChart_3.CheckedChanged += new System.EventHandler(this.chkBandChart_3_CheckedChanged);
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(226, 256);
+            this.label81.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(37, 15);
+            this.label81.TabIndex = 122;
+            this.label81.Text = "하락";
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(226, 226);
+            this.label82.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(37, 15);
+            this.label82.TabIndex = 121;
+            this.label82.Text = "상승";
+            // 
+            // btnBandSetting_3
+            // 
+            this.btnBandSetting_3.ColorA = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.btnBandSetting_3.ColorB = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.btnBandSetting_3.ColorC = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
+            this.btnBandSetting_3.ColorD = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
+            this.btnBandSetting_3.ColorE = System.Drawing.Color.White;
+            this.btnBandSetting_3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBandSetting_3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnBandSetting_3.Location = new System.Drawing.Point(288, 12);
+            this.btnBandSetting_3.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBandSetting_3.Name = "btnBandSetting_3";
+            this.btnBandSetting_3.Size = new System.Drawing.Size(24, 28);
+            this.btnBandSetting_3.TabIndex = 22;
+            this.btnBandSetting_3.Text = "...";
+            this.btnBandSetting_3.UseVisualStyleBackColor = true;
+            this.btnBandSetting_3.Click += new System.EventHandler(this.btnBandSetting_Click);
+            // 
+            // txtCci21_3
+            // 
+            this.txtCci21_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCci21_3.Location = new System.Drawing.Point(180, 248);
+            this.txtCci21_3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCci21_3.Name = "txtCci21_3";
+            this.txtCci21_3.Size = new System.Drawing.Size(44, 27);
+            this.txtCci21_3.TabIndex = 120;
+            this.txtCci21_3.TextChanged += new System.EventHandler(this.txtCci21_3_TextChanged);
+            // 
+            // txtCci11_3
+            // 
+            this.txtCci11_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCci11_3.Location = new System.Drawing.Point(180, 219);
+            this.txtCci11_3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCci11_3.Name = "txtCci11_3";
+            this.txtCci11_3.Size = new System.Drawing.Size(44, 27);
+            this.txtCci11_3.TabIndex = 119;
+            this.txtCci11_3.TextChanged += new System.EventHandler(this.txtCci11_3_TextChanged);
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(258, 317);
+            this.label83.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(22, 15);
+            this.label83.TabIndex = 118;
+            this.label83.Text = "위";
+            // 
+            // chkCci_3
+            // 
+            this.chkCci_3.AutoSize = true;
+            this.chkCci_3.Location = new System.Drawing.Point(19, 237);
+            this.chkCci_3.Margin = new System.Windows.Forms.Padding(4);
+            this.chkCci_3.Name = "chkCci_3";
+            this.chkCci_3.Size = new System.Drawing.Size(52, 19);
+            this.chkCci_3.TabIndex = 103;
+            this.chkCci_3.Text = "CCI";
+            this.chkCci_3.UseVisualStyleBackColor = true;
+            this.chkCci_3.CheckedChanged += new System.EventHandler(this.chkCci_3_CheckedChanged);
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(144, 226);
+            this.label84.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(37, 15);
+            this.label84.TabIndex = 86;
+            this.label84.Text = "이상";
+            // 
+            // chkConc1_3
+            // 
+            this.chkConc1_3.AutoSize = true;
+            this.chkConc1_3.Location = new System.Drawing.Point(19, 132);
+            this.chkConc1_3.Margin = new System.Windows.Forms.Padding(4);
+            this.chkConc1_3.Name = "chkConc1_3";
+            this.chkConc1_3.Size = new System.Drawing.Size(74, 19);
+            this.chkConc1_3.TabIndex = 88;
+            this.chkConc1_3.Text = "거래량";
+            this.chkConc1_3.UseVisualStyleBackColor = true;
+            this.chkConc1_3.CheckedChanged += new System.EventHandler(this.chkConc1_3_CheckedChanged);
+            // 
+            // chkRsi_3
+            // 
+            this.chkRsi_3.AutoSize = true;
+            this.chkRsi_3.Location = new System.Drawing.Point(19, 282);
+            this.chkRsi_3.Margin = new System.Windows.Forms.Padding(4);
+            this.chkRsi_3.Name = "chkRsi_3";
+            this.chkRsi_3.Size = new System.Drawing.Size(52, 19);
+            this.chkRsi_3.TabIndex = 92;
+            this.chkRsi_3.Text = "RSI";
+            this.chkRsi_3.UseVisualStyleBackColor = true;
+            this.chkRsi_3.CheckedChanged += new System.EventHandler(this.chkRsi_3_CheckedChanged);
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.Location = new System.Drawing.Point(264, 136);
+            this.label85.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(52, 15);
+            this.label85.TabIndex = 87;
+            this.label85.Text = "개이상";
+            // 
+            // txtCci1_3
+            // 
+            this.txtCci1_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCci1_3.Location = new System.Drawing.Point(96, 219);
+            this.txtCci1_3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCci1_3.Name = "txtCci1_3";
+            this.txtCci1_3.Size = new System.Drawing.Size(44, 27);
+            this.txtCci1_3.TabIndex = 104;
+            this.txtCci1_3.TextChanged += new System.EventHandler(this.txtCci1_3_TextChanged);
+            // 
+            // cmbCciSide1_3
+            // 
+            this.cmbCciSide1_3.BackColor = System.Drawing.Color.White;
+            this.cmbCciSide1_3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbCciSide1_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCciSide1_3.FormattingEnabled = true;
+            this.cmbCciSide1_3.Location = new System.Drawing.Point(262, 218);
+            this.cmbCciSide1_3.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbCciSide1_3.Name = "cmbCciSide1_3";
+            this.cmbCciSide1_3.Size = new System.Drawing.Size(68, 26);
+            this.cmbCciSide1_3.TabIndex = 105;
+            this.cmbCciSide1_3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbCciSide1_3_DrawItem);
+            this.cmbCciSide1_3.SelectedIndexChanged += new System.EventHandler(this.cmbCciSide1_3_SelectedIndexChanged);
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.Location = new System.Drawing.Point(149, 134);
+            this.label86.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(37, 15);
+            this.label86.TabIndex = 85;
+            this.label86.Text = "분당";
+            // 
+            // cmbAvgsSide2_3
+            // 
+            this.cmbAvgsSide2_3.BackColor = System.Drawing.Color.White;
+            this.cmbAvgsSide2_3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbAvgsSide2_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAvgsSide2_3.FormattingEnabled = true;
+            this.cmbAvgsSide2_3.Location = new System.Drawing.Point(292, 338);
+            this.cmbAvgsSide2_3.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbAvgsSide2_3.Name = "cmbAvgsSide2_3";
+            this.cmbAvgsSide2_3.Size = new System.Drawing.Size(68, 26);
+            this.cmbAvgsSide2_3.TabIndex = 117;
+            this.cmbAvgsSide2_3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbAvgsSide2_3_DrawItem);
+            this.cmbAvgsSide2_3.SelectedIndexChanged += new System.EventHandler(this.cmbAvgsSide2_3_SelectedIndexChanged);
+            // 
+            // label87
+            // 
+            this.label87.AutoSize = true;
+            this.label87.Location = new System.Drawing.Point(144, 254);
+            this.label87.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(37, 15);
+            this.label87.TabIndex = 106;
+            this.label87.Text = "이하";
+            // 
+            // txtConc1Min_3
+            // 
+            this.txtConc1Min_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConc1Min_3.Location = new System.Drawing.Point(96, 129);
+            this.txtConc1Min_3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtConc1Min_3.Name = "txtConc1Min_3";
+            this.txtConc1Min_3.Size = new System.Drawing.Size(43, 27);
+            this.txtConc1Min_3.TabIndex = 89;
+            this.txtConc1Min_3.TextChanged += new System.EventHandler(this.txtConc1Min_3_TextChanged);
+            // 
+            // label88
+            // 
+            this.label88.AutoSize = true;
+            this.label88.Location = new System.Drawing.Point(252, 343);
+            this.label88.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(37, 15);
+            this.label88.TabIndex = 116;
+            this.label88.Text = "아래";
+            // 
+            // txtCci2_3
+            // 
+            this.txtCci2_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCci2_3.Location = new System.Drawing.Point(96, 247);
+            this.txtCci2_3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCci2_3.Name = "txtCci2_3";
+            this.txtCci2_3.Size = new System.Drawing.Size(44, 27);
+            this.txtCci2_3.TabIndex = 107;
+            this.txtCci2_3.TextChanged += new System.EventHandler(this.txtCci2_3_TextChanged);
+            // 
+            // txtConc1Cnt_3
+            // 
+            this.txtConc1Cnt_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConc1Cnt_3.Location = new System.Drawing.Point(189, 129);
+            this.txtConc1Cnt_3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtConc1Cnt_3.Name = "txtConc1Cnt_3";
+            this.txtConc1Cnt_3.Size = new System.Drawing.Size(69, 27);
+            this.txtConc1Cnt_3.TabIndex = 90;
+            this.txtConc1Cnt_3.TextChanged += new System.EventHandler(this.txtConc1Cnt_3_TextChanged);
+            // 
+            // cmbAvgsSide1_3
+            // 
+            this.cmbAvgsSide1_3.BackColor = System.Drawing.Color.White;
+            this.cmbAvgsSide1_3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbAvgsSide1_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAvgsSide1_3.FormattingEnabled = true;
+            this.cmbAvgsSide1_3.Location = new System.Drawing.Point(292, 310);
+            this.cmbAvgsSide1_3.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbAvgsSide1_3.Name = "cmbAvgsSide1_3";
+            this.cmbAvgsSide1_3.Size = new System.Drawing.Size(68, 26);
+            this.cmbAvgsSide1_3.TabIndex = 115;
+            this.cmbAvgsSide1_3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbAvgsSide1_3_DrawItem);
+            this.cmbAvgsSide1_3.SelectedIndexChanged += new System.EventHandler(this.cmbAvgsSide1_3_SelectedIndexChanged);
+            // 
+            // cmbCciSide2_3
+            // 
+            this.cmbCciSide2_3.BackColor = System.Drawing.Color.White;
+            this.cmbCciSide2_3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbCciSide2_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCciSide2_3.FormattingEnabled = true;
+            this.cmbCciSide2_3.Location = new System.Drawing.Point(262, 246);
+            this.cmbCciSide2_3.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbCciSide2_3.Name = "cmbCciSide2_3";
+            this.cmbCciSide2_3.Size = new System.Drawing.Size(68, 26);
+            this.cmbCciSide2_3.TabIndex = 108;
+            this.cmbCciSide2_3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbCciSide2_3_DrawItem);
+            this.cmbCciSide2_3.SelectedIndexChanged += new System.EventHandler(this.cmbCciSide2_3_SelectedIndexChanged);
+            // 
+            // label89
+            // 
+            this.label89.AutoSize = true;
+            this.label89.Location = new System.Drawing.Point(144, 196);
+            this.label89.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label89.Name = "label89";
+            this.label89.Size = new System.Drawing.Size(37, 15);
+            this.label89.TabIndex = 101;
+            this.label89.Text = "이상";
+            // 
+            // label90
+            // 
+            this.label90.AutoSize = true;
+            this.label90.Location = new System.Drawing.Point(169, 328);
+            this.label90.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label90.Name = "label90";
+            this.label90.Size = new System.Drawing.Size(81, 15);
+            this.label90.TabIndex = 102;
+            this.label90.Text = "봉 200일선";
+            // 
+            // cmbRsiSide2_3
+            // 
+            this.cmbRsiSide2_3.BackColor = System.Drawing.Color.White;
+            this.cmbRsiSide2_3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbRsiSide2_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRsiSide2_3.FormattingEnabled = true;
+            this.cmbRsiSide2_3.Location = new System.Drawing.Point(358, 279);
+            this.cmbRsiSide2_3.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbRsiSide2_3.Name = "cmbRsiSide2_3";
+            this.cmbRsiSide2_3.Size = new System.Drawing.Size(70, 26);
+            this.cmbRsiSide2_3.TabIndex = 114;
+            this.cmbRsiSide2_3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbRsiSide2_3_DrawItem);
+            this.cmbRsiSide2_3.SelectedIndexChanged += new System.EventHandler(this.cmbRsiSide2_3_SelectedIndexChanged);
+            // 
+            // chkConc2_3
+            // 
+            this.chkConc2_3.AutoSize = true;
+            this.chkConc2_3.Location = new System.Drawing.Point(19, 162);
+            this.chkConc2_3.Margin = new System.Windows.Forms.Padding(4);
+            this.chkConc2_3.Name = "chkConc2_3";
+            this.chkConc2_3.Size = new System.Drawing.Size(74, 19);
+            this.chkConc2_3.TabIndex = 91;
+            this.chkConc2_3.Text = "거래량";
+            this.chkConc2_3.UseVisualStyleBackColor = true;
+            this.chkConc2_3.CheckedChanged += new System.EventHandler(this.chkConc2_3_CheckedChanged);
+            // 
+            // txtAvgsCandle_3
+            // 
+            this.txtAvgsCandle_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAvgsCandle_3.Location = new System.Drawing.Point(119, 322);
+            this.txtAvgsCandle_3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAvgsCandle_3.Name = "txtAvgsCandle_3";
+            this.txtAvgsCandle_3.Size = new System.Drawing.Size(44, 27);
+            this.txtAvgsCandle_3.TabIndex = 100;
+            this.txtAvgsCandle_3.TextChanged += new System.EventHandler(this.txtAvgsCandle_3_TextChanged);
+            // 
+            // label91
+            // 
+            this.label91.AutoSize = true;
+            this.label91.Location = new System.Drawing.Point(142, 283);
+            this.label91.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label91.Name = "label91";
+            this.label91.Size = new System.Drawing.Size(37, 15);
+            this.label91.TabIndex = 109;
+            this.label91.Text = "이상";
+            // 
+            // txtAdx_3
+            // 
+            this.txtAdx_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAdx_3.Location = new System.Drawing.Point(96, 188);
+            this.txtAdx_3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAdx_3.Name = "txtAdx_3";
+            this.txtAdx_3.Size = new System.Drawing.Size(43, 27);
+            this.txtAdx_3.TabIndex = 99;
+            this.txtAdx_3.TextChanged += new System.EventHandler(this.txtAdx_3_TextChanged);
+            // 
+            // chkAvgs_3
+            // 
+            this.chkAvgs_3.AutoSize = true;
+            this.chkAvgs_3.Location = new System.Drawing.Point(19, 327);
+            this.chkAvgs_3.Margin = new System.Windows.Forms.Padding(4);
+            this.chkAvgs_3.Name = "chkAvgs_3";
+            this.chkAvgs_3.Size = new System.Drawing.Size(92, 19);
+            this.chkAvgs_3.TabIndex = 98;
+            this.chkAvgs_3.Text = "이평선S1";
+            this.chkAvgs_3.UseVisualStyleBackColor = true;
+            this.chkAvgs_3.CheckedChanged += new System.EventHandler(this.chkAvgs_3_CheckedChanged);
+            // 
+            // txtRsi2_3
+            // 
+            this.txtRsi2_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRsi2_3.Location = new System.Drawing.Point(268, 278);
+            this.txtRsi2_3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtRsi2_3.Name = "txtRsi2_3";
+            this.txtRsi2_3.Size = new System.Drawing.Size(44, 27);
+            this.txtRsi2_3.TabIndex = 113;
+            this.txtRsi2_3.TextChanged += new System.EventHandler(this.txtRsi2_3_TextChanged);
+            // 
+            // txtConc2Cand_3
+            // 
+            this.txtConc2Cand_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConc2Cand_3.Location = new System.Drawing.Point(96, 158);
+            this.txtConc2Cand_3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtConc2Cand_3.Name = "txtConc2Cand_3";
+            this.txtConc2Cand_3.Size = new System.Drawing.Size(43, 27);
+            this.txtConc2Cand_3.TabIndex = 93;
+            this.txtConc2Cand_3.TextChanged += new System.EventHandler(this.txtConc2Cand_3_TextChanged);
+            // 
+            // txtRsi1_3
+            // 
+            this.txtRsi1_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRsi1_3.Location = new System.Drawing.Point(96, 278);
+            this.txtRsi1_3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtRsi1_3.Name = "txtRsi1_3";
+            this.txtRsi1_3.Size = new System.Drawing.Size(44, 27);
+            this.txtRsi1_3.TabIndex = 110;
+            this.txtRsi1_3.TextChanged += new System.EventHandler(this.txtRsi1_3_TextChanged);
+            // 
+            // label92
+            // 
+            this.label92.AutoSize = true;
+            this.label92.Location = new System.Drawing.Point(318, 283);
+            this.label92.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label92.Name = "label92";
+            this.label92.Size = new System.Drawing.Size(37, 15);
+            this.label92.TabIndex = 112;
+            this.label92.Text = "이하";
+            // 
+            // chkAdx_3
+            // 
+            this.chkAdx_3.AutoSize = true;
+            this.chkAdx_3.Location = new System.Drawing.Point(19, 192);
+            this.chkAdx_3.Margin = new System.Windows.Forms.Padding(4);
+            this.chkAdx_3.Name = "chkAdx_3";
+            this.chkAdx_3.Size = new System.Drawing.Size(62, 19);
+            this.chkAdx_3.TabIndex = 97;
+            this.chkAdx_3.Text = " ADX";
+            this.chkAdx_3.UseVisualStyleBackColor = true;
+            this.chkAdx_3.CheckedChanged += new System.EventHandler(this.chkAdx_3_CheckedChanged);
+            // 
+            // cmbRsiSide1_3
+            // 
+            this.cmbRsiSide1_3.BackColor = System.Drawing.Color.White;
+            this.cmbRsiSide1_3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbRsiSide1_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRsiSide1_3.FormattingEnabled = true;
+            this.cmbRsiSide1_3.Location = new System.Drawing.Point(180, 279);
+            this.cmbRsiSide1_3.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbRsiSide1_3.Name = "cmbRsiSide1_3";
+            this.cmbRsiSide1_3.Size = new System.Drawing.Size(68, 26);
+            this.cmbRsiSide1_3.TabIndex = 111;
+            this.cmbRsiSide1_3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbRsiSide1_3_DrawItem);
+            this.cmbRsiSide1_3.SelectedIndexChanged += new System.EventHandler(this.cmbRsiSide1_3_SelectedIndexChanged);
+            // 
+            // label93
+            // 
+            this.label93.AutoSize = true;
+            this.label93.Location = new System.Drawing.Point(149, 163);
+            this.label93.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label93.Name = "label93";
+            this.label93.Size = new System.Drawing.Size(22, 15);
+            this.label93.TabIndex = 94;
+            this.label93.Text = "봉";
+            // 
+            // label94
+            // 
+            this.label94.AutoSize = true;
+            this.label94.Location = new System.Drawing.Point(266, 164);
+            this.label94.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label94.Name = "label94";
+            this.label94.Size = new System.Drawing.Size(48, 15);
+            this.label94.TabIndex = 96;
+            this.label94.Text = "%이상";
+            // 
+            // txtConc2Cnt_3
+            // 
+            this.txtConc2Cnt_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConc2Cnt_3.Location = new System.Drawing.Point(189, 158);
+            this.txtConc2Cnt_3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtConc2Cnt_3.Name = "txtConc2Cnt_3";
+            this.txtConc2Cnt_3.Size = new System.Drawing.Size(69, 27);
+            this.txtConc2Cnt_3.TabIndex = 95;
+            this.txtConc2Cnt_3.TextChanged += new System.EventHandler(this.txtConc2Cnt_3_TextChanged);
+            // 
+            // btnOrdSel3
+            // 
+            this.btnOrdSel3.ColorA = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.btnOrdSel3.ColorB = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.btnOrdSel3.ColorC = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
+            this.btnOrdSel3.ColorD = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
+            this.btnOrdSel3.ColorE = System.Drawing.Color.White;
+            this.btnOrdSel3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOrdSel3.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnOrdSel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrdSel3.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnOrdSel3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnOrdSel3.Location = new System.Drawing.Point(401, 70);
+            this.btnOrdSel3.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOrdSel3.Name = "btnOrdSel3";
+            this.btnOrdSel3.Size = new System.Drawing.Size(29, 29);
+            this.btnOrdSel3.TabIndex = 56;
+            this.btnOrdSel3.Text = "...";
+            this.btnOrdSel3.UseVisualStyleBackColor = true;
+            this.btnOrdSel3.Click += new System.EventHandler(this.btnOrdSel3_Click);
+            // 
+            // chkOrd34
+            // 
+            this.chkOrd34.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkOrd34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
+            this.chkOrd34.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkOrd34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkOrd34.ForeColor = System.Drawing.Color.Black;
+            this.chkOrd34.Location = new System.Drawing.Point(349, 70);
+            this.chkOrd34.Margin = new System.Windows.Forms.Padding(0);
+            this.chkOrd34.Name = "chkOrd34";
+            this.chkOrd34.Size = new System.Drawing.Size(50, 29);
+            this.chkOrd34.TabIndex = 55;
+            this.chkOrd34.Text = "10";
+            this.chkOrd34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkOrd34.UseVisualStyleBackColor = false;
+            this.chkOrd34.CheckedChanged += new System.EventHandler(this.chkOrd34_CheckedChanged);
+            // 
+            // chkOrd33
+            // 
+            this.chkOrd33.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkOrd33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
+            this.chkOrd33.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkOrd33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkOrd33.ForeColor = System.Drawing.Color.Black;
+            this.chkOrd33.Location = new System.Drawing.Point(297, 70);
+            this.chkOrd33.Margin = new System.Windows.Forms.Padding(0);
+            this.chkOrd33.Name = "chkOrd33";
+            this.chkOrd33.Size = new System.Drawing.Size(50, 29);
+            this.chkOrd33.TabIndex = 54;
+            this.chkOrd33.Text = "5";
+            this.chkOrd33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkOrd33.UseVisualStyleBackColor = false;
+            this.chkOrd33.CheckedChanged += new System.EventHandler(this.chkOrd33_CheckedChanged);
+            // 
+            // chkOrd32
+            // 
+            this.chkOrd32.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkOrd32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
+            this.chkOrd32.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkOrd32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkOrd32.ForeColor = System.Drawing.Color.Black;
+            this.chkOrd32.Location = new System.Drawing.Point(245, 70);
+            this.chkOrd32.Margin = new System.Windows.Forms.Padding(0);
+            this.chkOrd32.Name = "chkOrd32";
+            this.chkOrd32.Size = new System.Drawing.Size(50, 29);
+            this.chkOrd32.TabIndex = 53;
+            this.chkOrd32.Text = "2";
+            this.chkOrd32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkOrd32.UseVisualStyleBackColor = false;
+            this.chkOrd32.CheckedChanged += new System.EventHandler(this.chkOrd32_CheckedChanged);
+            // 
+            // chkOrd31
+            // 
+            this.chkOrd31.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkOrd31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
+            this.chkOrd31.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkOrd31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkOrd31.ForeColor = System.Drawing.Color.Black;
+            this.chkOrd31.Location = new System.Drawing.Point(193, 70);
+            this.chkOrd31.Margin = new System.Windows.Forms.Padding(0);
+            this.chkOrd31.Name = "chkOrd31";
+            this.chkOrd31.Size = new System.Drawing.Size(50, 29);
+            this.chkOrd31.TabIndex = 52;
+            this.chkOrd31.Text = "1";
+            this.chkOrd31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkOrd31.UseVisualStyleBackColor = false;
+            this.chkOrd31.CheckedChanged += new System.EventHandler(this.chkOrd31_CheckedChanged);
+            // 
+            // cmbReorder3
+            // 
+            this.cmbReorder3.BackColor = System.Drawing.Color.White;
+            this.cmbReorder3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbReorder3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbReorder3.FormattingEnabled = true;
+            this.cmbReorder3.Location = new System.Drawing.Point(96, 100);
+            this.cmbReorder3.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbReorder3.Name = "cmbReorder3";
+            this.cmbReorder3.Size = new System.Drawing.Size(67, 26);
+            this.cmbReorder3.TabIndex = 24;
+            this.cmbReorder3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbReorder3_DrawItem);
+            this.cmbReorder3.SelectedIndexChanged += new System.EventHandler(this.cmbReorder3_SelectedIndexChanged);
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(16, 105);
+            this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(52, 15);
+            this.label34.TabIndex = 23;
+            this.label34.Text = "되돌림";
+            // 
+            // cmbOrderType3
+            // 
+            this.cmbOrderType3.BackColor = System.Drawing.Color.White;
+            this.cmbOrderType3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbOrderType3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOrderType3.FormattingEnabled = true;
+            this.cmbOrderType3.Location = new System.Drawing.Point(96, 41);
+            this.cmbOrderType3.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbOrderType3.Name = "cmbOrderType3";
+            this.cmbOrderType3.Size = new System.Drawing.Size(85, 26);
+            this.cmbOrderType3.TabIndex = 21;
+            this.cmbOrderType3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderType3_DrawItem);
+            this.cmbOrderType3.SelectedIndexChanged += new System.EventHandler(this.cmbOrderType3_SelectedIndexChanged);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(16, 47);
+            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(67, 15);
+            this.label26.TabIndex = 22;
+            this.label26.Text = "주문타입";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(167, 76);
+            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(22, 15);
+            this.label23.TabIndex = 20;
+            this.label23.Text = "개";
+            // 
+            // txtOrderCount3
+            // 
+            this.txtOrderCount3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOrderCount3.Location = new System.Drawing.Point(96, 70);
+            this.txtOrderCount3.Margin = new System.Windows.Forms.Padding(4);
+            this.txtOrderCount3.Name = "txtOrderCount3";
+            this.txtOrderCount3.Size = new System.Drawing.Size(67, 27);
+            this.txtOrderCount3.TabIndex = 18;
+            this.txtOrderCount3.TextChanged += new System.EventHandler(this.txtOrderCount3_TextChanged);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(16, 76);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(67, 15);
+            this.label24.TabIndex = 19;
+            this.label24.Text = "주문수량";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(331, 105);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(72, 15);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "캔들 배팅";
+            // 
+            // cmbChartType3
+            // 
+            this.cmbChartType3.BackColor = System.Drawing.Color.White;
+            this.cmbChartType3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbChartType3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbChartType3.FormattingEnabled = true;
+            this.cmbChartType3.ItemHeight = 16;
+            this.cmbChartType3.Location = new System.Drawing.Point(96, 13);
+            this.cmbChartType3.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbChartType3.Name = "cmbChartType3";
+            this.cmbChartType3.Size = new System.Drawing.Size(85, 22);
+            this.cmbChartType3.TabIndex = 0;
+            this.cmbChartType3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbChartType3_DrawItem);
+            this.cmbChartType3.SelectedIndexChanged += new System.EventHandler(this.cmbChartType3_SelectedIndexChanged);
+            // 
+            // cmbBettingCandle3
+            // 
+            this.cmbBettingCandle3.BackColor = System.Drawing.Color.White;
+            this.cmbBettingCandle3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbBettingCandle3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBettingCandle3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbBettingCandle3.FormattingEnabled = true;
+            this.cmbBettingCandle3.Location = new System.Drawing.Point(242, 100);
+            this.cmbBettingCandle3.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbBettingCandle3.Name = "cmbBettingCandle3";
+            this.cmbBettingCandle3.Size = new System.Drawing.Size(85, 26);
+            this.cmbBettingCandle3.TabIndex = 0;
+            this.cmbBettingCandle3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbBettingCandle3_DrawItem);
+            this.cmbBettingCandle3.SelectedIndexChanged += new System.EventHandler(this.cmbBettingCandle3_SelectedIndexChanged);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(16, 21);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(67, 15);
+            this.label21.TabIndex = 3;
+            this.label21.Text = "차트타입";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(187, 105);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(52, 15);
+            this.label22.TabIndex = 3;
+            this.label22.Text = "교차시";
             // 
             // groupBetting6
             // 
@@ -4703,788 +5485,6 @@ namespace LuckyFuture.UI
             this.label9.TabIndex = 3;
             this.label9.Text = "동일색캔들";
             // 
-            // groupBetting3
-            // 
-            this.groupBetting3.Controls.Add(this.cmbOrderLine2);
-            this.groupBetting3.Controls.Add(this.cmbOrderLine1);
-            this.groupBetting3.Controls.Add(this.label100);
-            this.groupBetting3.Controls.Add(this.chkBandChart_3);
-            this.groupBetting3.Controls.Add(this.label81);
-            this.groupBetting3.Controls.Add(this.label82);
-            this.groupBetting3.Controls.Add(this.btnBandSetting_3);
-            this.groupBetting3.Controls.Add(this.txtCci21_3);
-            this.groupBetting3.Controls.Add(this.txtCci11_3);
-            this.groupBetting3.Controls.Add(this.label83);
-            this.groupBetting3.Controls.Add(this.chkCci_3);
-            this.groupBetting3.Controls.Add(this.label84);
-            this.groupBetting3.Controls.Add(this.chkConc1_3);
-            this.groupBetting3.Controls.Add(this.chkRsi_3);
-            this.groupBetting3.Controls.Add(this.label85);
-            this.groupBetting3.Controls.Add(this.txtCci1_3);
-            this.groupBetting3.Controls.Add(this.cmbCciSide1_3);
-            this.groupBetting3.Controls.Add(this.label86);
-            this.groupBetting3.Controls.Add(this.cmbAvgsSide2_3);
-            this.groupBetting3.Controls.Add(this.label87);
-            this.groupBetting3.Controls.Add(this.txtConc1Min_3);
-            this.groupBetting3.Controls.Add(this.label88);
-            this.groupBetting3.Controls.Add(this.txtCci2_3);
-            this.groupBetting3.Controls.Add(this.txtConc1Cnt_3);
-            this.groupBetting3.Controls.Add(this.cmbAvgsSide1_3);
-            this.groupBetting3.Controls.Add(this.cmbCciSide2_3);
-            this.groupBetting3.Controls.Add(this.label89);
-            this.groupBetting3.Controls.Add(this.label90);
-            this.groupBetting3.Controls.Add(this.cmbRsiSide2_3);
-            this.groupBetting3.Controls.Add(this.chkConc2_3);
-            this.groupBetting3.Controls.Add(this.txtAvgsCandle_3);
-            this.groupBetting3.Controls.Add(this.label91);
-            this.groupBetting3.Controls.Add(this.txtAdx_3);
-            this.groupBetting3.Controls.Add(this.chkAvgs_3);
-            this.groupBetting3.Controls.Add(this.txtRsi2_3);
-            this.groupBetting3.Controls.Add(this.txtConc2Cand_3);
-            this.groupBetting3.Controls.Add(this.txtRsi1_3);
-            this.groupBetting3.Controls.Add(this.label92);
-            this.groupBetting3.Controls.Add(this.chkAdx_3);
-            this.groupBetting3.Controls.Add(this.cmbRsiSide1_3);
-            this.groupBetting3.Controls.Add(this.label93);
-            this.groupBetting3.Controls.Add(this.label94);
-            this.groupBetting3.Controls.Add(this.txtConc2Cnt_3);
-            this.groupBetting3.Controls.Add(this.btnOrdSel3);
-            this.groupBetting3.Controls.Add(this.chkOrd34);
-            this.groupBetting3.Controls.Add(this.chkOrd33);
-            this.groupBetting3.Controls.Add(this.chkOrd32);
-            this.groupBetting3.Controls.Add(this.chkOrd31);
-            this.groupBetting3.Controls.Add(this.cmbReorder3);
-            this.groupBetting3.Controls.Add(this.label34);
-            this.groupBetting3.Controls.Add(this.cmbOrderType3);
-            this.groupBetting3.Controls.Add(this.label26);
-            this.groupBetting3.Controls.Add(this.label23);
-            this.groupBetting3.Controls.Add(this.txtOrderCount3);
-            this.groupBetting3.Controls.Add(this.label24);
-            this.groupBetting3.Controls.Add(this.label8);
-            this.groupBetting3.Controls.Add(this.cmbChartType3);
-            this.groupBetting3.Controls.Add(this.cmbBettingCandle3);
-            this.groupBetting3.Controls.Add(this.label21);
-            this.groupBetting3.Controls.Add(this.label22);
-            this.groupBetting3.Location = new System.Drawing.Point(5, 54);
-            this.groupBetting3.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBetting3.Name = "groupBetting3";
-            this.groupBetting3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBetting3.Size = new System.Drawing.Size(440, 372);
-            this.groupBetting3.TabIndex = 15;
-            this.groupBetting3.TabStop = false;
-            this.groupBetting3.Text = "주문설정";
-            // 
-            // cmbOrderLine2
-            // 
-            this.cmbOrderLine2.BackColor = System.Drawing.Color.White;
-            this.cmbOrderLine2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbOrderLine2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbOrderLine2.FormattingEnabled = true;
-            this.cmbOrderLine2.Location = new System.Drawing.Point(347, 41);
-            this.cmbOrderLine2.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbOrderLine2.Name = "cmbOrderLine2";
-            this.cmbOrderLine2.Size = new System.Drawing.Size(83, 26);
-            this.cmbOrderLine2.TabIndex = 126;
-            this.cmbOrderLine2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderLine2_DrawItem);
-            this.cmbOrderLine2.SelectedIndexChanged += new System.EventHandler(this.cmbOrderLine2_SelectedIndexChanged);
-            // 
-            // cmbOrderLine1
-            // 
-            this.cmbOrderLine1.BackColor = System.Drawing.Color.White;
-            this.cmbOrderLine1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbOrderLine1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbOrderLine1.FormattingEnabled = true;
-            this.cmbOrderLine1.Location = new System.Drawing.Point(259, 42);
-            this.cmbOrderLine1.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbOrderLine1.Name = "cmbOrderLine1";
-            this.cmbOrderLine1.Size = new System.Drawing.Size(83, 26);
-            this.cmbOrderLine1.TabIndex = 125;
-            this.cmbOrderLine1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderLine1_DrawItem);
-            this.cmbOrderLine1.SelectedIndexChanged += new System.EventHandler(this.cmbOrderLine1_SelectedIndexChanged);
-            // 
-            // label100
-            // 
-            this.label100.AutoSize = true;
-            this.label100.Location = new System.Drawing.Point(191, 45);
-            this.label100.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label100.Name = "label100";
-            this.label100.Size = new System.Drawing.Size(67, 15);
-            this.label100.TabIndex = 124;
-            this.label100.Text = "크로스선";
-            // 
-            // chkBandChart_3
-            // 
-            this.chkBandChart_3.AutoSize = true;
-            this.chkBandChart_3.Location = new System.Drawing.Point(198, 18);
-            this.chkBandChart_3.Margin = new System.Windows.Forms.Padding(4);
-            this.chkBandChart_3.Name = "chkBandChart_3";
-            this.chkBandChart_3.Size = new System.Drawing.Size(89, 19);
-            this.chkBandChart_3.TabIndex = 123;
-            this.chkBandChart_3.Text = "등락설정";
-            this.chkBandChart_3.UseVisualStyleBackColor = true;
-            this.chkBandChart_3.CheckedChanged += new System.EventHandler(this.chkBandChart_3_CheckedChanged);
-            // 
-            // label81
-            // 
-            this.label81.AutoSize = true;
-            this.label81.Location = new System.Drawing.Point(226, 256);
-            this.label81.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(37, 15);
-            this.label81.TabIndex = 122;
-            this.label81.Text = "하락";
-            // 
-            // label82
-            // 
-            this.label82.AutoSize = true;
-            this.label82.Location = new System.Drawing.Point(226, 226);
-            this.label82.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label82.Name = "label82";
-            this.label82.Size = new System.Drawing.Size(37, 15);
-            this.label82.TabIndex = 121;
-            this.label82.Text = "상승";
-            // 
-            // btnBandSetting_3
-            // 
-            this.btnBandSetting_3.ColorA = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.btnBandSetting_3.ColorB = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.btnBandSetting_3.ColorC = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
-            this.btnBandSetting_3.ColorD = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
-            this.btnBandSetting_3.ColorE = System.Drawing.Color.White;
-            this.btnBandSetting_3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBandSetting_3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnBandSetting_3.Location = new System.Drawing.Point(288, 13);
-            this.btnBandSetting_3.Margin = new System.Windows.Forms.Padding(4);
-            this.btnBandSetting_3.Name = "btnBandSetting_3";
-            this.btnBandSetting_3.Size = new System.Drawing.Size(24, 28);
-            this.btnBandSetting_3.TabIndex = 22;
-            this.btnBandSetting_3.Text = "...";
-            this.btnBandSetting_3.UseVisualStyleBackColor = true;
-            this.btnBandSetting_3.Click += new System.EventHandler(this.btnBandSetting_Click);
-            // 
-            // txtCci21_3
-            // 
-            this.txtCci21_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCci21_3.Location = new System.Drawing.Point(180, 248);
-            this.txtCci21_3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCci21_3.Name = "txtCci21_3";
-            this.txtCci21_3.Size = new System.Drawing.Size(44, 27);
-            this.txtCci21_3.TabIndex = 120;
-            this.txtCci21_3.TextChanged += new System.EventHandler(this.txtCci21_3_TextChanged);
-            // 
-            // txtCci11_3
-            // 
-            this.txtCci11_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCci11_3.Location = new System.Drawing.Point(180, 219);
-            this.txtCci11_3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCci11_3.Name = "txtCci11_3";
-            this.txtCci11_3.Size = new System.Drawing.Size(44, 27);
-            this.txtCci11_3.TabIndex = 119;
-            this.txtCci11_3.TextChanged += new System.EventHandler(this.txtCci11_3_TextChanged);
-            // 
-            // label83
-            // 
-            this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(258, 317);
-            this.label83.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(22, 15);
-            this.label83.TabIndex = 118;
-            this.label83.Text = "위";
-            // 
-            // chkCci_3
-            // 
-            this.chkCci_3.AutoSize = true;
-            this.chkCci_3.Location = new System.Drawing.Point(19, 237);
-            this.chkCci_3.Margin = new System.Windows.Forms.Padding(4);
-            this.chkCci_3.Name = "chkCci_3";
-            this.chkCci_3.Size = new System.Drawing.Size(52, 19);
-            this.chkCci_3.TabIndex = 103;
-            this.chkCci_3.Text = "CCI";
-            this.chkCci_3.UseVisualStyleBackColor = true;
-            this.chkCci_3.CheckedChanged += new System.EventHandler(this.chkCci_3_CheckedChanged);
-            // 
-            // label84
-            // 
-            this.label84.AutoSize = true;
-            this.label84.Location = new System.Drawing.Point(144, 226);
-            this.label84.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(37, 15);
-            this.label84.TabIndex = 86;
-            this.label84.Text = "이상";
-            // 
-            // chkConc1_3
-            // 
-            this.chkConc1_3.AutoSize = true;
-            this.chkConc1_3.Location = new System.Drawing.Point(19, 132);
-            this.chkConc1_3.Margin = new System.Windows.Forms.Padding(4);
-            this.chkConc1_3.Name = "chkConc1_3";
-            this.chkConc1_3.Size = new System.Drawing.Size(74, 19);
-            this.chkConc1_3.TabIndex = 88;
-            this.chkConc1_3.Text = "거래량";
-            this.chkConc1_3.UseVisualStyleBackColor = true;
-            this.chkConc1_3.CheckedChanged += new System.EventHandler(this.chkConc1_3_CheckedChanged);
-            // 
-            // chkRsi_3
-            // 
-            this.chkRsi_3.AutoSize = true;
-            this.chkRsi_3.Location = new System.Drawing.Point(19, 282);
-            this.chkRsi_3.Margin = new System.Windows.Forms.Padding(4);
-            this.chkRsi_3.Name = "chkRsi_3";
-            this.chkRsi_3.Size = new System.Drawing.Size(52, 19);
-            this.chkRsi_3.TabIndex = 92;
-            this.chkRsi_3.Text = "RSI";
-            this.chkRsi_3.UseVisualStyleBackColor = true;
-            this.chkRsi_3.CheckedChanged += new System.EventHandler(this.chkRsi_3_CheckedChanged);
-            // 
-            // label85
-            // 
-            this.label85.AutoSize = true;
-            this.label85.Location = new System.Drawing.Point(264, 136);
-            this.label85.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label85.Name = "label85";
-            this.label85.Size = new System.Drawing.Size(52, 15);
-            this.label85.TabIndex = 87;
-            this.label85.Text = "개이상";
-            // 
-            // txtCci1_3
-            // 
-            this.txtCci1_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCci1_3.Location = new System.Drawing.Point(96, 219);
-            this.txtCci1_3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCci1_3.Name = "txtCci1_3";
-            this.txtCci1_3.Size = new System.Drawing.Size(44, 27);
-            this.txtCci1_3.TabIndex = 104;
-            this.txtCci1_3.TextChanged += new System.EventHandler(this.txtCci1_3_TextChanged);
-            // 
-            // cmbCciSide1_3
-            // 
-            this.cmbCciSide1_3.BackColor = System.Drawing.Color.White;
-            this.cmbCciSide1_3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbCciSide1_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCciSide1_3.FormattingEnabled = true;
-            this.cmbCciSide1_3.Location = new System.Drawing.Point(262, 218);
-            this.cmbCciSide1_3.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbCciSide1_3.Name = "cmbCciSide1_3";
-            this.cmbCciSide1_3.Size = new System.Drawing.Size(68, 26);
-            this.cmbCciSide1_3.TabIndex = 105;
-            this.cmbCciSide1_3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbCciSide1_3_DrawItem);
-            this.cmbCciSide1_3.SelectedIndexChanged += new System.EventHandler(this.cmbCciSide1_3_SelectedIndexChanged);
-            // 
-            // label86
-            // 
-            this.label86.AutoSize = true;
-            this.label86.Location = new System.Drawing.Point(149, 134);
-            this.label86.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(37, 15);
-            this.label86.TabIndex = 85;
-            this.label86.Text = "분당";
-            // 
-            // cmbAvgsSide2_3
-            // 
-            this.cmbAvgsSide2_3.BackColor = System.Drawing.Color.White;
-            this.cmbAvgsSide2_3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbAvgsSide2_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAvgsSide2_3.FormattingEnabled = true;
-            this.cmbAvgsSide2_3.Location = new System.Drawing.Point(292, 338);
-            this.cmbAvgsSide2_3.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbAvgsSide2_3.Name = "cmbAvgsSide2_3";
-            this.cmbAvgsSide2_3.Size = new System.Drawing.Size(68, 26);
-            this.cmbAvgsSide2_3.TabIndex = 117;
-            this.cmbAvgsSide2_3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbAvgsSide2_3_DrawItem);
-            this.cmbAvgsSide2_3.SelectedIndexChanged += new System.EventHandler(this.cmbAvgsSide2_3_SelectedIndexChanged);
-            // 
-            // label87
-            // 
-            this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(144, 254);
-            this.label87.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(37, 15);
-            this.label87.TabIndex = 106;
-            this.label87.Text = "이하";
-            // 
-            // txtConc1Min_3
-            // 
-            this.txtConc1Min_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConc1Min_3.Location = new System.Drawing.Point(96, 129);
-            this.txtConc1Min_3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtConc1Min_3.Name = "txtConc1Min_3";
-            this.txtConc1Min_3.Size = new System.Drawing.Size(43, 27);
-            this.txtConc1Min_3.TabIndex = 89;
-            this.txtConc1Min_3.TextChanged += new System.EventHandler(this.txtConc1Min_3_TextChanged);
-            // 
-            // label88
-            // 
-            this.label88.AutoSize = true;
-            this.label88.Location = new System.Drawing.Point(252, 343);
-            this.label88.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(37, 15);
-            this.label88.TabIndex = 116;
-            this.label88.Text = "아래";
-            // 
-            // txtCci2_3
-            // 
-            this.txtCci2_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCci2_3.Location = new System.Drawing.Point(96, 247);
-            this.txtCci2_3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCci2_3.Name = "txtCci2_3";
-            this.txtCci2_3.Size = new System.Drawing.Size(44, 27);
-            this.txtCci2_3.TabIndex = 107;
-            this.txtCci2_3.TextChanged += new System.EventHandler(this.txtCci2_3_TextChanged);
-            // 
-            // txtConc1Cnt_3
-            // 
-            this.txtConc1Cnt_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConc1Cnt_3.Location = new System.Drawing.Point(189, 129);
-            this.txtConc1Cnt_3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtConc1Cnt_3.Name = "txtConc1Cnt_3";
-            this.txtConc1Cnt_3.Size = new System.Drawing.Size(69, 27);
-            this.txtConc1Cnt_3.TabIndex = 90;
-            this.txtConc1Cnt_3.TextChanged += new System.EventHandler(this.txtConc1Cnt_3_TextChanged);
-            // 
-            // cmbAvgsSide1_3
-            // 
-            this.cmbAvgsSide1_3.BackColor = System.Drawing.Color.White;
-            this.cmbAvgsSide1_3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbAvgsSide1_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAvgsSide1_3.FormattingEnabled = true;
-            this.cmbAvgsSide1_3.Location = new System.Drawing.Point(292, 310);
-            this.cmbAvgsSide1_3.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbAvgsSide1_3.Name = "cmbAvgsSide1_3";
-            this.cmbAvgsSide1_3.Size = new System.Drawing.Size(68, 26);
-            this.cmbAvgsSide1_3.TabIndex = 115;
-            this.cmbAvgsSide1_3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbAvgsSide1_3_DrawItem);
-            this.cmbAvgsSide1_3.SelectedIndexChanged += new System.EventHandler(this.cmbAvgsSide1_3_SelectedIndexChanged);
-            // 
-            // cmbCciSide2_3
-            // 
-            this.cmbCciSide2_3.BackColor = System.Drawing.Color.White;
-            this.cmbCciSide2_3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbCciSide2_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCciSide2_3.FormattingEnabled = true;
-            this.cmbCciSide2_3.Location = new System.Drawing.Point(262, 246);
-            this.cmbCciSide2_3.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbCciSide2_3.Name = "cmbCciSide2_3";
-            this.cmbCciSide2_3.Size = new System.Drawing.Size(68, 26);
-            this.cmbCciSide2_3.TabIndex = 108;
-            this.cmbCciSide2_3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbCciSide2_3_DrawItem);
-            this.cmbCciSide2_3.SelectedIndexChanged += new System.EventHandler(this.cmbCciSide2_3_SelectedIndexChanged);
-            // 
-            // label89
-            // 
-            this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(144, 196);
-            this.label89.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(37, 15);
-            this.label89.TabIndex = 101;
-            this.label89.Text = "이상";
-            // 
-            // label90
-            // 
-            this.label90.AutoSize = true;
-            this.label90.Location = new System.Drawing.Point(169, 328);
-            this.label90.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(81, 15);
-            this.label90.TabIndex = 102;
-            this.label90.Text = "봉 200일선";
-            // 
-            // cmbRsiSide2_3
-            // 
-            this.cmbRsiSide2_3.BackColor = System.Drawing.Color.White;
-            this.cmbRsiSide2_3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbRsiSide2_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbRsiSide2_3.FormattingEnabled = true;
-            this.cmbRsiSide2_3.Location = new System.Drawing.Point(358, 279);
-            this.cmbRsiSide2_3.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbRsiSide2_3.Name = "cmbRsiSide2_3";
-            this.cmbRsiSide2_3.Size = new System.Drawing.Size(70, 26);
-            this.cmbRsiSide2_3.TabIndex = 114;
-            this.cmbRsiSide2_3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbRsiSide2_3_DrawItem);
-            this.cmbRsiSide2_3.SelectedIndexChanged += new System.EventHandler(this.cmbRsiSide2_3_SelectedIndexChanged);
-            // 
-            // chkConc2_3
-            // 
-            this.chkConc2_3.AutoSize = true;
-            this.chkConc2_3.Location = new System.Drawing.Point(19, 162);
-            this.chkConc2_3.Margin = new System.Windows.Forms.Padding(4);
-            this.chkConc2_3.Name = "chkConc2_3";
-            this.chkConc2_3.Size = new System.Drawing.Size(74, 19);
-            this.chkConc2_3.TabIndex = 91;
-            this.chkConc2_3.Text = "거래량";
-            this.chkConc2_3.UseVisualStyleBackColor = true;
-            this.chkConc2_3.CheckedChanged += new System.EventHandler(this.chkConc2_3_CheckedChanged);
-            // 
-            // txtAvgsCandle_3
-            // 
-            this.txtAvgsCandle_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAvgsCandle_3.Location = new System.Drawing.Point(119, 322);
-            this.txtAvgsCandle_3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtAvgsCandle_3.Name = "txtAvgsCandle_3";
-            this.txtAvgsCandle_3.Size = new System.Drawing.Size(44, 27);
-            this.txtAvgsCandle_3.TabIndex = 100;
-            this.txtAvgsCandle_3.TextChanged += new System.EventHandler(this.txtAvgsCandle_3_TextChanged);
-            // 
-            // label91
-            // 
-            this.label91.AutoSize = true;
-            this.label91.Location = new System.Drawing.Point(142, 283);
-            this.label91.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(37, 15);
-            this.label91.TabIndex = 109;
-            this.label91.Text = "이상";
-            // 
-            // txtAdx_3
-            // 
-            this.txtAdx_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAdx_3.Location = new System.Drawing.Point(96, 188);
-            this.txtAdx_3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtAdx_3.Name = "txtAdx_3";
-            this.txtAdx_3.Size = new System.Drawing.Size(43, 27);
-            this.txtAdx_3.TabIndex = 99;
-            this.txtAdx_3.TextChanged += new System.EventHandler(this.txtAdx_3_TextChanged);
-            // 
-            // chkAvgs_3
-            // 
-            this.chkAvgs_3.AutoSize = true;
-            this.chkAvgs_3.Location = new System.Drawing.Point(19, 327);
-            this.chkAvgs_3.Margin = new System.Windows.Forms.Padding(4);
-            this.chkAvgs_3.Name = "chkAvgs_3";
-            this.chkAvgs_3.Size = new System.Drawing.Size(92, 19);
-            this.chkAvgs_3.TabIndex = 98;
-            this.chkAvgs_3.Text = "이평선S1";
-            this.chkAvgs_3.UseVisualStyleBackColor = true;
-            this.chkAvgs_3.CheckedChanged += new System.EventHandler(this.chkAvgs_3_CheckedChanged);
-            // 
-            // txtRsi2_3
-            // 
-            this.txtRsi2_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRsi2_3.Location = new System.Drawing.Point(268, 278);
-            this.txtRsi2_3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtRsi2_3.Name = "txtRsi2_3";
-            this.txtRsi2_3.Size = new System.Drawing.Size(44, 27);
-            this.txtRsi2_3.TabIndex = 113;
-            this.txtRsi2_3.TextChanged += new System.EventHandler(this.txtRsi2_3_TextChanged);
-            // 
-            // txtConc2Cand_3
-            // 
-            this.txtConc2Cand_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConc2Cand_3.Location = new System.Drawing.Point(96, 158);
-            this.txtConc2Cand_3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtConc2Cand_3.Name = "txtConc2Cand_3";
-            this.txtConc2Cand_3.Size = new System.Drawing.Size(43, 27);
-            this.txtConc2Cand_3.TabIndex = 93;
-            this.txtConc2Cand_3.TextChanged += new System.EventHandler(this.txtConc2Cand_3_TextChanged);
-            // 
-            // txtRsi1_3
-            // 
-            this.txtRsi1_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRsi1_3.Location = new System.Drawing.Point(96, 278);
-            this.txtRsi1_3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtRsi1_3.Name = "txtRsi1_3";
-            this.txtRsi1_3.Size = new System.Drawing.Size(44, 27);
-            this.txtRsi1_3.TabIndex = 110;
-            this.txtRsi1_3.TextChanged += new System.EventHandler(this.txtRsi1_3_TextChanged);
-            // 
-            // label92
-            // 
-            this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(318, 283);
-            this.label92.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(37, 15);
-            this.label92.TabIndex = 112;
-            this.label92.Text = "이하";
-            // 
-            // chkAdx_3
-            // 
-            this.chkAdx_3.AutoSize = true;
-            this.chkAdx_3.Location = new System.Drawing.Point(19, 192);
-            this.chkAdx_3.Margin = new System.Windows.Forms.Padding(4);
-            this.chkAdx_3.Name = "chkAdx_3";
-            this.chkAdx_3.Size = new System.Drawing.Size(62, 19);
-            this.chkAdx_3.TabIndex = 97;
-            this.chkAdx_3.Text = " ADX";
-            this.chkAdx_3.UseVisualStyleBackColor = true;
-            this.chkAdx_3.CheckedChanged += new System.EventHandler(this.chkAdx_3_CheckedChanged);
-            // 
-            // cmbRsiSide1_3
-            // 
-            this.cmbRsiSide1_3.BackColor = System.Drawing.Color.White;
-            this.cmbRsiSide1_3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbRsiSide1_3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbRsiSide1_3.FormattingEnabled = true;
-            this.cmbRsiSide1_3.Location = new System.Drawing.Point(180, 279);
-            this.cmbRsiSide1_3.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbRsiSide1_3.Name = "cmbRsiSide1_3";
-            this.cmbRsiSide1_3.Size = new System.Drawing.Size(68, 26);
-            this.cmbRsiSide1_3.TabIndex = 111;
-            this.cmbRsiSide1_3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbRsiSide1_3_DrawItem);
-            this.cmbRsiSide1_3.SelectedIndexChanged += new System.EventHandler(this.cmbRsiSide1_3_SelectedIndexChanged);
-            // 
-            // label93
-            // 
-            this.label93.AutoSize = true;
-            this.label93.Location = new System.Drawing.Point(149, 163);
-            this.label93.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label93.Name = "label93";
-            this.label93.Size = new System.Drawing.Size(22, 15);
-            this.label93.TabIndex = 94;
-            this.label93.Text = "봉";
-            // 
-            // label94
-            // 
-            this.label94.AutoSize = true;
-            this.label94.Location = new System.Drawing.Point(266, 164);
-            this.label94.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label94.Name = "label94";
-            this.label94.Size = new System.Drawing.Size(48, 15);
-            this.label94.TabIndex = 96;
-            this.label94.Text = "%이상";
-            // 
-            // txtConc2Cnt_3
-            // 
-            this.txtConc2Cnt_3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConc2Cnt_3.Location = new System.Drawing.Point(189, 158);
-            this.txtConc2Cnt_3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtConc2Cnt_3.Name = "txtConc2Cnt_3";
-            this.txtConc2Cnt_3.Size = new System.Drawing.Size(69, 27);
-            this.txtConc2Cnt_3.TabIndex = 95;
-            this.txtConc2Cnt_3.TextChanged += new System.EventHandler(this.txtConc2Cnt_3_TextChanged);
-            // 
-            // btnOrdSel3
-            // 
-            this.btnOrdSel3.ColorA = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.btnOrdSel3.ColorB = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.btnOrdSel3.ColorC = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
-            this.btnOrdSel3.ColorD = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
-            this.btnOrdSel3.ColorE = System.Drawing.Color.White;
-            this.btnOrdSel3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOrdSel3.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnOrdSel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOrdSel3.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnOrdSel3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOrdSel3.Location = new System.Drawing.Point(401, 70);
-            this.btnOrdSel3.Margin = new System.Windows.Forms.Padding(4);
-            this.btnOrdSel3.Name = "btnOrdSel3";
-            this.btnOrdSel3.Size = new System.Drawing.Size(29, 29);
-            this.btnOrdSel3.TabIndex = 56;
-            this.btnOrdSel3.Text = "...";
-            this.btnOrdSel3.UseVisualStyleBackColor = true;
-            this.btnOrdSel3.Click += new System.EventHandler(this.btnOrdSel3_Click);
-            // 
-            // chkOrd34
-            // 
-            this.chkOrd34.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkOrd34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
-            this.chkOrd34.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkOrd34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkOrd34.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd34.Location = new System.Drawing.Point(349, 70);
-            this.chkOrd34.Margin = new System.Windows.Forms.Padding(0);
-            this.chkOrd34.Name = "chkOrd34";
-            this.chkOrd34.Size = new System.Drawing.Size(50, 29);
-            this.chkOrd34.TabIndex = 55;
-            this.chkOrd34.Text = "10";
-            this.chkOrd34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkOrd34.UseVisualStyleBackColor = false;
-            this.chkOrd34.CheckedChanged += new System.EventHandler(this.chkOrd34_CheckedChanged);
-            // 
-            // chkOrd33
-            // 
-            this.chkOrd33.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkOrd33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
-            this.chkOrd33.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkOrd33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkOrd33.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd33.Location = new System.Drawing.Point(297, 70);
-            this.chkOrd33.Margin = new System.Windows.Forms.Padding(0);
-            this.chkOrd33.Name = "chkOrd33";
-            this.chkOrd33.Size = new System.Drawing.Size(50, 29);
-            this.chkOrd33.TabIndex = 54;
-            this.chkOrd33.Text = "5";
-            this.chkOrd33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkOrd33.UseVisualStyleBackColor = false;
-            this.chkOrd33.CheckedChanged += new System.EventHandler(this.chkOrd33_CheckedChanged);
-            // 
-            // chkOrd32
-            // 
-            this.chkOrd32.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkOrd32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
-            this.chkOrd32.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkOrd32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkOrd32.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd32.Location = new System.Drawing.Point(245, 70);
-            this.chkOrd32.Margin = new System.Windows.Forms.Padding(0);
-            this.chkOrd32.Name = "chkOrd32";
-            this.chkOrd32.Size = new System.Drawing.Size(50, 29);
-            this.chkOrd32.TabIndex = 53;
-            this.chkOrd32.Text = "2";
-            this.chkOrd32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkOrd32.UseVisualStyleBackColor = false;
-            this.chkOrd32.CheckedChanged += new System.EventHandler(this.chkOrd32_CheckedChanged);
-            // 
-            // chkOrd31
-            // 
-            this.chkOrd31.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkOrd31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
-            this.chkOrd31.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkOrd31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkOrd31.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd31.Location = new System.Drawing.Point(193, 70);
-            this.chkOrd31.Margin = new System.Windows.Forms.Padding(0);
-            this.chkOrd31.Name = "chkOrd31";
-            this.chkOrd31.Size = new System.Drawing.Size(50, 29);
-            this.chkOrd31.TabIndex = 52;
-            this.chkOrd31.Text = "1";
-            this.chkOrd31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkOrd31.UseVisualStyleBackColor = false;
-            this.chkOrd31.CheckedChanged += new System.EventHandler(this.chkOrd31_CheckedChanged);
-            // 
-            // cmbReorder3
-            // 
-            this.cmbReorder3.BackColor = System.Drawing.Color.White;
-            this.cmbReorder3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbReorder3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbReorder3.FormattingEnabled = true;
-            this.cmbReorder3.Location = new System.Drawing.Point(96, 100);
-            this.cmbReorder3.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbReorder3.Name = "cmbReorder3";
-            this.cmbReorder3.Size = new System.Drawing.Size(67, 26);
-            this.cmbReorder3.TabIndex = 24;
-            this.cmbReorder3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbReorder3_DrawItem);
-            this.cmbReorder3.SelectedIndexChanged += new System.EventHandler(this.cmbReorder3_SelectedIndexChanged);
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(16, 105);
-            this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(52, 15);
-            this.label34.TabIndex = 23;
-            this.label34.Text = "되돌림";
-            // 
-            // cmbOrderType3
-            // 
-            this.cmbOrderType3.BackColor = System.Drawing.Color.White;
-            this.cmbOrderType3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbOrderType3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbOrderType3.FormattingEnabled = true;
-            this.cmbOrderType3.Location = new System.Drawing.Point(96, 41);
-            this.cmbOrderType3.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbOrderType3.Name = "cmbOrderType3";
-            this.cmbOrderType3.Size = new System.Drawing.Size(85, 26);
-            this.cmbOrderType3.TabIndex = 21;
-            this.cmbOrderType3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderType3_DrawItem);
-            this.cmbOrderType3.SelectedIndexChanged += new System.EventHandler(this.cmbOrderType3_SelectedIndexChanged);
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(16, 47);
-            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(67, 15);
-            this.label26.TabIndex = 22;
-            this.label26.Text = "주문타입";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(167, 76);
-            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(22, 15);
-            this.label23.TabIndex = 20;
-            this.label23.Text = "개";
-            // 
-            // txtOrderCount3
-            // 
-            this.txtOrderCount3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrderCount3.Location = new System.Drawing.Point(96, 70);
-            this.txtOrderCount3.Margin = new System.Windows.Forms.Padding(4);
-            this.txtOrderCount3.Name = "txtOrderCount3";
-            this.txtOrderCount3.Size = new System.Drawing.Size(67, 27);
-            this.txtOrderCount3.TabIndex = 18;
-            this.txtOrderCount3.TextChanged += new System.EventHandler(this.txtOrderCount3_TextChanged);
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(16, 76);
-            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(67, 15);
-            this.label24.TabIndex = 19;
-            this.label24.Text = "주문수량";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(331, 105);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(72, 15);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "캔들 배팅";
-            // 
-            // cmbChartType3
-            // 
-            this.cmbChartType3.BackColor = System.Drawing.Color.White;
-            this.cmbChartType3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbChartType3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbChartType3.FormattingEnabled = true;
-            this.cmbChartType3.ItemHeight = 16;
-            this.cmbChartType3.Location = new System.Drawing.Point(96, 14);
-            this.cmbChartType3.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbChartType3.Name = "cmbChartType3";
-            this.cmbChartType3.Size = new System.Drawing.Size(85, 22);
-            this.cmbChartType3.TabIndex = 0;
-            this.cmbChartType3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbChartType3_DrawItem);
-            this.cmbChartType3.SelectedIndexChanged += new System.EventHandler(this.cmbChartType3_SelectedIndexChanged);
-            // 
-            // cmbBettingCandle3
-            // 
-            this.cmbBettingCandle3.BackColor = System.Drawing.Color.White;
-            this.cmbBettingCandle3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbBettingCandle3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBettingCandle3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbBettingCandle3.FormattingEnabled = true;
-            this.cmbBettingCandle3.Location = new System.Drawing.Point(242, 100);
-            this.cmbBettingCandle3.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbBettingCandle3.Name = "cmbBettingCandle3";
-            this.cmbBettingCandle3.Size = new System.Drawing.Size(85, 26);
-            this.cmbBettingCandle3.TabIndex = 0;
-            this.cmbBettingCandle3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbBettingCandle3_DrawItem);
-            this.cmbBettingCandle3.SelectedIndexChanged += new System.EventHandler(this.cmbBettingCandle3_SelectedIndexChanged);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(16, 21);
-            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(67, 15);
-            this.label21.TabIndex = 3;
-            this.label21.Text = "차트타입";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(187, 105);
-            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(52, 15);
-            this.label22.TabIndex = 3;
-            this.label22.Text = "교차시";
-            // 
             // groupBetType
             // 
             this.groupBetType.BackColor = System.Drawing.Color.Azure;
@@ -5881,6 +5881,8 @@ namespace LuckyFuture.UI
             this.groupPayoff3.PerformLayout();
             this.groupBetting4.ResumeLayout(false);
             this.groupBetting4.PerformLayout();
+            this.groupBetting3.ResumeLayout(false);
+            this.groupBetting3.PerformLayout();
             this.groupBetting6.ResumeLayout(false);
             this.groupBetting6.PerformLayout();
             this.groupBetting5.ResumeLayout(false);
@@ -5889,8 +5891,6 @@ namespace LuckyFuture.UI
             this.groupBetting2.PerformLayout();
             this.groupBetting1.ResumeLayout(false);
             this.groupBetting1.PerformLayout();
-            this.groupBetting3.ResumeLayout(false);
-            this.groupBetting3.PerformLayout();
             this.groupBetType.ResumeLayout(false);
             this.groupBetType.PerformLayout();
             this.ResumeLayout(false);
