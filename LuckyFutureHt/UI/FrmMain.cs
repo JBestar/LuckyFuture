@@ -5460,10 +5460,12 @@ namespace LuckyFuture.UI
         private void btnSbOrd4_Click(object sender, EventArgs e)
         {
             ChangeBoOrdBtn(0); //진입체결-S-B선
+            saveSetting();
         }
         private void btnCciOrd4_Click(object sender, EventArgs e)
         {
             ChangeBoOrdBtn(1); //진입체결-CCI
+            saveSetting();
         }
 
         private void chkSelVal_CheckedChanged(object sender, EventArgs e)

@@ -31,21 +31,10 @@ namespace LuckyFuture.UI
 		{
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -53,8 +42,6 @@ namespace LuckyFuture.UI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -63,44 +50,29 @@ namespace LuckyFuture.UI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.dgvQuoteInfo = new System.Windows.Forms.DataGridView();
-            this.sellOrderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceSymbolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buyQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buyCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buyOrderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bsQuoteInfo = new System.Windows.Forms.BindingSource(this.components);
             this.chkFixed = new System.Windows.Forms.CheckBox();
             this.dgvValuationInfo = new System.Windows.Forms.DataGridView();
-            this.averageUnitPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valuationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalValuationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalProfitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lossCutDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bsValuationInfo = new System.Windows.Forms.BindingSource(this.components);
             this.txtId = new System.Windows.Forms.TextBox();
             this.cmbSiteList = new System.Windows.Forms.ComboBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvOrderInfo = new System.Windows.Forms.DataGridView();
-            this.orderTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.symbolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.averagePriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.currentPriceDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valuationDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.actionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.bsOrderInfo = new System.Windows.Forms.BindingSource(this.components);
             this.dgvCurrentInfo = new System.Windows.Forms.DataGridView();
-            this.timeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.currentPriceDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.conclusionQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tradeTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bsCurrentInfo = new System.Windows.Forms.BindingSource(this.components);
             this.label7 = new System.Windows.Forms.Label();
             this.btnLogin = new ReaLTaiizor.Controls.DreamButton();
             this.listLog = new System.Windows.Forms.ListView();
@@ -109,25 +81,8 @@ namespace LuckyFuture.UI
             this.txtBalance = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dgvTotalQuoteInfo = new System.Windows.Forms.DataGridView();
-            this.totalSellOrderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalSellCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalSellQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.differenceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalBuyQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalBuyCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalBuyOrderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bsTotalQuoteInfo = new System.Windows.Forms.BindingSource(this.components);
             this.cmbUserAccounts = new System.Windows.Forms.ComboBox();
             this.dgvItemPriceInfo = new System.Windows.Forms.DataGridView();
-            this.title1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.currentPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contrastDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contrastPerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.title2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.highPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lowPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bsItemPriceInfo = new System.Windows.Forms.BindingSource(this.components);
             this.chkAutoMode = new System.Windows.Forms.CheckBox();
             this.btnLogout = new ReaLTaiizor.Controls.DreamButton();
             this.cmbItemList = new System.Windows.Forms.ComboBox();
@@ -443,18 +398,57 @@ namespace LuckyFuture.UI
             this.btnSync = new ReaLTaiizor.Controls.DreamButton();
             this.cmbPrdList = new System.Windows.Forms.ComboBox();
             this.label99 = new System.Windows.Forms.Label();
+            this.totalSellOrderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalSellCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalSellQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.differenceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalBuyQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalBuyCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalBuyOrderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bsTotalQuoteInfo = new System.Windows.Forms.BindingSource(this.components);
+            this.title1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.currentPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contrastDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contrastPerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.highPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lowPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bsItemPriceInfo = new System.Windows.Forms.BindingSource(this.components);
+            this.timeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.currentPriceDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.conclusionQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tradeTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bsCurrentInfo = new System.Windows.Forms.BindingSource(this.components);
+            this.averageUnitPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valuationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalValuationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalProfitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lossCutDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bsValuationInfo = new System.Windows.Forms.BindingSource(this.components);
+            this.orderTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.symbolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.averagePriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.currentPriceDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valuationDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.bsOrderInfo = new System.Windows.Forms.BindingSource(this.components);
+            this.sellOrderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceSymbolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buyQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buyCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buyOrderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bsQuoteInfo = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuoteInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsQuoteInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvValuationInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsValuationInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsOrderInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCurrentInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCurrentInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTotalQuoteInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsTotalQuoteInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemPriceInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsItemPriceInfo)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupOther.SuspendLayout();
             this.groupStop.SuspendLayout();
@@ -468,6 +462,12 @@ namespace LuckyFuture.UI
             this.groupBetting2.SuspendLayout();
             this.groupBetting1.SuspendLayout();
             this.groupBetType.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsTotalQuoteInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsItemPriceInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCurrentInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsValuationInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsOrderInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsQuoteInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvQuoteInfo
@@ -526,146 +526,6 @@ namespace LuckyFuture.UI
             this.dgvQuoteInfo.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvQuoteInfo_CellMouseUp);
             this.dgvQuoteInfo.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvQuoteInfo_CellPainting);
             this.dgvQuoteInfo.SelectionChanged += new System.EventHandler(this.dgvQuoteInfo_SelectionChanged);
-            // 
-            // sellOrderDataGridViewTextBoxColumn
-            // 
-            this.sellOrderDataGridViewTextBoxColumn.DataPropertyName = "SellOrder";
-            this.sellOrderDataGridViewTextBoxColumn.FillWeight = 143.0603F;
-            this.sellOrderDataGridViewTextBoxColumn.HeaderText = "매도";
-            this.sellOrderDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.sellOrderDataGridViewTextBoxColumn.Name = "sellOrderDataGridViewTextBoxColumn";
-            this.sellOrderDataGridViewTextBoxColumn.ReadOnly = true;
-            this.sellOrderDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.sellOrderDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sellOrderDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // sellCountDataGridViewTextBoxColumn
-            // 
-            this.sellCountDataGridViewTextBoxColumn.DataPropertyName = "AskCount";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sellCountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.sellCountDataGridViewTextBoxColumn.FillWeight = 23.19896F;
-            this.sellCountDataGridViewTextBoxColumn.HeaderText = "건수";
-            this.sellCountDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.sellCountDataGridViewTextBoxColumn.Name = "sellCountDataGridViewTextBoxColumn";
-            this.sellCountDataGridViewTextBoxColumn.ReadOnly = true;
-            this.sellCountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.sellCountDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sellCountDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // sellQtyDataGridViewTextBoxColumn
-            // 
-            this.sellQtyDataGridViewTextBoxColumn.DataPropertyName = "AskQty";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            this.sellQtyDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.sellQtyDataGridViewTextBoxColumn.FillWeight = 23.19896F;
-            this.sellQtyDataGridViewTextBoxColumn.HeaderText = "잔량";
-            this.sellQtyDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.sellQtyDataGridViewTextBoxColumn.Name = "sellQtyDataGridViewTextBoxColumn";
-            this.sellQtyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.sellQtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.sellQtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sellQtyDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // priceSymbolDataGridViewTextBoxColumn
-            // 
-            this.priceSymbolDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.priceSymbolDataGridViewTextBoxColumn.DataPropertyName = "PriceSymbol";
-            this.priceSymbolDataGridViewTextBoxColumn.HeaderText = "";
-            this.priceSymbolDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.priceSymbolDataGridViewTextBoxColumn.Name = "priceSymbolDataGridViewTextBoxColumn";
-            this.priceSymbolDataGridViewTextBoxColumn.ReadOnly = true;
-            this.priceSymbolDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.priceSymbolDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.priceSymbolDataGridViewTextBoxColumn.Width = 28;
-            // 
-            // priceDataGridViewTextBoxColumn
-            // 
-            this.priceDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.priceDataGridViewTextBoxColumn.DataPropertyName = "PriceStr";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.NullValue = null;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.priceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.priceDataGridViewTextBoxColumn.FillWeight = 440.9449F;
-            this.priceDataGridViewTextBoxColumn.HeaderText = "";
-            this.priceDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
-            this.priceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.priceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.priceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.priceDataGridViewTextBoxColumn.Width = 75;
-            // 
-            // buyQtyDataGridViewTextBoxColumn
-            // 
-            this.buyQtyDataGridViewTextBoxColumn.DataPropertyName = "BidQty";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            this.buyQtyDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
-            this.buyQtyDataGridViewTextBoxColumn.FillWeight = 23.19896F;
-            this.buyQtyDataGridViewTextBoxColumn.HeaderText = "잔량";
-            this.buyQtyDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.buyQtyDataGridViewTextBoxColumn.Name = "buyQtyDataGridViewTextBoxColumn";
-            this.buyQtyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.buyQtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.buyQtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.buyQtyDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // buyCountDataGridViewTextBoxColumn
-            // 
-            this.buyCountDataGridViewTextBoxColumn.DataPropertyName = "BidCount";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.buyCountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
-            this.buyCountDataGridViewTextBoxColumn.FillWeight = 23.19896F;
-            this.buyCountDataGridViewTextBoxColumn.HeaderText = "건수";
-            this.buyCountDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.buyCountDataGridViewTextBoxColumn.Name = "buyCountDataGridViewTextBoxColumn";
-            this.buyCountDataGridViewTextBoxColumn.ReadOnly = true;
-            this.buyCountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.buyCountDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.buyCountDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // buyOrderDataGridViewTextBoxColumn
-            // 
-            this.buyOrderDataGridViewTextBoxColumn.DataPropertyName = "BuyOrder";
-            this.buyOrderDataGridViewTextBoxColumn.FillWeight = 23.19896F;
-            this.buyOrderDataGridViewTextBoxColumn.HeaderText = "매수";
-            this.buyOrderDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.buyOrderDataGridViewTextBoxColumn.Name = "buyOrderDataGridViewTextBoxColumn";
-            this.buyOrderDataGridViewTextBoxColumn.ReadOnly = true;
-            this.buyOrderDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.buyOrderDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.buyOrderDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // bsQuoteInfo
-            // 
-            this.bsQuoteInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.QuoteInfo);
             // 
             // chkFixed
             // 
@@ -727,92 +587,6 @@ namespace LuckyFuture.UI
             this.dgvValuationInfo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvValuationInfo_CellFormatting);
             this.dgvValuationInfo.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvValuationInfo_DataError);
             this.dgvValuationInfo.SelectionChanged += new System.EventHandler(this.dgvValuationInfo_SelectionChanged);
-            // 
-            // averageUnitPriceDataGridViewTextBoxColumn
-            // 
-            this.averageUnitPriceDataGridViewTextBoxColumn.DataPropertyName = "AverageUnitPrice";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.NullValue = null;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            this.averageUnitPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
-            this.averageUnitPriceDataGridViewTextBoxColumn.HeaderText = "평균단가";
-            this.averageUnitPriceDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.averageUnitPriceDataGridViewTextBoxColumn.Name = "averageUnitPriceDataGridViewTextBoxColumn";
-            this.averageUnitPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.averageUnitPriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.averageUnitPriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.averageUnitPriceDataGridViewTextBoxColumn.Width = 102;
-            // 
-            // valuationDataGridViewTextBoxColumn
-            // 
-            this.valuationDataGridViewTextBoxColumn.DataPropertyName = "Valuation";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = null;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.valuationDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
-            this.valuationDataGridViewTextBoxColumn.HeaderText = "평가손익";
-            this.valuationDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.valuationDataGridViewTextBoxColumn.Name = "valuationDataGridViewTextBoxColumn";
-            this.valuationDataGridViewTextBoxColumn.ReadOnly = true;
-            this.valuationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.valuationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.valuationDataGridViewTextBoxColumn.Width = 102;
-            // 
-            // totalValuationDataGridViewTextBoxColumn
-            // 
-            this.totalValuationDataGridViewTextBoxColumn.DataPropertyName = "TotalValuation";
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.totalValuationDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
-            this.totalValuationDataGridViewTextBoxColumn.HeaderText = "평가손익합";
-            this.totalValuationDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.totalValuationDataGridViewTextBoxColumn.Name = "totalValuationDataGridViewTextBoxColumn";
-            this.totalValuationDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalValuationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.totalValuationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.totalValuationDataGridViewTextBoxColumn.Width = 102;
-            // 
-            // totalProfitDataGridViewTextBoxColumn
-            // 
-            this.totalProfitDataGridViewTextBoxColumn.DataPropertyName = "TotalProfit";
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.totalProfitDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
-            this.totalProfitDataGridViewTextBoxColumn.HeaderText = "실현손익";
-            this.totalProfitDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.totalProfitDataGridViewTextBoxColumn.Name = "totalProfitDataGridViewTextBoxColumn";
-            this.totalProfitDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalProfitDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.totalProfitDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.totalProfitDataGridViewTextBoxColumn.Width = 102;
-            // 
-            // lossCutDataGridViewTextBoxColumn
-            // 
-            this.lossCutDataGridViewTextBoxColumn.DataPropertyName = "CurrentProfit";
-            dataGridViewCellStyle11.Format = "N2";
-            dataGridViewCellStyle11.NullValue = null;
-            this.lossCutDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
-            this.lossCutDataGridViewTextBoxColumn.HeaderText = "실시간수익";
-            this.lossCutDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.lossCutDataGridViewTextBoxColumn.Name = "lossCutDataGridViewTextBoxColumn";
-            this.lossCutDataGridViewTextBoxColumn.ReadOnly = true;
-            this.lossCutDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.lossCutDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.lossCutDataGridViewTextBoxColumn.Width = 102;
-            // 
-            // bsValuationInfo
-            // 
-            this.bsValuationInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.ValuationInfo);
             // 
             // txtId
             // 
@@ -910,89 +684,6 @@ namespace LuckyFuture.UI
             this.dgvOrderInfo.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvOrderInfo_DataError);
             this.dgvOrderInfo.SelectionChanged += new System.EventHandler(this.dgvOrderInfo_SelectionChanged);
             // 
-            // orderTypeDataGridViewTextBoxColumn
-            // 
-            this.orderTypeDataGridViewTextBoxColumn.DataPropertyName = "OrderType";
-            this.orderTypeDataGridViewTextBoxColumn.HeaderText = "구분";
-            this.orderTypeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.orderTypeDataGridViewTextBoxColumn.Name = "orderTypeDataGridViewTextBoxColumn";
-            this.orderTypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.orderTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.orderTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.orderTypeDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // symbolDataGridViewTextBoxColumn
-            // 
-            this.symbolDataGridViewTextBoxColumn.DataPropertyName = "Symbol";
-            this.symbolDataGridViewTextBoxColumn.HeaderText = "종목코드";
-            this.symbolDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.symbolDataGridViewTextBoxColumn.Name = "symbolDataGridViewTextBoxColumn";
-            this.symbolDataGridViewTextBoxColumn.ReadOnly = true;
-            this.symbolDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.symbolDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.symbolDataGridViewTextBoxColumn.Width = 83;
-            // 
-            // qtyDataGridViewTextBoxColumn
-            // 
-            this.qtyDataGridViewTextBoxColumn.DataPropertyName = "Qty";
-            this.qtyDataGridViewTextBoxColumn.HeaderText = "수량";
-            this.qtyDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.qtyDataGridViewTextBoxColumn.Name = "qtyDataGridViewTextBoxColumn";
-            this.qtyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.qtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.qtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.qtyDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // averagePriceDataGridViewTextBoxColumn
-            // 
-            this.averagePriceDataGridViewTextBoxColumn.DataPropertyName = "AveragePrice";
-            this.averagePriceDataGridViewTextBoxColumn.HeaderText = "주문가";
-            this.averagePriceDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.averagePriceDataGridViewTextBoxColumn.Name = "averagePriceDataGridViewTextBoxColumn";
-            this.averagePriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.averagePriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.averagePriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.averagePriceDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // currentPriceDataGridViewTextBoxColumn2
-            // 
-            this.currentPriceDataGridViewTextBoxColumn2.DataPropertyName = "CurrentPrice";
-            this.currentPriceDataGridViewTextBoxColumn2.HeaderText = "현재가";
-            this.currentPriceDataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.currentPriceDataGridViewTextBoxColumn2.Name = "currentPriceDataGridViewTextBoxColumn2";
-            this.currentPriceDataGridViewTextBoxColumn2.ReadOnly = true;
-            this.currentPriceDataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.currentPriceDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.currentPriceDataGridViewTextBoxColumn2.Width = 70;
-            // 
-            // valuationDataGridViewTextBoxColumn1
-            // 
-            this.valuationDataGridViewTextBoxColumn1.DataPropertyName = "Valuation";
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.valuationDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle12;
-            this.valuationDataGridViewTextBoxColumn1.HeaderText = "평가손익";
-            this.valuationDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.valuationDataGridViewTextBoxColumn1.Name = "valuationDataGridViewTextBoxColumn1";
-            this.valuationDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.valuationDataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.valuationDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.valuationDataGridViewTextBoxColumn1.Width = 95;
-            // 
-            // actionDataGridViewTextBoxColumn
-            // 
-            this.actionDataGridViewTextBoxColumn.DataPropertyName = "Action";
-            this.actionDataGridViewTextBoxColumn.HeaderText = "주문";
-            this.actionDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.actionDataGridViewTextBoxColumn.Name = "actionDataGridViewTextBoxColumn";
-            this.actionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.actionDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.actionDataGridViewTextBoxColumn.Width = 63;
-            // 
-            // bsOrderInfo
-            // 
-            this.bsOrderInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.OrderInfo);
-            // 
             // dgvCurrentInfo
             // 
             this.dgvCurrentInfo.AllowUserToAddRows = false;
@@ -1051,60 +742,6 @@ namespace LuckyFuture.UI
             this.dgvCurrentInfo.Visible = false;
             this.dgvCurrentInfo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCurrentInfo_CellFormatting);
             this.dgvCurrentInfo.SelectionChanged += new System.EventHandler(this.dgvCurrentInfo_SelectionChanged);
-            // 
-            // timeDataGridViewTextBoxColumn
-            // 
-            this.timeDataGridViewTextBoxColumn.DataPropertyName = "Time";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.Format = "HH:mm:ss";
-            this.timeDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle14;
-            this.timeDataGridViewTextBoxColumn.HeaderText = "시간";
-            this.timeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.timeDataGridViewTextBoxColumn.Name = "timeDataGridViewTextBoxColumn";
-            this.timeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.timeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.timeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.timeDataGridViewTextBoxColumn.Width = 76;
-            // 
-            // currentPriceDataGridViewTextBoxColumn1
-            // 
-            this.currentPriceDataGridViewTextBoxColumn1.DataPropertyName = "CurrentPriceStr";
-            dataGridViewCellStyle15.NullValue = null;
-            this.currentPriceDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle15;
-            this.currentPriceDataGridViewTextBoxColumn1.HeaderText = "체결가";
-            this.currentPriceDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.currentPriceDataGridViewTextBoxColumn1.Name = "currentPriceDataGridViewTextBoxColumn1";
-            this.currentPriceDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.currentPriceDataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.currentPriceDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.currentPriceDataGridViewTextBoxColumn1.Width = 76;
-            // 
-            // conclusionQtyDataGridViewTextBoxColumn
-            // 
-            this.conclusionQtyDataGridViewTextBoxColumn.DataPropertyName = "ConclusionQty";
-            this.conclusionQtyDataGridViewTextBoxColumn.HeaderText = "체결량";
-            this.conclusionQtyDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.conclusionQtyDataGridViewTextBoxColumn.Name = "conclusionQtyDataGridViewTextBoxColumn";
-            this.conclusionQtyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.conclusionQtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.conclusionQtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.conclusionQtyDataGridViewTextBoxColumn.Width = 76;
-            // 
-            // tradeTypeDataGridViewTextBoxColumn
-            // 
-            this.tradeTypeDataGridViewTextBoxColumn.DataPropertyName = "TradeType";
-            this.tradeTypeDataGridViewTextBoxColumn.HeaderText = "구분";
-            this.tradeTypeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.tradeTypeDataGridViewTextBoxColumn.Name = "tradeTypeDataGridViewTextBoxColumn";
-            this.tradeTypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.tradeTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.tradeTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.tradeTypeDataGridViewTextBoxColumn.Visible = false;
-            this.tradeTypeDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // bsCurrentInfo
-            // 
-            this.bsCurrentInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.CurrentInfo);
             // 
             // label7
             // 
@@ -1244,106 +881,6 @@ namespace LuckyFuture.UI
             this.dgvTotalQuoteInfo.Visible = false;
             this.dgvTotalQuoteInfo.SelectionChanged += new System.EventHandler(this.dgvTotalQuoteInfo_SelectionChanged);
             // 
-            // totalSellOrderDataGridViewTextBoxColumn
-            // 
-            this.totalSellOrderDataGridViewTextBoxColumn.DataPropertyName = "TotalSellOrder";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.totalSellOrderDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle17;
-            this.totalSellOrderDataGridViewTextBoxColumn.FillWeight = 81.27339F;
-            this.totalSellOrderDataGridViewTextBoxColumn.HeaderText = "TotalSellOrder";
-            this.totalSellOrderDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.totalSellOrderDataGridViewTextBoxColumn.Name = "totalSellOrderDataGridViewTextBoxColumn";
-            this.totalSellOrderDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalSellOrderDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.totalSellOrderDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.totalSellOrderDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // totalSellCountDataGridViewTextBoxColumn
-            // 
-            this.totalSellCountDataGridViewTextBoxColumn.DataPropertyName = "TotalAskCount";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.totalSellCountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle18;
-            this.totalSellCountDataGridViewTextBoxColumn.FillWeight = 116.3529F;
-            this.totalSellCountDataGridViewTextBoxColumn.HeaderText = "TotalAskCount";
-            this.totalSellCountDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.totalSellCountDataGridViewTextBoxColumn.Name = "totalSellCountDataGridViewTextBoxColumn";
-            this.totalSellCountDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalSellCountDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // totalSellQtyDataGridViewTextBoxColumn
-            // 
-            this.totalSellQtyDataGridViewTextBoxColumn.DataPropertyName = "TotalAskQty";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.totalSellQtyDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle19;
-            this.totalSellQtyDataGridViewTextBoxColumn.FillWeight = 172.4202F;
-            this.totalSellQtyDataGridViewTextBoxColumn.HeaderText = "TotalAskQty";
-            this.totalSellQtyDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.totalSellQtyDataGridViewTextBoxColumn.Name = "totalSellQtyDataGridViewTextBoxColumn";
-            this.totalSellQtyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalSellQtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.totalSellQtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.totalSellQtyDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // differenceDataGridViewTextBoxColumn
-            // 
-            this.differenceDataGridViewTextBoxColumn.DataPropertyName = "Difference";
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.differenceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle20;
-            this.differenceDataGridViewTextBoxColumn.FillWeight = 262.0321F;
-            this.differenceDataGridViewTextBoxColumn.HeaderText = "Difference";
-            this.differenceDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.differenceDataGridViewTextBoxColumn.Name = "differenceDataGridViewTextBoxColumn";
-            this.differenceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.differenceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.differenceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.differenceDataGridViewTextBoxColumn.Width = 103;
-            // 
-            // totalBuyQtyDataGridViewTextBoxColumn
-            // 
-            this.totalBuyQtyDataGridViewTextBoxColumn.DataPropertyName = "TotalBidQty";
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.totalBuyQtyDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle21;
-            this.totalBuyQtyDataGridViewTextBoxColumn.FillWeight = 22.64045F;
-            this.totalBuyQtyDataGridViewTextBoxColumn.HeaderText = "TotalBidQty";
-            this.totalBuyQtyDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.totalBuyQtyDataGridViewTextBoxColumn.Name = "totalBuyQtyDataGridViewTextBoxColumn";
-            this.totalBuyQtyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalBuyQtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.totalBuyQtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.totalBuyQtyDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // totalBuyCountDataGridViewTextBoxColumn
-            // 
-            this.totalBuyCountDataGridViewTextBoxColumn.DataPropertyName = "TotalBidCount";
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.totalBuyCountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle22;
-            this.totalBuyCountDataGridViewTextBoxColumn.FillWeight = 22.64045F;
-            this.totalBuyCountDataGridViewTextBoxColumn.HeaderText = "TotalBidCount";
-            this.totalBuyCountDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.totalBuyCountDataGridViewTextBoxColumn.Name = "totalBuyCountDataGridViewTextBoxColumn";
-            this.totalBuyCountDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalBuyCountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.totalBuyCountDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.totalBuyCountDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // totalBuyOrderDataGridViewTextBoxColumn
-            // 
-            this.totalBuyOrderDataGridViewTextBoxColumn.DataPropertyName = "TotalBuyOrder";
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.totalBuyOrderDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle23;
-            this.totalBuyOrderDataGridViewTextBoxColumn.FillWeight = 22.64045F;
-            this.totalBuyOrderDataGridViewTextBoxColumn.HeaderText = "TotalBuyOrder";
-            this.totalBuyOrderDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.totalBuyOrderDataGridViewTextBoxColumn.Name = "totalBuyOrderDataGridViewTextBoxColumn";
-            this.totalBuyOrderDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalBuyOrderDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.totalBuyOrderDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.totalBuyOrderDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // bsTotalQuoteInfo
-            // 
-            this.bsTotalQuoteInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.TotalQuoteInfo);
-            // 
             // cmbUserAccounts
             // 
             this.cmbUserAccounts.BackColor = System.Drawing.SystemColors.Window;
@@ -1424,117 +961,6 @@ namespace LuckyFuture.UI
             this.dgvItemPriceInfo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvItemPriceInfo_CellFormatting);
             this.dgvItemPriceInfo.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvItemPriceInfo_DataError);
             this.dgvItemPriceInfo.SelectionChanged += new System.EventHandler(this.dgvItemPriceInfo_SelectionChanged);
-            // 
-            // title1DataGridViewTextBoxColumn
-            // 
-            this.title1DataGridViewTextBoxColumn.DataPropertyName = "Title1";
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.title1DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle25;
-            this.title1DataGridViewTextBoxColumn.HeaderText = "Title1";
-            this.title1DataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.title1DataGridViewTextBoxColumn.Name = "title1DataGridViewTextBoxColumn";
-            this.title1DataGridViewTextBoxColumn.ReadOnly = true;
-            this.title1DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.title1DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.title1DataGridViewTextBoxColumn.Width = 65;
-            // 
-            // currentPriceDataGridViewTextBoxColumn
-            // 
-            this.currentPriceDataGridViewTextBoxColumn.DataPropertyName = "CurrentPrice";
-            dataGridViewCellStyle26.NullValue = null;
-            this.currentPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle26;
-            this.currentPriceDataGridViewTextBoxColumn.HeaderText = "CurrentPrice";
-            this.currentPriceDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.currentPriceDataGridViewTextBoxColumn.Name = "currentPriceDataGridViewTextBoxColumn";
-            this.currentPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.currentPriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.currentPriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.currentPriceDataGridViewTextBoxColumn.Width = 68;
-            // 
-            // contrastDataGridViewTextBoxColumn
-            // 
-            this.contrastDataGridViewTextBoxColumn.DataPropertyName = "Contrast";
-            dataGridViewCellStyle27.Format = "N2";
-            this.contrastDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle27;
-            this.contrastDataGridViewTextBoxColumn.HeaderText = "Contrast";
-            this.contrastDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.contrastDataGridViewTextBoxColumn.Name = "contrastDataGridViewTextBoxColumn";
-            this.contrastDataGridViewTextBoxColumn.ReadOnly = true;
-            this.contrastDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.contrastDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.contrastDataGridViewTextBoxColumn.Width = 58;
-            // 
-            // contrastPerDataGridViewTextBoxColumn
-            // 
-            this.contrastPerDataGridViewTextBoxColumn.DataPropertyName = "ContrastPer";
-            dataGridViewCellStyle28.Format = "N2";
-            dataGridViewCellStyle28.NullValue = null;
-            this.contrastPerDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle28;
-            this.contrastPerDataGridViewTextBoxColumn.HeaderText = "ContrastPer";
-            this.contrastPerDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.contrastPerDataGridViewTextBoxColumn.Name = "contrastPerDataGridViewTextBoxColumn";
-            this.contrastPerDataGridViewTextBoxColumn.ReadOnly = true;
-            this.contrastPerDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.contrastPerDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.contrastPerDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // title2DataGridViewTextBoxColumn
-            // 
-            this.title2DataGridViewTextBoxColumn.DataPropertyName = "Title2";
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.title2DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle29;
-            this.title2DataGridViewTextBoxColumn.HeaderText = "Title2";
-            this.title2DataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.title2DataGridViewTextBoxColumn.Name = "title2DataGridViewTextBoxColumn";
-            this.title2DataGridViewTextBoxColumn.ReadOnly = true;
-            this.title2DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.title2DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.title2DataGridViewTextBoxColumn.Width = 65;
-            // 
-            // startPriceDataGridViewTextBoxColumn
-            // 
-            this.startPriceDataGridViewTextBoxColumn.DataPropertyName = "StartPrice";
-            dataGridViewCellStyle30.NullValue = null;
-            this.startPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle30;
-            this.startPriceDataGridViewTextBoxColumn.HeaderText = "StartPrice";
-            this.startPriceDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.startPriceDataGridViewTextBoxColumn.Name = "startPriceDataGridViewTextBoxColumn";
-            this.startPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.startPriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.startPriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.startPriceDataGridViewTextBoxColumn.Width = 68;
-            // 
-            // highPriceDataGridViewTextBoxColumn
-            // 
-            this.highPriceDataGridViewTextBoxColumn.DataPropertyName = "HighPrice";
-            dataGridViewCellStyle31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle31.NullValue = null;
-            this.highPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle31;
-            this.highPriceDataGridViewTextBoxColumn.HeaderText = "HighPrice";
-            this.highPriceDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.highPriceDataGridViewTextBoxColumn.Name = "highPriceDataGridViewTextBoxColumn";
-            this.highPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.highPriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.highPriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.highPriceDataGridViewTextBoxColumn.Width = 68;
-            // 
-            // lowPriceDataGridViewTextBoxColumn
-            // 
-            this.lowPriceDataGridViewTextBoxColumn.DataPropertyName = "LowPrice";
-            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.Blue;
-            dataGridViewCellStyle32.NullValue = null;
-            this.lowPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle32;
-            this.lowPriceDataGridViewTextBoxColumn.HeaderText = "LowPrice";
-            this.lowPriceDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.lowPriceDataGridViewTextBoxColumn.Name = "lowPriceDataGridViewTextBoxColumn";
-            this.lowPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.lowPriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.lowPriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.lowPriceDataGridViewTextBoxColumn.Width = 67;
-            // 
-            // bsItemPriceInfo
-            // 
-            this.bsItemPriceInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.ItemPriceInfo);
             // 
             // chkAutoMode
             // 
@@ -2281,7 +1707,7 @@ namespace LuckyFuture.UI
             this.btnLossTick4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLossTick4.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLossTick4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLossTick4.Location = new System.Drawing.Point(270, 46);
+            this.btnLossTick4.Location = new System.Drawing.Point(274, 46);
             this.btnLossTick4.Margin = new System.Windows.Forms.Padding(4);
             this.btnLossTick4.Name = "btnLossTick4";
             this.btnLossTick4.Size = new System.Drawing.Size(33, 29);
@@ -2300,7 +1726,7 @@ namespace LuckyFuture.UI
             this.btnLossTick3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLossTick3.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLossTick3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLossTick3.Location = new System.Drawing.Point(235, 46);
+            this.btnLossTick3.Location = new System.Drawing.Point(239, 46);
             this.btnLossTick3.Margin = new System.Windows.Forms.Padding(4);
             this.btnLossTick3.Name = "btnLossTick3";
             this.btnLossTick3.Size = new System.Drawing.Size(33, 29);
@@ -2319,10 +1745,10 @@ namespace LuckyFuture.UI
             this.btnLossTick2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLossTick2.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLossTick2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLossTick2.Location = new System.Drawing.Point(202, 46);
+            this.btnLossTick2.Location = new System.Drawing.Point(204, 46);
             this.btnLossTick2.Margin = new System.Windows.Forms.Padding(4);
             this.btnLossTick2.Name = "btnLossTick2";
-            this.btnLossTick2.Size = new System.Drawing.Size(31, 29);
+            this.btnLossTick2.Size = new System.Drawing.Size(33, 29);
             this.btnLossTick2.TabIndex = 78;
             this.btnLossTick2.Text = "100";
             this.btnLossTick2.UseVisualStyleBackColor = true;
@@ -2341,7 +1767,7 @@ namespace LuckyFuture.UI
             this.btnLossTick1.Location = new System.Drawing.Point(169, 46);
             this.btnLossTick1.Margin = new System.Windows.Forms.Padding(4);
             this.btnLossTick1.Name = "btnLossTick1";
-            this.btnLossTick1.Size = new System.Drawing.Size(31, 29);
+            this.btnLossTick1.Size = new System.Drawing.Size(33, 29);
             this.btnLossTick1.TabIndex = 77;
             this.btnLossTick1.Text = "100";
             this.btnLossTick1.UseVisualStyleBackColor = true;
@@ -2357,7 +1783,7 @@ namespace LuckyFuture.UI
             this.btnEarnTick4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEarnTick4.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEarnTick4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEarnTick4.Location = new System.Drawing.Point(270, 15);
+            this.btnEarnTick4.Location = new System.Drawing.Point(274, 15);
             this.btnEarnTick4.Margin = new System.Windows.Forms.Padding(4);
             this.btnEarnTick4.Name = "btnEarnTick4";
             this.btnEarnTick4.Size = new System.Drawing.Size(33, 29);
@@ -2376,7 +1802,7 @@ namespace LuckyFuture.UI
             this.btnEarnTick3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEarnTick3.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEarnTick3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEarnTick3.Location = new System.Drawing.Point(235, 15);
+            this.btnEarnTick3.Location = new System.Drawing.Point(239, 15);
             this.btnEarnTick3.Margin = new System.Windows.Forms.Padding(4);
             this.btnEarnTick3.Name = "btnEarnTick3";
             this.btnEarnTick3.Size = new System.Drawing.Size(33, 29);
@@ -2395,10 +1821,10 @@ namespace LuckyFuture.UI
             this.btnEarnTick2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEarnTick2.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEarnTick2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEarnTick2.Location = new System.Drawing.Point(202, 15);
+            this.btnEarnTick2.Location = new System.Drawing.Point(204, 15);
             this.btnEarnTick2.Margin = new System.Windows.Forms.Padding(4);
             this.btnEarnTick2.Name = "btnEarnTick2";
-            this.btnEarnTick2.Size = new System.Drawing.Size(31, 29);
+            this.btnEarnTick2.Size = new System.Drawing.Size(33, 29);
             this.btnEarnTick2.TabIndex = 74;
             this.btnEarnTick2.Text = "100";
             this.btnEarnTick2.UseVisualStyleBackColor = true;
@@ -2417,7 +1843,7 @@ namespace LuckyFuture.UI
             this.btnEarnTick1.Location = new System.Drawing.Point(169, 15);
             this.btnEarnTick1.Margin = new System.Windows.Forms.Padding(4);
             this.btnEarnTick1.Name = "btnEarnTick1";
-            this.btnEarnTick1.Size = new System.Drawing.Size(31, 29);
+            this.btnEarnTick1.Size = new System.Drawing.Size(33, 29);
             this.btnEarnTick1.TabIndex = 73;
             this.btnEarnTick1.Text = "100";
             this.btnEarnTick1.UseVisualStyleBackColor = true;
@@ -2432,7 +1858,7 @@ namespace LuckyFuture.UI
             this.btnLossTickSet.ColorE = System.Drawing.Color.White;
             this.btnLossTickSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLossTickSet.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLossTickSet.Location = new System.Drawing.Point(305, 46);
+            this.btnLossTickSet.Location = new System.Drawing.Point(309, 46);
             this.btnLossTickSet.Margin = new System.Windows.Forms.Padding(4);
             this.btnLossTickSet.Name = "btnLossTickSet";
             this.btnLossTickSet.Size = new System.Drawing.Size(25, 29);
@@ -2450,7 +1876,7 @@ namespace LuckyFuture.UI
             this.btnEarnTickSet.ColorE = System.Drawing.Color.White;
             this.btnEarnTickSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEarnTickSet.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEarnTickSet.Location = new System.Drawing.Point(305, 15);
+            this.btnEarnTickSet.Location = new System.Drawing.Point(309, 15);
             this.btnEarnTickSet.Margin = new System.Windows.Forms.Padding(4);
             this.btnEarnTickSet.Name = "btnEarnTickSet";
             this.btnEarnTickSet.Size = new System.Drawing.Size(25, 29);
@@ -2612,7 +2038,7 @@ namespace LuckyFuture.UI
             this.cmbCrossUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCrossUnit.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCrossUnit.FormattingEnabled = true;
-            this.cmbCrossUnit.Location = new System.Drawing.Point(224, 104);
+            this.cmbCrossUnit.Location = new System.Drawing.Point(248, 104);
             this.cmbCrossUnit.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCrossUnit.Name = "cmbCrossUnit";
             this.cmbCrossUnit.Size = new System.Drawing.Size(45, 26);
@@ -2624,7 +2050,7 @@ namespace LuckyFuture.UI
             // 
             this.label61.AutoSize = true;
             this.label61.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label61.Location = new System.Drawing.Point(278, 110);
+            this.label61.Location = new System.Drawing.Point(297, 110);
             this.label61.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(37, 15);
@@ -2634,10 +2060,10 @@ namespace LuckyFuture.UI
             // txtCrossLoss
             // 
             this.txtCrossLoss.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCrossLoss.Location = new System.Drawing.Point(179, 104);
+            this.txtCrossLoss.Location = new System.Drawing.Point(195, 104);
             this.txtCrossLoss.Margin = new System.Windows.Forms.Padding(4);
             this.txtCrossLoss.Name = "txtCrossLoss";
-            this.txtCrossLoss.Size = new System.Drawing.Size(39, 27);
+            this.txtCrossLoss.Size = new System.Drawing.Size(51, 27);
             this.txtCrossLoss.TabIndex = 18;
             this.txtCrossLoss.TextChanged += new System.EventHandler(this.txtCrossLoss_TextChanged);
             // 
@@ -2661,7 +2087,7 @@ namespace LuckyFuture.UI
             this.cmbSmartUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSmartUnit.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSmartUnit.FormattingEnabled = true;
-            this.cmbSmartUnit.Location = new System.Drawing.Point(224, 78);
+            this.cmbSmartUnit.Location = new System.Drawing.Point(248, 78);
             this.cmbSmartUnit.Margin = new System.Windows.Forms.Padding(4);
             this.cmbSmartUnit.Name = "cmbSmartUnit";
             this.cmbSmartUnit.Size = new System.Drawing.Size(45, 26);
@@ -2673,7 +2099,7 @@ namespace LuckyFuture.UI
             // 
             this.label55.AutoSize = true;
             this.label55.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label55.Location = new System.Drawing.Point(278, 82);
+            this.label55.Location = new System.Drawing.Point(297, 82);
             this.label55.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(37, 15);
@@ -2683,10 +2109,10 @@ namespace LuckyFuture.UI
             // txtSmartLoss
             // 
             this.txtSmartLoss.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSmartLoss.Location = new System.Drawing.Point(179, 78);
+            this.txtSmartLoss.Location = new System.Drawing.Point(195, 78);
             this.txtSmartLoss.Margin = new System.Windows.Forms.Padding(4);
             this.txtSmartLoss.Name = "txtSmartLoss";
-            this.txtSmartLoss.Size = new System.Drawing.Size(39, 27);
+            this.txtSmartLoss.Size = new System.Drawing.Size(51, 27);
             this.txtSmartLoss.TabIndex = 14;
             this.txtSmartLoss.TextChanged += new System.EventHandler(this.txtSmartLoss_TextChanged);
             // 
@@ -2694,7 +2120,7 @@ namespace LuckyFuture.UI
             // 
             this.label54.AutoSize = true;
             this.label54.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label54.Location = new System.Drawing.Point(154, 85);
+            this.label54.Location = new System.Drawing.Point(169, 85);
             this.label54.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(22, 15);
@@ -2704,10 +2130,10 @@ namespace LuckyFuture.UI
             // txtSmartEarn
             // 
             this.txtSmartEarn.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSmartEarn.Location = new System.Drawing.Point(110, 78);
+            this.txtSmartEarn.Location = new System.Drawing.Point(107, 78);
             this.txtSmartEarn.Margin = new System.Windows.Forms.Padding(4);
             this.txtSmartEarn.Name = "txtSmartEarn";
-            this.txtSmartEarn.Size = new System.Drawing.Size(39, 27);
+            this.txtSmartEarn.Size = new System.Drawing.Size(55, 27);
             this.txtSmartEarn.TabIndex = 12;
             this.txtSmartEarn.TextChanged += new System.EventHandler(this.txtSmartEarn_TextChanged);
             // 
@@ -3172,7 +2598,7 @@ namespace LuckyFuture.UI
             this.btnCciOrd4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCciOrd4.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCciOrd4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCciOrd4.Location = new System.Drawing.Point(190, 100);
+            this.btnCciOrd4.Location = new System.Drawing.Point(191, 100);
             this.btnCciOrd4.Margin = new System.Windows.Forms.Padding(4);
             this.btnCciOrd4.Name = "btnCciOrd4";
             this.btnCciOrd4.Size = new System.Drawing.Size(87, 29);
@@ -3412,7 +2838,7 @@ namespace LuckyFuture.UI
             // txtConc1Cnt
             // 
             this.txtConc1Cnt.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConc1Cnt.Location = new System.Drawing.Point(190, 131);
+            this.txtConc1Cnt.Location = new System.Drawing.Point(191, 131);
             this.txtConc1Cnt.Margin = new System.Windows.Forms.Padding(4);
             this.txtConc1Cnt.Name = "txtConc1Cnt";
             this.txtConc1Cnt.Size = new System.Drawing.Size(69, 27);
@@ -3713,7 +3139,7 @@ namespace LuckyFuture.UI
             // txtConc2Cnt
             // 
             this.txtConc2Cnt.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConc2Cnt.Location = new System.Drawing.Point(190, 160);
+            this.txtConc2Cnt.Location = new System.Drawing.Point(191, 160);
             this.txtConc2Cnt.Margin = new System.Windows.Forms.Padding(4);
             this.txtConc2Cnt.Name = "txtConc2Cnt";
             this.txtConc2Cnt.Size = new System.Drawing.Size(69, 27);
@@ -5712,8 +5138,6 @@ namespace LuckyFuture.UI
             // chkSelVal
             // 
             this.chkSelVal.BackColor = System.Drawing.Color.Azure;
-            this.chkSelVal.Checked = true;
-            this.chkSelVal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSelVal.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.chkSelVal.Location = new System.Drawing.Point(336, 374);
             this.chkSelVal.Margin = new System.Windows.Forms.Padding(4);
@@ -5794,6 +5218,580 @@ namespace LuckyFuture.UI
             this.label99.Text = "개";
             this.label99.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // totalSellOrderDataGridViewTextBoxColumn
+            // 
+            this.totalSellOrderDataGridViewTextBoxColumn.DataPropertyName = "TotalSellOrder";
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.totalSellOrderDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle17;
+            this.totalSellOrderDataGridViewTextBoxColumn.FillWeight = 81.27339F;
+            this.totalSellOrderDataGridViewTextBoxColumn.HeaderText = "TotalSellOrder";
+            this.totalSellOrderDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.totalSellOrderDataGridViewTextBoxColumn.Name = "totalSellOrderDataGridViewTextBoxColumn";
+            this.totalSellOrderDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalSellOrderDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.totalSellOrderDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.totalSellOrderDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // totalSellCountDataGridViewTextBoxColumn
+            // 
+            this.totalSellCountDataGridViewTextBoxColumn.DataPropertyName = "TotalAskCount";
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.totalSellCountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle18;
+            this.totalSellCountDataGridViewTextBoxColumn.FillWeight = 116.3529F;
+            this.totalSellCountDataGridViewTextBoxColumn.HeaderText = "TotalAskCount";
+            this.totalSellCountDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.totalSellCountDataGridViewTextBoxColumn.Name = "totalSellCountDataGridViewTextBoxColumn";
+            this.totalSellCountDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalSellCountDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // totalSellQtyDataGridViewTextBoxColumn
+            // 
+            this.totalSellQtyDataGridViewTextBoxColumn.DataPropertyName = "TotalAskQty";
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.totalSellQtyDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle19;
+            this.totalSellQtyDataGridViewTextBoxColumn.FillWeight = 172.4202F;
+            this.totalSellQtyDataGridViewTextBoxColumn.HeaderText = "TotalAskQty";
+            this.totalSellQtyDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.totalSellQtyDataGridViewTextBoxColumn.Name = "totalSellQtyDataGridViewTextBoxColumn";
+            this.totalSellQtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalSellQtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.totalSellQtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.totalSellQtyDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // differenceDataGridViewTextBoxColumn
+            // 
+            this.differenceDataGridViewTextBoxColumn.DataPropertyName = "Difference";
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.differenceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle20;
+            this.differenceDataGridViewTextBoxColumn.FillWeight = 262.0321F;
+            this.differenceDataGridViewTextBoxColumn.HeaderText = "Difference";
+            this.differenceDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.differenceDataGridViewTextBoxColumn.Name = "differenceDataGridViewTextBoxColumn";
+            this.differenceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.differenceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.differenceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.differenceDataGridViewTextBoxColumn.Width = 103;
+            // 
+            // totalBuyQtyDataGridViewTextBoxColumn
+            // 
+            this.totalBuyQtyDataGridViewTextBoxColumn.DataPropertyName = "TotalBidQty";
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.totalBuyQtyDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle21;
+            this.totalBuyQtyDataGridViewTextBoxColumn.FillWeight = 22.64045F;
+            this.totalBuyQtyDataGridViewTextBoxColumn.HeaderText = "TotalBidQty";
+            this.totalBuyQtyDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.totalBuyQtyDataGridViewTextBoxColumn.Name = "totalBuyQtyDataGridViewTextBoxColumn";
+            this.totalBuyQtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalBuyQtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.totalBuyQtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.totalBuyQtyDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // totalBuyCountDataGridViewTextBoxColumn
+            // 
+            this.totalBuyCountDataGridViewTextBoxColumn.DataPropertyName = "TotalBidCount";
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.totalBuyCountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle22;
+            this.totalBuyCountDataGridViewTextBoxColumn.FillWeight = 22.64045F;
+            this.totalBuyCountDataGridViewTextBoxColumn.HeaderText = "TotalBidCount";
+            this.totalBuyCountDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.totalBuyCountDataGridViewTextBoxColumn.Name = "totalBuyCountDataGridViewTextBoxColumn";
+            this.totalBuyCountDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalBuyCountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.totalBuyCountDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.totalBuyCountDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // totalBuyOrderDataGridViewTextBoxColumn
+            // 
+            this.totalBuyOrderDataGridViewTextBoxColumn.DataPropertyName = "TotalBuyOrder";
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.totalBuyOrderDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle23;
+            this.totalBuyOrderDataGridViewTextBoxColumn.FillWeight = 22.64045F;
+            this.totalBuyOrderDataGridViewTextBoxColumn.HeaderText = "TotalBuyOrder";
+            this.totalBuyOrderDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.totalBuyOrderDataGridViewTextBoxColumn.Name = "totalBuyOrderDataGridViewTextBoxColumn";
+            this.totalBuyOrderDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalBuyOrderDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.totalBuyOrderDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.totalBuyOrderDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // bsTotalQuoteInfo
+            // 
+            this.bsTotalQuoteInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.TotalQuoteInfo);
+            // 
+            // title1DataGridViewTextBoxColumn
+            // 
+            this.title1DataGridViewTextBoxColumn.DataPropertyName = "Title1";
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.title1DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle25;
+            this.title1DataGridViewTextBoxColumn.HeaderText = "Title1";
+            this.title1DataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.title1DataGridViewTextBoxColumn.Name = "title1DataGridViewTextBoxColumn";
+            this.title1DataGridViewTextBoxColumn.ReadOnly = true;
+            this.title1DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.title1DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.title1DataGridViewTextBoxColumn.Width = 65;
+            // 
+            // currentPriceDataGridViewTextBoxColumn
+            // 
+            this.currentPriceDataGridViewTextBoxColumn.DataPropertyName = "CurrentPrice";
+            dataGridViewCellStyle26.NullValue = null;
+            this.currentPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle26;
+            this.currentPriceDataGridViewTextBoxColumn.HeaderText = "CurrentPrice";
+            this.currentPriceDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.currentPriceDataGridViewTextBoxColumn.Name = "currentPriceDataGridViewTextBoxColumn";
+            this.currentPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.currentPriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.currentPriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.currentPriceDataGridViewTextBoxColumn.Width = 68;
+            // 
+            // contrastDataGridViewTextBoxColumn
+            // 
+            this.contrastDataGridViewTextBoxColumn.DataPropertyName = "Contrast";
+            dataGridViewCellStyle27.Format = "N2";
+            this.contrastDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle27;
+            this.contrastDataGridViewTextBoxColumn.HeaderText = "Contrast";
+            this.contrastDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.contrastDataGridViewTextBoxColumn.Name = "contrastDataGridViewTextBoxColumn";
+            this.contrastDataGridViewTextBoxColumn.ReadOnly = true;
+            this.contrastDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.contrastDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.contrastDataGridViewTextBoxColumn.Width = 58;
+            // 
+            // contrastPerDataGridViewTextBoxColumn
+            // 
+            this.contrastPerDataGridViewTextBoxColumn.DataPropertyName = "ContrastPer";
+            dataGridViewCellStyle28.Format = "N2";
+            dataGridViewCellStyle28.NullValue = null;
+            this.contrastPerDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle28;
+            this.contrastPerDataGridViewTextBoxColumn.HeaderText = "ContrastPer";
+            this.contrastPerDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.contrastPerDataGridViewTextBoxColumn.Name = "contrastPerDataGridViewTextBoxColumn";
+            this.contrastPerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.contrastPerDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.contrastPerDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.contrastPerDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // title2DataGridViewTextBoxColumn
+            // 
+            this.title2DataGridViewTextBoxColumn.DataPropertyName = "Title2";
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.title2DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle29;
+            this.title2DataGridViewTextBoxColumn.HeaderText = "Title2";
+            this.title2DataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.title2DataGridViewTextBoxColumn.Name = "title2DataGridViewTextBoxColumn";
+            this.title2DataGridViewTextBoxColumn.ReadOnly = true;
+            this.title2DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.title2DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.title2DataGridViewTextBoxColumn.Width = 65;
+            // 
+            // startPriceDataGridViewTextBoxColumn
+            // 
+            this.startPriceDataGridViewTextBoxColumn.DataPropertyName = "StartPrice";
+            dataGridViewCellStyle30.NullValue = null;
+            this.startPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle30;
+            this.startPriceDataGridViewTextBoxColumn.HeaderText = "StartPrice";
+            this.startPriceDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.startPriceDataGridViewTextBoxColumn.Name = "startPriceDataGridViewTextBoxColumn";
+            this.startPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.startPriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.startPriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.startPriceDataGridViewTextBoxColumn.Width = 68;
+            // 
+            // highPriceDataGridViewTextBoxColumn
+            // 
+            this.highPriceDataGridViewTextBoxColumn.DataPropertyName = "HighPrice";
+            dataGridViewCellStyle31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle31.NullValue = null;
+            this.highPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle31;
+            this.highPriceDataGridViewTextBoxColumn.HeaderText = "HighPrice";
+            this.highPriceDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.highPriceDataGridViewTextBoxColumn.Name = "highPriceDataGridViewTextBoxColumn";
+            this.highPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.highPriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.highPriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.highPriceDataGridViewTextBoxColumn.Width = 68;
+            // 
+            // lowPriceDataGridViewTextBoxColumn
+            // 
+            this.lowPriceDataGridViewTextBoxColumn.DataPropertyName = "LowPrice";
+            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle32.NullValue = null;
+            this.lowPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle32;
+            this.lowPriceDataGridViewTextBoxColumn.HeaderText = "LowPrice";
+            this.lowPriceDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.lowPriceDataGridViewTextBoxColumn.Name = "lowPriceDataGridViewTextBoxColumn";
+            this.lowPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lowPriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.lowPriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.lowPriceDataGridViewTextBoxColumn.Width = 67;
+            // 
+            // bsItemPriceInfo
+            // 
+            this.bsItemPriceInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.ItemPriceInfo);
+            // 
+            // timeDataGridViewTextBoxColumn
+            // 
+            this.timeDataGridViewTextBoxColumn.DataPropertyName = "Time";
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.Format = "HH:mm:ss";
+            this.timeDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle14;
+            this.timeDataGridViewTextBoxColumn.HeaderText = "시간";
+            this.timeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.timeDataGridViewTextBoxColumn.Name = "timeDataGridViewTextBoxColumn";
+            this.timeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.timeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.timeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.timeDataGridViewTextBoxColumn.Width = 76;
+            // 
+            // currentPriceDataGridViewTextBoxColumn1
+            // 
+            this.currentPriceDataGridViewTextBoxColumn1.DataPropertyName = "CurrentPriceStr";
+            dataGridViewCellStyle15.NullValue = null;
+            this.currentPriceDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle15;
+            this.currentPriceDataGridViewTextBoxColumn1.HeaderText = "체결가";
+            this.currentPriceDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.currentPriceDataGridViewTextBoxColumn1.Name = "currentPriceDataGridViewTextBoxColumn1";
+            this.currentPriceDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.currentPriceDataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.currentPriceDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.currentPriceDataGridViewTextBoxColumn1.Width = 76;
+            // 
+            // conclusionQtyDataGridViewTextBoxColumn
+            // 
+            this.conclusionQtyDataGridViewTextBoxColumn.DataPropertyName = "ConclusionQty";
+            this.conclusionQtyDataGridViewTextBoxColumn.HeaderText = "체결량";
+            this.conclusionQtyDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.conclusionQtyDataGridViewTextBoxColumn.Name = "conclusionQtyDataGridViewTextBoxColumn";
+            this.conclusionQtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.conclusionQtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.conclusionQtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.conclusionQtyDataGridViewTextBoxColumn.Width = 76;
+            // 
+            // tradeTypeDataGridViewTextBoxColumn
+            // 
+            this.tradeTypeDataGridViewTextBoxColumn.DataPropertyName = "TradeType";
+            this.tradeTypeDataGridViewTextBoxColumn.HeaderText = "구분";
+            this.tradeTypeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tradeTypeDataGridViewTextBoxColumn.Name = "tradeTypeDataGridViewTextBoxColumn";
+            this.tradeTypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tradeTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.tradeTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tradeTypeDataGridViewTextBoxColumn.Visible = false;
+            this.tradeTypeDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // bsCurrentInfo
+            // 
+            this.bsCurrentInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.CurrentInfo);
+            // 
+            // averageUnitPriceDataGridViewTextBoxColumn
+            // 
+            this.averageUnitPriceDataGridViewTextBoxColumn.DataPropertyName = "AverageUnitPrice";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.NullValue = null;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.averageUnitPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            this.averageUnitPriceDataGridViewTextBoxColumn.HeaderText = "평균단가";
+            this.averageUnitPriceDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.averageUnitPriceDataGridViewTextBoxColumn.Name = "averageUnitPriceDataGridViewTextBoxColumn";
+            this.averageUnitPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.averageUnitPriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.averageUnitPriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.averageUnitPriceDataGridViewTextBoxColumn.Width = 102;
+            // 
+            // valuationDataGridViewTextBoxColumn
+            // 
+            this.valuationDataGridViewTextBoxColumn.DataPropertyName = "Valuation";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.valuationDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            this.valuationDataGridViewTextBoxColumn.HeaderText = "평가손익";
+            this.valuationDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.valuationDataGridViewTextBoxColumn.Name = "valuationDataGridViewTextBoxColumn";
+            this.valuationDataGridViewTextBoxColumn.ReadOnly = true;
+            this.valuationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.valuationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.valuationDataGridViewTextBoxColumn.Width = 102;
+            // 
+            // totalValuationDataGridViewTextBoxColumn
+            // 
+            this.totalValuationDataGridViewTextBoxColumn.DataPropertyName = "TotalValuation";
+            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.totalValuationDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            this.totalValuationDataGridViewTextBoxColumn.HeaderText = "평가손익합";
+            this.totalValuationDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.totalValuationDataGridViewTextBoxColumn.Name = "totalValuationDataGridViewTextBoxColumn";
+            this.totalValuationDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalValuationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.totalValuationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.totalValuationDataGridViewTextBoxColumn.Width = 102;
+            // 
+            // totalProfitDataGridViewTextBoxColumn
+            // 
+            this.totalProfitDataGridViewTextBoxColumn.DataPropertyName = "TotalProfit";
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.totalProfitDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
+            this.totalProfitDataGridViewTextBoxColumn.HeaderText = "실현손익";
+            this.totalProfitDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.totalProfitDataGridViewTextBoxColumn.Name = "totalProfitDataGridViewTextBoxColumn";
+            this.totalProfitDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalProfitDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.totalProfitDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.totalProfitDataGridViewTextBoxColumn.Width = 102;
+            // 
+            // lossCutDataGridViewTextBoxColumn
+            // 
+            this.lossCutDataGridViewTextBoxColumn.DataPropertyName = "CurrentProfit";
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.lossCutDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            this.lossCutDataGridViewTextBoxColumn.HeaderText = "실시간수익";
+            this.lossCutDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.lossCutDataGridViewTextBoxColumn.Name = "lossCutDataGridViewTextBoxColumn";
+            this.lossCutDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lossCutDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.lossCutDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.lossCutDataGridViewTextBoxColumn.Width = 102;
+            // 
+            // bsValuationInfo
+            // 
+            this.bsValuationInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.ValuationInfo);
+            // 
+            // orderTypeDataGridViewTextBoxColumn
+            // 
+            this.orderTypeDataGridViewTextBoxColumn.DataPropertyName = "OrderType";
+            this.orderTypeDataGridViewTextBoxColumn.HeaderText = "구분";
+            this.orderTypeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.orderTypeDataGridViewTextBoxColumn.Name = "orderTypeDataGridViewTextBoxColumn";
+            this.orderTypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.orderTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.orderTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.orderTypeDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // symbolDataGridViewTextBoxColumn
+            // 
+            this.symbolDataGridViewTextBoxColumn.DataPropertyName = "Symbol";
+            this.symbolDataGridViewTextBoxColumn.HeaderText = "종목코드";
+            this.symbolDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.symbolDataGridViewTextBoxColumn.Name = "symbolDataGridViewTextBoxColumn";
+            this.symbolDataGridViewTextBoxColumn.ReadOnly = true;
+            this.symbolDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.symbolDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.symbolDataGridViewTextBoxColumn.Width = 83;
+            // 
+            // qtyDataGridViewTextBoxColumn
+            // 
+            this.qtyDataGridViewTextBoxColumn.DataPropertyName = "Qty";
+            this.qtyDataGridViewTextBoxColumn.HeaderText = "수량";
+            this.qtyDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.qtyDataGridViewTextBoxColumn.Name = "qtyDataGridViewTextBoxColumn";
+            this.qtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.qtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.qtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.qtyDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // averagePriceDataGridViewTextBoxColumn
+            // 
+            this.averagePriceDataGridViewTextBoxColumn.DataPropertyName = "AveragePrice";
+            this.averagePriceDataGridViewTextBoxColumn.HeaderText = "주문가";
+            this.averagePriceDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.averagePriceDataGridViewTextBoxColumn.Name = "averagePriceDataGridViewTextBoxColumn";
+            this.averagePriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.averagePriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.averagePriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.averagePriceDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // currentPriceDataGridViewTextBoxColumn2
+            // 
+            this.currentPriceDataGridViewTextBoxColumn2.DataPropertyName = "CurrentPrice";
+            this.currentPriceDataGridViewTextBoxColumn2.HeaderText = "현재가";
+            this.currentPriceDataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.currentPriceDataGridViewTextBoxColumn2.Name = "currentPriceDataGridViewTextBoxColumn2";
+            this.currentPriceDataGridViewTextBoxColumn2.ReadOnly = true;
+            this.currentPriceDataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.currentPriceDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.currentPriceDataGridViewTextBoxColumn2.Width = 70;
+            // 
+            // valuationDataGridViewTextBoxColumn1
+            // 
+            this.valuationDataGridViewTextBoxColumn1.DataPropertyName = "Valuation";
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.valuationDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle12;
+            this.valuationDataGridViewTextBoxColumn1.HeaderText = "평가손익";
+            this.valuationDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.valuationDataGridViewTextBoxColumn1.Name = "valuationDataGridViewTextBoxColumn1";
+            this.valuationDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.valuationDataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.valuationDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.valuationDataGridViewTextBoxColumn1.Width = 95;
+            // 
+            // actionDataGridViewTextBoxColumn
+            // 
+            this.actionDataGridViewTextBoxColumn.DataPropertyName = "Action";
+            this.actionDataGridViewTextBoxColumn.HeaderText = "주문";
+            this.actionDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.actionDataGridViewTextBoxColumn.Name = "actionDataGridViewTextBoxColumn";
+            this.actionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.actionDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.actionDataGridViewTextBoxColumn.Width = 63;
+            // 
+            // bsOrderInfo
+            // 
+            this.bsOrderInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.OrderInfo);
+            // 
+            // sellOrderDataGridViewTextBoxColumn
+            // 
+            this.sellOrderDataGridViewTextBoxColumn.DataPropertyName = "SellOrder";
+            this.sellOrderDataGridViewTextBoxColumn.FillWeight = 143.0603F;
+            this.sellOrderDataGridViewTextBoxColumn.HeaderText = "매도";
+            this.sellOrderDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.sellOrderDataGridViewTextBoxColumn.Name = "sellOrderDataGridViewTextBoxColumn";
+            this.sellOrderDataGridViewTextBoxColumn.ReadOnly = true;
+            this.sellOrderDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.sellOrderDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sellOrderDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // sellCountDataGridViewTextBoxColumn
+            // 
+            this.sellCountDataGridViewTextBoxColumn.DataPropertyName = "AskCount";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sellCountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.sellCountDataGridViewTextBoxColumn.FillWeight = 23.19896F;
+            this.sellCountDataGridViewTextBoxColumn.HeaderText = "건수";
+            this.sellCountDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.sellCountDataGridViewTextBoxColumn.Name = "sellCountDataGridViewTextBoxColumn";
+            this.sellCountDataGridViewTextBoxColumn.ReadOnly = true;
+            this.sellCountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.sellCountDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sellCountDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // sellQtyDataGridViewTextBoxColumn
+            // 
+            this.sellQtyDataGridViewTextBoxColumn.DataPropertyName = "AskQty";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.sellQtyDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.sellQtyDataGridViewTextBoxColumn.FillWeight = 23.19896F;
+            this.sellQtyDataGridViewTextBoxColumn.HeaderText = "잔량";
+            this.sellQtyDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.sellQtyDataGridViewTextBoxColumn.Name = "sellQtyDataGridViewTextBoxColumn";
+            this.sellQtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.sellQtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.sellQtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sellQtyDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // priceSymbolDataGridViewTextBoxColumn
+            // 
+            this.priceSymbolDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.priceSymbolDataGridViewTextBoxColumn.DataPropertyName = "PriceSymbol";
+            this.priceSymbolDataGridViewTextBoxColumn.HeaderText = "";
+            this.priceSymbolDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.priceSymbolDataGridViewTextBoxColumn.Name = "priceSymbolDataGridViewTextBoxColumn";
+            this.priceSymbolDataGridViewTextBoxColumn.ReadOnly = true;
+            this.priceSymbolDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.priceSymbolDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.priceSymbolDataGridViewTextBoxColumn.Width = 28;
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            this.priceDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.priceDataGridViewTextBoxColumn.DataPropertyName = "PriceStr";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.NullValue = null;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.priceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.priceDataGridViewTextBoxColumn.FillWeight = 440.9449F;
+            this.priceDataGridViewTextBoxColumn.HeaderText = "";
+            this.priceDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            this.priceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.priceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.priceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.priceDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // buyQtyDataGridViewTextBoxColumn
+            // 
+            this.buyQtyDataGridViewTextBoxColumn.DataPropertyName = "BidQty";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.buyQtyDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            this.buyQtyDataGridViewTextBoxColumn.FillWeight = 23.19896F;
+            this.buyQtyDataGridViewTextBoxColumn.HeaderText = "잔량";
+            this.buyQtyDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.buyQtyDataGridViewTextBoxColumn.Name = "buyQtyDataGridViewTextBoxColumn";
+            this.buyQtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.buyQtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.buyQtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.buyQtyDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // buyCountDataGridViewTextBoxColumn
+            // 
+            this.buyCountDataGridViewTextBoxColumn.DataPropertyName = "BidCount";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.buyCountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            this.buyCountDataGridViewTextBoxColumn.FillWeight = 23.19896F;
+            this.buyCountDataGridViewTextBoxColumn.HeaderText = "건수";
+            this.buyCountDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.buyCountDataGridViewTextBoxColumn.Name = "buyCountDataGridViewTextBoxColumn";
+            this.buyCountDataGridViewTextBoxColumn.ReadOnly = true;
+            this.buyCountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.buyCountDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.buyCountDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // buyOrderDataGridViewTextBoxColumn
+            // 
+            this.buyOrderDataGridViewTextBoxColumn.DataPropertyName = "BuyOrder";
+            this.buyOrderDataGridViewTextBoxColumn.FillWeight = 23.19896F;
+            this.buyOrderDataGridViewTextBoxColumn.HeaderText = "매수";
+            this.buyOrderDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.buyOrderDataGridViewTextBoxColumn.Name = "buyOrderDataGridViewTextBoxColumn";
+            this.buyOrderDataGridViewTextBoxColumn.ReadOnly = true;
+            this.buyOrderDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.buyOrderDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.buyOrderDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // bsQuoteInfo
+            // 
+            this.bsQuoteInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.QuoteInfo);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -5857,17 +5855,11 @@ namespace LuckyFuture.UI
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuoteInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsQuoteInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvValuationInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsValuationInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsOrderInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCurrentInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCurrentInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTotalQuoteInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsTotalQuoteInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemPriceInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsItemPriceInfo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.groupOther.ResumeLayout(false);
             this.groupOther.PerformLayout();
@@ -5893,6 +5885,12 @@ namespace LuckyFuture.UI
             this.groupBetting1.PerformLayout();
             this.groupBetType.ResumeLayout(false);
             this.groupBetType.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsTotalQuoteInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsItemPriceInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCurrentInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsValuationInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsOrderInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsQuoteInfo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

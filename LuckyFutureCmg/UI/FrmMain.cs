@@ -88,7 +88,7 @@ namespace LuckyFuture.UI
 				cmbSiteList.Items.Add(site_name);
 
 			this.hopeForm1.Text = AppAuthor.Default.GetAppName() + " " + AppAuthor.Default.GetAppVersion();
-            LogPath = AppAuthor.Default.CreatePathFolder("Log") + "/" + DateTime.Now.ToString("yyyyMMdd"+"_MT");
+            LogPath = AppAuthor.Default.CreatePathFolder("Log") + "/" + DateTime.Now.ToString("yyyyMMdd") + "_MT";
             WriteLog("<============= 시작 =============>");
 			// double buffered
             this.dgvOrderInfo.DoubleBuffered(true);
@@ -4875,10 +4875,20 @@ namespace LuckyFuture.UI
                     {
                         Price = price
                     };
-                    AddLog("매수 주문가:" + quoteInfo.Price);
+                    AddLog("[매수주문] 주문가:" + quoteInfo.Price);
                 }
 
-                int ordCnt = Int32.Parse(cmbOrderCnt.Text);
+                double ordCnt = 0;
+                try
+                {
+                    ordCnt = double.Parse(cmbOrderCnt.Text);
+                }
+                catch
+                {
+                    cmbOrderCnt.Focus();
+                    AddLog("[매수주문] 주문수량 오류");
+                    return;
+                }
                 CurrentSite.DoBuyOrder(quoteInfo, ordCnt, quoteInfo==null);
                        
             }
@@ -4910,9 +4920,19 @@ namespace LuckyFuture.UI
                 {
                     Price = price
                 };
-                AddLog("매도 주문가:" + quoteInfo.Price);
+                AddLog("[매도주문] 주문가:" + quoteInfo.Price);
             }
-            int ordCnt = Int32.Parse(cmbOrderCnt.Text);
+            double ordCnt = 0;
+            try
+            {
+                ordCnt = double.Parse(cmbOrderCnt.Text);
+            }
+            catch
+            {
+                cmbOrderCnt.Focus();
+                AddLog("[매도주문] 주문수량 오류");
+                return;
+            }
             CurrentSite.DoSellOrder(quoteInfo, ordCnt, quoteInfo==null);
         }
 
@@ -5458,10 +5478,12 @@ namespace LuckyFuture.UI
         private void btnSbOrd4_Click(object sender, EventArgs e)
         {
             ChangeBoOrdBtn(0); //진입체결-S-B선
+            saveSetting();
         }
         private void btnCciOrd4_Click(object sender, EventArgs e)
         {
             ChangeBoOrdBtn(1); //진입체결-CCI
+            saveSetting();
         }
 
         private void chkSelVal_CheckedChanged(object sender, EventArgs e)

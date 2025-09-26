@@ -972,12 +972,12 @@ namespace LuckyFuture.Site
                 string sBalance = sValuation.Substring(15, 15);
                 string sTotalValuation = sValuation.Substring(30, 15);
                 string sTotalProfit = sValuation.Substring(45, 15);
-                long lBalance = 0, lValuation = 0, lProfit = 0;
+                double lBalance = 0, lValuation = 0, lProfit = 0;
                 try
                 {
                     lBalance = long.Parse(sBalance);
-                    lValuation = long.Parse(sTotalValuation) / 100;
-                    lProfit = long.Parse(sTotalProfit) / 100;
+                    lValuation = long.Parse(sTotalValuation) / 100.0;
+                    lProfit = long.Parse(sTotalProfit) / 100.0;
                 }
                 catch (Exception)
                 {
@@ -986,10 +986,10 @@ namespace LuckyFuture.Site
                 if (lBalance >= 0 && this.CurrentUserAccount != null)
                 {
                     this.CurrentUserAccount.Balance = lBalance - lValuation;
-                    DayProfitLoss.TotalProfit = lProfit;
+                    DayProfitLoss.TotalProfit = (long)lProfit;
                     this.ValuationList[0].TotalValuation = lValuation;
-                    this.ValuationList[0].TotalProfit = DayProfitLoss.TotalProfit;
-                    this.ValuationList[0].CurrentProfit = DayProfitLoss.TotalProfit + lValuation;
+                    this.ValuationList[0].TotalProfit = lProfit;
+                    this.ValuationList[0].CurrentProfit = lProfit + lValuation;
 
                     if(!Settings.Default.SignalSiteOn)
                         OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.VALUATION);
@@ -1093,12 +1093,12 @@ namespace LuckyFuture.Site
                                     }
                                     lValSum += orderInfo.Valuation;
                                 }
-                                ValuationList[0].Valuation = (long)lValSum;
-                                ValuationList[0].TotalValuation = (long)lValSum;
+                                ValuationList[0].Valuation = lValSum;
+                                ValuationList[0].TotalValuation = lValSum;
                                 if (dAveragePriceSum > 0)
                                     ValuationList[0].AverageUnitPrice = dAveragePriceSum / nOrderCnt;
-                                ValuationList[0].TotalProfit = DayProfitLoss.TotalProfit;
-                                ValuationList[0].CurrentProfit = DayProfitLoss.TotalProfit + (long)lValSum;
+                                //ValuationList[0].TotalProfit = DayProfitLoss.TotalProfit;
+                                ValuationList[0].CurrentProfit = ValuationList[0].TotalProfit + lValSum;
 
                             }
                             else if (nOrderCnt < 1)

@@ -65,7 +65,7 @@ namespace LuckyFuture
                             case "OrderStop": Settings.Default.OrderStop = bool.Parse(value); break;
                             case "OrderStopDelay": Settings.Default.OrderStopDelay = int.Parse(value); break;
                             case "BettingCandleComplete": Settings.Default.BettingCandleComplete = int.Parse(value); break;
-                            case "OrderCount": Settings.Default.OrderCount = int.Parse(value); break;
+                            case "OrderCount": Settings.Default.OrderCount = float.Parse(value); break;
                             case "OrderType": Settings.Default.OrderType = int.Parse(value); break;
                             // case "OrderMax": Settings.Default.OrderMax = int.Parse(value); break;
                             case "Reorder": Settings.Default.Reorder = bool.Parse(value); break;

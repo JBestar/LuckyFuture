@@ -303,13 +303,13 @@ namespace LuckyFuture.Site
                 return false;
             }
 
-            if (quoteInfo != null)
+            if (!bMarketPrice && quoteInfo != null)
             {
                 temp = string.Format("{0:N6}", quoteInfo.Price);
                 quoteInfo.Price = double.Parse(temp);
 
-                double nOrderRange = 2000 * CurItemSymbol.OverTick;
-                if (quoteInfo.Price < Current.CurrentPrice - nOrderRange || quoteInfo.Price > Current.CurrentPrice + nOrderRange)
+                double nOrderRange = 4000 * CurItemSymbol.OverTick;
+                if (quoteInfo.Price < Current.CurrentPrice2 - nOrderRange || quoteInfo.Price > Current.CurrentPrice2 + nOrderRange)
                 {
                     OnFutureSiteLogEvent("[주문] 주문 가격이 초과 됨");
                     return false;
@@ -394,12 +394,12 @@ namespace LuckyFuture.Site
                 return false;
             }
 
-            if (quoteInfo != null)
+            if (!bMarketPrice && quoteInfo != null)
             {
                 temp = string.Format("{0:N6}", quoteInfo.Price);
                 quoteInfo.Price = double.Parse(temp);
 
-                double nOrderRange = 2000 * CurItemSymbol.OverTick;
+                double nOrderRange = 4000 * CurItemSymbol.OverTick;
                 if (quoteInfo.Price < Current.CurrentPrice - nOrderRange || quoteInfo.Price > Current.CurrentPrice + nOrderRange)
                 {
                     OnFutureSiteLogEvent("[주문] 주문 가격이 초과 됨");
@@ -431,7 +431,7 @@ namespace LuckyFuture.Site
             if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.JSON, url, token, jsonParam))
                 return false;
 
-            WriteLog(string.Format("[DoSellOrder] param={0} resp={1}", jsonParam, body));
+            WriteLog(string.Format("[DoBuyOrder] param={0} resp={1}", jsonParam, body));
             try
             {
                 JsonDocument doc = JsonDocument.Parse(body);
@@ -829,7 +829,7 @@ namespace LuckyFuture.Site
 
             this.ValuationList[0].TotalProfit = dProfit;
             DayProfitLoss.TotalProfit = (long)this.ValuationList[0].TotalProfit;
-            this.ValuationList[0].CurrentProfit = DayProfitLoss.TotalProfit + this.ValuationList[0].TotalValuation;
+            this.ValuationList[0].CurrentProfit = this.ValuationList[0].TotalProfit + this.ValuationList[0].TotalValuation;
 
             return CONSTATE.SUCCESSS;
         }
@@ -1279,8 +1279,7 @@ namespace LuckyFuture.Site
                                 ValuationList[0].TotalValuation = lValSum;
                                 if (dAveragePriceSum > 0)
                                     ValuationList[0].AverageUnitPrice = dAveragePriceSum / nOrderCnt;
-                                ValuationList[0].TotalProfit = DayProfitLoss.TotalProfit;
-                                ValuationList[0].CurrentProfit = DayProfitLoss.TotalProfit + lValSum;
+                                ValuationList[0].CurrentProfit = ValuationList[0].TotalProfit + lValSum;
 
                             }
                             else if (nOrderCnt <= 0)
@@ -1595,27 +1594,27 @@ namespace LuckyFuture.Site
 
             newPrd = new PrdInfo();
             newPrd.Code = "FX MAJOR STD";
-            newPrd.Name = "FX MAJOR STD";
+            newPrd.Name = "FX MAJOR STD"; //Trade is disabled.
             newPrd.ItemList = new List<ItemSymbolInfo>();
-            newItem = new ItemSymbolInfo() { Symbol = "AUDUSD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "AUDUSD", };
+            newItem = new ItemSymbolInfo() { Symbol = "AUDUSD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "AUDUSD", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURUSD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "EURUSD", };
+            newItem = new ItemSymbolInfo() { Symbol = "EURUSD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "EURUSD", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "GBPUSD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "GBPUSD", };
+            newItem = new ItemSymbolInfo() { Symbol = "GBPUSD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "GBPUSD", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "NZDUSD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "NZDUSD", };
+            newItem = new ItemSymbolInfo() { Symbol = "NZDUSD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "NZDUSD", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDCAD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDCAD", };
+            newItem = new ItemSymbolInfo() { Symbol = "USDCAD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDCAD", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDCHF", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDCHF", };
+            newItem = new ItemSymbolInfo() { Symbol = "USDCHF", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDCHF", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 }; ;
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDCNH", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.01, ItemName = "USDCNH", };
+            newItem = new ItemSymbolInfo() { Symbol = "USDCNH", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDCNH", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDHKD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDHKD", };
+            newItem = new ItemSymbolInfo() { Symbol = "USDHKD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDHKD", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDJPY", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "USDJPY", };
+            newItem = new ItemSymbolInfo() { Symbol = "USDJPY", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 1, ItemName = "USDJPY", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDSGD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDSGD", };
+            newItem = new ItemSymbolInfo() { Symbol = "USDSGD", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDSGD", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
             PrdList.Add(newPrd);
 
@@ -1623,127 +1622,127 @@ namespace LuckyFuture.Site
             newPrd.Code = "FOREX.ins";
             newPrd.Name = "FOREX.ins";
             newPrd.ItemList = new List<ItemSymbolInfo>();
-            newItem = new ItemSymbolInfo() { Symbol = "AUDCAD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "AUDCAD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "AUDCAD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "AUDCAD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "AUDCHF.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "AUDCHF.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "AUDCHF.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "AUDCHF.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "AUDJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "AUDJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "AUDJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 1, ItemName = "AUDJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "AUDNZD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "AUDNZD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "AUDNZD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "AUDNZD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "AUDSGD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "AUDSGD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "AUDSGD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "AUDSGD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "AUDUSD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "AUDUSD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "AUDUSD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "AUDUSD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "CADCHF.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "CADCHF.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "CADCHF.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "CADCHF.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "CADJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "CADJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "CADJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 1, ItemName = "CADJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "CADSGD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.00, ItemName = "CADSGD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "CADSGD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "CADSGD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "CHFJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "CHFJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "CHFJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 1, ItemName = "CHFJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "CHFSEK.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "CHFSEK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "CHFSEK.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "CHFSEK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "CHFSGD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "CHFSGD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "CHFSGD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "CHFSGD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURAUD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "EURAUD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "EURAUD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "EURAUD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURCAD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "EURCAD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "EURCAD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "EURCAD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURCHF.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "EURCHF.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "EURCHF.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "EURCHF.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURCZK.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "EURCZK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "EURCZK.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 1, ItemName = "EURCZK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURGBP.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "EURGBP.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "EURGBP.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "EURGBP.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "EURJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "EURJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 1, ItemName = "EURJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURNOK.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "EURNOK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "EURNOK.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 1, ItemName = "EURNOK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURNZD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "EURNZD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "EURNZD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "EURNZD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURPLN.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "EURPLN.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "EURPLN.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 1, ItemName = "EURPLN.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURSEK.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "EURSEK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "EURSEK.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 1, ItemName = "EURSEK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURSGD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "EURSGD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "EURSGD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "EURSGD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "EURUSD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "EURUSD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "EURUSD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "EURUSD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "GBPAUD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "GBPAUD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "GBPAUD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "GBPAUD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "GBPCAD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "GBPCAD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "GBPCAD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "GBPCAD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "GBPCHF.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "GBPCHF.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "GBPCHF.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "GBPCHF.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "GBPJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "GBPJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "GBPJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 1, ItemName = "GBPJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "GBPMXN.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "GBPMXN.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "GBPMXN.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 1, ItemName = "GBPMXN.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "GBPNOK.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "GBPNOK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "GBPNOK.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "GBPNOK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "GBPNZD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "GBPNZD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "GBPNZD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "GBPNZD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "GBPPLN.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "GBPPLN.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "GBPPLN.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 1, ItemName = "GBPPLN.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "GBPSEK.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "GBPSEK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "GBPSEK.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "GBPSEK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "GBPSGD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "GBPSGD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "GBPSGD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "GBPSGD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "GBPUSD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "GBPUSD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "GBPUSD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "GBPUSD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "MXNJPY.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.01, ItemName = "MXNJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "MXNJPY.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "MXNJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "NOKJPY.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.01, ItemName = "NOKJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "NOKJPY.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "NOKJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "NZDCAD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "NZDCAD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "NZDCAD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "NZDCAD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "NZDCHF.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "NZDCHF.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "NZDCHF.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "NZDCHF.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "NZDJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "NZDJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "NZDJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 1, ItemName = "NZDJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "NZDUSD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "NZDUSD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "NZDUSD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "NZDUSD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "SGDJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "SGDJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "SGDJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 1, ItemName = "SGDJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDBRL.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDBRL.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDBRL.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 2, ItemName = "USDBRL.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDCAD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDCAD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDCAD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDCAD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDCHF.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDCHF.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDCHF.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDCHF.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDCNH.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.01, ItemName = "USDCNH.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDCNH.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDCNH.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDCZK.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDCZK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDCZK.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 1, ItemName = "USDCZK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDHKD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDHKD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDHKD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDHKD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDIDR.ins", Precision = 1, OverTick = 0.1, Exchange = 1, ValueTick = 0.0001, ItemName = "USDIDR.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDIDR.ins", Precision = 1, OverTick = 0.1, Exchange = 1, ValueTick = 1, ItemName = "USDIDR.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDILS.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDILS.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDILS.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDILS.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDINR.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDINR.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDINR.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 1, ItemName = "USDINR.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "USDJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDJPY.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 1, ItemName = "USDJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDKRW.ins", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 0.0001, ItemName = "USDKRW.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDKRW.ins", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 1, ItemName = "USDKRW.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDMXN.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDMXN.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDMXN.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDMXN.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDNOK.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDNOK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDNOK.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 1, ItemName = "USDNOK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDPLN.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDPLN.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDPLN.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 1, ItemName = "USDPLN.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDSEK.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDSEK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDSEK.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 1, ItemName = "USDSEK.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDSGD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDSGD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDSGD.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDSGD.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDTHB.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDTHB.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDTHB.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 1, ItemName = "USDTHB.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "USDZAR.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "USDZAR.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "USDZAR.ins", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 1, ItemName = "USDZAR.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "ZARJPY.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.01, ItemName = "ZARJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "ZARJPY.ins", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 1, ItemName = "ZARJPY.ins", MinVolume = 0.01, MaxVolume = 50, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
             PrdList.Add(newPrd);
 
@@ -1752,19 +1751,19 @@ namespace LuckyFuture.Site
             newPrd.Code = "METALS.ins";
             newPrd.Name = "METALS.ins";
             newPrd.ItemList = new List<ItemSymbolInfo>();
-            newItem = new ItemSymbolInfo() { Symbol = "XAGUSD.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "XAGUSD.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "XAGUSD.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 5, ItemName = "XAGUSD.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "XAUAUD.ins", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 0.01, ItemName = "XAUAUD.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "XAUAUD.ins", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 1, ItemName = "XAUAUD.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "XAUCHF.ins", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 0.01, ItemName = "XAUCHF.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "XAUCHF.ins", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 1, ItemName = "XAUCHF.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "XAUEUR.ins", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 0.01, ItemName = "XAUEUR.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "XAUEUR.ins", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 1, ItemName = "XAUEUR.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "XAUGBP.ins", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 0.01, ItemName = "XAUGBP.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "XAUGBP.ins", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 1, ItemName = "XAUGBP.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "XAUUSD.ins", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 0.01, ItemName = "XAUUSD.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "XAUUSD.ins", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 1, ItemName = "XAUUSD.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "XPTUSD.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "XPTUSD.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "XPTUSD.ins", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.1, ItemName = "XPTUSD.ins", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
             PrdList.Add(newPrd);
 
@@ -1784,21 +1783,21 @@ namespace LuckyFuture.Site
             newPrd.ItemList = new List<ItemSymbolInfo>();
             newItem = new ItemSymbolInfo() { Symbol = "ADAUSD.ecn", Precision = 4, OverTick = 0.0001, Exchange = 1, ValueTick = 0.0001, ItemName = "ADAUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "BCHUSD.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "BCHUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
+            newItem = new ItemSymbolInfo() { Symbol = "BCHUSD.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.001, ItemName = "BCHUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "DOGUSD.ecn", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.01, ItemName = "DOGUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
+            newItem = new ItemSymbolInfo() { Symbol = "DOGUSD.ecn", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.001, ItemName = "DOGUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "DOTUSD.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "DOTUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
+            newItem = new ItemSymbolInfo() { Symbol = "DOTUSD.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.001, ItemName = "DOTUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "ETHUSD.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "ETHUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
+            newItem = new ItemSymbolInfo() { Symbol = "ETHUSD.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.001, ItemName = "ETHUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "LNKUSD.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "LNKUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
+            newItem = new ItemSymbolInfo() { Symbol = "LNKUSD.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.001, ItemName = "LNKUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "LTCUSD.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "LTCUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
+            newItem = new ItemSymbolInfo() { Symbol = "LTCUSD.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.001, ItemName = "LTCUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "XLMUSD.ecn", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.01, ItemName = "XLMUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
+            newItem = new ItemSymbolInfo() { Symbol = "XLMUSD.ecn", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.0001, ItemName = "XLMUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "XRPUSD.ecn", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.01, ItemName = "XRPUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
+            newItem = new ItemSymbolInfo() { Symbol = "XRPUSD.ecn", Precision = 5, OverTick = 0.00001, Exchange = 1, ValueTick = 0.001, ItemName = "XRPUSD.ecn", MinVolume = 0.1, MaxVolume = 200, VolumeStep = 0.1 };
             newPrd.ItemList.Add(newItem);
             PrdList.Add(newPrd);
 
@@ -1821,7 +1820,7 @@ namespace LuckyFuture.Site
             newPrd.ItemList.Add(newItem);
             newItem = new ItemSymbolInfo() { Symbol = "IT40.ecn", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 0.01, ItemName = "IT40.ecn", MinVolume = 1, MaxVolume = 1000, VolumeStep = 1 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "JPN225.ecn", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 1, ItemName = "JPN225.ecn", MinVolume = 1, MaxVolume = 1000, VolumeStep = 1 };
+            newItem = new ItemSymbolInfo() { Symbol = "JPN225.ecn", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 0.005, ItemName = "JPN225.ecn", MinVolume = 1, MaxVolume = 1000, VolumeStep = 1 };
             newPrd.ItemList.Add(newItem);
             newItem = new ItemSymbolInfo() { Symbol = "NETH25.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "NETH25.ecn", MinVolume = 1, MaxVolume = 1000, VolumeStep = 1 };
             newPrd.ItemList.Add(newItem);
@@ -1854,7 +1853,7 @@ namespace LuckyFuture.Site
             newPrd.ItemList = new List<ItemSymbolInfo>();
             newItem = new ItemSymbolInfo() { Symbol = "BRENT.ecn", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 10, ItemName = "BRENT.ecn", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
-            newItem = new ItemSymbolInfo() { Symbol = "NATGAS.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 0.01, ItemName = "NATGAS.ecn", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
+            newItem = new ItemSymbolInfo() { Symbol = "NATGAS.ecn", Precision = 3, OverTick = 0.001, Exchange = 1, ValueTick = 1, ItemName = "NATGAS.ecn", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
             newItem = new ItemSymbolInfo() { Symbol = "WTI.ecn", Precision = 2, OverTick = 0.01, Exchange = 1, ValueTick = 10, ItemName = "WTI.ecn", MinVolume = 0.01, MaxVolume = 10, VolumeStep = 0.01 };
             newPrd.ItemList.Add(newItem);
