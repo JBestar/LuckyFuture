@@ -235,6 +235,8 @@ namespace LuckyFuture.UI
                 cmbAvgType2.Items.Add(i);
                 cmbOrderLine1.Items.Add(string.Format("{0}평선", i));
                 cmbOrderLine2.Items.Add(string.Format("{0}평선", i));
+                cmbOrderLine5_1.Items.Add(string.Format("{0}평선", i));
+                cmbOrderLine5_2.Items.Add(string.Format("{0}평선", i));
             }
 
             cmbSmartUnit.Items.Add("%");
@@ -2584,6 +2586,8 @@ namespace LuckyFuture.UI
                 cmbOrderType5.SelectedIndex = Settings.Default.OrderType;
                 txtOrderCount5.Text = Settings.Default.OrderCount.ToString();
                 label39.Text = strCom;
+                cmbOrderLine5_1.SelectedIndex = Settings.Default.CrossAvgLine1;
+                cmbOrderLine5_2.SelectedIndex = Settings.Default.CrossAvgLine2;
                 cmbBettingCandle5.SelectedIndex = Settings.Default.BettingCandleComplete;
                 txtBoAdjust5.Text = Settings.Default.BoLineAdjust.ToString();
             }
@@ -3314,7 +3318,7 @@ namespace LuckyFuture.UI
                 log += "주문(방식:이평크로스";
                 log += ", 차트타입:" + cmbChartType3.SelectedItem.ToString();
                 log += ", 주문타입:" + (Settings.Default.OrderType == 0 ? "시장가" : "지정가");
-                log += ", 크로스선:" + Common.GetAvgTypeStr(Settings.Default.CrossAvgLine1) + ", " + Common.GetAvgTypeStr(Settings.Default.CrossAvgLine2); 
+                log += ", 크로스선:" + Common.GetAvgTypeStr(Settings.Default.CrossAvgLine1) + "&" + Common.GetAvgTypeStr(Settings.Default.CrossAvgLine2); 
                 log += ", 주문수량:" + Settings.Default.OrderCount;
                 log += ", 교차시:" + cmbBettingCandle3.SelectedItem.ToString();
                 log += ", 되돌림:" + cmbReorder3.SelectedItem.ToString();
@@ -3660,6 +3664,15 @@ namespace LuckyFuture.UI
                 Settings.Default.BettingType = (int)BETTYPE.HYBRID;
                 Settings.Default.ChartType = cmbChartType5.SelectedIndex;
                 Settings.Default.OrderType = cmbOrderType5.SelectedIndex;
+                if (cmbOrderLine5_1.SelectedIndex == cmbOrderLine5_2.SelectedIndex)
+                {
+                    cmbOrderLine5_2.SelectAll();
+                    cmbOrderLine5_2.Focus();
+                    return;
+                }
+                Settings.Default.CrossAvgLine1 = cmbOrderLine5_1.SelectedIndex;
+                Settings.Default.CrossAvgLine2 = cmbOrderLine5_2.SelectedIndex;
+
                 //주문가능수량
                 try
                 {
@@ -3714,6 +3727,7 @@ namespace LuckyFuture.UI
                 log += ", 차트타입:" + cmbChartType5.SelectedItem.ToString();
                 log += ", 주문타입:" + (Settings.Default.OrderType == 0 ? "시장가" : "지정가");
                 log += ", 주문수량:" + Settings.Default.OrderCount;
+                log += ", 크로스선:" + Common.GetAvgTypeStr(Settings.Default.CrossAvgLine1) + "&" + Common.GetAvgTypeStr(Settings.Default.CrossAvgLine2); 
                 log += ", 상승/하락:" + cmbBettingCandle5.SelectedItem.ToString();
                 log += ", S-B선조정:" + Settings.Default.BoLineAdjust + "틱";
                 log += ") ";
@@ -4875,7 +4889,7 @@ namespace LuckyFuture.UI
                     {
                         Price = price
                     };
-                    AddLog("[매수주문] 주문가:" + quoteInfo.Price);
+                    // AddLog("[매수주문] 주문가:" + quoteInfo.Price);
                 }
 
                 double ordCnt = 0;
@@ -4920,7 +4934,7 @@ namespace LuckyFuture.UI
                 {
                     Price = price
                 };
-                AddLog("[매도주문] 주문가:" + quoteInfo.Price);
+                // AddLog("[매도주문] 주문가:" + quoteInfo.Price);
             }
             double ordCnt = 0;
             try
@@ -5961,6 +5975,36 @@ namespace LuckyFuture.UI
             if (e.Index >= 0)
             {
                 e.Graphics.DrawString(cmbReverseOrd2.Items[e.Index].ToString(), e.Font,
+                 new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
+            }
+        }
+
+        private void cmbOrderLine5_1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            saveSetting();
+        }
+
+        private void cmbOrderLine5_1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            if (e.Index >= 0)
+            {
+                e.Graphics.DrawString(cmbOrderLine5_1.Items[e.Index].ToString(), e.Font,
+                 new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
+            }
+        }
+
+        private void cmbOrderLine5_2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            saveSetting();
+        }
+
+        private void cmbOrderLine5_2_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            if (e.Index >= 0)
+            {
+                e.Graphics.DrawString(cmbOrderLine5_2.Items[e.Index].ToString(), e.Font,
                  new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
             }
         }

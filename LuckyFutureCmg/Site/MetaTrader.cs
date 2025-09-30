@@ -20,7 +20,6 @@ using LuckyFuture.Models.ValueObjects;
 using LuckyFuture.Properties;
 using LuckyFutureLib.Include;
 using SocketIOClient;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace LuckyFuture.Site
 {
@@ -44,6 +43,7 @@ namespace LuckyFuture.Site
         private int m_tickCurrent = 0;
         private int m_tickAccount = 0;
         private bool m_bNeedAcc = false;
+        private bool m_bReconnect = false;
 
         public MetaTrader()
         {
@@ -142,7 +142,7 @@ namespace LuckyFuture.Site
             this.UserAccounts.Add(this.CurrentUserAccount);
             DayProfitLoss = new DayProfitLossInfo();
             OnLogin();
-            this.ValuationList[0].TotalValuation = valuation;
+            this.ValuationList[0].TotalValuation = 0; //valuation
 
             RequestHistoryDeals();
 
@@ -260,11 +260,10 @@ namespace LuckyFuture.Site
             Current = null;
 
             reqQuote(ItemSymbol, mt_oldSymbol);
-
+            this.ValuationList[0].CurrentProfit = this.ValuationList[0].TotalProfit;
             CurrentList.Clear();
             OrderList.Clear();
-            RequestOrderList(false, false);
-            RequestOrderList(false, true);
+            RequestOrderList(false);
         }
 
 
@@ -324,6 +323,8 @@ namespace LuckyFuture.Site
                 param_list.Add("symbol", ItemSymbol);
                 param_list.Add("volume", nQuantity);
                 param_list.Add("takeProfit", 0);
+             
+                OnFutureSiteLogEvent(string.Format("[매도주문] 주문가:시장가, 주문수량:{0}", nQuantity));
             }
             else
             {
@@ -331,6 +332,7 @@ namespace LuckyFuture.Site
                 param_list.Add("symbol", ItemSymbol);
                 param_list.Add("volume", nQuantity);
                 param_list.Add("openPrice", quoteInfo.Price);
+                OnFutureSiteLogEvent(string.Format("[매도주문] 주문가:{0}, 주문수량:{1}", quoteInfo.Price, nQuantity));
             }
 
             string jsonParam = JsonSerializer.Serialize(param_list);
@@ -415,6 +417,7 @@ namespace LuckyFuture.Site
                 param_list.Add("symbol", ItemSymbol);
                 param_list.Add("volume", nQuantity);
                 param_list.Add("takeProfit", 0);
+                OnFutureSiteLogEvent(string.Format("[매수주문] 주문가:시장가, 주문수량:{0}", nQuantity));
             }
             else
             {
@@ -422,6 +425,7 @@ namespace LuckyFuture.Site
                 param_list.Add("symbol", ItemSymbol);
                 param_list.Add("volume", nQuantity);
                 param_list.Add("openPrice", quoteInfo.Price);
+                OnFutureSiteLogEvent(string.Format("[매수주문] 주문가:{0}, 주문수량:{1}", quoteInfo.Price, nQuantity));
             }
 
             string jsonParam = JsonSerializer.Serialize(param_list);
@@ -801,9 +805,20 @@ namespace LuckyFuture.Site
             if (this.CurrentUserAccount == null)
                 return CONSTATE.NO_LOGIN;
 
-            DateTime dtNow = DateTime.Now.AddHours(-6);
-            string startTime = dtNow.ToString("yyyy-MM-ddT") + "00:00:00";
-            string endTime = dtNow.AddHours(24).ToString("yyyy-MM-dd");
+            DateTime dtNow = DateTime.Now;
+            string startTime = "";
+            string endTime = "";
+
+            if (string.Compare(dtNow.ToString("HH:mm:ss"), "07:00:00") < 0)
+            {
+                startTime = dtNow.AddDays(-2).ToString("yyyy-MM-dd") + "T22:00:00";
+                endTime = dtNow.AddDays(-1).ToString("yyyy-MM-dd")+ "T22:00:00";
+            } else
+            {
+                startTime = dtNow.AddDays(-1).ToString("yyyy-MM-dd") + "T22:00:00";
+                endTime = dtNow.ToString("yyyy-MM-dd") + "T22:00:00";
+            }
+
             string url = String.Format("{0}/users/current/accounts/{1}/history-deals/time/{2}/{3}", URL_MAIN, mt_userId, startTime, endTime);
             string token = UserPassword;
             if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.GET, url, token))
@@ -834,20 +849,13 @@ namespace LuckyFuture.Site
             return CONSTATE.SUCCESSS;
         }
 
-        private void RequestOrderList(bool bAccount, bool bRequidate)
+        private void RequestOrderList(bool bAccount)
         {
-            if (Settings.Default.SignalSiteOn)
-                return;
 
-            Thread.Sleep(200);
-            if (bRequidate)
-            {
-                RequestRequidateOrder();
-            }
-            else
-            {
-                RequestOutstandOrder();
-            }
+            Thread.Sleep(500);
+            RequestOutstandOrder();
+            Thread.Sleep(500);
+            RequestRequidateOrder();
 
             if (bAccount)
             {
@@ -861,7 +869,6 @@ namespace LuckyFuture.Site
             if (this.CurrentUserAccount == null)
                 return CONSTATE.NO_LOGIN;
 
-            OrderList.RemoveAll(o => o.OrderType == "체결");
 
             string token = UserPassword;
             string url = String.Format("{0}/users/current/accounts/{1}/positions?refreshTerminalState=true", URL_MAIN, mt_userId);
@@ -870,42 +877,48 @@ namespace LuckyFuture.Site
 
             try
             {
-                JsonDocument doc = JsonDocument.Parse(body);
-                JsonElement rootElement = doc.RootElement;
-                int cnt = rootElement.GetArrayLength();
-                for (int i = 0; i < cnt; i++)
+                lock (OrderList)
                 {
-                    string orderNo = rootElement[i].GetProperty("id").GetString();
-                    string type = rootElement[i].GetProperty("type").GetString();
-                    string symbol = rootElement[i].GetProperty("symbol").GetString();
-                    double volume = rootElement[i].GetProperty("volume").GetDouble();
-                    double openPrice = rootElement[i].GetProperty("openPrice").GetDouble();
-                    double currentPrice = rootElement[i].GetProperty("currentPrice").GetDouble();
-                    double profit = rootElement[i].GetProperty("profit").GetDouble();
-                    string orderTime = rootElement[i].GetProperty("time").GetString();
+                    OrderList.RemoveAll(o => o.OrderType == "체결");
 
-                    if (symbol != ItemSymbol)
-                        continue;
-                    // if (OrderList.FirstOrDefault(o => o.OrderNo == orderNo) != null)
-                    //    continue;
-
-                    OrderInfo orderInfo = new OrderInfo
+                    JsonDocument doc = JsonDocument.Parse(body);
+                    JsonElement rootElement = doc.RootElement;
+                    int cnt = rootElement.GetArrayLength();
+                    WriteLog(string.Format("[RequestRequidateOrder] cnt={0}", cnt));
+                    for (int i = 0; i < cnt; i++)
                     {
-                        OrderType = "체결",
-                        Symbol = symbol,
-                        Qty = string.Format("{0}[{1}]", type == "POSITION_TYPE_SELL" ? "매도" : "매수", volume),
-                        AveragePrice = openPrice.ToString(),
-                        MaxAveragePrice = Math.Round(openPrice, 6),
-                        CurrentPrice = currentPrice.ToString(),
-                        StartCciPrice = -10000,
-                        Valuation = (int)profit,
-                        Action = "청산",
-                        TradeType = type == "POSITION_TYPE_SELL" ? TRADETYPE.SELL : TRADETYPE.BUY,
-                        OrderQty = volume,
-                        OrderNo = orderNo,
-                        OrderDate = orderTime,
-                    };
-                    this.OrderList.Add(orderInfo);
+                        string orderNo = rootElement[i].GetProperty("id").GetString();
+                        string type = rootElement[i].GetProperty("type").GetString();
+                        string symbol = rootElement[i].GetProperty("symbol").GetString();
+                        double volume = rootElement[i].GetProperty("volume").GetDouble();
+                        double openPrice = rootElement[i].GetProperty("openPrice").GetDouble();
+                        double currentPrice = rootElement[i].GetProperty("currentPrice").GetDouble();
+                        double profit = rootElement[i].GetProperty("profit").GetDouble();
+                        string orderTime = rootElement[i].GetProperty("time").GetString();
+
+                        if (symbol != ItemSymbol)
+                            continue;
+                        if (OrderList.FirstOrDefault(o => o.OrderNo == orderNo /*&& o.OrderType == "체결"*/) != null)
+                            continue;
+
+                        OrderInfo orderInfo = new OrderInfo
+                        {
+                            OrderType = "체결",
+                            Symbol = symbol,
+                            Qty = string.Format("{0}[{1}]", type == "POSITION_TYPE_SELL" ? "매도" : "매수", volume),
+                            AveragePrice = openPrice.ToString(),
+                            MaxAveragePrice = Math.Round(openPrice, 6),
+                            CurrentPrice = currentPrice.ToString(),
+                            StartCciPrice = -10000,
+                            Valuation = (int)profit,
+                            Action = "청산",
+                            TradeType = type == "POSITION_TYPE_SELL" ? TRADETYPE.SELL : TRADETYPE.BUY,
+                            OrderQty = volume,
+                            OrderNo = orderNo,
+                            OrderDate = orderTime,
+                        };
+                        this.OrderList.Add(orderInfo);
+                    }
                 }
 
                 OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.ORDER);
@@ -925,8 +938,6 @@ namespace LuckyFuture.Site
             if (this.CurrentUserAccount == null)
                 return CONSTATE.NO_LOGIN;
 
-            OrderList.RemoveAll(o => o.OrderType == "미체결");
-
             string token = UserPassword;
             string url = String.Format("{0}/users/current/accounts/{1}/orders?refreshTerminalState=true", URL_MAIN, mt_userId);
             if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.GET, url, token))
@@ -934,42 +945,50 @@ namespace LuckyFuture.Site
 
             try
             {
-                JsonDocument doc = JsonDocument.Parse(body);
-                JsonElement rootElement = doc.RootElement;
-                int cnt = rootElement.GetArrayLength();
-                for (int i = 0; i < cnt; i++)
+                lock (OrderList)
                 {
-                    string orderNo = rootElement[i].GetProperty("id").GetString();
-                    string type = rootElement[i].GetProperty("type").GetString();
-                    string state = rootElement[i].GetProperty("state").GetString();
-                    string symbol = rootElement[i].GetProperty("symbol").GetString();
-                    double volume = rootElement[i].GetProperty("volume").GetDouble();
-                    double openPrice = rootElement[i].GetProperty("openPrice").GetDouble();
-                    double currentPrice = rootElement[i].GetProperty("currentPrice").GetDouble();
-                    string orderTime = rootElement[i].GetProperty("time").GetString();
+                    OrderList.RemoveAll(o => o.OrderType == "미체결");
 
-                    if (symbol != ItemSymbol)
-                        continue;
-                    // if (OrderList.FirstOrDefault(o => o.OrderNo == orderNo) != null)
-                    //    continue;
+                    JsonDocument doc = JsonDocument.Parse(body);
+                    JsonElement rootElement = doc.RootElement;
+                    int cnt = rootElement.GetArrayLength();
 
-                    OrderInfo orderInfo = new OrderInfo
+                    WriteLog(string.Format("[RequestOutstandOrder] cnt={0}", cnt));
+
+                    for (int i = 0; i < cnt; i++)
                     {
-                        OrderType = "미체결",
-                        Symbol = symbol,
-                        Qty = string.Format("{0}[{1}]", type == "POSITION_TYPE_SELL_LIMIT" ? "매도" : "매수", volume),
-                        AveragePrice = openPrice.ToString(),
-                        MaxAveragePrice = Math.Round(openPrice, 6),
-                        CurrentPrice = currentPrice.ToString(),
-                        Valuation = 0L,
-                        Action = "취소",
-                        TradeType = type == "POSITION_TYPE_SELL" ? TRADETYPE.SELL : TRADETYPE.BUY,
-                        OrderQty = volume,
-                        OrderNo = orderNo,
-                        OrderTime = Environment.TickCount,
-                        OrderDate = orderTime,
-                    };
-                    this.OrderList.Add(orderInfo);
+                        string orderNo = rootElement[i].GetProperty("id").GetString();
+                        string type = rootElement[i].GetProperty("type").GetString();
+                        string state = rootElement[i].GetProperty("state").GetString();
+                        string symbol = rootElement[i].GetProperty("symbol").GetString();
+                        double volume = rootElement[i].GetProperty("volume").GetDouble();
+                        double openPrice = rootElement[i].GetProperty("openPrice").GetDouble();
+                        double currentPrice = rootElement[i].GetProperty("currentPrice").GetDouble();
+                        string orderTime = rootElement[i].GetProperty("time").GetString();
+
+                        if (symbol != ItemSymbol)
+                            continue;
+                        if (OrderList.FirstOrDefault(o => o.OrderNo == orderNo/* && o.OrderType == "미체결"*/) != null)
+                            continue;
+
+                        OrderInfo orderInfo = new OrderInfo
+                        {
+                            OrderType = "미체결",
+                            Symbol = symbol,
+                            Qty = string.Format("{0}[{1}]", type == "POSITION_TYPE_SELL_LIMIT" ? "매도" : "매수", volume),
+                            AveragePrice = openPrice.ToString(),
+                            MaxAveragePrice = Math.Round(openPrice, 6),
+                            CurrentPrice = currentPrice.ToString(),
+                            Valuation = 0L,
+                            Action = "취소",
+                            TradeType = type == "POSITION_TYPE_SELL" ? TRADETYPE.SELL : TRADETYPE.BUY,
+                            OrderQty = volume,
+                            OrderNo = orderNo,
+                            OrderTime = Environment.TickCount,
+                            OrderDate = orderTime,
+                        };
+                        this.OrderList.Add(orderInfo);
+                    }
                 }
 
                 SetUnliquidationPosition(OrderList);
@@ -1050,8 +1069,13 @@ namespace LuckyFuture.Site
 
             if (symbol != ItemSymbol)
                 return;
+            OrderInfo orderInfo = OrderList.FirstOrDefault(o => o.OrderType == "체결" && o.OrderNo == orderNo);
+            if(orderInfo != null)
+            {
+                OrderList.Remove(orderInfo);
+            }
 
-            OrderInfo orderInfo = OrderList.FirstOrDefault(o => o.OrderType == "미체결" && o.OrderNo == orderNo);
+            orderInfo = OrderList.FirstOrDefault(o => o.OrderType == "미체결" && o.OrderNo == orderNo);
 
             try
             {
@@ -1209,7 +1233,7 @@ namespace LuckyFuture.Site
                 double balance = json["balance"];
                 this.CurrentUserAccount.Balance = balance;
                 double valuation = json["equity"] - balance;
-                this.ValuationList[0].CurrentProfit = this.ValuationList[0].TotalProfit + valuation;
+                //this.ValuationList[0].CurrentProfit = this.ValuationList[0].TotalProfit + valuation;
 
                 OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.VALUATION);
 
@@ -1234,6 +1258,7 @@ namespace LuckyFuture.Site
                             int nOrderCnt = this.OrderList.Count;
                             if (nOrderCnt > 0)
                             {
+                                int nReqCnt = 0;
                                 OrderInfo orderInfo;
                                 double lValSum = 0;
                                 double dAveragePrice = 0.0;
@@ -1250,7 +1275,7 @@ namespace LuckyFuture.Site
                                         continue;
                                     }
 
-                                    if (double.Parse(orderInfo.CurrentPrice) != current.CurrentPrice)
+                                    //if (double.Parse(orderInfo.CurrentPrice) != current.CurrentPrice)
                                     {
                                         orderInfo.CurrentPrice = string.Format(Settings.Default.PriceFormat, orderInfo.TradeType == TRADETYPE.SELL ? current.CurrentPrice2 : current.CurrentPrice);
                                         dAveragePrice = double.Parse(orderInfo.AveragePrice);
@@ -1274,11 +1299,12 @@ namespace LuckyFuture.Site
                                         }
                                     }
                                     lValSum += orderInfo.Valuation;
+                                    nReqCnt++;
                                 }
                                 ValuationList[0].Valuation = lValSum;
                                 ValuationList[0].TotalValuation = lValSum;
-                                if (dAveragePriceSum > 0)
-                                    ValuationList[0].AverageUnitPrice = dAveragePriceSum / nOrderCnt;
+                                if (dAveragePriceSum > 0 && nReqCnt>0)
+                                    ValuationList[0].AverageUnitPrice = Math.Round(dAveragePriceSum / nReqCnt, 6);
                                 ValuationList[0].CurrentProfit = ValuationList[0].TotalProfit + lValSum;
 
                             }
@@ -1287,6 +1313,7 @@ namespace LuckyFuture.Site
                                 ValuationList[0].Valuation = 0;
                                 ValuationList[0].TotalValuation = 0;
                                 ValuationList[0].AverageUnitPrice = 0;
+                                ValuationList[0].CurrentProfit = ValuationList[0].TotalProfit;
                             }
                         }
                     }
@@ -2055,6 +2082,7 @@ namespace LuckyFuture.Site
         }
         private void socket_onConnected(object sender, EventArgs e)
         {
+            WriteLog("[socket_onConnected] " + e);
             var request = new Dictionary<string, object>
                 {
                     { "type", "subscribe"},
@@ -2067,6 +2095,9 @@ namespace LuckyFuture.Site
                 };
 
             _socketClient.EmitAsync("request", request);
+
+            if(m_bReconnect)
+                RequestOrderList(false);
         }
 
         private void socket_onError(object sender, string e)
@@ -2076,6 +2107,7 @@ namespace LuckyFuture.Site
 
         private void socket_onDisconnected(object sender, string e)
         {
+            m_bReconnect = true;
             WriteLog("[socket_onDisconnected] " + e);
         }
 
@@ -2120,7 +2152,7 @@ namespace LuckyFuture.Site
                 }
                 else if (msg.Contains("\"type\":\"update\""))
                 {
-                    WriteLog(string.Format("[SYNC] {0}", msg));
+                    WriteLog(string.Format("[SYNC_Update] {0}", msg));
                     JsonValue json = JsonValue.Parse(msg);
                     if (json.ContainsKey("updatedPositions") && json["updatedPositions"].JsonType == JsonType.Array)
                     {
@@ -2239,6 +2271,7 @@ namespace LuckyFuture.Site
                 if (!_httpClient.SendRequest(out body, out headers, HTTPREQUEST_TYPE.POST, url, token))
                     return false;
 
+                WriteLog(string.Format("[reqQuote] unsubscribe symbol={0}", oldSymbol));
                 Thread.Sleep(1000);
             }
 
@@ -2246,6 +2279,8 @@ namespace LuckyFuture.Site
             url = String.Format("{0}/users/current/accounts/{1}/symbols/{2}/current-tick?keepSubscription=true", URL_MAIN, mt_userId, newSymbol);
             if (!_httpClient.SendRequest(out body, out headers, HTTPREQUEST_TYPE.GET, url, token))
                 return false;
+
+            WriteLog(string.Format("[reqQuote] subscribe symbol={0}", newSymbol));
 
             return true;
         }
@@ -2276,7 +2311,7 @@ namespace LuckyFuture.Site
                 current.CurrentPrice2 = ask;
                 current.ConclusionVolume = 1;
 
-                WriteLog(string.Format("[Current] time={0}, ask={1}, bid={2}, equity={3}", sTime, ask, bid, equity));
+                //WriteLog(string.Format("[Current] time={0}, ask={1}, bid={2}, equity={3}", sTime, ask, bid, equity));
 
                 if (CurItemSymbol != null && CurItemSymbol.MidPrice == 0)
                 {

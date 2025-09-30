@@ -57,12 +57,12 @@ namespace LuckyFuture.UI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.dgvQuoteInfo = new System.Windows.Forms.DataGridView();
             this.chkFixed = new System.Windows.Forms.CheckBox();
@@ -190,6 +190,28 @@ namespace LuckyFuture.UI
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.groupBetting5 = new System.Windows.Forms.GroupBox();
+            this.cmbOrderLine5_2 = new System.Windows.Forms.ComboBox();
+            this.cmbOrderLine5_1 = new System.Windows.Forms.ComboBox();
+            this.label101 = new System.Windows.Forms.Label();
+            this.btnOrdSel5 = new ReaLTaiizor.Controls.DreamButton();
+            this.chkOrd54 = new System.Windows.Forms.CheckBox();
+            this.chkOrd53 = new System.Windows.Forms.CheckBox();
+            this.chkOrd52 = new System.Windows.Forms.CheckBox();
+            this.chkOrd51 = new System.Windows.Forms.CheckBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.txtBoAdjust5 = new System.Windows.Forms.TextBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.cmbOrderType5 = new System.Windows.Forms.ComboBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.txtOrderCount5 = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.cmbChartType5 = new System.Windows.Forms.ComboBox();
+            this.cmbBettingCandle5 = new System.Windows.Forms.ComboBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
             this.groupBetting4 = new System.Windows.Forms.GroupBox();
             this.btnBandSetting_4 = new ReaLTaiizor.Controls.DreamButton();
             this.chkBandChart_4 = new System.Windows.Forms.CheckBox();
@@ -323,25 +345,6 @@ namespace LuckyFuture.UI
             this.label60 = new System.Windows.Forms.Label();
             this.cmbChartType6 = new System.Windows.Forms.ComboBox();
             this.label62 = new System.Windows.Forms.Label();
-            this.groupBetting5 = new System.Windows.Forms.GroupBox();
-            this.btnOrdSel5 = new ReaLTaiizor.Controls.DreamButton();
-            this.chkOrd54 = new System.Windows.Forms.CheckBox();
-            this.chkOrd53 = new System.Windows.Forms.CheckBox();
-            this.chkOrd52 = new System.Windows.Forms.CheckBox();
-            this.chkOrd51 = new System.Windows.Forms.CheckBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.txtBoAdjust5 = new System.Windows.Forms.TextBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.cmbOrderType5 = new System.Windows.Forms.ComboBox();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.txtOrderCount5 = new System.Windows.Forms.TextBox();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.cmbChartType5 = new System.Windows.Forms.ComboBox();
-            this.cmbBettingCandle5 = new System.Windows.Forms.ComboBox();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
             this.groupBetting2 = new System.Windows.Forms.GroupBox();
             this.btnOrdSel2 = new ReaLTaiizor.Controls.DreamButton();
             this.chkOrd24 = new System.Windows.Forms.CheckBox();
@@ -426,13 +429,6 @@ namespace LuckyFuture.UI
             this.totalProfitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lossCutDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bsValuationInfo = new System.Windows.Forms.BindingSource(this.components);
-            this.orderTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.symbolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.averagePriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.currentPriceDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valuationDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.actionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.bsOrderInfo = new System.Windows.Forms.BindingSource(this.components);
             this.sellOrderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sellCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -443,6 +439,14 @@ namespace LuckyFuture.UI
             this.buyCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buyOrderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bsQuoteInfo = new System.Windows.Forms.BindingSource(this.components);
+            this.orderTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.symbolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.averagePriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.currentPriceDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valuationDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.endColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuoteInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvValuationInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderInfo)).BeginInit();
@@ -455,10 +459,10 @@ namespace LuckyFuture.UI
             this.groupPayoff1.SuspendLayout();
             this.groupPayoff2.SuspendLayout();
             this.groupPayoff3.SuspendLayout();
+            this.groupBetting5.SuspendLayout();
             this.groupBetting4.SuspendLayout();
             this.groupBetting3.SuspendLayout();
             this.groupBetting6.SuspendLayout();
-            this.groupBetting5.SuspendLayout();
             this.groupBetting2.SuspendLayout();
             this.groupBetting1.SuspendLayout();
             this.groupBetType.SuspendLayout();
@@ -655,7 +659,8 @@ namespace LuckyFuture.UI
             this.averagePriceDataGridViewTextBoxColumn,
             this.currentPriceDataGridViewTextBoxColumn2,
             this.valuationDataGridViewTextBoxColumn1,
-            this.actionDataGridViewTextBoxColumn});
+            this.actionDataGridViewTextBoxColumn,
+            this.endColumn});
             this.dgvOrderInfo.DataSource = this.bsOrderInfo;
             this.dgvOrderInfo.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvOrderInfo.EnableHeadersVisualStyles = false;
@@ -1055,10 +1060,10 @@ namespace LuckyFuture.UI
             this.panel1.Controls.Add(this.groupPayoff1);
             this.panel1.Controls.Add(this.groupPayoff2);
             this.panel1.Controls.Add(this.groupPayoff3);
+            this.panel1.Controls.Add(this.groupBetting5);
             this.panel1.Controls.Add(this.groupBetting4);
             this.panel1.Controls.Add(this.groupBetting3);
             this.panel1.Controls.Add(this.groupBetting6);
-            this.panel1.Controls.Add(this.groupBetting5);
             this.panel1.Controls.Add(this.groupBetting2);
             this.panel1.Controls.Add(this.groupBetting1);
             this.panel1.Controls.Add(this.groupBetType);
@@ -2448,6 +2453,307 @@ namespace LuckyFuture.UI
             this.checkBox2.TabIndex = 9;
             this.checkBox2.Text = "수익";
             this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // groupBetting5
+            // 
+            this.groupBetting5.Controls.Add(this.cmbOrderLine5_2);
+            this.groupBetting5.Controls.Add(this.cmbOrderLine5_1);
+            this.groupBetting5.Controls.Add(this.label101);
+            this.groupBetting5.Controls.Add(this.btnOrdSel5);
+            this.groupBetting5.Controls.Add(this.chkOrd54);
+            this.groupBetting5.Controls.Add(this.chkOrd53);
+            this.groupBetting5.Controls.Add(this.chkOrd52);
+            this.groupBetting5.Controls.Add(this.chkOrd51);
+            this.groupBetting5.Controls.Add(this.label37);
+            this.groupBetting5.Controls.Add(this.txtBoAdjust5);
+            this.groupBetting5.Controls.Add(this.label44);
+            this.groupBetting5.Controls.Add(this.cmbOrderType5);
+            this.groupBetting5.Controls.Add(this.label38);
+            this.groupBetting5.Controls.Add(this.label39);
+            this.groupBetting5.Controls.Add(this.txtOrderCount5);
+            this.groupBetting5.Controls.Add(this.label40);
+            this.groupBetting5.Controls.Add(this.label41);
+            this.groupBetting5.Controls.Add(this.cmbChartType5);
+            this.groupBetting5.Controls.Add(this.cmbBettingCandle5);
+            this.groupBetting5.Controls.Add(this.label42);
+            this.groupBetting5.Controls.Add(this.label43);
+            this.groupBetting5.Location = new System.Drawing.Point(5, 54);
+            this.groupBetting5.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBetting5.Name = "groupBetting5";
+            this.groupBetting5.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBetting5.Size = new System.Drawing.Size(440, 240);
+            this.groupBetting5.TabIndex = 14;
+            this.groupBetting5.TabStop = false;
+            this.groupBetting5.Text = "주문설정";
+            // 
+            // cmbOrderLine5_2
+            // 
+            this.cmbOrderLine5_2.BackColor = System.Drawing.Color.White;
+            this.cmbOrderLine5_2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbOrderLine5_2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOrderLine5_2.FormattingEnabled = true;
+            this.cmbOrderLine5_2.Location = new System.Drawing.Point(188, 126);
+            this.cmbOrderLine5_2.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbOrderLine5_2.Name = "cmbOrderLine5_2";
+            this.cmbOrderLine5_2.Size = new System.Drawing.Size(85, 26);
+            this.cmbOrderLine5_2.TabIndex = 76;
+            this.cmbOrderLine5_2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderLine5_2_DrawItem);
+            this.cmbOrderLine5_2.SelectedIndexChanged += new System.EventHandler(this.cmbOrderLine5_2_SelectedIndexChanged);
+            // 
+            // cmbOrderLine5_1
+            // 
+            this.cmbOrderLine5_1.BackColor = System.Drawing.Color.White;
+            this.cmbOrderLine5_1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbOrderLine5_1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOrderLine5_1.FormattingEnabled = true;
+            this.cmbOrderLine5_1.Location = new System.Drawing.Point(91, 126);
+            this.cmbOrderLine5_1.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbOrderLine5_1.Name = "cmbOrderLine5_1";
+            this.cmbOrderLine5_1.Size = new System.Drawing.Size(85, 26);
+            this.cmbOrderLine5_1.TabIndex = 75;
+            this.cmbOrderLine5_1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderLine5_1_DrawItem);
+            this.cmbOrderLine5_1.SelectedIndexChanged += new System.EventHandler(this.cmbOrderLine5_1_SelectedIndexChanged);
+            // 
+            // label101
+            // 
+            this.label101.AutoSize = true;
+            this.label101.Location = new System.Drawing.Point(17, 130);
+            this.label101.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label101.Name = "label101";
+            this.label101.Size = new System.Drawing.Size(67, 15);
+            this.label101.TabIndex = 74;
+            this.label101.Text = "크로스선";
+            // 
+            // btnOrdSel5
+            // 
+            this.btnOrdSel5.ColorA = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.btnOrdSel5.ColorB = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.btnOrdSel5.ColorC = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
+            this.btnOrdSel5.ColorD = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
+            this.btnOrdSel5.ColorE = System.Drawing.Color.White;
+            this.btnOrdSel5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOrdSel5.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnOrdSel5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrdSel5.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnOrdSel5.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnOrdSel5.Location = new System.Drawing.Point(399, 89);
+            this.btnOrdSel5.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOrdSel5.Name = "btnOrdSel5";
+            this.btnOrdSel5.Size = new System.Drawing.Size(29, 29);
+            this.btnOrdSel5.TabIndex = 73;
+            this.btnOrdSel5.Text = "...";
+            this.btnOrdSel5.UseVisualStyleBackColor = true;
+            this.btnOrdSel5.Click += new System.EventHandler(this.btnOrdSel5_Click);
+            // 
+            // chkOrd54
+            // 
+            this.chkOrd54.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkOrd54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
+            this.chkOrd54.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkOrd54.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkOrd54.ForeColor = System.Drawing.Color.Black;
+            this.chkOrd54.Location = new System.Drawing.Point(346, 89);
+            this.chkOrd54.Margin = new System.Windows.Forms.Padding(0);
+            this.chkOrd54.Name = "chkOrd54";
+            this.chkOrd54.Size = new System.Drawing.Size(50, 29);
+            this.chkOrd54.TabIndex = 72;
+            this.chkOrd54.Text = "10";
+            this.chkOrd54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkOrd54.UseVisualStyleBackColor = false;
+            this.chkOrd54.CheckedChanged += new System.EventHandler(this.chkOrd54_CheckedChanged);
+            // 
+            // chkOrd53
+            // 
+            this.chkOrd53.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkOrd53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
+            this.chkOrd53.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkOrd53.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkOrd53.ForeColor = System.Drawing.Color.Black;
+            this.chkOrd53.Location = new System.Drawing.Point(293, 89);
+            this.chkOrd53.Margin = new System.Windows.Forms.Padding(0);
+            this.chkOrd53.Name = "chkOrd53";
+            this.chkOrd53.Size = new System.Drawing.Size(50, 29);
+            this.chkOrd53.TabIndex = 71;
+            this.chkOrd53.Text = "5";
+            this.chkOrd53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkOrd53.UseVisualStyleBackColor = false;
+            this.chkOrd53.CheckedChanged += new System.EventHandler(this.chkOrd53_CheckedChanged);
+            // 
+            // chkOrd52
+            // 
+            this.chkOrd52.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkOrd52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
+            this.chkOrd52.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkOrd52.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkOrd52.ForeColor = System.Drawing.Color.Black;
+            this.chkOrd52.Location = new System.Drawing.Point(240, 89);
+            this.chkOrd52.Margin = new System.Windows.Forms.Padding(0);
+            this.chkOrd52.Name = "chkOrd52";
+            this.chkOrd52.Size = new System.Drawing.Size(50, 29);
+            this.chkOrd52.TabIndex = 70;
+            this.chkOrd52.Text = "2";
+            this.chkOrd52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkOrd52.UseVisualStyleBackColor = false;
+            this.chkOrd52.CheckedChanged += new System.EventHandler(this.chkOrd52_CheckedChanged);
+            // 
+            // chkOrd51
+            // 
+            this.chkOrd51.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkOrd51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
+            this.chkOrd51.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chkOrd51.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkOrd51.ForeColor = System.Drawing.Color.Black;
+            this.chkOrd51.Location = new System.Drawing.Point(187, 89);
+            this.chkOrd51.Margin = new System.Windows.Forms.Padding(0);
+            this.chkOrd51.Name = "chkOrd51";
+            this.chkOrd51.Size = new System.Drawing.Size(50, 29);
+            this.chkOrd51.TabIndex = 69;
+            this.chkOrd51.Text = "1";
+            this.chkOrd51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkOrd51.UseVisualStyleBackColor = false;
+            this.chkOrd51.CheckedChanged += new System.EventHandler(this.chkOrd51_CheckedChanged);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(185, 204);
+            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(18, 15);
+            this.label37.TabIndex = 25;
+            this.label37.Text = "%";
+            // 
+            // txtBoAdjust5
+            // 
+            this.txtBoAdjust5.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoAdjust5.Location = new System.Drawing.Point(91, 198);
+            this.txtBoAdjust5.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoAdjust5.Name = "txtBoAdjust5";
+            this.txtBoAdjust5.Size = new System.Drawing.Size(85, 27);
+            this.txtBoAdjust5.TabIndex = 23;
+            this.txtBoAdjust5.TextChanged += new System.EventHandler(this.txtBoAdjust5_TextChanged);
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(15, 203);
+            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(72, 15);
+            this.label44.TabIndex = 24;
+            this.label44.Text = "SB선조정";
+            // 
+            // cmbOrderType5
+            // 
+            this.cmbOrderType5.BackColor = System.Drawing.Color.White;
+            this.cmbOrderType5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbOrderType5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOrderType5.FormattingEnabled = true;
+            this.cmbOrderType5.Location = new System.Drawing.Point(91, 55);
+            this.cmbOrderType5.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbOrderType5.Name = "cmbOrderType5";
+            this.cmbOrderType5.Size = new System.Drawing.Size(85, 26);
+            this.cmbOrderType5.TabIndex = 21;
+            this.cmbOrderType5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderType5_DrawItem);
+            this.cmbOrderType5.SelectedIndexChanged += new System.EventHandler(this.cmbOrderType5_SelectedIndexChanged);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(15, 60);
+            this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(67, 15);
+            this.label38.TabIndex = 22;
+            this.label38.Text = "주문타입";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(161, 96);
+            this.label39.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(22, 15);
+            this.label39.TabIndex = 20;
+            this.label39.Text = "개";
+            // 
+            // txtOrderCount5
+            // 
+            this.txtOrderCount5.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOrderCount5.Location = new System.Drawing.Point(91, 90);
+            this.txtOrderCount5.Margin = new System.Windows.Forms.Padding(4);
+            this.txtOrderCount5.Name = "txtOrderCount5";
+            this.txtOrderCount5.Size = new System.Drawing.Size(67, 27);
+            this.txtOrderCount5.TabIndex = 18;
+            this.txtOrderCount5.TextChanged += new System.EventHandler(this.txtOrderCount5_TextChanged);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(15, 95);
+            this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(67, 15);
+            this.label40.TabIndex = 19;
+            this.label40.Text = "주문수량";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(185, 169);
+            this.label41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(72, 15);
+            this.label41.TabIndex = 4;
+            this.label41.Text = "캔들 배팅";
+            // 
+            // cmbChartType5
+            // 
+            this.cmbChartType5.BackColor = System.Drawing.Color.White;
+            this.cmbChartType5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbChartType5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbChartType5.FormattingEnabled = true;
+            this.cmbChartType5.Location = new System.Drawing.Point(91, 22);
+            this.cmbChartType5.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbChartType5.Name = "cmbChartType5";
+            this.cmbChartType5.Size = new System.Drawing.Size(85, 26);
+            this.cmbChartType5.TabIndex = 0;
+            this.cmbChartType5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbChartType5_DrawItem);
+            this.cmbChartType5.SelectedIndexChanged += new System.EventHandler(this.cmbChartType5_SelectedIndexChanged);
+            // 
+            // cmbBettingCandle5
+            // 
+            this.cmbBettingCandle5.BackColor = System.Drawing.Color.White;
+            this.cmbBettingCandle5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbBettingCandle5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBettingCandle5.FormattingEnabled = true;
+            this.cmbBettingCandle5.Location = new System.Drawing.Point(91, 165);
+            this.cmbBettingCandle5.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbBettingCandle5.Name = "cmbBettingCandle5";
+            this.cmbBettingCandle5.Size = new System.Drawing.Size(85, 26);
+            this.cmbBettingCandle5.TabIndex = 0;
+            this.cmbBettingCandle5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbBettingCandle5_DrawItem);
+            this.cmbBettingCandle5.SelectedIndexChanged += new System.EventHandler(this.cmbBettingCandle5_SelectedIndexChanged);
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(15, 28);
+            this.label42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(67, 15);
+            this.label42.TabIndex = 3;
+            this.label42.Text = "차트타입";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(15, 168);
+            this.label43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(73, 15);
+            this.label43.TabIndex = 3;
+            this.label43.Text = "상승/하락";
             // 
             // groupBetting4
             // 
@@ -4146,266 +4452,6 @@ namespace LuckyFuture.UI
             this.label62.TabIndex = 3;
             this.label62.Text = "차트타입";
             // 
-            // groupBetting5
-            // 
-            this.groupBetting5.Controls.Add(this.btnOrdSel5);
-            this.groupBetting5.Controls.Add(this.chkOrd54);
-            this.groupBetting5.Controls.Add(this.chkOrd53);
-            this.groupBetting5.Controls.Add(this.chkOrd52);
-            this.groupBetting5.Controls.Add(this.chkOrd51);
-            this.groupBetting5.Controls.Add(this.label37);
-            this.groupBetting5.Controls.Add(this.txtBoAdjust5);
-            this.groupBetting5.Controls.Add(this.label44);
-            this.groupBetting5.Controls.Add(this.cmbOrderType5);
-            this.groupBetting5.Controls.Add(this.label38);
-            this.groupBetting5.Controls.Add(this.label39);
-            this.groupBetting5.Controls.Add(this.txtOrderCount5);
-            this.groupBetting5.Controls.Add(this.label40);
-            this.groupBetting5.Controls.Add(this.label41);
-            this.groupBetting5.Controls.Add(this.cmbChartType5);
-            this.groupBetting5.Controls.Add(this.cmbBettingCandle5);
-            this.groupBetting5.Controls.Add(this.label42);
-            this.groupBetting5.Controls.Add(this.label43);
-            this.groupBetting5.Location = new System.Drawing.Point(5, 54);
-            this.groupBetting5.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBetting5.Name = "groupBetting5";
-            this.groupBetting5.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBetting5.Size = new System.Drawing.Size(440, 240);
-            this.groupBetting5.TabIndex = 14;
-            this.groupBetting5.TabStop = false;
-            this.groupBetting5.Text = "주문설정";
-            // 
-            // btnOrdSel5
-            // 
-            this.btnOrdSel5.ColorA = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.btnOrdSel5.ColorB = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.btnOrdSel5.ColorC = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
-            this.btnOrdSel5.ColorD = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(227)))), ((int)(((byte)(227)))));
-            this.btnOrdSel5.ColorE = System.Drawing.Color.White;
-            this.btnOrdSel5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOrdSel5.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnOrdSel5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOrdSel5.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnOrdSel5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOrdSel5.Location = new System.Drawing.Point(399, 104);
-            this.btnOrdSel5.Margin = new System.Windows.Forms.Padding(4);
-            this.btnOrdSel5.Name = "btnOrdSel5";
-            this.btnOrdSel5.Size = new System.Drawing.Size(29, 29);
-            this.btnOrdSel5.TabIndex = 73;
-            this.btnOrdSel5.Text = "...";
-            this.btnOrdSel5.UseVisualStyleBackColor = true;
-            this.btnOrdSel5.Click += new System.EventHandler(this.btnOrdSel5_Click);
-            // 
-            // chkOrd54
-            // 
-            this.chkOrd54.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkOrd54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
-            this.chkOrd54.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkOrd54.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkOrd54.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd54.Location = new System.Drawing.Point(346, 104);
-            this.chkOrd54.Margin = new System.Windows.Forms.Padding(0);
-            this.chkOrd54.Name = "chkOrd54";
-            this.chkOrd54.Size = new System.Drawing.Size(50, 29);
-            this.chkOrd54.TabIndex = 72;
-            this.chkOrd54.Text = "10";
-            this.chkOrd54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkOrd54.UseVisualStyleBackColor = false;
-            this.chkOrd54.CheckedChanged += new System.EventHandler(this.chkOrd54_CheckedChanged);
-            // 
-            // chkOrd53
-            // 
-            this.chkOrd53.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkOrd53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
-            this.chkOrd53.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkOrd53.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkOrd53.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd53.Location = new System.Drawing.Point(293, 104);
-            this.chkOrd53.Margin = new System.Windows.Forms.Padding(0);
-            this.chkOrd53.Name = "chkOrd53";
-            this.chkOrd53.Size = new System.Drawing.Size(50, 29);
-            this.chkOrd53.TabIndex = 71;
-            this.chkOrd53.Text = "5";
-            this.chkOrd53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkOrd53.UseVisualStyleBackColor = false;
-            this.chkOrd53.CheckedChanged += new System.EventHandler(this.chkOrd53_CheckedChanged);
-            // 
-            // chkOrd52
-            // 
-            this.chkOrd52.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkOrd52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
-            this.chkOrd52.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkOrd52.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkOrd52.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd52.Location = new System.Drawing.Point(240, 104);
-            this.chkOrd52.Margin = new System.Windows.Forms.Padding(0);
-            this.chkOrd52.Name = "chkOrd52";
-            this.chkOrd52.Size = new System.Drawing.Size(50, 29);
-            this.chkOrd52.TabIndex = 70;
-            this.chkOrd52.Text = "2";
-            this.chkOrd52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkOrd52.UseVisualStyleBackColor = false;
-            this.chkOrd52.CheckedChanged += new System.EventHandler(this.chkOrd52_CheckedChanged);
-            // 
-            // chkOrd51
-            // 
-            this.chkOrd51.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkOrd51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
-            this.chkOrd51.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chkOrd51.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkOrd51.ForeColor = System.Drawing.Color.Black;
-            this.chkOrd51.Location = new System.Drawing.Point(187, 104);
-            this.chkOrd51.Margin = new System.Windows.Forms.Padding(0);
-            this.chkOrd51.Name = "chkOrd51";
-            this.chkOrd51.Size = new System.Drawing.Size(50, 29);
-            this.chkOrd51.TabIndex = 69;
-            this.chkOrd51.Text = "1";
-            this.chkOrd51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkOrd51.UseVisualStyleBackColor = false;
-            this.chkOrd51.CheckedChanged += new System.EventHandler(this.chkOrd51_CheckedChanged);
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(185, 196);
-            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(18, 15);
-            this.label37.TabIndex = 25;
-            this.label37.Text = "%";
-            // 
-            // txtBoAdjust5
-            // 
-            this.txtBoAdjust5.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoAdjust5.Location = new System.Drawing.Point(91, 191);
-            this.txtBoAdjust5.Margin = new System.Windows.Forms.Padding(4);
-            this.txtBoAdjust5.Name = "txtBoAdjust5";
-            this.txtBoAdjust5.Size = new System.Drawing.Size(85, 27);
-            this.txtBoAdjust5.TabIndex = 23;
-            this.txtBoAdjust5.TextChanged += new System.EventHandler(this.txtBoAdjust5_TextChanged);
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(15, 196);
-            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(72, 15);
-            this.label44.TabIndex = 24;
-            this.label44.Text = "SB선조정";
-            // 
-            // cmbOrderType5
-            // 
-            this.cmbOrderType5.BackColor = System.Drawing.Color.White;
-            this.cmbOrderType5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbOrderType5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbOrderType5.FormattingEnabled = true;
-            this.cmbOrderType5.Location = new System.Drawing.Point(91, 64);
-            this.cmbOrderType5.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbOrderType5.Name = "cmbOrderType5";
-            this.cmbOrderType5.Size = new System.Drawing.Size(85, 26);
-            this.cmbOrderType5.TabIndex = 21;
-            this.cmbOrderType5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbOrderType5_DrawItem);
-            this.cmbOrderType5.SelectedIndexChanged += new System.EventHandler(this.cmbOrderType5_SelectedIndexChanged);
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(15, 69);
-            this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(67, 15);
-            this.label38.TabIndex = 22;
-            this.label38.Text = "주문타입";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(161, 109);
-            this.label39.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(22, 15);
-            this.label39.TabIndex = 20;
-            this.label39.Text = "개";
-            // 
-            // txtOrderCount5
-            // 
-            this.txtOrderCount5.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrderCount5.Location = new System.Drawing.Point(91, 105);
-            this.txtOrderCount5.Margin = new System.Windows.Forms.Padding(4);
-            this.txtOrderCount5.Name = "txtOrderCount5";
-            this.txtOrderCount5.Size = new System.Drawing.Size(67, 27);
-            this.txtOrderCount5.TabIndex = 18;
-            this.txtOrderCount5.TextChanged += new System.EventHandler(this.txtOrderCount5_TextChanged);
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(15, 110);
-            this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(67, 15);
-            this.label40.TabIndex = 19;
-            this.label40.Text = "주문수량";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(185, 152);
-            this.label41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(72, 15);
-            this.label41.TabIndex = 4;
-            this.label41.Text = "캔들 배팅";
-            // 
-            // cmbChartType5
-            // 
-            this.cmbChartType5.BackColor = System.Drawing.Color.White;
-            this.cmbChartType5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbChartType5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbChartType5.FormattingEnabled = true;
-            this.cmbChartType5.Location = new System.Drawing.Point(91, 22);
-            this.cmbChartType5.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbChartType5.Name = "cmbChartType5";
-            this.cmbChartType5.Size = new System.Drawing.Size(85, 26);
-            this.cmbChartType5.TabIndex = 0;
-            this.cmbChartType5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbChartType5_DrawItem);
-            this.cmbChartType5.SelectedIndexChanged += new System.EventHandler(this.cmbChartType5_SelectedIndexChanged);
-            // 
-            // cmbBettingCandle5
-            // 
-            this.cmbBettingCandle5.BackColor = System.Drawing.Color.White;
-            this.cmbBettingCandle5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbBettingCandle5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBettingCandle5.FormattingEnabled = true;
-            this.cmbBettingCandle5.Location = new System.Drawing.Point(91, 149);
-            this.cmbBettingCandle5.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbBettingCandle5.Name = "cmbBettingCandle5";
-            this.cmbBettingCandle5.Size = new System.Drawing.Size(85, 26);
-            this.cmbBettingCandle5.TabIndex = 0;
-            this.cmbBettingCandle5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbBettingCandle5_DrawItem);
-            this.cmbBettingCandle5.SelectedIndexChanged += new System.EventHandler(this.cmbBettingCandle5_SelectedIndexChanged);
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(15, 28);
-            this.label42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(67, 15);
-            this.label42.TabIndex = 3;
-            this.label42.Text = "차트타입";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(15, 152);
-            this.label43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(73, 15);
-            this.label43.TabIndex = 3;
-            this.label43.Text = "상승/하락";
-            // 
             // groupBetting2
             // 
             this.groupBetting2.Controls.Add(this.btnOrdSel2);
@@ -5569,85 +5615,6 @@ namespace LuckyFuture.UI
             // 
             this.bsValuationInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.ValuationInfo);
             // 
-            // orderTypeDataGridViewTextBoxColumn
-            // 
-            this.orderTypeDataGridViewTextBoxColumn.DataPropertyName = "OrderType";
-            this.orderTypeDataGridViewTextBoxColumn.HeaderText = "구분";
-            this.orderTypeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.orderTypeDataGridViewTextBoxColumn.Name = "orderTypeDataGridViewTextBoxColumn";
-            this.orderTypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.orderTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.orderTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.orderTypeDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // symbolDataGridViewTextBoxColumn
-            // 
-            this.symbolDataGridViewTextBoxColumn.DataPropertyName = "Symbol";
-            this.symbolDataGridViewTextBoxColumn.HeaderText = "종목코드";
-            this.symbolDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.symbolDataGridViewTextBoxColumn.Name = "symbolDataGridViewTextBoxColumn";
-            this.symbolDataGridViewTextBoxColumn.ReadOnly = true;
-            this.symbolDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.symbolDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.symbolDataGridViewTextBoxColumn.Width = 83;
-            // 
-            // qtyDataGridViewTextBoxColumn
-            // 
-            this.qtyDataGridViewTextBoxColumn.DataPropertyName = "Qty";
-            this.qtyDataGridViewTextBoxColumn.HeaderText = "수량";
-            this.qtyDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.qtyDataGridViewTextBoxColumn.Name = "qtyDataGridViewTextBoxColumn";
-            this.qtyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.qtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.qtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.qtyDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // averagePriceDataGridViewTextBoxColumn
-            // 
-            this.averagePriceDataGridViewTextBoxColumn.DataPropertyName = "AveragePrice";
-            this.averagePriceDataGridViewTextBoxColumn.HeaderText = "주문가";
-            this.averagePriceDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.averagePriceDataGridViewTextBoxColumn.Name = "averagePriceDataGridViewTextBoxColumn";
-            this.averagePriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.averagePriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.averagePriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.averagePriceDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // currentPriceDataGridViewTextBoxColumn2
-            // 
-            this.currentPriceDataGridViewTextBoxColumn2.DataPropertyName = "CurrentPrice";
-            this.currentPriceDataGridViewTextBoxColumn2.HeaderText = "현재가";
-            this.currentPriceDataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.currentPriceDataGridViewTextBoxColumn2.Name = "currentPriceDataGridViewTextBoxColumn2";
-            this.currentPriceDataGridViewTextBoxColumn2.ReadOnly = true;
-            this.currentPriceDataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.currentPriceDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.currentPriceDataGridViewTextBoxColumn2.Width = 70;
-            // 
-            // valuationDataGridViewTextBoxColumn1
-            // 
-            this.valuationDataGridViewTextBoxColumn1.DataPropertyName = "Valuation";
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.valuationDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle12;
-            this.valuationDataGridViewTextBoxColumn1.HeaderText = "평가손익";
-            this.valuationDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.valuationDataGridViewTextBoxColumn1.Name = "valuationDataGridViewTextBoxColumn1";
-            this.valuationDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.valuationDataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.valuationDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.valuationDataGridViewTextBoxColumn1.Width = 95;
-            // 
-            // actionDataGridViewTextBoxColumn
-            // 
-            this.actionDataGridViewTextBoxColumn.DataPropertyName = "Action";
-            this.actionDataGridViewTextBoxColumn.HeaderText = "주문";
-            this.actionDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.actionDataGridViewTextBoxColumn.Name = "actionDataGridViewTextBoxColumn";
-            this.actionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.actionDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.actionDataGridViewTextBoxColumn.Width = 63;
-            // 
             // bsOrderInfo
             // 
             this.bsOrderInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.OrderInfo);
@@ -5792,6 +5759,93 @@ namespace LuckyFuture.UI
             // 
             this.bsQuoteInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.QuoteInfo);
             // 
+            // orderTypeDataGridViewTextBoxColumn
+            // 
+            this.orderTypeDataGridViewTextBoxColumn.DataPropertyName = "OrderType";
+            this.orderTypeDataGridViewTextBoxColumn.HeaderText = "구분";
+            this.orderTypeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.orderTypeDataGridViewTextBoxColumn.Name = "orderTypeDataGridViewTextBoxColumn";
+            this.orderTypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.orderTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.orderTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.orderTypeDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // symbolDataGridViewTextBoxColumn
+            // 
+            this.symbolDataGridViewTextBoxColumn.DataPropertyName = "Symbol";
+            this.symbolDataGridViewTextBoxColumn.HeaderText = "종목코드";
+            this.symbolDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.symbolDataGridViewTextBoxColumn.Name = "symbolDataGridViewTextBoxColumn";
+            this.symbolDataGridViewTextBoxColumn.ReadOnly = true;
+            this.symbolDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.symbolDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.symbolDataGridViewTextBoxColumn.Width = 83;
+            // 
+            // qtyDataGridViewTextBoxColumn
+            // 
+            this.qtyDataGridViewTextBoxColumn.DataPropertyName = "Qty";
+            this.qtyDataGridViewTextBoxColumn.HeaderText = "수량";
+            this.qtyDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.qtyDataGridViewTextBoxColumn.Name = "qtyDataGridViewTextBoxColumn";
+            this.qtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.qtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.qtyDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.qtyDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // averagePriceDataGridViewTextBoxColumn
+            // 
+            this.averagePriceDataGridViewTextBoxColumn.DataPropertyName = "AveragePrice";
+            this.averagePriceDataGridViewTextBoxColumn.HeaderText = "주문가";
+            this.averagePriceDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.averagePriceDataGridViewTextBoxColumn.Name = "averagePriceDataGridViewTextBoxColumn";
+            this.averagePriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.averagePriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.averagePriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.averagePriceDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // currentPriceDataGridViewTextBoxColumn2
+            // 
+            this.currentPriceDataGridViewTextBoxColumn2.DataPropertyName = "CurrentPrice";
+            this.currentPriceDataGridViewTextBoxColumn2.HeaderText = "현재가";
+            this.currentPriceDataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.currentPriceDataGridViewTextBoxColumn2.Name = "currentPriceDataGridViewTextBoxColumn2";
+            this.currentPriceDataGridViewTextBoxColumn2.ReadOnly = true;
+            this.currentPriceDataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.currentPriceDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.currentPriceDataGridViewTextBoxColumn2.Width = 70;
+            // 
+            // valuationDataGridViewTextBoxColumn1
+            // 
+            this.valuationDataGridViewTextBoxColumn1.DataPropertyName = "Valuation";
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.valuationDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle12;
+            this.valuationDataGridViewTextBoxColumn1.HeaderText = "평가손익";
+            this.valuationDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.valuationDataGridViewTextBoxColumn1.Name = "valuationDataGridViewTextBoxColumn1";
+            this.valuationDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.valuationDataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.valuationDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.valuationDataGridViewTextBoxColumn1.Width = 85;
+            // 
+            // actionDataGridViewTextBoxColumn
+            // 
+            this.actionDataGridViewTextBoxColumn.DataPropertyName = "Action";
+            this.actionDataGridViewTextBoxColumn.HeaderText = "주문";
+            this.actionDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.actionDataGridViewTextBoxColumn.Name = "actionDataGridViewTextBoxColumn";
+            this.actionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.actionDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.actionDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // endColumn
+            // 
+            this.endColumn.HeaderText = "";
+            this.endColumn.MinimumWidth = 6;
+            this.endColumn.Name = "endColumn";
+            this.endColumn.ReadOnly = true;
+            this.endColumn.Width = 20;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -5871,14 +5925,14 @@ namespace LuckyFuture.UI
             this.groupPayoff2.PerformLayout();
             this.groupPayoff3.ResumeLayout(false);
             this.groupPayoff3.PerformLayout();
+            this.groupBetting5.ResumeLayout(false);
+            this.groupBetting5.PerformLayout();
             this.groupBetting4.ResumeLayout(false);
             this.groupBetting4.PerformLayout();
             this.groupBetting3.ResumeLayout(false);
             this.groupBetting3.PerformLayout();
             this.groupBetting6.ResumeLayout(false);
             this.groupBetting6.PerformLayout();
-            this.groupBetting5.ResumeLayout(false);
-            this.groupBetting5.PerformLayout();
             this.groupBetting2.ResumeLayout(false);
             this.groupBetting2.PerformLayout();
             this.groupBetting1.ResumeLayout(false);
@@ -6256,13 +6310,6 @@ namespace LuckyFuture.UI
         private System.Windows.Forms.DataGridViewTextBoxColumn totalValuationDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalProfitDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lossCutDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn orderTypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn symbolDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qtyDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn averagePriceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn currentPriceDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn valuationDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewButtonColumn actionDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label label99;
         private System.Windows.Forms.CheckBox chkWithEarn;
         private System.Windows.Forms.CheckBox chkWithEarn2;
@@ -6276,6 +6323,17 @@ namespace LuckyFuture.UI
         private System.Windows.Forms.ComboBox cmbReverseOrd2;
         private System.Windows.Forms.TextBox txtReverseOrd2;
         private System.Windows.Forms.ComboBox cmbReverseOrd1;
+        private System.Windows.Forms.ComboBox cmbOrderLine5_2;
+        private System.Windows.Forms.ComboBox cmbOrderLine5_1;
+        private System.Windows.Forms.Label label101;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orderTypeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn symbolDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qtyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn averagePriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn currentPriceDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valuationDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewButtonColumn actionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn endColumn;
         // private AxKFOpenAPILib.AxKFOpenAPI axKFOpenAPI;
     }
 }

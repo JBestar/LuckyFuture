@@ -388,7 +388,7 @@ namespace LuckyFuture.Logic
             if (_tradeTypeToOrder != TRADETYPE.NONE)
             {
                 if (log.Length > 0)
-                    this.frmMain.AddLog(log);
+                    this.frmMain.AddLog("[주문]" + log);
                 return true;
             }
             else
@@ -2212,7 +2212,7 @@ namespace LuckyFuture.Logic
 
             if (lastCandlelist.Count < nCandleCnt)
                 return TRADETYPE.NONE;
-            string log = "[주문] ";
+            string log = "";
 
             TRADETYPE trade_type = TRADETYPE.NONE;
 
@@ -2226,7 +2226,7 @@ namespace LuckyFuture.Logic
                     return TRADETYPE.NONE;
 
                 trade_type = lastCandle.Result == RESULTSTATE.BUY ? TRADETYPE.BUY : TRADETYPE.SELL;
-
+                log += string.Format("방식:동일캔들 차트타입:{0} 동일색캔들:{1}개이상 ", Common.GetChartTypeStr((CHARTTYPE)Settings.Default.ChartType), Settings.Default.BettingCandleCount);
             }
             else if (Settings.Default.BettingType == (int)BETTYPE.UPDOWN)               //Check Moving Average Line
             {
@@ -2240,12 +2240,14 @@ namespace LuckyFuture.Logic
 #endif
                 if (fTickDiff >= fTickConf && lastCandlelist.Count<DItem>(d => d.GetTrendUp(avgType, iFirstIdx) == CH_TRENDTYPE.UP) >= Settings.Default.BettingCandleCount + 1)
                 {
-                    log += String.Format("틱={0:N2}(설정:{1}개 틱={2})", fTickDiff, Settings.Default.BettingCandleCount, fTickConf);
+                    log += string.Format("방식:이평언오버 차트타입:{0} 이평선:{1} ", Common.GetChartTypeStr((CHARTTYPE)Settings.Default.ChartType), Common.GetAvgTypeStr(Settings.Default.AvgType));
+                    log += String.Format("틱={0:N2}(설정:{1}개 틱={2:N1})", fTickDiff, Settings.Default.BettingCandleCount, fTickConf/ Settings.Default.ItemOverTick);
                     trade_type = TRADETYPE.BUY;
                 }
                 else if (fTickDiff >= fTickConf && lastCandlelist.Count<DItem>(d => d.GetTrendDown(avgType, iFirstIdx) == CH_TRENDTYPE.DOWN) >= Settings.Default.BettingCandleCount + 1)
                 {
-                    log += String.Format("틱={0:N2}(설정:{1}개 틱={2})", fTickDiff, Settings.Default.BettingCandleCount, fTickConf);
+                    log += string.Format("방식:이평언오버 차트타입:{0} 이평선:{1} ", Common.GetChartTypeStr((CHARTTYPE)Settings.Default.ChartType), Common.GetAvgTypeStr(Settings.Default.AvgType));
+                    log += String.Format("틱={0:N2}(설정:{1}개 틱={2:N1})", fTickDiff, Settings.Default.BettingCandleCount, fTickConf/ Settings.Default.ItemOverTick);
                     trade_type = TRADETYPE.SELL;
                 }
                 else trade_type = TRADETYPE.NONE;
@@ -2256,6 +2258,15 @@ namespace LuckyFuture.Logic
                 bool bTradeChanged = CheckTradeChange(ref logTrade);
                 if (bTradeChanged)
                 {
+                    if(Settings.Default.BettingType == (int)BETTYPE.CROSS)
+                    {
+                        log += string.Format("방식:이평크로스 차트타입:{0} 크로스:{1},{2} ", Common.GetChartTypeStr((CHARTTYPE)Settings.Default.ChartType), Common.GetAvgTypeStr(Settings.Default.CrossAvgLine1), Common.GetAvgTypeStr(Settings.Default.CrossAvgLine2));
+                    }
+                    else
+                    {
+                        log += string.Format("방식:이평-SB 차트타입:{0} 크로스:{1},{2} ", Common.GetChartTypeStr((CHARTTYPE)Settings.Default.ChartType), Common.GetAvgTypeStr(Settings.Default.CrossAvgLine1), Common.GetAvgTypeStr(Settings.Default.CrossAvgLine2));
+                    }
+
 
                     if (logTrade.Length > 0)
                     {
@@ -2300,12 +2311,15 @@ namespace LuckyFuture.Logic
             }
             else if (Settings.Default.BettingType == (int)BETTYPE.BOLINE || Settings.Default.BettingType == (int)BETTYPE.BOT1)           //Check Equivalent Candle 
             {
+
                 if (Settings.Default.BoOrdType == 1) //CCI Mode
                 {
                     string logTrade = "";
                     bool bTradeChanged = CheckTradeChange(ref logTrade);
                     if (bTradeChanged)
                     {
+                        log += string.Format("방식:S-B선 차트타입:{0} 진입체결:CCI ", Common.GetChartTypeStr((CHARTTYPE)Settings.Default.ChartType));
+
                         if (logTrade.Length > 0)
                         {
                             log += logTrade;
@@ -2333,6 +2347,8 @@ namespace LuckyFuture.Logic
                     DItem firstCandle = lastCandlelist.First<DItem>();
                     if (firstCandle.Bos[0] == firstCandle.Bos[1] || (Settings.Default.BettingEnter && m_boLiquid))
                     {
+                        log += string.Format("방식:S-B선 차트타입:{0} 진입체결:S-B ", Common.GetChartTypeStr((CHARTTYPE)Settings.Default.ChartType));
+
                         string logTrade = "";
                         bool bTradeChanged = CheckTradeChange(ref logTrade);
                         if (logTrade.Length > 0)

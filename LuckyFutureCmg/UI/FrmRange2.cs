@@ -29,7 +29,6 @@ namespace LuckyFuture.UI
         {
             dgvRangeInfo.DoubleBuffered(true);
             //lbAmount.Text = "금액";
-            //lbAmoutUnit.Text = "만원";
             //lbLoss.Text = "하락";
             //lbLossUnit.Text = "%";
             //lblRsi.Text = "RSI";
@@ -306,7 +305,7 @@ namespace LuckyFuture.UI
                 return;
             }
 
-            string amountUnit = "만원";
+            string amountUnit = "USD";
             string rateUnit = "%";
 
            if (RangeType == RANGETYPE.CciLoss)
