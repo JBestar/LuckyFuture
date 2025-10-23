@@ -12,6 +12,7 @@ namespace LuckyFuture.Models.ValueObjects
         public string ItemName { get; set; }
         public long ItemId { get; set; }
         public string Symbol { get; set; }
+        public string PrdName { get; set; }
         public double OverTick { get; set; }
         public double ValueTick { get; set; }
         public double Exchange { get; set; }
