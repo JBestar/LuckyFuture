@@ -70,7 +70,10 @@ namespace LuckyFuture
                             // case "OrderMax": Settings.Default.OrderMax = int.Parse(value); break;
                             case "Reorder": Settings.Default.Reorder = bool.Parse(value); break;
                             case "ReturnOption": Settings.Default.ReturnOption = byte.Parse(value); break;
+                            case "BoAdjustPerOn": Settings.Default.BoAdjustPerOn = bool.Parse(value); break;
                             case "BoLineAdjust": Settings.Default.BoLineAdjust = int.Parse(value); break;
+                            case "BoAdjustSecOn": Settings.Default.BoAdjustSecOn = bool.Parse(value); break;
+                            case "BoAdjustSec": Settings.Default.BoAdjustSec = int.Parse(value); break;
                             case "BettingEnter": Settings.Default.BettingEnter = bool.Parse(value); break;
                             case "LiquidStop": Settings.Default.LiquidStop = bool.Parse(value); break;
                             case "ForceEarnPayoff": Settings.Default.ForceEarnPayoff = bool.Parse(value); break;
@@ -222,7 +225,10 @@ namespace LuckyFuture
                 AddElement(document, itemListElement, "Reorder", Settings.Default.Reorder.ToString());
                 AddElement(document, itemListElement, "ReturnOption", Settings.Default.ReturnOption.ToString());
                 //Except ServerTimeDelay
+                AddElement(document, itemListElement, "BoAdjustPer", Settings.Default.BoAdjustPerOn.ToString());
                 AddElement(document, itemListElement, "BoLineAdjust", Settings.Default.BoLineAdjust.ToString());
+                AddElement(document, itemListElement, "BoAdjustSecOn", Settings.Default.BoAdjustSecOn.ToString());
+                AddElement(document, itemListElement, "BoAdjustSec", Settings.Default.BoAdjustSec.ToString());
                 AddElement(document, itemListElement, "BettingEnter", Settings.Default.BettingEnter.ToString());
                 AddElement(document, itemListElement, "LiquidStop", Settings.Default.LiquidStop.ToString());
                 AddElement(document, itemListElement, "ForceEarnPayoff", Settings.Default.ForceEarnPayoff.ToString());

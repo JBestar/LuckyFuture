@@ -13,4 +13,11 @@ namespace LuckyFuture.Models.ValueObjects
 		BUY,
 		BOTH,
 	}
+    public class SignalInfo
+    {
+        public TRADETYPE TradeType { get; set; }
+        public long UpdatedTick { get; set; }
+        public bool Enabled { get; set; }
+    }
+
 }

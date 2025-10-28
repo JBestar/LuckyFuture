@@ -85,7 +85,10 @@ namespace LuckyFuture.Site
             string url = String.Format("{0}/users/current/accounts?offset=0&limit=1000&state=DEPLOYED", URL_PROV);
             string token = UserPassword;
             if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.GET, url, token))
+            {
+                WriteLog(String.Format("Login error url={0}, response={1}", url, body));
                 return ERRORCODE.CANT_CONNECT;
+            }
             try
             {
                 mt_userId = "";
@@ -115,7 +118,10 @@ namespace LuckyFuture.Site
             url = String.Format("{0}/users/current/accounts/{1}/account-information", URL_MAIN, mt_userId);
             token = UserPassword;
             if (!_httpClient.SendRequest(out body, out headers, HTTPREQUEST_TYPE.GET, url, token))
+            {
+                WriteLog(String.Format("Login error url={0}, response={1}", url, body));
                 return ERRORCODE.CANT_CONNECT;
+            }
 
             double balance = 0, valuation = 0, profit = 0;
             try

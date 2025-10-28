@@ -14,16 +14,16 @@ using LuckyFuture.Properties;
 
 namespace LuckyFuture.UI
 {
-	public partial class FrmChart : Form
-	{
-		public static readonly FrmChart Default = new FrmChart();
+    public partial class FrmChart : Form
+    {
+        public static readonly FrmChart Default = new FrmChart();
         public CHARTTYPE _ChartType;
-		private FrmChart()
-		{
-			InitializeComponent();
-			CenterToParent();
-			InitializeComponentEx();
-		}
+        private FrmChart()
+        {
+            InitializeComponent();
+            CenterToParent();
+            InitializeComponentEx();
+        }
         private void InitializeComponentEx()
         {
             this.chartFuture.UnitTimeCount = ChartCtrl.TIMEUNIT.TIMEUNIT_60;
@@ -32,11 +32,11 @@ namespace LuckyFuture.UI
             chartFuture.SaveRtVal = true;
             ResetDChartType();
         }
-        
-        private void FrmChat_Load(object sender, EventArgs e)
-		{
 
-		}
+        private void FrmChat_Load(object sender, EventArgs e)
+        {
+
+        }
         private void ResetDChartType()
         {
 
@@ -48,17 +48,17 @@ namespace LuckyFuture.UI
             chartFuture.ChartNoticeEvent += chartEvent;
         }
         public void ResetChart()
-		{
-			if(InvokeRequired)
-			{
-				BeginInvoke(new MethodInvoker(delegate ()
-				{
-					ResetChart();
-				}));
-			}
-			else
-				chartFuture.InitDraw();
-		}
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new MethodInvoker(delegate ()
+                {
+                    ResetChart();
+                }));
+            }
+            else
+                chartFuture.InitDraw();
+        }
         public void Redraw()
         {
             if (InvokeRequired)
@@ -77,8 +77,8 @@ namespace LuckyFuture.UI
 
         }
         public void SetRTValue(double rt_value, DateTime time, int nQuantity, int nConclusion)
-		{
-			
+        {
+
 
             if (InvokeRequired)
             {
@@ -97,7 +97,7 @@ namespace LuckyFuture.UI
                 }
             }
             else
-                chartFuture.SetRealTimeVal((float)rt_value, time, nQuantity, nConclusion>0? nConclusion:1);
+                chartFuture.SetRealTimeVal((float)rt_value, time, nQuantity, nConclusion > 0 ? nConclusion : 1);
 
 
         }
@@ -166,7 +166,7 @@ namespace LuckyFuture.UI
                     break;
             }
 
-            return chartFuture.SetRChartType(tt, tu, arrAvgCnt, Settings.Default.BoLineAdjust);
+            return chartFuture.SetRChartType(tt, tu, arrAvgCnt, Settings.Default.BoAdjustPerOn ? Settings.Default.BoLineAdjust : 0);
 
         }
 
@@ -236,7 +236,7 @@ namespace LuckyFuture.UI
                     break;
             }
 
-            return chartFuture.SetDChartType(tt, tu, arrAvgCnt, Settings.Default.BoLineAdjust);
+            return chartFuture.SetDChartType(tt, tu, arrAvgCnt, Settings.Default.BoAdjustPerOn ? Settings.Default.BoLineAdjust : 0);
 
         }
 
@@ -377,9 +377,9 @@ namespace LuckyFuture.UI
             chartFuture.SetOrderInfo(orderInfo);
         }
         public List<DItem> GetCandleList(int nCandles = 0, bool bNeedLast = false)
-		{
+        {
             return chartFuture.GetDChartList(nCandles, bNeedLast);
-		}
+        }
         public List<CItem> GetCandleList2(int nCandles = 0, bool bNeedLast = false)
         {
             return chartFuture.GetCChartList(nCandles, bNeedLast);
@@ -397,9 +397,9 @@ namespace LuckyFuture.UI
             chartFuture.AppendValue(value, color);
         }
         private void FrmChat_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			Hide();
-			e.Cancel = true;
-		}
-	}
+        {
+            Hide();
+            e.Cancel = true;
+        }
+    }
 }

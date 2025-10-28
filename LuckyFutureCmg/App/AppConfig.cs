@@ -70,7 +70,10 @@ namespace LuckyFuture
                             // case "OrderMax": Settings.Default.OrderMax = int.Parse(value); break;
                             case "Reorder": Settings.Default.Reorder = bool.Parse(value); break;
                             case "ReturnOption": Settings.Default.ReturnOption = byte.Parse(value); break;
+                            case "BoAdjustPerOn": Settings.Default.BoAdjustPerOn = bool.Parse(value); break;
                             case "BoLineAdjust": Settings.Default.BoLineAdjust = int.Parse(value); break;
+                            case "BoAdjustSecOn": Settings.Default.BoAdjustSecOn = bool.Parse(value); break;
+                            case "BoAdjustSec": Settings.Default.BoAdjustSec = int.Parse(value); break;
                             case "BettingEnter": Settings.Default.BettingEnter = bool.Parse(value); break;
                             case "LiquidStop": Settings.Default.LiquidStop = bool.Parse(value); break;
                             case "ForceEarnPayoff": Settings.Default.ForceEarnPayoff = bool.Parse(value); break;
@@ -157,6 +160,9 @@ namespace LuckyFuture
                             case "ReverseOrdSel1": Settings.Default.ReverseOrdSel1 = int.Parse(value); break;
                             case "ReverseOrdCnt2": Settings.Default.ReverseOrdCnt2 = int.Parse(value); break;
                             case "ReverseOrdSel2": Settings.Default.ReverseOrdSel2 = int.Parse(value); break;
+                            case "GapLiquid": Settings.Default.GapLiquid = bool.Parse(value); break;
+                            case "GapValue": Settings.Default.GapValue = int.Parse(value); break;
+
                             default: break;
                         }
                     }
@@ -222,7 +228,10 @@ namespace LuckyFuture
                 AddElement(document, itemListElement, "Reorder", Settings.Default.Reorder.ToString());
                 AddElement(document, itemListElement, "ReturnOption", Settings.Default.ReturnOption.ToString());
                 //Except ServerTimeDelay
+                AddElement(document, itemListElement, "BoAdjustPer", Settings.Default.BoAdjustPerOn.ToString());
                 AddElement(document, itemListElement, "BoLineAdjust", Settings.Default.BoLineAdjust.ToString());
+                AddElement(document, itemListElement, "BoAdjustSecOn", Settings.Default.BoAdjustSecOn.ToString());
+                AddElement(document, itemListElement, "BoAdjustSec", Settings.Default.BoAdjustSec.ToString());
                 AddElement(document, itemListElement, "BettingEnter", Settings.Default.BettingEnter.ToString());
                 AddElement(document, itemListElement, "LiquidStop", Settings.Default.LiquidStop.ToString());
                 AddElement(document, itemListElement, "ForceEarnPayoff", Settings.Default.ForceEarnPayoff.ToString());
@@ -310,6 +319,8 @@ namespace LuckyFuture
                 AddElement(document, itemListElement, "ReverseOrdSel1", Settings.Default.ReverseOrdSel1.ToString());
                 AddElement(document, itemListElement, "ReverseOrdCnt2", Settings.Default.ReverseOrdCnt2.ToString());
                 AddElement(document, itemListElement, "ReverseOrdSel2", Settings.Default.ReverseOrdSel2.ToString());
+                AddElement(document, itemListElement, "GapLiquid", Settings.Default.GapLiquid.ToString());
+                AddElement(document, itemListElement, "GapValue", Settings.Default.GapValue.ToString());
 
                 document.Save(filePath);
                 return true;

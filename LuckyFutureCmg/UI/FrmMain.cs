@@ -1240,10 +1240,7 @@ namespace LuckyFuture.UI
 					cmbItemList.SelectedIndex = selIndex;
                     AddLog(CurrentSite.CurItemSymbol.ItemName);
                 }
-
-
             }
-
         }
         private void EnableControls()
 		{
@@ -1973,8 +1970,7 @@ namespace LuckyFuture.UI
         public void LoadSettingControls()
         {
             _bLoadConfig = true;
-            if (Settings.Default.BettingType == (int)BETTYPE.BOT1)
-                LockEx.locked = false;
+            
             cmbBettingType.SelectedIndex = Settings.Default.BettingType;
             try
             {
@@ -2023,6 +2019,10 @@ namespace LuckyFuture.UI
             txtBoAdjust4.Visible = index == 0;
             label45.Visible = index == 0;
             label46.Visible = index == 0;
+            chkBoAdjust4.Visible = index == 0;
+            chkBoSec4.Visible = index == 0;
+            txtBoSec4.Visible = index == 0;
+            label103.Visible = index == 0;
 
             btnSbOrd4.Invalidate();
             btnCciOrd4.Invalidate();
@@ -2518,6 +2518,9 @@ namespace LuckyFuture.UI
                 cmbAvgsSide1_3.SelectedIndex = Settings.Default.AvgsSide1;
                 cmbAvgsSide2_3.SelectedIndex = Settings.Default.AvgsSide2;
 
+                chkCrossSec3.Checked = Settings.Default.BoAdjustSecOn;
+                txtCrossSec3.Text = Settings.Default.BoAdjustSec.ToString();
+
                 cmbCciSide1_3.Location = new Point(144, 176);
                 cmbCciSide2_3.Location = new Point(144, 199);
                 txtCci11_3.Visible = false;
@@ -2549,7 +2552,10 @@ namespace LuckyFuture.UI
                 txtConc2Cnt.Text = Settings.Default.Conc2Cnt.ToString();
                 chkAdx.Checked = Settings.Default.AdxOn;
                 txtAdx.Text = Settings.Default.AdxCnt.ToString();
+                chkBoAdjust4.Checked = Settings.Default.BoAdjustPerOn;
                 txtBoAdjust4.Text = Settings.Default.BoLineAdjust.ToString();
+                chkBoSec4.Checked = Settings.Default.BoAdjustSecOn;
+                txtBoSec4.Text = Settings.Default.BoAdjustSec.ToString();
 
                 ChangeBoOrdBtn(Settings.Default.BoOrdType);
                 //Group B
@@ -2591,23 +2597,7 @@ namespace LuckyFuture.UI
                 cmbBettingCandle5.SelectedIndex = Settings.Default.BettingCandleComplete;
                 txtBoAdjust5.Text = Settings.Default.BoLineAdjust.ToString();
             }
-            else if (cmbBettingType.SelectedIndex == (int)BETTYPE.BOT1)
-            {
-                groupBetting6.Visible = true;
-                groupPayoff1.Visible = true;
-
-                cmbChartType6.SelectedIndex = Settings.Default.ChartType;
-                cmbOrderType6.SelectedIndex = Settings.Default.OrderType;
-                txtOrderCount6.Text = Settings.Default.OrderCount.ToString();
-                label59.Text = strCom;
-                cmbBettingCross6.SelectedIndex = Settings.Default.BettingEnter ? 1 : 0;
-                txtBoAdjust6.Text = Settings.Default.BoLineAdjust.ToString();
-
-                enableSmart = true;
-                enableCross = true;
-                enableCci = true;
-            }
-
+            
             chkSmartLossPayoff.Visible = enableSmart;
             txtSmartEarn.Visible = enableSmart;
             txtSmartLoss.Visible = enableSmart;
@@ -2699,6 +2689,8 @@ namespace LuckyFuture.UI
             chkOrderSelect.Checked = Settings.Default.OrderSelectOn;
             ChangeOrdSelBtn(Settings.Default.OrderSelectType);
             chkBothOrder.Checked = Settings.Default.BothOrder;
+            chkGapLiquid.Checked = Settings.Default.GapLiquid;
+            txtGapVal.Text = Settings.Default.GapValue.ToString();
 
             chkReverseOrder.Checked = Settings.Default.ReverseOrder;
             txtReverseOrd1.Text = Settings.Default.ReverseOrdCnt1.ToString();
@@ -2720,7 +2712,7 @@ namespace LuckyFuture.UI
             //수익
             txtPayoffEarn.Enabled = chkEarnPayoff.Checked;
 			//강제청산
-            chkForceEarnPayoff.Visible = (chkEarnPayoff.Checked && (cmbBettingType.SelectedIndex == (int)BETTYPE.CROSS || cmbBettingType.SelectedIndex == (int)BETTYPE.BOLINE || cmbBettingType.SelectedIndex == (int)BETTYPE.BOT1)) ? true:false ;
+            chkForceEarnPayoff.Visible = (chkEarnPayoff.Checked && (cmbBettingType.SelectedIndex == (int)BETTYPE.CROSS || cmbBettingType.SelectedIndex == (int)BETTYPE.BOLINE)) ? true:false ;
             //스마트청산
             txtSmartEarn.Enabled = chkSmartLossPayoff.Checked && !chkSmartRange.Checked;
             txtSmartLoss.Enabled = chkSmartLossPayoff.Checked && !chkSmartRange.Checked;
@@ -2809,6 +2801,13 @@ namespace LuckyFuture.UI
             txtReverseOrd2.Enabled = chkReverseOrder.Checked;
             cmbReverseOrd2.Enabled = chkReverseOrder.Checked;
 
+            chkGapLiquid.Enabled = chkBothOrder.Checked;
+            txtGapVal.Enabled = chkBothOrder.Checked;
+
+            txtBoSec4.Enabled = chkBoSec4.Checked;
+            txtBoAdjust4.Enabled = chkBoAdjust4.Checked;
+
+            txtCrossSec3.Enabled = chkCrossSec3.Checked;
         }
 
         private void chkEarnPayoff_CheckedChanged(object sender, EventArgs e)
@@ -3132,6 +3131,28 @@ namespace LuckyFuture.UI
                 else
                     Settings.Default.ReturnOption = 0;
 
+                Settings.Default.BoAdjustSecOn = chkCrossSec3.Checked;
+                if (chkCrossSec3.Checked)
+                {
+                    try
+                    {
+                        int nAdjust = Int32.Parse(txtCrossSec3.Text);
+                        if (nAdjust < 0 || nAdjust > 10000)
+                        {
+                            txtCrossSec3.SelectAll();
+                            txtCrossSec3.Focus();
+                            return;
+                        }
+
+                        Settings.Default.BoAdjustSec = nAdjust;
+                    }
+                    catch
+                    {
+                        txtCrossSec3.SelectAll();
+                        txtCrossSec3.Focus();
+                        return;
+                    }
+                }
                 Settings.Default.Conc1On = chkConc1_3.Checked;
                 if (chkConc1_3.Checked)
                 {
@@ -3318,7 +3339,11 @@ namespace LuckyFuture.UI
                 log += "주문(방식:이평크로스";
                 log += ", 차트타입:" + cmbChartType3.SelectedItem.ToString();
                 log += ", 주문타입:" + (Settings.Default.OrderType == 0 ? "시장가" : "지정가");
-                log += ", 크로스선:" + Common.GetAvgTypeStr(Settings.Default.CrossAvgLine1) + "&" + Common.GetAvgTypeStr(Settings.Default.CrossAvgLine2); 
+                log += ", 크로스선:" + Common.GetAvgTypeStr(Settings.Default.CrossAvgLine1) + "&" + Common.GetAvgTypeStr(Settings.Default.CrossAvgLine2);
+                if (Settings.Default.BoAdjustSecOn)
+                {
+                    log += " " + Settings.Default.BoAdjustSec + "초";
+                }
                 log += ", 주문수량:" + Settings.Default.OrderCount;
                 log += ", 교차시:" + cmbBettingCandle3.SelectedItem.ToString();
                 log += ", 되돌림:" + cmbReorder3.SelectedItem.ToString();
@@ -3387,23 +3412,49 @@ namespace LuckyFuture.UI
                 Settings.Default.BettingEnter = false;
 
                 //주-하선조종
-                try
+                Settings.Default.BoAdjustPerOn = chkBoAdjust4.Checked;
+                if (chkBoAdjust4.Checked)
                 {
-                    int nAdjust = Int32.Parse(txtBoAdjust4.Text);
-                    if (nAdjust < 0 || nAdjust > 100)
+                    try
+                    {
+                        int nAdjust = Int32.Parse(txtBoAdjust4.Text);
+                        if (nAdjust < 0 || nAdjust > 100)
+                        {
+                            txtBoAdjust4.SelectAll();
+                            txtBoAdjust4.Focus();
+                            return;
+                        }
+
+                        Settings.Default.BoLineAdjust = nAdjust;
+                    }
+                    catch
                     {
                         txtBoAdjust4.SelectAll();
                         txtBoAdjust4.Focus();
                         return;
                     }
-
-                    Settings.Default.BoLineAdjust = nAdjust;
                 }
-                catch
+                Settings.Default.BoAdjustSecOn = chkBoSec4.Checked;
+                if (chkBoSec4.Checked)
                 {
-                    txtBoAdjust4.SelectAll();
-                    txtBoAdjust4.Focus();
-                    return;
+                    try
+                    {
+                        int nAdjust = Int32.Parse(txtBoSec4.Text);
+                        if (nAdjust < 0 || nAdjust > 10000)
+                        {
+                            txtBoSec4.SelectAll();
+                            txtBoSec4.Focus();
+                            return;
+                        }
+
+                        Settings.Default.BoAdjustSec = nAdjust;
+                    }
+                    catch
+                    {
+                        txtBoSec4.SelectAll();
+                        txtBoSec4.Focus();
+                        return;
+                    }
                 }
 
                 Settings.Default.Conc1On = chkConc1.Checked;
@@ -3621,7 +3672,20 @@ namespace LuckyFuture.UI
                 log += ", 주문수량:" + Settings.Default.OrderCount;
                 log += ", 진입체결:" + (Settings.Default.BoOrdType == 0 ? "S-B선" : "CCI");
                 if (Settings.Default.BoOrdType == 0)
-                    log += ", S-B선조정:" + Settings.Default.BoLineAdjust + "%";
+                {
+                    if(Settings.Default.BoAdjustPerOn || Settings.Default.BoAdjustSecOn)
+                    {
+                        log += ", S-B선조정:";
+                        if (Settings.Default.BoAdjustPerOn)
+                        {
+                            log += Settings.Default.BoLineAdjust + "% ";
+                        }
+                        if (Settings.Default.BoAdjustSecOn)
+                        {
+                            log += Settings.Default.BoAdjustSec + "초";
+                        }
+                    }
+                }
 
                 if (chkConc1.Checked)
                     log += string.Format(", {0}분당 거래량 {1}이상", Settings.Default.Conc1Min, Settings.Default.Conc1Cnt);
@@ -3732,70 +3796,7 @@ namespace LuckyFuture.UI
                 log += ", S-B선조정:" + Settings.Default.BoLineAdjust + "틱";
                 log += ") ";
             }
-            else if (cmbBettingType.SelectedIndex == (int)BETTYPE.BOT1)       //하늘-주황라인
-            {
-                Settings.Default.BettingType = (int)BETTYPE.BOT1;
-                Settings.Default.ChartType = cmbChartType6.SelectedIndex;
-                Settings.Default.OrderType = cmbOrderType6.SelectedIndex;
-                try
-                {
-                    float nOrderCnt = float.Parse(txtOrderCount6.Text);
-                    if (nOrderCnt < 0)
-                    {
-                        txtOrderCount6.SelectAll();
-                        txtOrderCount6.Focus();
-                        return;
-                    }
-                    else if (nOrderCnt > Settings.Default.OrderMax)
-                    {
-                        MessageBox.Show(strWarning, "경고");
-
-                        txtOrderCount6.SelectAll();
-                        txtOrderCount6.Focus();
-                        return;
-                    }
-                    Settings.Default.OrderCount = nOrderCnt;
-                }
-                catch
-                {
-                    txtOrderCount6.SelectAll();
-                    txtOrderCount6.Focus();
-                    return;
-                }
-                
-                Settings.Default.BettingCandleCount = 2;
-
-                Settings.Default.BettingEnter = cmbBettingCross6.SelectedIndex == 1 ? true : false;
-
-                //주-하선조종
-                try
-                {
-                    int nAdjust = Int32.Parse(txtBoAdjust6.Text);
-                    if (nAdjust < 0 || nAdjust > 100)
-                    {
-                        txtBoAdjust6.SelectAll();
-                        txtBoAdjust6.Focus();
-                        return;
-                    }
-
-                    Settings.Default.BoLineAdjust = nAdjust;
-                }
-                catch
-                {
-                    txtBoAdjust6.SelectAll();
-                    txtBoAdjust6.Focus();
-                    return;
-                }
-
-                log += "주문(방식:S-B T";
-                log += ", 차트타입:" + cmbChartType6.SelectedItem.ToString();
-                log += ", 주문타입:" + (Settings.Default.OrderType == 0 ? "시장가" : "지정가");
-                log += ", 주문수량:" + Settings.Default.OrderCount;
-                log += ", 청산후:" + cmbBettingCross6.SelectedItem.ToString();
-                log += ", S-B선조정:" + Settings.Default.BoLineAdjust + "%";
-                log += ") ";
-            }
-
+            
             log = "[설정저장]" + log;
             AddLog(log);
             log = "";
@@ -4146,6 +4147,26 @@ namespace LuckyFuture.UI
             //}
             Settings.Default.OrderSelectOn = chkOrderSelect.Checked;
             Settings.Default.BothOrder = chkBothOrder.Checked;
+            Settings.Default.GapLiquid = chkGapLiquid.Checked;
+            if (chkGapLiquid.Checked)
+            {
+                try
+                {
+                    Settings.Default.GapValue = int.Parse(txtGapVal.Text);
+                    if (Settings.Default.GapValue < 0)
+                    {
+                        txtGapVal.SelectAll();
+                        txtGapVal.Focus();
+                        return;
+                    }
+                }
+                catch
+                {
+                    txtGapVal.SelectAll();
+                    txtGapVal.Focus();
+                    return;
+                }
+            }
             Settings.Default.ReverseOrder = chkReverseOrder.Checked;
             if (chkReverseOrder.Checked)
             {
@@ -4194,7 +4215,12 @@ namespace LuckyFuture.UI
             }
             if (chkBothOrder.Checked)
             {
-                log += " 양방향 매수/매도,";
+                log += " 양방향주문";
+                if (chkGapLiquid.Checked)
+                {
+                    log += ":Gap "+Settings.Default.GapValue+"USD";
+                }
+                log += ",";
             }
             if (chkOrderStop.Checked)
             {
@@ -5874,6 +5900,7 @@ namespace LuckyFuture.UI
 
         private void chkBothOrder_CheckedChanged(object sender, EventArgs e)
         {
+            EnableSettingControls();
             saveSetting();
         }
 
@@ -6007,6 +6034,46 @@ namespace LuckyFuture.UI
                 e.Graphics.DrawString(cmbOrderLine5_2.Items[e.Index].ToString(), e.Font,
                  new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
             }
+        }
+
+        private void chkGapLiquid_CheckedChanged(object sender, EventArgs e)
+        {
+            EnableSettingControls();
+            saveSetting();
+        }
+
+        private void txtGapVal_TextChanged(object sender, EventArgs e)
+        {
+            saveSetting();
+        }
+
+        private void chkBoAdjust4_CheckedChanged(object sender, EventArgs e)
+        {
+            EnableSettingControls();
+            saveSetting();
+        }
+
+        private void chkBoSec4_CheckedChanged(object sender, EventArgs e)
+        {
+            EnableSettingControls();
+            saveSetting();
+        }
+
+        private void txtBoSec4_TextChanged(object sender, EventArgs e)
+        {
+            saveSetting();
+        }
+
+        private void txtCrossSec3_TextChanged(object sender, EventArgs e)
+        {
+            EnableSettingControls();
+            saveSetting();
+        }
+
+        private void chkCrossSec3_CheckedChanged(object sender, EventArgs e)
+        {
+            EnableSettingControls();
+            saveSetting();
         }
     }
 }

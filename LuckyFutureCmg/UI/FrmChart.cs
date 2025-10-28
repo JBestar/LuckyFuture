@@ -166,7 +166,7 @@ namespace LuckyFuture.UI
                     break;
             }
 
-            return chartFuture.SetRChartType(tt, tu, arrAvgCnt, Settings.Default.BoLineAdjust);
+            return chartFuture.SetRChartType(tt, tu, arrAvgCnt, Settings.Default.BoAdjustPerOn?Settings.Default.BoLineAdjust:0);
 
         }
 
@@ -236,7 +236,7 @@ namespace LuckyFuture.UI
                     break;
             }
 
-            return chartFuture.SetDChartType(tt, tu, arrAvgCnt, Settings.Default.BoLineAdjust);
+            return chartFuture.SetDChartType(tt, tu, arrAvgCnt, Settings.Default.BoAdjustPerOn ? Settings.Default.BoLineAdjust : 0);
 
         }
 

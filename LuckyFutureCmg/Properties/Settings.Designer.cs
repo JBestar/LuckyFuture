@@ -1558,5 +1558,65 @@ namespace LuckyFuture.Properties {
                 this["ReverseOrdSel2"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool GapLiquid {
+            get {
+                return ((bool)(this["GapLiquid"]));
+            }
+            set {
+                this["GapLiquid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int GapValue {
+            get {
+                return ((int)(this["GapValue"]));
+            }
+            set {
+                this["GapValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool BoAdjustPerOn {
+            get {
+                return ((bool)(this["BoAdjustPerOn"]));
+            }
+            set {
+                this["BoAdjustPerOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool BoAdjustSecOn {
+            get {
+                return ((bool)(this["BoAdjustSecOn"]));
+            }
+            set {
+                this["BoAdjustSecOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int BoAdjustSec {
+            get {
+                return ((int)(this["BoAdjustSec"]));
+            }
+            set {
+                this["BoAdjustSec"] = value;
+            }
+        }
     }
 }
