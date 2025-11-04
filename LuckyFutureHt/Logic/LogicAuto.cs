@@ -715,7 +715,7 @@ namespace LuckyFuture.Logic
                                 {
                                     if (o.TradeType == TRADETYPE.BUY)   //매수
                                     {
-                                        if (lastCandleList.Last().GetCrossTrend((CH_AVGTYPE)Settings.Default.CrossAvgLine1, (CH_AVGTYPE)Settings.Default.CrossAvgLine2) == CH_TRENDTYPE.DOWN)
+                                        if (bCrossed && _crossOrderSignal.TradeType == TRADETYPE.SELL)
                                         {
                                             log = "[청산] 되돌림청산 ";
                                             this.frmMain.AddLog(log);
@@ -724,7 +724,7 @@ namespace LuckyFuture.Logic
                                     }
                                     else if (o.TradeType == TRADETYPE.SELL) //매도
                                     {
-                                        if (lastCandleList.Last().GetCrossTrend((CH_AVGTYPE)Settings.Default.CrossAvgLine1, (CH_AVGTYPE)Settings.Default.CrossAvgLine2) == CH_TRENDTYPE.UP)
+                                        if (bCrossed && _crossOrderSignal.TradeType == TRADETYPE.BUY)
                                         {
 
                                             log = "[청산] 되돌림청산 ";
@@ -741,7 +741,7 @@ namespace LuckyFuture.Logic
 
                                     if (o.TradeType == TRADETYPE.BUY)   //매수
                                     {
-                                        if (lastCandleList.Last().GetCrossTrend((CH_AVGTYPE)Settings.Default.CrossAvgLine1, (CH_AVGTYPE)Settings.Default.CrossAvgLine2) == CH_TRENDTYPE.DOWN && bTradeChanged)
+                                        if (bCrossed && _crossOrderSignal.TradeType == TRADETYPE.SELL && bTradeChanged)
                                         {
                                             if (!Settings.Default.OrderSelectOn || (Settings.Default.OrderSelectOn && Settings.Default.OrderSelectType == 0))
                                             {
@@ -765,7 +765,7 @@ namespace LuckyFuture.Logic
                                     }
                                     else if (o.TradeType == TRADETYPE.SELL) //매도
                                     {
-                                        if (lastCandleList.Last().GetCrossTrend((CH_AVGTYPE)Settings.Default.CrossAvgLine1, (CH_AVGTYPE)Settings.Default.CrossAvgLine2) == CH_TRENDTYPE.UP && bTradeChanged)
+                                        if (bCrossed && _crossOrderSignal.TradeType == TRADETYPE.BUY && bTradeChanged)
                                         {
                                             if (!Settings.Default.OrderSelectOn || (Settings.Default.OrderSelectOn && Settings.Default.OrderSelectType == 0))
                                             {
@@ -939,8 +939,8 @@ namespace LuckyFuture.Logic
                                         {
                                             if (Settings.Default.BoAdjustSecOn)
                                             {
-                                                if (Math.Abs(tickCurrent - _boCancelSignal.UpdatedTick) >= Settings.Default.BoAdjustSec * 1000 &&
-                                                    Math.Abs(tickCurrent - _boCancelSignal.UpdatedTick) <= (Settings.Default.BoAdjustSec + m_secCrossDelay) * 1000)
+                                                if (Math.Abs(tickCurrent - _boCancelSignal.UpdatedTick) >= Settings.Default.BoAdjustSec * 1000
+                                                     && Math.Abs(tickCurrent - _boCancelSignal.UpdatedTick) <= (Settings.Default.BoAdjustSec + m_secCrossDelay) * 1000)
                                                 {
                                                     bCrossed = true;
                                                 }

@@ -228,7 +228,7 @@ namespace LuckyFuture
                 AddElement(document, itemListElement, "Reorder", Settings.Default.Reorder.ToString());
                 AddElement(document, itemListElement, "ReturnOption", Settings.Default.ReturnOption.ToString());
                 //Except ServerTimeDelay
-                AddElement(document, itemListElement, "BoAdjustPer", Settings.Default.BoAdjustPerOn.ToString());
+                AddElement(document, itemListElement, "BoAdjustPerOn", Settings.Default.BoAdjustPerOn.ToString());
                 AddElement(document, itemListElement, "BoLineAdjust", Settings.Default.BoLineAdjust.ToString());
                 AddElement(document, itemListElement, "BoAdjustSecOn", Settings.Default.BoAdjustSecOn.ToString());
                 AddElement(document, itemListElement, "BoAdjustSec", Settings.Default.BoAdjustSec.ToString());
