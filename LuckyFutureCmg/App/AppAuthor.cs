@@ -167,6 +167,7 @@ namespace LuckyFuture
                 if ((APPLOGINRESULT)iLoginResult == APPLOGINRESULT.SUCCESS)
                 {
                     string token = doc.RootElement.GetProperty("token").GetString();
+                    //WEBTOKEN = RsaCrypt.Decrypt(token);
                     WEBTOKEN = token;
 
                     string data = doc.RootElement.GetProperty("data").GetString();

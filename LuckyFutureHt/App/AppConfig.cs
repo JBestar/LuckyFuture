@@ -70,6 +70,7 @@ namespace LuckyFuture
                             // case "OrderMax": Settings.Default.OrderMax = int.Parse(value); break;
                             case "Reorder": Settings.Default.Reorder = bool.Parse(value); break;
                             case "ReturnOption": Settings.Default.ReturnOption = byte.Parse(value); break;
+                            case "ReturnSBOption": Settings.Default.ReturnSBOption = byte.Parse(value); break;
                             case "BoAdjustPerOn": Settings.Default.BoAdjustPerOn = bool.Parse(value); break;
                             case "BoLineAdjust": Settings.Default.BoLineAdjust = int.Parse(value); break;
                             case "BoAdjustSecOn": Settings.Default.BoAdjustSecOn = bool.Parse(value); break;
@@ -224,6 +225,7 @@ namespace LuckyFuture
                 //AddElement(document, itemListElement, "OrderMax", Settings.Default.OrderMax.ToString());
                 AddElement(document, itemListElement, "Reorder", Settings.Default.Reorder.ToString());
                 AddElement(document, itemListElement, "ReturnOption", Settings.Default.ReturnOption.ToString());
+                AddElement(document, itemListElement, "ReturnSBOption", Settings.Default.ReturnSBOption.ToString());
                 //Except ServerTimeDelay
                 AddElement(document, itemListElement, "BoAdjustPerOn", Settings.Default.BoAdjustPerOn.ToString());
                 AddElement(document, itemListElement, "BoLineAdjust", Settings.Default.BoLineAdjust.ToString());

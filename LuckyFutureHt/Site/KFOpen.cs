@@ -1,4 +1,4 @@
-﻿// #define WRITE_LOG
+﻿//#define WRITE_LOG
 
 using System;
 using System.Collections.Generic;
@@ -366,8 +366,8 @@ namespace LuckyFuture.Site
 
             if (iRet == (int)ERRORCOM.SUCCESS)
             {
-                OnFutureSiteLogEvent("[주문] 매도주문 요청");
-                OnFutureSiteLogEvent("[주문] 주문시가격:" + Current.CurrentPrice);
+                OnFutureSiteLogEvent(string.Format("[매도주문]  주문가:{0}, 주문수량:{1}", bMarketPrice ? "시장가" : strPrice, iQty));
+                OnFutureSiteLogEvent("[매도주문] 주문시가격:" + Current.CurrentPrice);
                 return true;
             }
             else ShowErrorLog((ERRORCOM)iRet);
@@ -442,8 +442,8 @@ namespace LuckyFuture.Site
             if (iRet == (int)ERRORCOM.SUCCESS)
             {
                 // _orderTrade = TRADETYPE.BUY;
-                OnFutureSiteLogEvent("[주문] 매수주문 요청");
-                OnFutureSiteLogEvent("[주문] 주문시가격:" + Current.CurrentPrice);
+                OnFutureSiteLogEvent(string.Format("[매수주문]  주문가:{0}, 주문수량:{1}", bMarketPrice?"시장가": strPrice, iQty));
+                OnFutureSiteLogEvent("[매수주문] 주문시가격:" + Current.CurrentPrice);
                 return true;
             }
             else ShowErrorLog((ERRORCOM)iRet);
@@ -2539,7 +2539,7 @@ namespace LuckyFuture.Site
                     concState = CONCSTATE.CONCLUDE;
                     orderType = "체결";
                     qty = nAddCnt;
-                    logMsg += "체결가:" + dAveragePrice.ToString();
+                    logMsg += "[체결] 체결가:" + dAveragePrice.ToString();
                 }
                 else if (nAddCnt == 0 && nLiquidCnt > 0)
                 {
@@ -2547,7 +2547,7 @@ namespace LuckyFuture.Site
                     concState = CONCSTATE.LIQUID;
                     orderType = "청산";
                     qty = nLiquidCnt;
-                    logMsg += "청산가:" + dAveragePrice.ToString();
+                    logMsg += "[청산] 청산가:" + dAveragePrice.ToString();
                     double dValuation = 0;
                     try
                     {
@@ -2564,7 +2564,7 @@ namespace LuckyFuture.Site
                     concState = CONCSTATE.RECONC;
                     orderType = "되돌림";
                     qty = nAddCnt ;
-                    logMsg += "체결가:" + dAveragePrice.ToString();
+                    logMsg += "[체결] 체결가:" + dAveragePrice.ToString();
                     double dValuation = 0;
                     try
                     {

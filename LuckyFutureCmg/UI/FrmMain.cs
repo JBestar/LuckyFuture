@@ -198,6 +198,9 @@ namespace LuckyFuture.UI
             cmbReorder3.Items.Add("무시");
             cmbReorder3.Items.Add("주문");
             cmbReorder3.Items.Add("청산");
+
+            cmbReorder4.Items.Add("주문");
+            cmbReorder4.Items.Add("청산");
             //주하선
             cmbBettingCross6.Items.Add("대기");
             cmbBettingCross6.Items.Add("재진입");
@@ -2543,6 +2546,7 @@ namespace LuckyFuture.UI
                 chkBandChart_4.Checked = Settings.Default.BandChart;
                 txtOrderCount4.Text = Settings.Default.OrderCount.ToString();
                 label29.Text = strCom;
+                cmbReorder4.SelectedIndex = Settings.Default.ReturnSBOption;
                 //Group A
                 chkConc1.Checked = Settings.Default.Conc1On;
                 txtConc1Min.Text = Settings.Default.Conc1Min.ToString();
@@ -3411,6 +3415,10 @@ namespace LuckyFuture.UI
                 Settings.Default.BettingCandleCount = 1;
                 Settings.Default.BettingEnter = false;
 
+                if (cmbReorder4.SelectedItem != null)
+                    Settings.Default.ReturnSBOption = (byte)cmbReorder4.SelectedIndex;
+                else
+                    Settings.Default.ReturnSBOption = 0;
                 //주-하선조종
                 Settings.Default.BoAdjustPerOn = chkBoAdjust4.Checked;
                 if (chkBoAdjust4.Checked)
@@ -3670,6 +3678,7 @@ namespace LuckyFuture.UI
                 log += ", 차트타입:" + cmbChartType4.SelectedItem.ToString();
                 log += ", 주문타입:" + (Settings.Default.OrderType == 0 ? "시장가" : "지정가");
                 log += ", 주문수량:" + Settings.Default.OrderCount;
+                log += ", 되돌림:" + cmbReorder4.SelectedItem.ToString();
                 log += ", 진입체결:" + (Settings.Default.BoOrdType == 0 ? "S-B선" : "CCI");
                 if (Settings.Default.BoOrdType == 0)
                 {
@@ -6074,6 +6083,21 @@ namespace LuckyFuture.UI
         {
             EnableSettingControls();
             saveSetting();
+        }
+
+        private void cmbReorder4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            saveSetting();
+        }
+
+        private void cmbReorder4_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            if (e.Index >= 0)
+            {
+                e.Graphics.DrawString(cmbReorder4.Items[e.Index].ToString(), e.Font,
+                 new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
+            }
         }
     }
 }

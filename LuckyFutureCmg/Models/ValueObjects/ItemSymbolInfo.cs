@@ -14,6 +14,7 @@ namespace LuckyFuture.Models.ValueObjects
         public string Symbol { get; set; }
         public string PrdName { get; set; }
         public double OverTick { get; set; }
+        public int TickScale { get; set; }
         public double ValueTick { get; set; }
         public double Exchange { get; set; }
         public int Precision { get; set; }

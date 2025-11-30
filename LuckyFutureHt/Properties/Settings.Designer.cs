@@ -1594,5 +1594,17 @@ namespace LuckyFuture.Properties {
                 this["BoAdjustSec"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte ReturnSBOption {
+            get {
+                return ((byte)(this["ReturnSBOption"]));
+            }
+            set {
+                this["ReturnSBOption"] = value;
+            }
+        }
     }
 }
