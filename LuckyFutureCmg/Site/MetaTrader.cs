@@ -422,7 +422,7 @@ namespace LuckyFuture.Site
                 param_list.Add("symbol", ItemSymbol);
                 param_list.Add("volume", nQuantity);
                 param_list.Add("takeProfit", 0);
-                OnFutureSiteLogEvent(string.Format("[매수주문] 주문가:시장가, 주문수량:{0}", nQuantity));
+                OnFutureSiteLogEvent(string.Format("[매수주문] 주문가:{0}, 주문수량:{1}", Settings.Default.OrderType == 0 ? "시장가" : "지정가",  nQuantity));
             }
             else
             {
