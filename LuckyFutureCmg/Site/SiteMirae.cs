@@ -1990,6 +1990,7 @@ namespace LuckyFuture.Site
         }
         private void SetItemPriceInfo(Current current)
         {
+            WriteLog("SetItemPriceInfo-SiteMirae");
             if (this.ItemPriceList == null)
                 return;
 

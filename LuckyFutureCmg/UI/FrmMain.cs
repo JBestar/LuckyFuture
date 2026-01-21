@@ -12,9 +12,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Threading;
-using System.Windows.Forms;
 using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LuckyFuture.UI
 {
@@ -1471,38 +1472,72 @@ namespace LuckyFuture.UI
             }
 
         }
-        private void ChangeItem(int itemIndex, bool bLog=true)
-		{
+        //      private void ChangeItem(int itemIndex, bool bLog=true)
+        //{
+        //          if (CurrentSite == null || CurrentSite.ItemList == null || CurrentSite.ItemList.Count < itemIndex + 1)
+        //              return;
+
+        //          if (CurrentSite.ItemSymbol != CurrentSite.ItemList[itemIndex].Symbol)
+        //          {
+        //		string itemSymbol = CurrentSite.ItemList[itemIndex].Symbol;
+
+        //		if(this.CurrentSiteType == SITETYPE.DREAM || this.CurrentSiteType == SITETYPE.TOPASSET
+        //                  || this.CurrentSiteType == SITETYPE.KIWOOM || this.CurrentSiteType == SITETYPE.MIRAE2
+        //                  || this.CurrentSiteType == SITETYPE.CMG)
+        //              {
+        //                  ItemChanged = true;
+        //                  if (CurrentSite.ChangeItem(itemSymbol))
+        //                  {
+        //                      if(bLog)
+        //                          AddLog(CurrentSite.ItemList[itemIndex].ItemName);
+
+        //                      if (SignalSite != null)
+        //                          SignalSite.ChangeItem(itemSymbol);
+        //                      Thread.Sleep(1000);
+        //                  }
+        //                  ItemChanged = false;
+
+        //              }
+        //              ChartForm.ResetChart();
+        //              InitListView(false);
+        //              Invalidate();
+
+        //          }
+
+        //      }
+        // 함수 선언에 async를 추가합니다.
+        private async void ChangeItem(int itemIndex, bool bLog = true)
+        {
             if (CurrentSite == null || CurrentSite.ItemList == null || CurrentSite.ItemList.Count < itemIndex + 1)
                 return;
 
             if (CurrentSite.ItemSymbol != CurrentSite.ItemList[itemIndex].Symbol)
             {
-				string itemSymbol = CurrentSite.ItemList[itemIndex].Symbol;
-                
-				if(this.CurrentSiteType == SITETYPE.DREAM || this.CurrentSiteType == SITETYPE.TOPASSET
+                string itemSymbol = CurrentSite.ItemList[itemIndex].Symbol;
+
+                if (this.CurrentSiteType == SITETYPE.DREAM || this.CurrentSiteType == SITETYPE.TOPASSET
                     || this.CurrentSiteType == SITETYPE.KIWOOM || this.CurrentSiteType == SITETYPE.MIRAE2
                     || this.CurrentSiteType == SITETYPE.CMG)
                 {
                     ItemChanged = true;
                     if (CurrentSite.ChangeItem(itemSymbol))
                     {
-                        if(bLog)
+                        if (bLog)
                             AddLog(CurrentSite.ItemList[itemIndex].ItemName);
 
                         if (SignalSite != null)
                             SignalSite.ChangeItem(itemSymbol);
-                        Thread.Sleep(1000);
+
+                        // 핵심 수정: Thread.Sleep(1000) 대신 비동기 대기 사용
+                        // 1초 동안 기다리지만 UI 쓰레드는 멈추지 않고 계속 현재가를 그립니다.
+                        await Task.Delay(1000);
                     }
                     ItemChanged = false;
-
                 }
                 ChartForm.ResetChart();
                 InitListView(false);
                 Invalidate();
-
             }
-			
         }
         private void dgvCurrentInfo_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -4924,7 +4959,7 @@ namespace LuckyFuture.UI
                     {
                         Price = price
                     };
-                    // AddLog("[매수주문] 주문가:" + quoteInfo.Price);
+                    AddLog("[매수주문] 주문가:" + quoteInfo.Price);
                 }
 
                 double ordCnt = 0;
@@ -4938,8 +4973,20 @@ namespace LuckyFuture.UI
                     AddLog("[매수주문] 주문수량 오류");
                     return;
                 }
-                CurrentSite.DoBuyOrder(quoteInfo, ordCnt, quoteInfo==null);
-                       
+                //CurrentSite.DoBuyOrder(quoteInfo, ordCnt, quoteInfo==null);
+                // 백그라운드 쓰레드에서 주문을 처리하게 함
+                Task.Run(() => {
+                    try
+                    {
+                        // 기존의 주문 실행 로직
+                        CurrentSite.DoBuyOrder(quoteInfo, ordCnt, quoteInfo == null);
+                    }
+                    catch (Exception ex)
+                    {
+                        AddLog(ex.Message);
+                    }
+                });
+
             }
             catch (Exception) { }
         }
@@ -4982,7 +5029,19 @@ namespace LuckyFuture.UI
                 AddLog("[매도주문] 주문수량 오류");
                 return;
             }
-            CurrentSite.DoSellOrder(quoteInfo, ordCnt, quoteInfo==null);
+            //CurrentSite.DoSellOrder(quoteInfo, ordCnt, quoteInfo==null);
+            // 백그라운드 쓰레드에서 주문을 처리하게 함
+            Task.Run(() => {
+                try
+                {
+                    // 기존의 주문 실행 로직
+                    CurrentSite.DoSellOrder(quoteInfo, ordCnt, quoteInfo == null);
+                }
+                catch (Exception ex)
+                {
+                    AddLog(ex.Message);
+                }
+            });
         }
 
         private void cmbOrderCnt_DrawItem(object sender, DrawItemEventArgs e)

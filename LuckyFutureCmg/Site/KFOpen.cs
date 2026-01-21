@@ -1628,6 +1628,7 @@ namespace LuckyFuture.Site
         }
         private void SetItemPriceInfo(Current current)
         {
+            WriteLog("SetItemPriceInfo-KFOpen");
             if (this.ItemPriceList == null)
                 return;
 

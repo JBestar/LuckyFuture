@@ -367,7 +367,67 @@ namespace LuckyFuture.Site
 
             return true;
         }
+        public bool IsTradeEnabled(string symbol)
+        {
+            try
+            {
+                // 1. 심볼 상세 사양 정보 가져오기 (MetaApi 엔드포인트 호출)
+                // URL 예시: /users/current/accounts/{accountId}/symbols/{symbol}/specification
+                string specUrl = $"{URL_MAIN}/users/current/accounts/{mt_userId}/symbols/{symbol}/specification";
 
+                if (!_httpClient.SendRequest(out string responseBody, out _, HTTPREQUEST_TYPE.GET, specUrl, UserPassword))
+                    return false;
+
+                var spec = JsonDocument.Parse(responseBody).RootElement;
+
+                // 2. 현재 거래 모드 확인 (FULL이 아니면 주문 불가)
+                string tradeMode = spec.GetProperty("tradeMode").GetString();
+                if (tradeMode != "SYMBOL_TRADE_MODE_FULL")
+                {
+                    OnFutureSiteLogEvent($"[경고] {symbol} 거래 불가 상태 (Mode: {tradeMode})");
+                    return false;
+                }
+
+                // 3. 현재 시간 기준 세션 활성화 여부 확인
+                // MetaApi는 UTC 시간을 사용하므로 현재 UTC 시간을 기준으로 체크합니다.
+                DateTime nowUtc = DateTime.UtcNow;
+                int dayOfWeek = (int)nowUtc.DayOfWeek; // 0:일요일 ~ 6:토요일
+                double currentMinutes = nowUtc.Hour * 60 + nowUtc.Minute;
+
+                if (spec.TryGetProperty("tradeSessions", out JsonElement sessionsElement))
+                {
+                    // 해당 요일의 세션 목록 가져오기
+                    if (sessionsElement.TryGetProperty(dayOfWeek.ToString(), out JsonElement dailySessions))
+                    {
+                        bool inSession = false;
+                        foreach (var session in dailySessions.EnumerateArray())
+                        {
+                            int from = session.GetProperty("fromHour").GetInt32() * 60 + session.GetProperty("fromMinute").GetInt32();
+                            int to = session.GetProperty("toHour").GetInt32() * 60 + session.GetProperty("toMinute").GetInt32();
+
+                            if (currentMinutes >= from && currentMinutes <= to)
+                            {
+                                inSession = true;
+                                break;
+                            }
+                        }
+
+                        if (!inSession)
+                        {
+                            OnFutureSiteLogEvent($"[경고] {symbol} 현재 거래 세션이 아닙니다.");
+                            return false;
+                        }
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                OnFutureSiteLogEvent($"[에러] 세션 확인 중 오류: {ex.Message}");
+                return false;
+            }
+        }
         public override bool DoBuyOrder(QuoteInfo quoteInfo, double nQuantity = 1, bool bMarketPrice = false)
         {
             if (this.CurrentUserAccount == null || string.IsNullOrEmpty(CurrentUserAccount.UserAccountId))
@@ -422,7 +482,7 @@ namespace LuckyFuture.Site
                 param_list.Add("symbol", ItemSymbol);
                 param_list.Add("volume", nQuantity);
                 param_list.Add("takeProfit", 0);
-                OnFutureSiteLogEvent(string.Format("[매수주문] 주문가:{0}, 주문수량:{1}", Settings.Default.OrderType == 0 ? "시장가" : "지정가",  nQuantity));
+                OnFutureSiteLogEvent(string.Format("[매수주문] 주문가:시장가, 주문수량:{0}",  nQuantity));
             }
             else
             {
@@ -432,7 +492,12 @@ namespace LuckyFuture.Site
                 param_list.Add("openPrice", quoteInfo.Price);
                 OnFutureSiteLogEvent(string.Format("[매수주문] 주문가:{0}, 주문수량:{1}", quoteInfo.Price, nQuantity));
             }
-
+            // 주문 전송 전 세션 체크 추가
+            if (!IsTradeEnabled(ItemSymbol))
+            {
+                OnFutureSiteLogEvent("[알림] 거래 불가능한 시간이거나 브로커에 의해 제한되었습니다.");
+                return false; // 서버로 요청을 보내지 않고 즉시 중단
+            }
             string jsonParam = JsonSerializer.Serialize(param_list);
 
             string url = String.Format("{0}/users/current/accounts/{1}/trade", URL_MAIN, mt_userId);
@@ -1252,9 +1317,12 @@ namespace LuckyFuture.Site
         }
         private void OnReceiveCurrent(Current current)
         {
+            WriteLog("OnReceiveCurrent-MetaTrader");
             try
             {
-                if (Math.Abs(Environment.TickCount - m_tickCurrent) > 50)
+                // 주문 중이거나 특정 상황일 때는 0.2초(200ms)마다 한 번만 UI를 갱신하게 함
+                //int updateInterval = (this.IsOrdering) ? 500 : 150;
+                if (Math.Abs(Environment.TickCount - m_tickCurrent) > 200)
                 {
                     m_tickCurrent = Environment.TickCount;
                     lock (this.OrderList)
@@ -1372,6 +1440,7 @@ namespace LuckyFuture.Site
         }
         private void SetItemPriceInfo(Current current)
         {
+            WriteLog("SetItemPriceInfo-MetaTrader");
             if (this.ItemPriceList == null)
                 return;
 

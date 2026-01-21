@@ -1767,6 +1767,7 @@ namespace LuckyFuture.Site
         }
         private void SetItemPriceInfo(Current current)
         {
+            WriteLog("SetItemPriceInfo-SiteReantek");
             if (this.ItemPriceList == null)
                 return;
 
