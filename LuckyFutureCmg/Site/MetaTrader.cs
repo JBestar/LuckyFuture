@@ -357,12 +357,14 @@ namespace LuckyFuture.Site
                 {
                     string message = doc.RootElement.GetProperty("message").GetString();
                     OnFutureSiteLogEvent(string.Format("[주문] 실패({0})", message));
+                    return false;
                 }
 
             }
             catch (Exception ex)
             {
                 string errMsg = ex.Message;
+                return false;
             }
 
             return true;
@@ -449,11 +451,13 @@ namespace LuckyFuture.Site
                 {
                     string message = doc.RootElement.GetProperty("message").GetString();
                     OnFutureSiteLogEvent(string.Format("[주문] 실패({0})", message));
+                    return false;
                 }
             }
             catch (Exception ex)
             {
                 string errMsg = ex.Message;
+                return false;
             }
 
             return true;
