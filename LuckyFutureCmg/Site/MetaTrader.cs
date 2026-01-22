@@ -1356,12 +1356,11 @@ namespace LuckyFuture.Site
         }
         private void OnReceiveCurrent(Current current)
         {
-            WriteLog("OnReceiveCurrent-MetaTrader");
+            // WriteLog("OnReceiveCurrent-MetaTrader");
             try
             {
-                // 주문 중이거나 특정 상황일 때는 0.2초(200ms)마다 한 번만 UI를 갱신하게 함
-                //int updateInterval = (this.IsOrdering) ? 500 : 150;
-                if (Math.Abs(Environment.TickCount - m_tickCurrent) > 200)
+                // 50ms마다 한 번만 UI를 갱신하게 함
+                if (Math.Abs(Environment.TickCount - m_tickCurrent) > 50)
                 {
                     m_tickCurrent = Environment.TickCount;
                     lock (this.OrderList)
