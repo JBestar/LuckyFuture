@@ -21,8 +21,12 @@ namespace LuckyFuture.UI
 {
     public partial class FrmMain : Form
 	{
-		public FrmMain()
+        // 1. 클래스 최상단 멤버 변수 영역에 추가
+        public static FrmMain Default; // ★ 여기 추가
+        public FrmMain()
 		{
+            // 2. 생성자 가장 첫 줄에서 자기 자신을 대입
+            Default = this; // ★ 여기 추가
             DeleteBeforeFiles();
 			if (LoginForm.ShowDialog() != DialogResult.OK)
 			{

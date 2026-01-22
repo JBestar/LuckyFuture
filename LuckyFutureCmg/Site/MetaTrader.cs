@@ -20,6 +20,7 @@ using LuckyFuture.Models.ValueObjects;
 using LuckyFuture.Properties;
 using LuckyFutureLib.Include;
 using SocketIOClient;
+using LuckyFuture.UI;
 
 namespace LuckyFuture.Site
 {
@@ -271,7 +272,71 @@ namespace LuckyFuture.Site
             RequestOrderList(false);
         }
 
+        public bool IsTradeEnabled(string symbol)
+        {
+            OnFutureSiteLogEvent("[디버그] 세션 체크 시작..."); // 이 로그가 찍히는지 확인
+            try
+            {
+                // 1. 심볼 상세 사양 정보 가져오기 (MetaApi 엔드포인트 호출)
+                // URL 예시: /users/current/accounts/{accountId}/symbols/{symbol}/specification
+                string specUrl = $"{URL_MAIN}/users/current/accounts/{mt_userId}/symbols/{symbol}/specification";
 
+                if (!_httpClient.SendRequest(out string responseBody, out _, HTTPREQUEST_TYPE.GET, specUrl, UserPassword))
+                {
+                    OnFutureSiteLogEvent("[디버그] 서버 통신 실패");
+                    return false;
+                }                
+
+                var spec = JsonDocument.Parse(responseBody).RootElement;
+
+                // 2. 현재 거래 모드 확인 (FULL이 아니면 주문 불가)
+                string tradeMode = spec.GetProperty("tradeMode").GetString();
+                if (tradeMode != "SYMBOL_TRADE_MODE_FULL")
+                {
+                    OnFutureSiteLogEvent($"[경고] {symbol} 거래 불가 상태 (Mode: {tradeMode})");
+                    return false;
+                }
+
+                // 3. 현재 시간 기준 세션 활성화 여부 확인
+                // MetaApi는 UTC 시간을 사용하므로 현재 UTC 시간을 기준으로 체크합니다.
+                DateTime nowUtc = DateTime.UtcNow;
+                int dayOfWeek = (int)nowUtc.DayOfWeek; // 0:일요일 ~ 6:토요일
+                double currentMinutes = nowUtc.Hour * 60 + nowUtc.Minute;
+
+                if (spec.TryGetProperty("tradeSessions", out JsonElement sessionsElement))
+                {
+                    // 해당 요일의 세션 목록 가져오기
+                    if (sessionsElement.TryGetProperty(dayOfWeek.ToString(), out JsonElement dailySessions))
+                    {
+                        bool inSession = false;
+                        foreach (var session in dailySessions.EnumerateArray())
+                        {
+                            int from = session.GetProperty("fromHour").GetInt32() * 60 + session.GetProperty("fromMinute").GetInt32();
+                            int to = session.GetProperty("toHour").GetInt32() * 60 + session.GetProperty("toMinute").GetInt32();
+
+                            if (currentMinutes >= from && currentMinutes <= to)
+                            {
+                                inSession = true;
+                                break;
+                            }
+                        }
+
+                        if (!inSession)
+                        {
+                            OnFutureSiteLogEvent($"[경고] {symbol} 현재 거래 세션이 아닙니다.");
+                            return false;
+                        }
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                OnFutureSiteLogEvent($"[에러] 세션 확인 중 오류: {ex.Message}");
+                return false;
+            }
+        }
         public override bool DoSellOrder(QuoteInfo quoteInfo, double nQuantity = 1, bool bMarketPrice = false)
         {
 
@@ -339,6 +404,12 @@ namespace LuckyFuture.Site
                 param_list.Add("openPrice", quoteInfo.Price);
                 OnFutureSiteLogEvent(string.Format("[매도주문] 주문가:{0}, 주문수량:{1}", quoteInfo.Price, nQuantity));
             }
+            // 주문 전송 전 세션 체크 추가
+            if (!IsTradeEnabled(ItemSymbol))
+            {
+                OnFutureSiteLogEvent("[알림] 거래 불가능한 시간이거나 브로커에 의해 제한되었습니다.");
+                return false; // 서버로 요청을 보내지 않고 즉시 중단
+            }
 
             string jsonParam = JsonSerializer.Serialize(param_list);
 
@@ -357,76 +428,22 @@ namespace LuckyFuture.Site
                 {
                     string message = doc.RootElement.GetProperty("message").GetString();
                     OnFutureSiteLogEvent(string.Format("[주문] 실패({0})", message));
+                    return false;
                 }
 
             }
             catch (Exception ex)
             {
                 string errMsg = ex.Message;
+                // 1. 로그를 남겨서 사용자와 개발자가 알 수 있게 합니다.
+                OnFutureSiteLogEvent(string.Format("[주문] 시스템 오류: {0}", errMsg));
+                //WriteLog(string.Format("[DoBuyOrder] Exception: {0}", errMsg));
+
+                // 2. 반드시 false를 리턴하여 상위 로직에 실패를 알립니다.
+                return false;
             }
 
             return true;
-        }
-        public bool IsTradeEnabled(string symbol)
-        {
-            try
-            {
-                // 1. 심볼 상세 사양 정보 가져오기 (MetaApi 엔드포인트 호출)
-                // URL 예시: /users/current/accounts/{accountId}/symbols/{symbol}/specification
-                string specUrl = $"{URL_MAIN}/users/current/accounts/{mt_userId}/symbols/{symbol}/specification";
-
-                if (!_httpClient.SendRequest(out string responseBody, out _, HTTPREQUEST_TYPE.GET, specUrl, UserPassword))
-                    return false;
-
-                var spec = JsonDocument.Parse(responseBody).RootElement;
-
-                // 2. 현재 거래 모드 확인 (FULL이 아니면 주문 불가)
-                string tradeMode = spec.GetProperty("tradeMode").GetString();
-                if (tradeMode != "SYMBOL_TRADE_MODE_FULL")
-                {
-                    OnFutureSiteLogEvent($"[경고] {symbol} 거래 불가 상태 (Mode: {tradeMode})");
-                    return false;
-                }
-
-                // 3. 현재 시간 기준 세션 활성화 여부 확인
-                // MetaApi는 UTC 시간을 사용하므로 현재 UTC 시간을 기준으로 체크합니다.
-                DateTime nowUtc = DateTime.UtcNow;
-                int dayOfWeek = (int)nowUtc.DayOfWeek; // 0:일요일 ~ 6:토요일
-                double currentMinutes = nowUtc.Hour * 60 + nowUtc.Minute;
-
-                if (spec.TryGetProperty("tradeSessions", out JsonElement sessionsElement))
-                {
-                    // 해당 요일의 세션 목록 가져오기
-                    if (sessionsElement.TryGetProperty(dayOfWeek.ToString(), out JsonElement dailySessions))
-                    {
-                        bool inSession = false;
-                        foreach (var session in dailySessions.EnumerateArray())
-                        {
-                            int from = session.GetProperty("fromHour").GetInt32() * 60 + session.GetProperty("fromMinute").GetInt32();
-                            int to = session.GetProperty("toHour").GetInt32() * 60 + session.GetProperty("toMinute").GetInt32();
-
-                            if (currentMinutes >= from && currentMinutes <= to)
-                            {
-                                inSession = true;
-                                break;
-                            }
-                        }
-
-                        if (!inSession)
-                        {
-                            OnFutureSiteLogEvent($"[경고] {symbol} 현재 거래 세션이 아닙니다.");
-                            return false;
-                        }
-                    }
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                OnFutureSiteLogEvent($"[에러] 세션 확인 중 오류: {ex.Message}");
-                return false;
-            }
         }
         public override bool DoBuyOrder(QuoteInfo quoteInfo, double nQuantity = 1, bool bMarketPrice = false)
         {
@@ -514,11 +531,18 @@ namespace LuckyFuture.Site
                 {
                     string message = doc.RootElement.GetProperty("message").GetString();
                     OnFutureSiteLogEvent(string.Format("[주문] 실패({0})", message));
+                    return false;
                 }
             }
             catch (Exception ex)
             {
                 string errMsg = ex.Message;
+                // 1. 로그를 남겨서 사용자와 개발자가 알 수 있게 합니다.
+                OnFutureSiteLogEvent(string.Format("[주문] 시스템 오류: {0}", errMsg));
+                //WriteLog(string.Format("[DoBuyOrder] Exception: {0}", errMsg));
+
+                // 2. 반드시 false를 리턴하여 상위 로직에 실패를 알립니다.
+                return false;
             }
 
             return true;
@@ -1209,8 +1233,10 @@ namespace LuckyFuture.Site
         {
             OrderInfo orderInfo = OrderList.FirstOrDefault(o => o.OrderNo == id);
             if (orderInfo == null)
+            {
+                OnFutureSiteLogEvent("[청산 실패] 리스트에 없는 ID: " + id);
                 return;
-
+            }
             try
             {
                 if (orderInfo.OrderType == "체결")
@@ -1251,12 +1277,25 @@ namespace LuckyFuture.Site
                         }
                     }
                 }
-                OrderList.RemoveAll(o => o.OrderNo == id);
-                OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.LIQUID);
+                // UI 갱신은 반드시 비동기로 안전하게 처리
+                // BeginInvoke 대신 메인 폼을 통해 호출합니다.
+                if (FrmMain.Default != null && FrmMain.Default.InvokeRequired)
+                {
+                    FrmMain.Default.BeginInvoke(new Action(() =>
+                    {
+                        OrderList.RemoveAll(o => o.OrderNo == id);
+                        OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.LIQUID);
+                    }));
+                }
+                else
+                {
+                    OrderList.RemoveAll(o => o.OrderNo == id);
+                    OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.LIQUID);
+                }
             }
             catch (Exception ex)
             {
-                WriteLog(string.Format("[onRemovedPosition] error={0}", ex.Message));
+                OnFutureSiteLogEvent(string.Format("[onRemovedPosition] error={0}", ex.Message));
             }
         }
         private void onCompletedOrder(string id, JsonValue historyOrders)
