@@ -12,7 +12,14 @@ namespace LuckyFutureLib.Include
     {
         private HttpClient _httpClient;
         private string _main_url = "";
-
+        // _fx가 null이 되지 않도록 여기서 바로 생성하거나 생성자에서 생성해야 합니다.
+        private readonly HttpClientFx _fx = new HttpClientFx();
+        // 생성자에서 Fx 인스턴스를 받습니다.
+        // 외부에서 주입받는 생성자 (선택 사항)
+        public HttpClientEx(HttpClientFx fx)
+        {
+            _fx = fx ?? new HttpClientFx(); // fx가 null이면 새로 생성
+        }
         public virtual void Reset()
         {
             if (_httpClient != null)
@@ -26,105 +33,167 @@ namespace LuckyFutureLib.Include
             set => _main_url = value;
         }
 
+        //public bool SendRequest(
+        //    out string result,
+        //    out HttpHeaders hdrs,
+        //    HTTPREQUEST_TYPE req_type,
+        //    string url,
+        //    Dictionary<string, string> param_list,
+        //    string media_type = "")
+        //{
+        //    string param = "";
+        //    if (param_list != null && param_list.Count > 0)
+        //    {
+        //        switch (req_type)
+        //        {
+        //            case HTTPREQUEST_TYPE.GET:
+        //            case HTTPREQUEST_TYPE.POST:
+        //                using (var encodedContent = new FormUrlEncodedContent(param_list))
+        //                    param = encodedContent.ReadAsStringAsync().Result;
+        //                break;
+        //            case HTTPREQUEST_TYPE.JSON:
+        //                param = "{" + string.Join(", ", param_list.Select(d => String.Format("\"{0}\": \"{1}\"", d.Key, d.Value))) + "}";
+        //                break;
+        //        }
+
+        //    }
+        //    return SendRequest(out result, out hdrs, req_type, url, param, media_type);
+        //}
         public bool SendRequest(
-            out string result,
-            out HttpHeaders hdrs,
-            HTTPREQUEST_TYPE req_type,
-            string url,
-            Dictionary<string, string> param_list,
-            string media_type = "")
+    out string result,
+    out HttpHeaders hdrs,
+    HTTPREQUEST_TYPE req_type,
+    string url,
+    Dictionary<string, string> param_list,
+    string media_type = "")
         {
-            string param = "";
-            if (param_list != null && param_list.Count > 0)
+            // _fx는 HttpClientFx의 인스턴스라고 가정합니다.
+            var task = Task.Run(async () =>
             {
-                switch (req_type)
+                string param = "";
+                if (param_list != null && param_list.Count > 0)
                 {
-                    case HTTPREQUEST_TYPE.GET:
-                    case HTTPREQUEST_TYPE.POST:
-                        using (var encodedContent = new FormUrlEncodedContent(param_list))
-                            param = encodedContent.ReadAsStringAsync().Result;
-                        break;
-                    case HTTPREQUEST_TYPE.JSON:
-                        param = "{" + string.Join(", ", param_list.Select(d => String.Format("\"{0}\": \"{1}\"", d.Key, d.Value))) + "}";
-                        break;
+                    switch (req_type)
+                    {
+                        case HTTPREQUEST_TYPE.GET:
+                        case HTTPREQUEST_TYPE.POST:
+                            using (var encodedContent = new FormUrlEncodedContent(param_list))
+                                // 내부에서도 비동기로 처리하여 데드락 방지
+                                param = await encodedContent.ReadAsStringAsync().ConfigureAwait(false);
+                            break;
+                        case HTTPREQUEST_TYPE.JSON:
+                            param = "{" + string.Join(", ", param_list.Select(d => String.Format("\"{0}\": \"{1}\"", d.Key, d.Value))) + "}";
+                            break;
+                    }
                 }
 
-            }
-            return SendRequest(out result, out hdrs, req_type, url, param, media_type);
-        }
+                // HttpClientFx에 있는 비동기 함수를 호출 (토큰은 빈값으로 전달)
+                return await _fx.SendRequestInternalAsync(req_type, url, "", param, media_type).ConfigureAwait(false);
+            });
 
+            // 기존 호출자(30여곳)를 위해 결과를 동기적으로 반환
+            var finalResult = task.GetAwaiter().GetResult();
+
+            result = finalResult.result;
+            hdrs = finalResult.hdrs;
+            return finalResult.success;
+        }
+        //public bool SendRequest(
+        //    out string result,
+        //    out HttpHeaders hdrs,
+        //    HTTPREQUEST_TYPE req_type,
+        //    string url,
+        //    string param = "",
+        //    string media_type = "")
+        //{
+        //    result = "";
+        //    hdrs = null;
+
+        //    string stFullUrl = url;
+        //    HttpMethod method;
+        //    switch (req_type)
+        //    {
+        //        case HTTPREQUEST_TYPE.GET:
+        //            method = HttpMethod.Get;
+        //            if (!string.IsNullOrEmpty(param))
+        //            {
+        //                stFullUrl += "?" + param;
+        //                param = "";
+        //            }
+        //            break;
+        //        case HTTPREQUEST_TYPE.POST:
+        //        case HTTPREQUEST_TYPE.JSON:
+        //            method = HttpMethod.Post;
+        //            break;
+        //        default:
+        //            return false;
+        //    }
+
+        //    bool ret = false;
+        //    using (var request = new HttpRequestMessage(method, stFullUrl))
+        //    {
+        //        if (!String.IsNullOrEmpty(param))
+        //        {
+        //            if (String.IsNullOrEmpty(media_type))
+        //            {
+        //                switch (req_type)
+        //                {
+        //                    case HTTPREQUEST_TYPE.POST:
+        //                        media_type = "application/x-www-form-urlencoded";
+        //                        break;
+        //                    case HTTPREQUEST_TYPE.JSON:
+        //                        media_type = "application/json";
+        //                        break;
+        //                    default:
+        //                        media_type = "text/plain";
+        //                        break;
+        //                }
+        //            }
+        //            request.Content = new StringContent(param, Encoding.UTF8, media_type);
+        //        }
+        //        try
+        //        {
+        //            var response = _httpClient.SendAsync(request).Result;
+        //            if (response.IsSuccessStatusCode)
+        //            {
+        //                var tmp = response.Content.ReadAsByteArrayAsync().Result;
+        //                result = Encoding.UTF8.GetString(tmp);
+        //                hdrs = response.Headers;
+        //                ret = true;
+        //            }
+        //        }
+        //        catch
+        //        {
+        //            ret = false;
+        //        }
+        //    }
+        //    return ret;
+        //}
         public bool SendRequest(
-            out string result,
-            out HttpHeaders hdrs,
-            HTTPREQUEST_TYPE req_type,
-            string url,
-            string param = "",
-            string media_type = "")
+    out string result,
+    out HttpHeaders hdrs,
+    HTTPREQUEST_TYPE req_type,
+    string url,
+    string param = "",
+    string media_type = "")
         {
-            result = "";
-            hdrs = null;
-
-            string stFullUrl = url;
-            HttpMethod method;
-            switch (req_type)
+            // 1. Task.Run을 사용하여 별도의 작업 스레드에서 실행함으로써 UI 데드락을 방지합니다.
+            // _fx는 HttpClientFx의 인스턴스 멤버 변수입니다.
+            var task = Task.Run(async () =>
             {
-                case HTTPREQUEST_TYPE.GET:
-                    method = HttpMethod.Get;
-                    if (!string.IsNullOrEmpty(param))
-                    {
-                        stFullUrl += "?" + param;
-                        param = "";
-                    }
-                    break;
-                case HTTPREQUEST_TYPE.POST:
-                case HTTPREQUEST_TYPE.JSON:
-                    method = HttpMethod.Post;
-                    break;
-                default:
-                    return false;
-            }
+                // 2. HttpClientFx 클래스에 구현된 비동기 메서드(SendRequestAsync)를 호출합니다.
+                // 토큰이 없는 버전이므로 token 인자에 빈 문자열("")을 전달합니다.
+                return await _fx.SendRequestInternalAsync(req_type, url, "", param, media_type).ConfigureAwait(false);
+            });
 
-            bool ret = false;
-            using (var request = new HttpRequestMessage(method, stFullUrl))
-            {
-                if (!String.IsNullOrEmpty(param))
-                {
-                    if (String.IsNullOrEmpty(media_type))
-                    {
-                        switch (req_type)
-                        {
-                            case HTTPREQUEST_TYPE.POST:
-                                media_type = "application/x-www-form-urlencoded";
-                                break;
-                            case HTTPREQUEST_TYPE.JSON:
-                                media_type = "application/json";
-                                break;
-                            default:
-                                media_type = "text/plain";
-                                break;
-                        }
-                    }
-                    request.Content = new StringContent(param, Encoding.UTF8, media_type);
-                }
-                try
-                {
-                    var response = _httpClient.SendAsync(request).Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var tmp = response.Content.ReadAsByteArrayAsync().Result;
-                        result = Encoding.UTF8.GetString(tmp);
-                        hdrs = response.Headers;
-                        ret = true;
-                    }
-                }
-                catch
-                {
-                    ret = false;
-                }
-            }
-            return ret;
+            // 3. 기존 호출자(30여 곳)들을 위해 결과를 동기적으로 반환합니다.
+            // UI 스레드가 아닌 작업 스레드에서 await가 완료되었으므로 안전하게 결과를 가져옵니다.
+            var finalResult = task.GetAwaiter().GetResult();
+
+            result = finalResult.result;
+            hdrs = finalResult.hdrs;
+            return finalResult.success;
         }
-
         public static string GetHeaderKeyValue(HttpHeaders headers, string header_name, string key_name)
         {
             string res = "";

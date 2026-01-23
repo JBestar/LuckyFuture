@@ -850,21 +850,47 @@ namespace LuckyFuture.UI
             }
         }
 
+        //public void WriteLog(string strLog)
+        //{
+        //    try
+        //    {
+        //        if (LogPath.Length > 0)
+        //        {
+        //            using (StreamWriter outputFile = new StreamWriter(LogPath, true))
+        //            {
+        //                outputFile.WriteLine(strLog);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    { string error = ex.Message; }
+
+        //}
+        private readonly object _logLock = new object(); // 파일 접근 동기화를 위한 객체
+
         public void WriteLog(string strLog)
         {
+            // 시간 정보를 포함하면 더 좋습니다.
+            string logEntry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {strLog}";
+
             try
             {
-                if (LogPath.Length > 0)
+                if (!string.IsNullOrEmpty(LogPath))
                 {
-                    using (StreamWriter outputFile = new StreamWriter(LogPath, true))
+                    lock (_logLock) // 여러 스레드가 동시에 파일에 쓰지 못하도록 보호
                     {
-                        outputFile.WriteLine(strLog);
+                        using (StreamWriter outputFile = new StreamWriter(LogPath, true))
+                        {
+                            outputFile.WriteLine(logEntry);
+                        }
                     }
                 }
             }
             catch (Exception ex)
-            { string error = ex.Message; }
-
+            {
+                // 2026년 기준: 로그 기록 실패 시 디버그 콘솔에라도 남기는 것이 좋습니다.
+                System.Diagnostics.Debug.WriteLine($"로그 기록 실패: {ex.Message}");
+            }
         }
 
         private void OnChartNoticeReceive(object sender, ChartEventArgs e)

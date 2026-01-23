@@ -42,7 +42,7 @@ namespace LuckyFuture
     {
         public readonly static AppAuthor Default = new AppAuthor();
 
-        private readonly HttpClientEx _httpClient = new HttpClientEx();
+        private readonly HttpClientEx _httpClient = new HttpClientEx(null);
         private readonly WebClientEx _webClient = new WebClientEx();
 
         public event EventHandler<AuthorEventArgs> NoticeEvent;
