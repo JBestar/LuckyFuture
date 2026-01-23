@@ -3,6 +3,7 @@ using LuckyFuture.Logic;
 using LuckyFuture.Models.ValueObjects;
 using LuckyFuture.Properties;
 using LuckyFuture.Site;
+using LuckyFutureLib;
 using LuckyFutureLib.Include;
 using System;
 using System.Collections.Generic;
@@ -12,29 +13,32 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Text.Json;
 using System.Threading;
 using System.Windows.Forms;
-using System.Text.Json;
 
 namespace LuckyFuture.UI
 {
-    public partial class FrmMain : Form
-	{
-		public FrmMain()
-		{
+    public partial class FrmMain : Form, ILogger // 인터페이스 상속
+    {
+        public FrmMain()
+        {
+            // 2. HttpClientFx에게 "내가 로그 기록을 처리하겠다"고 등록 (가장 중요)
+            HttpClientFx.Logger = this;
+
             DeleteBeforeFiles();
-			if (LoginForm.ShowDialog() != DialogResult.OK)
-			{
-				Environment.Exit(0);
-			}
+            if (LoginForm.ShowDialog() != DialogResult.OK)
+            {
+                Environment.Exit(0);
+            }
 
             if (UpdateForm.CheckUpdate())
             {
                 if (UpdateForm.ShowDialog() != DialogResult.OK)
                 {
-					AppAuthor.Default.Logout();
-					Thread.Sleep(1000);
-					Environment.Exit(0);
+                    AppAuthor.Default.Logout();
+                    Thread.Sleep(1000);
+                    Environment.Exit(0);
                 }
             }
 
@@ -50,8 +54,37 @@ namespace LuckyFuture.UI
             EarnTickForm.SetChartEventHandler(OnChartNoticeReceive);
             LossTickForm.SetChartEventHandler(OnChartNoticeReceive);
             SyncForm.SetChartEventHandler(OnChartNoticeReceive);
-        }
 
+        }
+        private readonly object _logLock = new object(); // 파일 접근 동기화를 위한 객체
+
+        public void WriteLog(string strLog)
+        {
+            // 시간 정보를 포함하면 더 좋습니다.
+            string logEntry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {strLog}";
+
+            try
+            {
+                if (!string.IsNullOrEmpty(LogPath))
+                {
+                    lock (_logLock) // 여러 스레드가 동시에 파일에 쓰지 못하도록 보호
+                    {
+                        using (StreamWriter outputFile = new StreamWriter(LogPath, true))
+                        {
+                            outputFile.WriteLine(logEntry);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // 2026년 기준: 로그 기록 실패 시 디버그 콘솔에라도 남기는 것이 좋습니다.
+                System.Diagnostics.Debug.WriteLine($"로그 기록 실패: {ex.Message}");
+            }
+        }
+    }
+    public partial class FrmMain : Form
+    {
         // Sub Forms
         private FrmLogin LoginForm { get => FrmLogin.Default; }
 		private FrmUpdate UpdateForm { get => FrmUpdate.Default; }
@@ -866,32 +899,32 @@ namespace LuckyFuture.UI
         //    { string error = ex.Message; }
 
         //}
-        private readonly object _logLock = new object(); // 파일 접근 동기화를 위한 객체
+        //private readonly object _logLock = new object(); // 파일 접근 동기화를 위한 객체
 
-        public void WriteLog(string strLog)
-        {
-            // 시간 정보를 포함하면 더 좋습니다.
-            string logEntry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {strLog}";
+        //public void WriteLog(string strLog)
+        //{
+        //    // 시간 정보를 포함하면 더 좋습니다.
+        //    string logEntry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {strLog}";
 
-            try
-            {
-                if (!string.IsNullOrEmpty(LogPath))
-                {
-                    lock (_logLock) // 여러 스레드가 동시에 파일에 쓰지 못하도록 보호
-                    {
-                        using (StreamWriter outputFile = new StreamWriter(LogPath, true))
-                        {
-                            outputFile.WriteLine(logEntry);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // 2026년 기준: 로그 기록 실패 시 디버그 콘솔에라도 남기는 것이 좋습니다.
-                System.Diagnostics.Debug.WriteLine($"로그 기록 실패: {ex.Message}");
-            }
-        }
+        //    try
+        //    {
+        //        if (!string.IsNullOrEmpty(LogPath))
+        //        {
+        //            lock (_logLock) // 여러 스레드가 동시에 파일에 쓰지 못하도록 보호
+        //            {
+        //                using (StreamWriter outputFile = new StreamWriter(LogPath, true))
+        //                {
+        //                    outputFile.WriteLine(logEntry);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // 2026년 기준: 로그 기록 실패 시 디버그 콘솔에라도 남기는 것이 좋습니다.
+        //        System.Diagnostics.Debug.WriteLine($"로그 기록 실패: {ex.Message}");
+        //    }
+        //}
 
         private void OnChartNoticeReceive(object sender, ChartEventArgs e)
         {

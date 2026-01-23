@@ -5,11 +5,17 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics; // Stopwatch 사용을 위해 필요
+
 
 namespace LuckyFutureLib.Include
 {
     public class HttpClientFx
     {
+        // 외부에서 로그 기능을 주입받습니다.
+        // 1. 로그 담당자를 저장할 정적 변수
+        public static ILogger Logger { get; set; }
+
         private HttpClient _httpClient = new HttpClient
         {
             Timeout = TimeSpan.FromSeconds(10) // 10초 내 응답이 없으면 타임아웃 발생
@@ -250,22 +256,40 @@ namespace LuckyFutureLib.Include
                 {
                     request.Headers.Add("auth-token", token);
                 }
-
+                Stopwatch sw = Stopwatch.StartNew(); // 1. 실행 시간 측정 시작
+                string logMsg = "";
                 try
                 {
                     // 4. 비동기 호출 (핵심: .Result 대신 await 사용)
                     // ConfigureAwait(false)는 UI 스레드 의존성을 끊어 데드락을 방지합니다.
                     using (var response = await _httpClient.SendAsync(request).ConfigureAwait(false))
                     {
+                        sw.Stop(); // 2. 응답 도착 시 측정 중지
                         hdrs = response.Headers;
                         var tmp = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
                         result = Encoding.UTF8.GetString(tmp);
-
+                        // 성공 로그 기록 (예: [GET] https://... - Success (452ms))
+                        logMsg = $"[{req_type}] {url} - Success ({sw.ElapsedMilliseconds}ms)";
+                        // LuckyFuture.UI.FrmMain.Default를 통해 접근
+                        Logger ?.WriteLog(logMsg);
                         return (response.IsSuccessStatusCode, result, hdrs);
                     }
                 }
+                catch (TaskCanceledException ex) when (!ex.CancellationToken.IsCancellationRequested)
+                {
+                    sw.Stop(); // 타임아웃 시 측정 중지
+                    logMsg = $"[{req_type}] {url} - Timeout! ({sw.ElapsedMilliseconds}ms)";
+                    // LuckyFuture.UI.FrmMain.Default를 통해 접근
+                    Logger?.WriteLog(logMsg);
+
+                    return (false, "서버 응답 시간 초과", null);
+                }
                 catch (Exception ex)
                 {
+                    sw.Stop(); // 일반 오류 시 측정 중지
+                    logMsg = $"[{req_type}] {url} - Error: {ex.Message} ({sw.ElapsedMilliseconds}ms)";
+                    // LuckyFuture.UI.FrmMain.Default를 통해 접근
+                    Logger?.WriteLog(logMsg);
                     return (false, ex.Message, null);
                 }
             }
