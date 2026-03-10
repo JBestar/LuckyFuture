@@ -1,4 +1,4 @@
-﻿using ChartCtrl;
+using ChartCtrl;
 using LuckyFuture.Logic;
 using LuckyFuture.Models.ValueObjects;
 using LuckyFuture.Properties;
@@ -119,6 +119,8 @@ namespace LuckyFuture.UI
             string[] site_names = {"CMG"}; //"더드림", "몬스타", "키움증권", "미래", //"레안텍", "나눔"
             foreach (string site_name in site_names) 
 				cmbSiteList.Items.Add(site_name);
+            if (cmbSiteList.Items.Count > 0)
+                cmbSiteList.SelectedIndex = 0;
 
 			this.hopeForm1.Text = AppAuthor.Default.GetAppName() + " " + AppAuthor.Default.GetAppVersion();
             LogPath = AppAuthor.Default.CreatePathFolder("Log") + "/" + DateTime.Now.ToString("yyyyMMdd") + "_MT";
@@ -500,6 +502,10 @@ namespace LuckyFuture.UI
 					ItemPriceInfo = null;
 					this.ItemPriceInfo = CurrentSite.ItemPriceList;					
 				}
+                if (CurrentSite.ItemPriceList != null && CurrentSite.ItemPriceList.Count > 0 && this.dgvItemPriceInfo.RowCount > 0)
+                {
+                    this.dgvItemPriceInfo.InvalidateRow(0);
+                }
 			}
 		}
 
@@ -623,6 +629,9 @@ namespace LuckyFuture.UI
                                     // Trace.TraceInformation("<FrmMain> OnSiteNoticeReceive.Login ResetChart");
                                 }
                             }
+                            ShowUserInfo();
+                            UpdateValuationInfo();
+                            ShowBalance(noticeType);
                             EnableControls();
 							ItemChanged = false;
 							break;
@@ -719,9 +728,10 @@ namespace LuckyFuture.UI
                             if (!ItemChanged)
                             {
                                 EnableControls();
-                                AddLog("로그아웃 되었습니다.");
+                                AddLog(this.CurrentSiteType == SITETYPE.CMG ? "연결이 종료되었습니다." : "로그아웃 되었습니다.");
                             }
-                            ShowKiwoomUserInfo();
+                            if (this.CurrentSiteType == SITETYPE.KIWOOM)
+                                ShowKiwoomUserInfo();
                             break;
 					}
 				}
@@ -1421,19 +1431,21 @@ namespace LuckyFuture.UI
 
 			else
 			{
-				if (string.IsNullOrEmpty(txtId.Text))
+				// CMG(MT4)는 서버 검증 없이 MT4 API만 사용 → 아이디/비밀번호 없이 접속 가능
+				if (this.CurrentSiteType != SITETYPE.CMG)
 				{
-					txtId.Focus();
-					return;
+					if (string.IsNullOrEmpty(txtId.Text))
+					{
+						txtId.Focus();
+						return;
+					}
+					if (string.IsNullOrEmpty(txtPassword.Text))
+					{
+						txtPassword.Focus();
+						return;
+					}
 				}
-
-				if (string.IsNullOrEmpty(txtPassword.Text))
-				{
-					txtPassword.Focus();
-					return;
-				}
-
-                string id = txtId.Text;
+                string id = txtId.Text ?? "";
                 string acc = "";
                 if (this.CurrentSiteType == SITETYPE.KIWOOM || Settings.Default.SignalSiteOn)
                 {

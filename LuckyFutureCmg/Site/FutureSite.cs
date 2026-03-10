@@ -1,4 +1,4 @@
-﻿using ChartCtrl;
+using ChartCtrl;
 using LuckyFutureLib.Include;
 using LuckyFuture.Models.ValueObjects;
 using LuckyFuture.Properties;
@@ -134,9 +134,12 @@ namespace LuckyFuture.Site
             if (LogicEvent != null)
                 LogicEvent(this, new FutureSiteEventArgs(obj));
         }
+        /// <summary>true면 비밀번호 없이도 Start() 가능 (예: CMG는 MT4 API만 사용)</summary>
+        protected virtual bool AllowEmptyPassword => false;
+
         public override bool Start()
 		{
-			if (String.IsNullOrEmpty(UserPassword))
+			if (!AllowEmptyPassword && String.IsNullOrEmpty(UserPassword))
 				return false;
             // ItemSymbol = "";
             ItemPrecision = 0;

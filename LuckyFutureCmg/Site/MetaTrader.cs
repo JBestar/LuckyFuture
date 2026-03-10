@@ -1,4 +1,4 @@
-﻿// #define WRITE_LOG
+// #define WRITE_LOG
 
 using System;
 using System.Collections.Generic;
@@ -6,50 +6,50 @@ using System.Diagnostics;
 using System.IO;
 using System.Json;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Security.Policy;
-using System.ServiceModel.Configuration;
 using System.Text;
-using System.Text.Json;
-using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using ChartCtrl;
 using Goodbyte.TradingSystem.Domain.Entities;
 using LuckyFuture.Models.ValueObjects;
 using LuckyFuture.Properties;
 using LuckyFutureLib.Include;
-using SocketIOClient;
+using MtApi;
 
 namespace LuckyFuture.Site
 {
-
+    /// <summary>
+    /// CMG 연동용 MetaTrader 사이트. MtApi로 MT4와 통신하며, 기존 자동매매 로직은 FutureSite 흐름을 그대로 사용.
+    /// </summary>
+    /// <remarks>
+    /// [수정 시 원칙] 통신부만 손대고 나머지는 그대로 둬서 기존 자동매매 로직이 작동하도록 유지.
+    /// - 통신부: Login/DisconnectSocket, MtApiClient 연결/해제, QuoteUpdated → Current 생성 후 OnReceiveCurrent 호출,
+    ///   OrderSend/OrderDelete/OrderClose, AccountBalance/AccountEquity/HistoryDeals/GetOrders 등 조회, CopyRates, SymbolSelect/reqQuote.
+    /// - 로직부(유지): Prepare/Check/OnPrepare/OnLogin, DoBuyOrder/DoSellOrder의 검증·흐름, CreateQuoteInfo, OnReceiveCurrent 이후 처리,
+    ///   OrderList/CurrentList/QuoteList/CurItemSymbol 기반 로직, OnFutureSiteNoticeEvent 등.
+    /// </remarks>
     class MetaTrader : FutureSite
     {
         public override SITETYPE Type { get; set; }
-        private readonly HttpClientFx _httpClient = new HttpClientFx();
-        private SocketIOClient.SocketIO _socketClient = null;
+        private MtApiClient _mtApiClient = null;
+        private readonly object _mtLock = new object();
 
-        public const string URL_MAIN = "https://mt-client-api-v1.new-york.agiliumtrade.ai";
-        public const string URL_SOCK = "https://mt-client-api-v1.new-york-b.agiliumtrade.ai";
-        public const string URL_PROV = "https://mt-provisioning-api-v1.agiliumtrade.agiliumtrade.ai";
-        public const string URL_DATA = "https://mt-market-data-client-api-v1.new-york.agiliumtrade.ai";
+        /// <summary>MtApi EA 연결 호스트 (기본 localhost)</summary>
+        public const string MTAPI_DEFAULT_HOST = "localhost";
+        /// <summary>MtApi EA 포트 (MT4 기본 8222)</summary>
+        public const int MTAPI_DEFAULT_PORT = 8222;
 
-        private string mt_application = "MetaApi";
-        private string mt_userId = "";
-        private string mt_host = "";
         private string mt_oldSymbol = "";
-
         private int m_tickCurrent = 0;
         private int m_tickAccount = 0;
+        private int m_tickContrastDiag = 0;
+        private int m_tickOrderList = 0;
+        private const int ORDERLIST_REFRESH_MS = 3000;
         private bool m_bNeedAcc = false;
-        private bool m_bReconnect = false;
+        private bool _mtApiConnected = false;
 
         public MetaTrader()
         {
             Type = SITETYPE.CMG;
-            _httpClient.Reset();
-
 #if WRITE_LOG
             CreateLogFile();
 #endif
@@ -80,75 +80,76 @@ namespace LuckyFuture.Site
             { string error = ex.Message; }
 #endif
         }
+
         protected override ERRORCODE Login(string id, string password)
         {
-            string url = String.Format("{0}/users/current/accounts?offset=0&limit=1000&state=DEPLOYED", URL_PROV);
-            string token = UserPassword;
-            if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.GET, url, token))
+            if (_mtApiClient != null)
             {
-                WriteLog(String.Format("Login error url={0}, response={1}", url, body));
-                return ERRORCODE.CANT_CONNECT;
+                DisconnectSocket();
             }
+
+            _mtApiClient = new MtApiClient();
+            _mtApiClient.ConnectionStateChanged += MtApiClient_ConnectionStateChanged;
+            _mtApiClient.QuoteUpdated += MtApiClient_QuoteUpdated;
+
             try
             {
-                mt_userId = "";
-                JsonDocument doc = JsonDocument.Parse(body);
-                JsonElement rootElement = doc.RootElement;
-                int cnt = rootElement.GetArrayLength();
-                for (int i = 0; i < cnt; i++)
+                _mtApiClient.BeginConnect(MTAPI_DEFAULT_HOST, MTAPI_DEFAULT_PORT);
+                int waitMs = 0;
+                while (!_mtApiConnected && waitMs < 10000)
                 {
-                    string loginId = rootElement[i].GetProperty("login").GetString();
-                    if (loginId == UserId)
-                    {
-                        mt_userId = rootElement[i].GetProperty("_id").GetString();
-                        break;
-                    }
+                    Thread.Sleep(100);
+                    waitMs += 100;
                 }
-
-
+                if (!_mtApiConnected)
+                {
+                    WriteLog("MtApi 연결 시간 초과");
+                    return ERRORCODE.CANT_CONNECT;
+                }
             }
             catch (Exception ex)
             {
-                string msgg = ex.Message;
-                return ERRORCODE.UNKNOWN_FAILED;
-            }
-            if (mt_userId.Length < 1)
-                return ERRORCODE.LOGIN_NO_ID;
-
-            url = String.Format("{0}/users/current/accounts/{1}/account-information", URL_MAIN, mt_userId);
-            token = UserPassword;
-            if (!_httpClient.SendRequest(out body, out headers, HTTPREQUEST_TYPE.GET, url, token))
-            {
-                WriteLog(String.Format("Login error url={0}, response={1}", url, body));
+                WriteLog(String.Format("MtApi Connect error: {0}", ex.Message));
                 return ERRORCODE.CANT_CONNECT;
             }
 
-            double balance = 0, valuation = 0, profit = 0;
+            lock (_mtLock)
+            {
+                if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected)
+                    return ERRORCODE.CANT_CONNECT;
+            }
+
+            double balance = 0, equity = 0;
+            string accNum = "";
+            string accountName = "";
             try
             {
-                JsonDocument doc = JsonDocument.Parse(body);
-                UserAcc = doc.RootElement.GetProperty("server").GetString();
-                balance = doc.RootElement.GetProperty("balance").GetDouble();
-                valuation = doc.RootElement.GetProperty("equity").GetDouble() - balance;
-                WriteLog(String.Format("Login Balance={0}, Valuation={1}, Profit={2}", balance, valuation, profit));
+                balance = _mtApiClient.AccountBalance();
+                equity = _mtApiClient.AccountEquity();
+                accNum = _mtApiClient.AccountNumber().ToString();
+                try { accountName = _mtApiClient.AccountName() ?? ""; } catch { }
+                UserAcc = accNum;
+                WriteLog(String.Format("Login Balance={0}, Equity={1}, Account={2}", balance, equity, accNum));
             }
             catch (Exception ex)
             {
-                string msgg = ex.Message;
+                WriteLog(String.Format("AccountInfo error: {0}", ex.Message));
                 return ERRORCODE.UNKNOWN_FAILED;
             }
 
+            double valuation = equity - balance;
+            string accountDisplay = string.IsNullOrEmpty(accountName) ? accNum : string.Format("{0} ({1})", accountName, accNum);
             this.CurrentUserAccount = new UserAccountInfo
             {
                 UserAccountId = UserAcc,
-                UserAccountStr = UserAcc,
+                UserAccountStr = accountDisplay,
                 Balance = balance
             };
             this.UserAccounts = new List<UserAccountInfo>();
             this.UserAccounts.Add(this.CurrentUserAccount);
             DayProfitLoss = new DayProfitLossInfo();
             OnLogin();
-            this.ValuationList[0].TotalValuation = 0; //valuation
+            this.ValuationList[0].TotalValuation = 0;
 
             RequestHistoryDeals();
 
@@ -162,12 +163,140 @@ namespace LuckyFuture.Site
             bQutoteCreated = false;
             reqItemlist();
             ConnectSocket();
-            Thread.Sleep(4000);
+            Thread.Sleep(1500);
         }
 
         protected override ERRORCODE LogOut()
         {
             return ERRORCODE.SUCCESS;
+        }
+
+        private void MtApiClient_ConnectionStateChanged(object sender, MtApi.MtConnectionEventArgs e)
+        {
+            _mtApiConnected = (e != null && e.Status == MtConnectionState.Connected);
+            WriteLog("[MtApi] ConnectionStateChanged: " + (e?.Status.ToString() ?? "null"));
+        }
+
+        /// <summary>통신부: MtApi 호가 수신 → 기존 로직용 Current 생성 후 OnReceiveCurrent 호출 (자동매매 로직은 변경 없음)</summary>
+        private void MtApiClient_QuoteUpdated(object sender, string symbol, DateTime time, double bid, double ask)
+        {
+            if (string.IsNullOrEmpty(symbol) || symbol != ItemSymbol) return;
+
+            Current current = new Current();
+            current.ReceivedDate = time;
+            current.CurrentPrice = bid;
+            current.CurrentPrice2 = ask;
+            current.ConclusionVolume = 1;
+            FillCurrentOhlcFromLastBar(current);
+            FillContrastFromApi(current);
+
+            if (CurItemSymbol != null && CurItemSymbol.MidPrice == 0)
+                CurItemSymbol.MidPrice = ask;
+
+            if (bQutoteCreated)
+                OnReceiveCurrent(current);
+        }
+
+        /// <summary>현재 종목의 최근 봉(시가/고가/저가) 정보로 current를 채움. MT4 CopyRates는 startPos=1(마지막 확정봉) 또는 0(현재봉)으로 요청.</summary>
+        private void FillCurrentOhlcFromLastBar(Current current)
+        {
+            try
+            {
+                lock (_mtLock)
+                {
+                    if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected) return;
+                    MqlRates[] rates = _mtApiClient.CopyRates(ItemSymbol, MtApi.ENUM_TIMEFRAMES.PERIOD_M1, 1, 1)?.ToArray() ?? new MqlRates[0];
+                    if (rates == null || rates.Length == 0)
+                        rates = _mtApiClient.CopyRates(ItemSymbol, MtApi.ENUM_TIMEFRAMES.PERIOD_M1, 0, 1)?.ToArray() ?? new MqlRates[0];
+                    if (rates == null || rates.Length == 0)
+                        rates = _mtApiClient.CopyRates(ItemSymbol, MtApi.ENUM_TIMEFRAMES.PERIOD_M1, 0, 10)?.ToArray() ?? new MqlRates[0];
+                    if (rates != null && rates.Length > 0)
+                    {
+                        var r = rates[0];
+                        for (int i = 1; i < rates.Length; i++)
+                            if (rates[i].Time > r.Time) r = rates[i];
+                        current.StartPrice = r.Open;
+                        current.HighPrice = r.High;
+                        current.LowPrice = r.Low;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLog("[FillCurrentOhlcFromLastBar] " + ex.Message);
+            }
+        }
+
+        /// <summary>MT4 API 제공 시세 기준으로 전일대비(Contrast)/등락률(ContrastPer) 설정. 세션시가 → M1시가 → D1 전일종가 순으로 기준가 확보.</summary>
+        private void FillContrastFromApi(Current current)
+        {
+            try
+            {
+                double refPrice = 0;
+                double sessionOpen = 0;
+                double d1Close = 0, d1Open = 0;
+                int d1Count = 0;
+                lock (_mtLock)
+                {
+                    if (_mtApiClient != null && _mtApiClient.ConnectionState == MtConnectionState.Connected)
+                    {
+                        try
+                        {
+                            sessionOpen = _mtApiClient.SymbolInfoDouble(ItemSymbol, EnumSymbolInfoDouble.SYMBOL_SESSION_OPEN);
+                            refPrice = sessionOpen;
+                        }
+                        catch
+                        {
+                            refPrice = 0;
+                        }
+                    }
+                }
+                if (refPrice <= 0)
+                    refPrice = current.StartPrice;
+                if (refPrice <= 0)
+                {
+                    lock (_mtLock)
+                    {
+                        if (_mtApiClient != null && _mtApiClient.ConnectionState == MtConnectionState.Connected)
+                        {
+                            try
+                            {
+                                var d1 = _mtApiClient.CopyRates(ItemSymbol, MtApi.ENUM_TIMEFRAMES.PERIOD_D1, 1, 1)?.ToArray() ?? new MqlRates[0];
+                                d1Count = d1 != null ? d1.Length : 0;
+                                if (d1 != null && d1.Length > 0)
+                                {
+                                    d1Close = d1[0].Close;
+                                    d1Open = d1[0].Open;
+                                    refPrice = d1Close > 0 ? d1Close : d1Open;
+                                }
+                            }
+                            catch { }
+                        }
+                    }
+                }
+                if (refPrice > 0)
+                {
+                    current.Contrast = current.CurrentPrice - refPrice;
+                    current.ContrastPer = (current.CurrentPrice - refPrice) / refPrice * 100.0;
+                }
+                else
+                {
+                    // [등락률 디버그] 기준가가 0일 때만 10초마다 로그
+                    // if (Math.Abs(Environment.TickCount - m_tickContrastDiag) >= 10000)
+                    // {
+                    //     m_tickContrastDiag = Environment.TickCount;
+                    //     string msg = string.Format("[등락률진단] 기준가=0 → SESSION_OPEN={0}, M1시가={1}, D1봉수={2}, D1Close={3}, D1Open={4}",
+                    //         sessionOpen, current.StartPrice, d1Count, d1Close, d1Open);
+                    //     OnFutureSiteLogEvent(msg);
+                    //     WriteLog("[등락률진단] symbol=" + (ItemSymbol ?? "") + " " + msg);
+                    // }
+                }
+            }
+            catch (Exception ex)
+            {
+                // WriteLog("[FillContrastFromApi] " + ex.Message);
+                // OnFutureSiteLogEvent("[등락률진단] 예외: " + ex.Message);
+            }
         }
 
         protected override ERRORCODE Prepare()
@@ -211,6 +340,22 @@ namespace LuckyFuture.Site
                 CreateQuoteInfo();
             }
 
+            // MT4 API 기준 주문 리스트 실시간 갱신 (다른 프로그램에서 청산해도 리스트에 반영)
+            bool doRefreshOrderList = false;
+            lock (_mtLock)
+            {
+                if (_mtApiClient != null && _mtApiClient.ConnectionState == MtConnectionState.Connected
+                    && Math.Abs(Environment.TickCount - m_tickOrderList) >= ORDERLIST_REFRESH_MS)
+                {
+                    m_tickOrderList = Environment.TickCount;
+                    doRefreshOrderList = true;
+                }
+            }
+            if (doRefreshOrderList)
+            {
+                try { RequestOrderList(false); } catch (Exception ex) { WriteLog("[Check] RequestOrderList " + ex.Message); }
+            }
+
             if (!m_bNeedAcc && Math.Abs(Environment.TickCount - m_tickAccount) < 60000)
                 return ERRORCODE.SUCCESS;
 
@@ -233,10 +378,11 @@ namespace LuckyFuture.Site
             return error_code;
         }
 
+        /// <summary>CMG(MT4)는 서버 로그인 없이 MT4 API 연결만 사용하므로 비밀번호 없이도 Start 가능</summary>
+        protected override bool AllowEmptyPassword => true;
+
         public override bool Start()
         {
-            if (String.IsNullOrEmpty(UserPassword))
-                return false;
             return base.Start();
         }
 
@@ -340,33 +486,35 @@ namespace LuckyFuture.Site
                 OnFutureSiteLogEvent(string.Format("[매도주문] 주문가:{0}, 주문수량:{1}", quoteInfo.Price, nQuantity));
             }
 
-            string jsonParam = JsonSerializer.Serialize(param_list);
-
-            string url = String.Format("{0}/users/current/accounts/{1}/trade", URL_MAIN, mt_userId);
-            string token = UserPassword;
-            if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.JSON, url, token, jsonParam))
-                return false;
-
-            WriteLog(string.Format("[DoSellOrder] param={0} resp={1}", jsonParam, body));
-
-            try
+            lock (_mtLock)
             {
-                JsonDocument doc = JsonDocument.Parse(body);
-                int code = doc.RootElement.GetProperty("numericCode").GetInt32();
-                if (code != 0)
+                if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected)
                 {
-                    string message = doc.RootElement.GetProperty("message").GetString();
-                    OnFutureSiteLogEvent(string.Format("[주문] 실패({0})", message));
+                    OnFutureSiteLogEvent("[주문] MtApi 미연결");
                     return false;
                 }
-
+                try
+                {
+                    double price = bMarketPrice ? _mtApiClient.SymbolInfoDouble(ItemSymbol, EnumSymbolInfoDouble.SYMBOL_ASK) : quoteInfo.Price;
+                    TradeOperation orderType = bMarketPrice ? TradeOperation.OP_SELL : TradeOperation.OP_SELLLIMIT;
+                    int ticket = _mtApiClient.OrderSend(ItemSymbol, orderType, nQuantity, price, 30, 0, 0, "CMG", 0, DateTime.MinValue);
+                    if (ticket < 0)
+                    {
+                        int err = _mtApiClient.GetLastError();
+                        OnFutureSiteLogEvent(string.Format("[주문] 실패(err={0})", err));
+                        return false;
+                    }
+                    WriteLog(string.Format("[DoSellOrder] ticket={0}", ticket));
+                }
+                catch (Exception ex)
+                {
+                    OnFutureSiteLogEvent("[주문] " + ex.Message);
+                    return false;
+                }
             }
-            catch (Exception ex)
-            {
-                string errMsg = ex.Message;
-                return false;
-            }
-
+            // 주문 리스트 갱신 후 ORDER 이벤트로 UI 현시 (기존 프로젝트와 동일한 갱신 흐름)
+            Thread.Sleep(200);
+            RequestOrderList(false);
             return true;
         }
 
@@ -435,30 +583,35 @@ namespace LuckyFuture.Site
                 OnFutureSiteLogEvent(string.Format("[매수주문] 주문가:{0}, 주문수량:{1}", quoteInfo.Price, nQuantity));
             }
 
-            string jsonParam = JsonSerializer.Serialize(param_list);
-
-            string url = String.Format("{0}/users/current/accounts/{1}/trade", URL_MAIN, mt_userId);
-            string token = UserPassword;
-            if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.JSON, url, token, jsonParam))
-                return false;
-
-            WriteLog(string.Format("[DoBuyOrder] param={0} resp={1}", jsonParam, body));
-            try
+            lock (_mtLock)
             {
-                JsonDocument doc = JsonDocument.Parse(body);
-                int code = doc.RootElement.GetProperty("numericCode").GetInt32();
-                if (code != 0)
+                if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected)
                 {
-                    string message = doc.RootElement.GetProperty("message").GetString();
-                    OnFutureSiteLogEvent(string.Format("[주문] 실패({0})", message));
+                    OnFutureSiteLogEvent("[주문] MtApi 미연결");
+                    return false;
+                }
+                try
+                {
+                    double price = bMarketPrice ? _mtApiClient.SymbolInfoDouble(ItemSymbol, EnumSymbolInfoDouble.SYMBOL_BID) : quoteInfo.Price;
+                    TradeOperation orderType = bMarketPrice ? TradeOperation.OP_BUY : TradeOperation.OP_BUYLIMIT;
+                    int ticket = _mtApiClient.OrderSend(ItemSymbol, orderType, nQuantity, price, 30, 0, 0, "CMG", 0, DateTime.MinValue);
+                    if (ticket < 0)
+                    {
+                        int err = _mtApiClient.GetLastError();
+                        OnFutureSiteLogEvent(string.Format("[주문] 실패(err={0})", err));
+                        return false;
+                    }
+                    WriteLog(string.Format("[DoBuyOrder] ticket={0}", ticket));
+                }
+                catch (Exception ex)
+                {
+                    OnFutureSiteLogEvent("[주문] " + ex.Message);
                     return false;
                 }
             }
-            catch (Exception ex)
-            {
-                string errMsg = ex.Message;
-                return false;
-            }
+            // 주문 리스트 갱신 후 ORDER 이벤트로 UI 현시 (기존 프로젝트와 동일한 갱신 흐름)
+            Thread.Sleep(200);
+            RequestOrderList(false);
 
             return true;
         }
@@ -472,20 +625,25 @@ namespace LuckyFuture.Site
                 return false;
             }
 
-            var param_list = new Dictionary<string, string>
+            lock (_mtLock)
             {
-                { "actionType", "ORDER_CANCEL"},
-                { "orderId", orderInfo.OrderNo},
-            };
-            string jsonParam = JsonSerializer.Serialize(param_list);
-
-            string url = String.Format("{0}/users/current/accounts/{1}/trade", URL_MAIN, mt_userId);
-            string token = UserPassword;
-            if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.JSON, url, token, jsonParam))
-                return false;
-
-            WriteLog(string.Format("[CancelOrder] {0}", body));
-
+                if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected)
+                    return false;
+                try
+                {
+                    int ticket = int.Parse(orderInfo.OrderNo);
+                    bool ok = _mtApiClient.OrderDelete(ticket);
+                    WriteLog(string.Format("[CancelOrder] ticket={0} result={1}", ticket, ok));
+                    if (!ok) return false;
+                }
+                catch (Exception ex)
+                {
+                    WriteLog("[CancelOrder] " + ex.Message);
+                    return false;
+                }
+            }
+            Thread.Sleep(200);
+            RequestOrderList(false);
             return true;
         }
 
@@ -494,20 +652,31 @@ namespace LuckyFuture.Site
             if (this.CurrentUserAccount == null)
                 return false;
 
-            var param_list = new Dictionary<string, string>
+            lock (_mtLock)
             {
-                { "actionType", "POSITION_CLOSE_ID"},
-                { "positionId", orderInfo.OrderNo},
-            };
-            string jsonParam = JsonSerializer.Serialize(param_list);
-
-            string url = String.Format("{0}/users/current/accounts/{1}/trade", URL_MAIN, mt_userId);
-            string token = UserPassword;
-            if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.JSON, url, token, jsonParam))
-                return false;
-
-            WriteLog(string.Format("[LiquidateOrder] {0}", body));
-
+                if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected)
+                    return false;
+                try
+                {
+                    int ticket = int.Parse(orderInfo.OrderNo);
+                    double volume = orderInfo.OrderQty;
+                    double price = orderInfo.TradeType == TRADETYPE.SELL ? _mtApiClient.SymbolInfoDouble(ItemSymbol, EnumSymbolInfoDouble.SYMBOL_BID) : _mtApiClient.SymbolInfoDouble(ItemSymbol, EnumSymbolInfoDouble.SYMBOL_ASK);
+                    bool ok = _mtApiClient.OrderClose(ticket, volume, price, 30);
+                    WriteLog(string.Format("[LiquidateOrder] ticket={0} result={1}", ticket, ok));
+                    if (!ok) return false;
+                    double profit = orderInfo.Valuation;
+                    string logMsg = string.Format("[청산] 청산가:{0}", price);
+                    logMsg += " " + (profit >= 0 ? "수익:" : "손실:") + string.Format("{0}", profit);
+                    OnFutureSiteLogEvent(logMsg);
+                }
+                catch (Exception ex)
+                {
+                    WriteLog("[LiquidateOrder] " + ex.Message);
+                    return false;
+                }
+            }
+            Thread.Sleep(200);
+            RequestOrderList(false);
             return true;
         }
 
@@ -594,59 +763,63 @@ namespace LuckyFuture.Site
             if (tmFrame.Length < 1)
                 return false;
 
-            string url = String.Format("{0}/users/current/accounts/{1}/historical-market-data/symbols/{2}/timeframes/{3}/candles?limit=300", URL_DATA, mt_userId, ItemSymbol, tmFrame);
-            string token = UserPassword;
-            if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.GET, url, token))
-                return false;
-            try
+            lock (_mtLock)
             {
-                DItem newDItem = null;
-                CItem newCItem = null;
-                int nConc = 0;
-                float fCurPrice = 0, fStartPrice = 0, fHighPrice = 0, fLowPrice = 0;
-                string sDateTime = "";
-                DateTime dtStart = DateTime.MinValue, dtEnd = DateTime.MinValue;
+                if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected) return false;
+                try
+                {
+                    int tf = GetMtApiTimeframe(tmFrame);
+                    MqlRates[] rates = _mtApiClient.CopyRates(ItemSymbol, (MtApi.ENUM_TIMEFRAMES)tf, 0, 300)?.ToArray() ?? new MqlRates[0];
+                    if (rates == null || rates.Length == 0) return false;
 
-                JsonDocument doc = JsonDocument.Parse(body);
-                JsonElement rootElement = doc.RootElement;
-                int cnt = rootElement.GetArrayLength();
-                int nTickCnt = 0;
-
-                lock (CtrlProperty._DItemList) lock (CtrlProperty._CItemList)
+                    lock (CtrlProperty._DItemList) lock (CtrlProperty._CItemList)
                     {
                         CtrlProperty._DItemList.Clear();
                         CtrlProperty._CItemList.Clear();
-                        for (int i = 0; i < cnt; i++)
+                        for (int i = 0; i < rates.Length; i++)
                         {
-                            fCurPrice = (float)rootElement[i].GetProperty("close").GetDouble();
-                            nConc = rootElement[i].GetProperty("tickVolume").GetInt32();
-                            sDateTime = rootElement[i].GetProperty("time").GetString();
-                            fStartPrice = (float)rootElement[i].GetProperty("open").GetDouble();
-                            fHighPrice = (float)rootElement[i].GetProperty("high").GetDouble();
-                            fLowPrice = (float)rootElement[i].GetProperty("low").GetDouble();
-                            if (sDateTime.Length > 14)
-                            {
-                                dtStart = DateTime.ParseExact(sDateTime, "yyyy-MM-ddTHH:mm:ss.fffZ", System.Globalization.CultureInfo.InvariantCulture);
-                                dtEnd = CtrlProperty.GetEndTime(CtrlProperty._DTimeType, CtrlProperty._DTimeUnitAmt, dtStart, true);
-                            }
+                            var r = rates[i];
+                            float fCurPrice = (float)r.Close;
+                            int nConc = (int)r.TickVolume;
+                            DateTime dtStart = r.Time;
+                            DateTime dtEnd = CtrlProperty.GetEndTime(CtrlProperty._DTimeType, CtrlProperty._DTimeUnitAmt, dtStart, true);
+                            float fStartPrice = (float)r.Open;
+                            float fHighPrice = (float)r.High;
+                            float fLowPrice = (float)r.Low;
 
-                            newDItem = new DItem(fStartPrice * CtrlProperty._nValueRate, fCurPrice * CtrlProperty._nValueRate, fLowPrice * CtrlProperty._nValueRate, fHighPrice * CtrlProperty._nValueRate,
-                            CtrlProperty.GetTimeStamp(dtStart), CtrlProperty.GetTimeStamp(dtEnd), CtrlProperty._DItemList.Count(), nTickCnt, nConc);
+                            var newDItem = new DItem(fStartPrice * CtrlProperty._nValueRate, fCurPrice * CtrlProperty._nValueRate, fLowPrice * CtrlProperty._nValueRate, fHighPrice * CtrlProperty._nValueRate,
+                                CtrlProperty.GetTimeStamp(dtStart), CtrlProperty.GetTimeStamp(dtEnd), CtrlProperty._DItemList.Count, 0, nConc);
                             CtrlProperty._DItemList.Add(newDItem);
-
-                            newCItem = new CItem(CtrlProperty.GetTimeStamp(dtStart), CtrlProperty.GetTimeStamp(dtEnd), nTickCnt, nConc);
+                            var newCItem = new CItem(CtrlProperty.GetTimeStamp(dtStart), CtrlProperty.GetTimeStamp(dtEnd), 0, nConc);
                             CtrlProperty._CItemList.Add(newCItem);
                         }
                     }
-
-
-            }
-            catch (Exception ex)
-            {
-                string errMsg = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    string errMsg = ex.Message;
+                    return false;
+                }
             }
 
             return true;
+        }
+
+        private static int GetMtApiTimeframe(string tmFrame)
+        {
+            switch (tmFrame)
+            {
+                case "1m": return (int)MtApi.ENUM_TIMEFRAMES.PERIOD_M1;
+                case "5m": return (int)MtApi.ENUM_TIMEFRAMES.PERIOD_M5;
+                case "15m": return (int)MtApi.ENUM_TIMEFRAMES.PERIOD_M15;
+                case "30m": return (int)MtApi.ENUM_TIMEFRAMES.PERIOD_M30;
+                case "1h": return (int)MtApi.ENUM_TIMEFRAMES.PERIOD_H1;
+                case "4h": return (int)MtApi.ENUM_TIMEFRAMES.PERIOD_H4;
+                case "1d": return (int)MtApi.ENUM_TIMEFRAMES.PERIOD_D1;
+                case "1w": return (int)MtApi.ENUM_TIMEFRAMES.PERIOD_W1;
+                case "1mn": return (int)MtApi.ENUM_TIMEFRAMES.PERIOD_MN1;
+                default: return (int)MtApi.ENUM_TIMEFRAMES.PERIOD_M30;
+            }
         }
 
         public override bool RequestRChart()
@@ -691,53 +864,43 @@ namespace LuckyFuture.Site
             if (tmFrame.Length < 1)
                 return false;
 
-            string url = String.Format("{0}/users/current/accounts/{1}/historical-market-data/symbols/{2}/timeframes/{3}/candles?limit=300", URL_DATA, mt_userId, ItemSymbol, tmFrame);
-            string token = UserPassword;
-            if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.GET, url, token))
-                return false;
-            try
+            lock (_mtLock)
             {
-                CtrlProperty.SetValueRate(Common.GetPrecisionRate(ItemSymbol, CurItemSymbol.Precision), Common.GetValueFormat(ItemPrecision + 1), (float)CurItemSymbol.OverTick);
-
-                RItem itemNew = null;
-                int nConc = 0;
-                float fCurPrice = 0, fStartPrice = 0, fHighPrice = 0, fLowPrice = 0;
-                string sDateTime = "";
-                DateTime dtStart = DateTime.MinValue, dtEnd = DateTime.MinValue;
-
-                JsonDocument doc = JsonDocument.Parse(body);
-                JsonElement rootElement = doc.RootElement;
-                int cnt = rootElement.GetArrayLength();
-                int nTickCnt = 0;
-
-                lock (CtrlProperty._RItemList)
+                if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected) return false;
+                try
                 {
-                    CtrlProperty._RItemList.Clear();
+                    CtrlProperty.SetValueRate(Common.GetPrecisionRate(ItemSymbol, CurItemSymbol.Precision), Common.GetValueFormat(ItemPrecision + 1), (float)CurItemSymbol.OverTick);
 
-                    for (int i = 0; i < cnt; i++)
+                    int tf = GetMtApiTimeframe(tmFrame);
+                    MqlRates[] rates = _mtApiClient.CopyRates(ItemSymbol, (MtApi.ENUM_TIMEFRAMES)tf, 0, 300)?.ToArray() ?? new MqlRates[0];
+                    if (rates == null || rates.Length == 0) return false;
+
+                    lock (CtrlProperty._RItemList)
                     {
-                        fCurPrice = (float)rootElement[i].GetProperty("close").GetDouble();
-                        nConc = rootElement[i].GetProperty("tickVolume").GetInt32();
-                        sDateTime = rootElement[i].GetProperty("time").GetString();
-                        fStartPrice = (float)rootElement[i].GetProperty("open").GetDouble();
-                        fHighPrice = (float)rootElement[i].GetProperty("high").GetDouble();
-                        fLowPrice = (float)rootElement[i].GetProperty("low").GetDouble();
-                        if (sDateTime.Length > 14)
+                        CtrlProperty._RItemList.Clear();
+                        for (int i = 0; i < rates.Length; i++)
                         {
-                            dtStart = DateTime.ParseExact(sDateTime, "yyyy-MM-ddTHH:mm:ss.fffZ", System.Globalization.CultureInfo.InvariantCulture);
-                            dtEnd = CtrlProperty.GetEndTime(CtrlProperty._RTimeType, CtrlProperty._RTimeUnitAmt, dtStart, true);
-                        }
+                            var r = rates[i];
+                            float fCurPrice = (float)r.Close;
+                            int nConc = (int)r.TickVolume;
+                            DateTime dtStart = r.Time;
+                            DateTime dtEnd = CtrlProperty.GetEndTime(CtrlProperty._RTimeType, CtrlProperty._RTimeUnitAmt, dtStart, true);
+                            float fStartPrice = (float)r.Open;
+                            float fHighPrice = (float)r.High;
+                            float fLowPrice = (float)r.Low;
 
-                        itemNew = new RItem(fStartPrice * CtrlProperty._nValueRate, fCurPrice * CtrlProperty._nValueRate, fLowPrice * CtrlProperty._nValueRate, fHighPrice * CtrlProperty._nValueRate,
-                        CtrlProperty.GetTimeStamp(dtStart), CtrlProperty.GetTimeStamp(dtEnd), CtrlProperty._RItemList.Count(), nTickCnt, nConc);
-                        CtrlProperty._RItemList.Add(itemNew);
+                            var itemNew = new RItem(fStartPrice * CtrlProperty._nValueRate, fCurPrice * CtrlProperty._nValueRate, fLowPrice * CtrlProperty._nValueRate, fHighPrice * CtrlProperty._nValueRate,
+                                CtrlProperty.GetTimeStamp(dtStart), CtrlProperty.GetTimeStamp(dtEnd), CtrlProperty._RItemList.Count, 0, nConc);
+                            CtrlProperty._RItemList.Add(itemNew);
+                        }
                     }
+                    OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.REDRAW);
                 }
-                OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.REDRAW);
-            }
-            catch (Exception ex)
-            {
-                string errMsg = ex.Message;
+                catch (Exception ex)
+                {
+                    string errMsg = ex.Message;
+                    return false;
+                }
             }
 
             return true;
@@ -782,30 +945,7 @@ namespace LuckyFuture.Site
             if (this.CurrentUserAccount == null)
                 return CONSTATE.NO_LOGIN;
 
-            //string url = String.Format("{0}/users/current/accounts/{1}/account-information", URL_MAIN, mt_userId);
-            //string token = UserPassword;
-            //if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.GET, url, token))
-            //    return CONSTATE.ERR_LOGIN;
-
-            //double balance = 0, valuation = 0;
-            //try
-            //{
-            //    JsonDocument doc = JsonDocument.Parse(body);
-            //    UserAcc = doc.RootElement.GetProperty("server").GetString();
-            //    balance = doc.RootElement.GetProperty("balance").GetDouble();
-            //    valuation = doc.RootElement.GetProperty("equity").GetDouble() - balance;
-            //    WriteLog(String.Format("Login Balance={0}, Valuation={1}, Profit={2}", balance, valuation));
-            //}
-            //catch (Exception ex)
-            //{
-            //    string msgg = ex.Message;
-            //    return CONSTATE.ERR_LOGIN;
-            //}
-
-            //this.CurrentUserAccount.Balance = balance;
-            //this.ValuationList[0].TotalValuation = valuation;
-            //this.ValuationList[0].CurrentProfit = this.ValuationList[0].TotalProfit + valuation;
-
+            // MtApi: 계정 정보는 Check() 주기에서 필요시 AccountBalance/AccountEquity로 갱신 가능
             return CONSTATE.SUCCESSS;
         }
 
@@ -814,47 +954,33 @@ namespace LuckyFuture.Site
             if (this.CurrentUserAccount == null)
                 return CONSTATE.NO_LOGIN;
 
-            DateTime dtNow = DateTime.Now;
-            string startTime = "";
-            string endTime = "";
-
-            if (string.Compare(dtNow.ToString("HH:mm:ss"), "07:00:00") < 0)
-            {
-                startTime = dtNow.AddDays(-2).ToString("yyyy-MM-dd") + "T22:00:00";
-                endTime = dtNow.AddDays(-1).ToString("yyyy-MM-dd") + "T22:00:00";
-            }
-            else
-            {
-                startTime = dtNow.AddDays(-1).ToString("yyyy-MM-dd") + "T22:00:00";
-                endTime = dtNow.ToString("yyyy-MM-dd") + "T22:00:00";
-            }
-
-            string url = String.Format("{0}/users/current/accounts/{1}/history-deals/time/{2}/{3}", URL_MAIN, mt_userId, startTime, endTime);
-            string token = UserPassword;
-            if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.GET, url, token))
-                return CONSTATE.ERR_REGAPI;
-
-            double dProfit = 0;
             try
             {
-                JsonDocument doc = JsonDocument.Parse(body);
-                JsonElement rootElement = doc.RootElement;
-                int cnt = rootElement.GetArrayLength();
-                for (int i = 0; i < cnt; i++)
+                lock (_mtLock)
                 {
-                    dProfit += rootElement[i].GetProperty("profit").GetDouble();
+                    if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected) return CONSTATE.ERR_REGAPI;
+                    DateTime dtNow = DateTime.Now;
+                    DateTime startTime = dtNow.Date.AddDays(-1);
+                    DateTime endTime = dtNow;
+                    var historyOrders = _mtApiClient.GetOrders(OrderSelectSource.MODE_HISTORY) ?? new List<MtOrder>();
+                    double dProfit = 0;
+                    foreach (var o in historyOrders)
+                    {
+                        if (o == null) continue;
+                        DateTime closeTime = o.CloseTime;
+                        if (closeTime >= startTime && closeTime <= endTime)
+                            dProfit += o.Profit;
+                    }
+                    this.ValuationList[0].TotalProfit = dProfit;
+                    DayProfitLoss.TotalProfit = (long)this.ValuationList[0].TotalProfit;
+                    this.ValuationList[0].CurrentProfit = this.ValuationList[0].TotalProfit + this.ValuationList[0].TotalValuation;
                 }
-
             }
             catch (Exception ex)
             {
                 string msgg = ex.Message;
                 return CONSTATE.ERR_LOGIN;
             }
-
-            this.ValuationList[0].TotalProfit = dProfit;
-            DayProfitLoss.TotalProfit = (long)this.ValuationList[0].TotalProfit;
-            this.ValuationList[0].CurrentProfit = this.ValuationList[0].TotalProfit + this.ValuationList[0].TotalValuation;
 
             return CONSTATE.SUCCESSS;
         }
@@ -879,55 +1005,44 @@ namespace LuckyFuture.Site
             if (this.CurrentUserAccount == null)
                 return CONSTATE.NO_LOGIN;
 
-
-            string token = UserPassword;
-            string url = String.Format("{0}/users/current/accounts/{1}/positions?refreshTerminalState=true", URL_MAIN, mt_userId);
-            if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.GET, url, token))
-                return CONSTATE.ERR_REGAPI;
-
             try
             {
                 lock (OrderList)
                 {
                     OrderList.RemoveAll(o => o.OrderType == "체결");
 
-                    JsonDocument doc = JsonDocument.Parse(body);
-                    JsonElement rootElement = doc.RootElement;
-                    int cnt = rootElement.GetArrayLength();
-                    WriteLog(string.Format("[RequestRequidateOrder] cnt={0}", cnt));
-                    for (int i = 0; i < cnt; i++)
+                    lock (_mtLock)
                     {
-                        string orderNo = rootElement[i].GetProperty("id").GetString();
-                        string type = rootElement[i].GetProperty("type").GetString();
-                        string symbol = rootElement[i].GetProperty("symbol").GetString();
-                        double volume = rootElement[i].GetProperty("volume").GetDouble();
-                        double openPrice = rootElement[i].GetProperty("openPrice").GetDouble();
-                        double currentPrice = rootElement[i].GetProperty("currentPrice").GetDouble();
-                        double profit = rootElement[i].GetProperty("profit").GetDouble();
-                        string orderTime = rootElement[i].GetProperty("time").GetString();
-
-                        if (symbol != ItemSymbol)
-                            continue;
-                        if (OrderList.FirstOrDefault(o => o.OrderNo == orderNo /*&& o.OrderType == "체결"*/) != null)
-                            continue;
-
-                        OrderInfo orderInfo = new OrderInfo
+                        if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected) return CONSTATE.ERR_REGAPI;
+                        var orders = _mtApiClient.GetOrders(OrderSelectSource.MODE_TRADES) ?? new List<MtOrder>();
+                        WriteLog(string.Format("[RequestRequidateOrder] cnt={0}", orders.Count));
+                        foreach (var o in orders)
                         {
-                            OrderType = "체결",
-                            Symbol = symbol,
-                            Qty = string.Format("{0}[{1}]", type == "POSITION_TYPE_SELL" ? "매도" : "매수", volume),
-                            AveragePrice = openPrice.ToString(),
-                            MaxAveragePrice = Math.Round(openPrice, 6),
-                            CurrentPrice = currentPrice.ToString(),
-                            StartCciPrice = -10000,
-                            Valuation = (int)profit,
-                            Action = "청산",
-                            TradeType = type == "POSITION_TYPE_SELL" ? TRADETYPE.SELL : TRADETYPE.BUY,
-                            OrderQty = volume,
-                            OrderNo = orderNo,
-                            OrderDate = orderTime,
-                        };
-                        this.OrderList.Add(orderInfo);
+                            if (o == null || o.Operation != TradeOperation.OP_BUY && o.Operation != TradeOperation.OP_SELL) continue;
+                            if (o.Ticket <= 0) continue;
+                            if (o.Symbol != ItemSymbol) continue;
+                            if (OrderList.FirstOrDefault(x => x.OrderNo == o.Ticket.ToString()) != null) continue;
+
+                            string orderTime = o.OpenTime.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
+                            string typeStr = (o.Operation == TradeOperation.OP_SELL) ? "POSITION_TYPE_SELL" : "POSITION_TYPE_BUY";
+                            OrderInfo orderInfo = new OrderInfo
+                            {
+                                OrderType = "체결",
+                                Symbol = o.Symbol,
+                                Qty = string.Format("{0}[{1}]", typeStr == "POSITION_TYPE_SELL" ? "매도" : "매수", o.Lots),
+                                AveragePrice = o.OpenPrice.ToString(),
+                                MaxAveragePrice = Math.Round(o.OpenPrice, 6),
+                                CurrentPrice = o.ClosePrice.ToString(),
+                                StartCciPrice = -10000,
+                                Valuation = (int)o.Profit,
+                                Action = "청산",
+                                TradeType = typeStr == "POSITION_TYPE_SELL" ? TRADETYPE.SELL : TRADETYPE.BUY,
+                                OrderQty = o.Lots,
+                                OrderNo = o.Ticket.ToString(),
+                                OrderDate = orderTime,
+                            };
+                            this.OrderList.Add(orderInfo);
+                        }
                     }
                 }
 
@@ -948,56 +1063,46 @@ namespace LuckyFuture.Site
             if (this.CurrentUserAccount == null)
                 return CONSTATE.NO_LOGIN;
 
-            string token = UserPassword;
-            string url = String.Format("{0}/users/current/accounts/{1}/orders?refreshTerminalState=true", URL_MAIN, mt_userId);
-            if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.GET, url, token))
-                return CONSTATE.ERR_REGAPI;
-
             try
             {
                 lock (OrderList)
                 {
                     OrderList.RemoveAll(o => o.OrderType == "미체결");
 
-                    JsonDocument doc = JsonDocument.Parse(body);
-                    JsonElement rootElement = doc.RootElement;
-                    int cnt = rootElement.GetArrayLength();
-
-                    WriteLog(string.Format("[RequestOutstandOrder] cnt={0}", cnt));
-
-                    for (int i = 0; i < cnt; i++)
+                    lock (_mtLock)
                     {
-                        string orderNo = rootElement[i].GetProperty("id").GetString();
-                        string type = rootElement[i].GetProperty("type").GetString();
-                        string state = rootElement[i].GetProperty("state").GetString();
-                        string symbol = rootElement[i].GetProperty("symbol").GetString();
-                        double volume = rootElement[i].GetProperty("volume").GetDouble();
-                        double openPrice = rootElement[i].GetProperty("openPrice").GetDouble();
-                        double currentPrice = rootElement[i].GetProperty("currentPrice").GetDouble();
-                        string orderTime = rootElement[i].GetProperty("time").GetString();
+                        if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected) return CONSTATE.ERR_REGAPI;
+                        var orders = _mtApiClient.GetOrders(OrderSelectSource.MODE_TRADES) ?? new List<MtOrder>();
+                        WriteLog(string.Format("[RequestOutstandOrder] cnt={0}", orders.Count));
 
-                        if (symbol != ItemSymbol)
-                            continue;
-                        if (OrderList.FirstOrDefault(o => o.OrderNo == orderNo/* && o.OrderType == "미체결"*/) != null)
-                            continue;
-
-                        OrderInfo orderInfo = new OrderInfo
+                        foreach (var o in orders)
                         {
-                            OrderType = "미체결",
-                            Symbol = symbol,
-                            Qty = string.Format("{0}[{1}]", type == "POSITION_TYPE_SELL_LIMIT" ? "매도" : "매수", volume),
-                            AveragePrice = openPrice.ToString(),
-                            MaxAveragePrice = Math.Round(openPrice, 6),
-                            CurrentPrice = currentPrice.ToString(),
-                            Valuation = 0L,
-                            Action = "취소",
-                            TradeType = type == "POSITION_TYPE_SELL" ? TRADETYPE.SELL : TRADETYPE.BUY,
-                            OrderQty = volume,
-                            OrderNo = orderNo,
-                            OrderTime = Environment.TickCount,
-                            OrderDate = orderTime,
-                        };
-                        this.OrderList.Add(orderInfo);
+                            if (o == null) continue;
+                            if (o.Operation != TradeOperation.OP_BUYLIMIT && o.Operation != TradeOperation.OP_SELLLIMIT && o.Operation != TradeOperation.OP_BUYSTOP && o.Operation != TradeOperation.OP_SELLSTOP) continue;
+                            if (o.Ticket <= 0) continue;
+                            if (o.Symbol != ItemSymbol) continue;
+                            if (OrderList.FirstOrDefault(x => x.OrderNo == o.Ticket.ToString()) != null) continue;
+
+                            string orderTime = o.OpenTime.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
+                            string typeStr = (o.Operation == TradeOperation.OP_SELLLIMIT || o.Operation == TradeOperation.OP_SELLSTOP) ? "POSITION_TYPE_SELL_LIMIT" : "POSITION_TYPE_BUY_LIMIT";
+                            OrderInfo orderInfo = new OrderInfo
+                            {
+                                OrderType = "미체결",
+                                Symbol = o.Symbol,
+                                Qty = string.Format("{0}[{1}]", typeStr == "POSITION_TYPE_SELL_LIMIT" ? "매도" : "매수", o.Lots),
+                                AveragePrice = o.OpenPrice.ToString(),
+                                MaxAveragePrice = Math.Round(o.OpenPrice, 6),
+                                CurrentPrice = o.ClosePrice.ToString(),
+                                Valuation = 0L,
+                                Action = "취소",
+                                TradeType = typeStr == "POSITION_TYPE_SELL_LIMIT" ? TRADETYPE.SELL : TRADETYPE.BUY,
+                                OrderQty = o.Lots,
+                                OrderNo = o.Ticket.ToString(),
+                                OrderTime = Environment.TickCount,
+                                OrderDate = orderTime,
+                            };
+                            this.OrderList.Add(orderInfo);
+                        }
                     }
                 }
 
@@ -1466,73 +1571,31 @@ namespace LuckyFuture.Site
             PrdInfo newPrd;
             ItemSymbolInfo newItem;
 
-
-            string url = String.Format("{0}/users/current/accounts/{1}/symbols", URL_MAIN, mt_userId);
-            string token = UserPassword;
-            if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.GET, url, token))
-                return;
-
             List<string> symbols = new List<string>();
-            try
+            lock (_mtLock)
             {
-                JsonDocument doc = JsonDocument.Parse(body);
-                JsonElement rootElement = doc.RootElement;
-                int cnt = rootElement.GetArrayLength();
-                for (int i = 0; i < cnt; i++)
+                if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected) return;
+                try
                 {
-                    symbols.Add(rootElement[i].GetString());
+                    int total = _mtApiClient.SymbolsTotal(false);
+                    for (int i = 0; i < total; i++)
+                    {
+                        string name = _mtApiClient.SymbolName(i, false);
+                        if (!string.IsNullOrEmpty(name))
+                            symbols.Add(name);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string msg = ex.Message;
+                    return;
                 }
             }
-            catch (Exception ex)
-            {
-                string msg = ex.Message;
-                return;
-            }
+
             List<ItemSymbolInfo> allItems = getAllItem();
 
             foreach (string symbol in symbols)
             {
-                //url = String.Format("{0}/users/current/accounts/{1}/symbols/{2}/specification", URL_MAIN, mt_userId, symbol);
-                //token = UserPassword;
-                //if (!_httpClient.SendRequest(out body, out headers, HTTPREQUEST_TYPE.GET, url, token))
-                //    continue;
-
-                //try
-                //{
-                //    JsonDocument doc = JsonDocument.Parse(body);
-                //    JsonElement rootElement = doc.RootElement;
-
-                //    newItem = new ItemSymbolInfo();
-                //    newItem.Symbol = rootElement.GetProperty("symbol").GetString();
-                //    newItem.ItemName = newItem.Symbol;
-                //    newItem.Precision = rootElement.GetProperty("digits").GetInt32();
-                //    newItem.OverTick = rootElement.GetProperty("tickSize").GetDouble();
-                //    newItem.ValueTick = rootElement.GetProperty("pipSize").GetDouble();
-                //    newItem.Exchange = 1;
-                //    int contractSize = rootElement.GetProperty("contractSize").GetInt32();
-                //    int initialMargin = rootElement.GetProperty("initialMargin").GetInt32();
-                //    string priceCalculationMode = rootElement.GetProperty("priceCalculationMode").GetString();
-                //    string baseCurrency = rootElement.GetProperty("baseCurrency").GetString();
-                //    string swapMode = rootElement.GetProperty("swapMode").GetString();
-                //    string description = rootElement.GetProperty("description").GetString();
-                //    double point = rootElement.GetProperty("point").GetDouble();
-                //    string executionMode = rootElement.GetProperty("executionMode").GetString();
-                //    newItem.MaxVolume = rootElement.GetProperty("maxVolume").GetDouble();
-                //    newItem.MinVolume = rootElement.GetProperty("minVolume").GetDouble();
-                //    newItem.VolumeStep = rootElement.GetProperty("volumeStep").GetDouble();
-                //    string tradeMode = rootElement.GetProperty("tradeMode").GetString();
-                //    string path = rootElement.GetProperty("path").GetString();
-
-                //    WriteLog(String.Format("Symbol={0}, Precision={1}, OverTick={2}, ValueTick={3}, contractSize={4}, initialMargin={5}, priceCalculationMode={6}, baseCurrency={7}, swapMode={8}, description={9}, point={10}, executionMode={11}, volumes={12},{13},{14}, tradeMode={15}, path={16}",
-                //        newItem.Symbol, newItem.Precision, newItem.OverTick, newItem.ValueTick,
-                //        contractSize, initialMargin, priceCalculationMode, baseCurrency, swapMode, description, point, executionMode,
-                //        newItem.MinVolume, newItem.MaxVolume, newItem.VolumeStep, tradeMode, path));
-                //}
-                //catch (Exception ex)
-                //{
-                //    string msgg = ex.Message;
-                //    continue;
-                //}
                 newItem = allItems.FirstOrDefault(i => i.ItemName == symbol);
                 if (newItem == null)
                     continue;
@@ -1902,368 +1965,68 @@ namespace LuckyFuture.Site
 
         public void ConnectSocket()
         {
-            if (_socketClient != null)
+            if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected)
+                return;
+            try
             {
-                DisconnectSocket();
+                if (ItemSymbol.Length > 0)
+                    _mtApiClient.SymbolSelect(ItemSymbol, true);
+                WriteLog("[ConnectSocket] SymbolSelect " + ItemSymbol);
             }
-            mt_host = "";
-            var rand = new Random();
-            string clientId = string.Format("{0:N10}", rand.NextDouble());
-            string token = UserPassword;
-
-            SocketIOOptions options = new SocketIOOptions
+            catch (Exception ex)
             {
-                Path = "/ws",
-                ExtraHeaders = new Dictionary<string, string>
-                {
-                    { "Client-Id", clientId},
-                },
-                // ConnectionTimeout = new TimeSpan(5000),
-                EIO = SocketIO.Core.EngineIO.V3,
-            };
-            options.Query = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("auth-token", token),
-                new KeyValuePair<string, string>("clientId", clientId),
-                new KeyValuePair<string, string>("protocol", "3")
-            };
-
-            _socketClient = new SocketIOClient.SocketIO(URL_SOCK, options);
-
-            _socketClient.On("response", response =>
-            {
-                socket_onResponse(response.GetValue<string>());
-            });
-
-            _socketClient.On("synchronization", response =>
-            {
-                socket_onSyncronization(response.GetValue<string>());
-            });
-
-            _socketClient.OnConnected += socket_onConnected;
-            _socketClient.OnError += socket_onError;
-            _socketClient.OnDisconnected += socket_onDisconnected;
-
-            // Connect to the server (make this asynchronous)
-            _socketClient.ConnectAsync();
-
+                WriteLog("[ConnectSocket] " + ex.Message);
+            }
         }
 
         public void DisconnectSocket()
         {
-            if (_socketClient != null)
+            try
             {
-                if (_socketClient.Connected)
+                if (_mtApiClient != null)
                 {
                     if (ItemSymbol.Length > 0)
                     {
-                        // var request = new Dictionary<string, object>
-                        // {
-                        //     { "type", "unsubscribeFromMarketData"},
-                        //     { "symbol", ItemSymbol},
-                        //     { "instanceIndex", 0},
-                        //     { "accountId", mt_userId},
-                        //     { "application", m_application},
-                        //     { "requestId", GetRandomId()},
-                        //     { "timestamps",  new Dictionary<string, string> {{ "clientProcessingStarted", GetIsoFormat(DateTime.Now.ToUniversalTime()) }}}
-                        // };
-                        // 
-                        // _socketClient.EmitAsync("request", request);
-                        // WriteLog(string.Format("[Send] {0}", JsonSerializer.Serialize(request)));
-                        string token = UserPassword;
-                        string url = String.Format("{0}/users/current/accounts/{1}/symbols/{2}/unsubscribe", URL_MAIN, mt_userId, ItemSymbol);
-                        if (!_httpClient.SendRequest(out string body, out HttpHeaders headers, HTTPREQUEST_TYPE.POST, url, token))
-                        {
-                        }
-
-                        Thread.Sleep(500);
+                        try { _mtApiClient.SymbolSelect(ItemSymbol, false); } catch { }
+                        Thread.Sleep(300);
                     }
-
-                    _socketClient.Dispose();
+                    _mtApiClient.ConnectionStateChanged -= MtApiClient_ConnectionStateChanged;
+                    _mtApiClient.QuoteUpdated -= MtApiClient_QuoteUpdated;
+                    _mtApiClient.BeginDisconnect();
+                    Thread.Sleep(200);
+                    _mtApiClient = null;
                 }
-
-                _socketClient.OnConnected -= socket_onConnected;
-                _socketClient.OnDisconnected -= socket_onDisconnected;
-                _socketClient.OnError -= socket_onError;
-
-                _socketClient = null;
-            }
-        }
-
-        public string GetRandomId()
-        {
-            int length = 32;
-            string allowedChars = "abcdefghijklmnopqrstuvwxyz";
-
-            Random random = new Random();
-            StringBuilder result = new StringBuilder(length);
-            for (int i = 0; i < length; i++)
-            {
-                int index = random.Next(allowedChars.Length);
-                result.Append(allowedChars[index]);
-            }
-
-            return result.ToString();
-        }
-        public string GetIsoFormat(DateTime dt)
-        {
-            return dt.ToString("yyyy-MM-ddTHH:mm:ss.fff") + "Z";
-        }
-        private void socket_onConnected(object sender, EventArgs e)
-        {
-            WriteLog("[socket_onConnected] " + e);
-            var request = new Dictionary<string, object>
-                {
-                    { "type", "subscribe"},
-                    { "instanceIndex", 0},
-                    { "sessionId", GetRandomId()},
-                    { "accountId", mt_userId},
-                    { "application", mt_application},
-                    { "requestId", GetRandomId()},
-                    { "timestamps",  new Dictionary<string, string> {{ "clientProcessingStarted", GetIsoFormat(DateTime.Now.ToUniversalTime()) }} }
-                };
-
-            _socketClient.EmitAsync("request", request);
-
-            if (m_bReconnect)
-                RequestOrderList(false);
-        }
-
-        private void socket_onError(object sender, string e)
-        {
-            WriteLog("[socket_onError] " + e);
-        }
-
-        private void socket_onDisconnected(object sender, string e)
-        {
-            m_bReconnect = true;
-            WriteLog("[socket_onDisconnected] " + e);
-        }
-
-        private void socket_onResponse(string msg)
-        {
-            WriteLog(string.Format("[RESP] {0}", msg));
-            try
-            {
-                if (mt_host.Length == 0 && msg.Contains("\"type\":\"response\""))
-                {
-                    JsonValue json = JsonValue.Parse(msg);
-                    if (json.ContainsKey("host"))
-                    {
-                        mt_host = json["host"];
-                    }
-                }
+                _mtApiConnected = false;
             }
             catch (Exception ex)
             {
-                WriteLog(string.Format("[RESP] Error = {0}", ex.Message));
+                WriteLog("[DisconnectSocket] " + ex.Message);
             }
         }
 
-        private void socket_onSyncronization(string msg)
-        {
-            try
-            {
-                if (msg.Contains("\"type\":\"prices\""))
-                {
-                    WriteLog(string.Format("[SYNC] {0}", msg));
-
-                    if (msg.Contains("\"prices\":"))
-                    {
-                        JsonValue json = JsonValue.Parse(msg);
-                        if (json.ContainsKey("prices") && json["prices"].JsonType == JsonType.Array)
-                        {
-                            JsonValue jsonPrice = json["prices"][0];
-                            onReceiveCurrent(jsonPrice);
-                        }
-                    }
-
-                }
-                else if (msg.Contains("\"type\":\"update\""))
-                {
-                    WriteLog(string.Format("[SYNC_Update] {0}", msg));
-                    JsonValue json = JsonValue.Parse(msg);
-                    if (json.ContainsKey("updatedPositions") && json["updatedPositions"].JsonType == JsonType.Array)
-                    {
-                        int cnt = json["updatedPositions"].Count;
-                        for (int i = 0; i < cnt; i++)
-                        {
-                            JsonValue jsonPos = json["updatedPositions"][i];
-                            onUpdatedPosition(jsonPos);
-                        }
-
-                    }
-                    else if (json.ContainsKey("removedPositionIds") && json.ContainsKey("historyOrders") && json["removedPositionIds"].JsonType == JsonType.Array)
-                    {
-                        int cnt = json["removedPositionIds"].Count;
-                        for (int i = 0; i < cnt; i++)
-                        {
-                            string id = json["removedPositionIds"][i];
-                            onRemovedPosition(id, json["deals"]);
-                        }
-                    }
-                    else if (json.ContainsKey("updatedOrders"))
-                    {
-                        onUpdatedOrders(json["updatedOrders"]);
-                    }
-                    else if (json.ContainsKey("completedOrderIds") && json.ContainsKey("historyOrders") && json["completedOrderIds"].JsonType == JsonType.Array)
-                    {
-                        int cnt = json["completedOrderIds"].Count;
-                        for (int i = 0; i < cnt; i++)
-                        {
-                            string id = json["completedOrderIds"][i];
-                            onCompletedOrder(id, json["historyOrders"]);
-                        }
-                    }
-
-                    if (json.ContainsKey("accountInformation"))
-                    {
-                        onAccountInformation(json["accountInformation"]);
-                    }
-                }
-                else
-                {
-                    WriteLog(string.Format("[SYNC] {0}", msg));
-                }
-            }
-            catch (Exception ex)
-            {
-                string exp = ex.Message;
-            }
-
-        }
         public bool reqQuote(string newSymbol, string oldSymbol)
         {
-            /*
-            var request = new Dictionary<string, object>();
-            if (oldSymbol.Length > 0)
-            {
-                request = new Dictionary<string, object>
-                {
-                    { "type", "unsubscribeFromMarketData"},
-                    { "symbol", oldSymbol},
-                    { "instanceIndex", 0},
-                    { "accountId", mt_userId},
-                    { "application", m_application},
-                    { "requestId", GetRandomId()},
-                    { "timestamps",  new Dictionary<string, string> {{ "clientProcessingStarted", GetIsoFormat(DateTime.Now.ToUniversalTime()) }}}
-                };
-
-                _socketClient.EmitAsync("request", request);
-                WriteLog(string.Format("[Send] {0}", JsonSerializer.Serialize(request)));
-
-                Thread.Sleep(1000);
-            }
-
-            var subscriptions = new List<object>
-            {
-                new Dictionary<string, object>{
-                    { "type", "quotes" }
-                },
-                // new Dictionary<string, object>{
-                //     { "type", "quotes" }, {"intervalInMilliseconds", 5000}
-                // },
-                // new Dictionary<string, object>{
-                //     { "type", "candles" }, {"timeframe", "1m"}, {"intervalInMilliseconds", 10000}
-                // },
-                // new Dictionary<string, object>{
-                //     { "type", "ticks" }
-                // },
-                // new Dictionary<string, object>{
-                //     { "type", "marketDepth" }, {"intervalInMilliseconds", 5000}
-                // },
-            };
-
-
-            request = new Dictionary<string, object>
-                {
-                    { "type", "subscribeToMarketData"},
-                    { "symbol", newSymbol},
-                    { "subscriptions", subscriptions},
-                    { "instanceIndex", 0},
-                    { "accountId", mt_userId},
-                    { "application", m_application},
-                    { "requestId", GetRandomId()},
-                    { "timestamps",  new Dictionary<string, string> {{ "clientProcessingStarted", GetIsoFormat(DateTime.Now.ToUniversalTime()) }}}
-                };
-
-            _socketClient.EmitAsync("request", request);
-            WriteLog(string.Format("[Send] {0}", JsonSerializer.Serialize(request)));
-            */
             try
             {
-                string token = UserPassword;
-                string url = "";
-                string body = "";
-                HttpHeaders headers = null;
-                if (oldSymbol.Length > 0)
+                lock (_mtLock)
                 {
-                    url = String.Format("{0}/users/current/accounts/{1}/symbols/{2}/unsubscribe", URL_MAIN, mt_userId, oldSymbol);
-                    if (!_httpClient.SendRequest(out body, out headers, HTTPREQUEST_TYPE.POST, url, token))
-                        return false;
-
-                    WriteLog(string.Format("[reqQuote] unsubscribe symbol={0}", oldSymbol));
-                    Thread.Sleep(1000);
+                    if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected) return false;
+                    if (oldSymbol.Length > 0)
+                    {
+                        _mtApiClient.SymbolSelect(oldSymbol, false);
+                        WriteLog(string.Format("[reqQuote] unsubscribe symbol={0}", oldSymbol));
+                        Thread.Sleep(500);
+                    }
+                    _mtApiClient.SymbolSelect(newSymbol, true);
+                    WriteLog(string.Format("[reqQuote] subscribe symbol={0}", newSymbol));
                 }
-
-
-                url = String.Format("{0}/users/current/accounts/{1}/symbols/{2}/current-tick?keepSubscription=true", URL_MAIN, mt_userId, newSymbol);
-                if (!_httpClient.SendRequest(out body, out headers, HTTPREQUEST_TYPE.GET, url, token))
-                    return false;
-
-                WriteLog(string.Format("[reqQuote] subscribe symbol={0} response={1}", newSymbol, body));
-
                 return true;
             }
             catch (Exception ex)
             {
-                string exp = ex.Message;
+                WriteLog("[reqQuote] " + ex.Message);
+                return false;
             }
-            return false;
-        }
-        private void onReceiveCurrent(JsonValue jsonPrice)
-        {
-            try
-            {
-                string symbol = jsonPrice["symbol"];
-                if (symbol != ItemSymbol)
-                {
-                    WriteLog(string.Format("[Current] otherSymbol={0}", symbol));
-                    return;
-                }
-
-                double ask = jsonPrice["ask"];
-                double bid = jsonPrice["bid"];
-                string sTime = jsonPrice["time"];
-                string sBrokerTime = jsonPrice["brokerTime"];
-                double equity = jsonPrice["equity"];
-
-                DateTime time = DateTime.ParseExact(sTime, "yyyy-MM-ddTHH:mm:ss.fffZ", System.Globalization.CultureInfo.InvariantCulture);
-                DateTime timeBroker = DateTime.ParseExact(sBrokerTime, "yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture);
-
-                Current current = new Current();
-                current.ReceivedDate = time;
-
-                current.CurrentPrice = bid;
-                current.CurrentPrice2 = ask;
-                current.ConclusionVolume = 1;
-
-                //WriteLog(string.Format("[Current] time={0}, ask={1}, bid={2}, equity={3}", sTime, ask, bid, equity));
-
-                if (CurItemSymbol != null && CurItemSymbol.MidPrice == 0)
-                {
-                    CurItemSymbol.MidPrice = ask;
-                }
-
-                if (bQutoteCreated)
-                    OnReceiveCurrent(current);
-
-            }
-            catch (Exception ex)
-            {
-                string exp = ex.Message;
-            }
-
         }
 
     }
