@@ -41,7 +41,7 @@ namespace LuckyFuture.Site
         private string mt_oldSymbol = "";
         private int m_tickCurrent = 0;
         private int m_tickAccount = 0;
-        private int m_tickContrastDiag = 0;
+//        private int m_tickContrastDiag = 0;
         private int m_tickOrderList = 0;
         private const int ORDERLIST_REFRESH_MS = 3000;
         private bool m_bNeedAcc = false;
@@ -178,12 +178,12 @@ namespace LuckyFuture.Site
         }
 
         /// <summary>통신부: MtApi 호가 수신 → 기존 로직용 Current 생성 후 OnReceiveCurrent 호출 (자동매매 로직은 변경 없음)</summary>
-        private void MtApiClient_QuoteUpdated(object sender, string symbol, DateTime time, double bid, double ask)
+        private void MtApiClient_QuoteUpdated(object sender, string symbol, double bid, double ask)
         {
             if (string.IsNullOrEmpty(symbol) || symbol != ItemSymbol) return;
 
             Current current = new Current();
-            current.ReceivedDate = time;
+//            current.ReceivedDate = time;
             current.CurrentPrice = bid;
             current.CurrentPrice2 = ask;
             current.ConclusionVolume = 1;
@@ -294,7 +294,7 @@ namespace LuckyFuture.Site
             }
             catch (Exception ex)
             {
-                // WriteLog("[FillContrastFromApi] " + ex.Message);
+                WriteLog("[FillContrastFromApi] " + ex.Message);
                 // OnFutureSiteLogEvent("[등락률진단] 예외: " + ex.Message);
             }
         }
