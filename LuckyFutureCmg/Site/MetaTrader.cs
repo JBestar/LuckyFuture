@@ -138,11 +138,12 @@ namespace LuckyFuture.Site
             }
 
             double valuation = equity - balance;
-            string accountDisplay = string.IsNullOrEmpty(accountName) ? accNum : string.Format("{0} ({1})", accountName, accNum);
+            // 계좌창에는 계좌번호만 표시. txtId에는 AccountName 표시(ShowUserInfo에서 설정)
             this.CurrentUserAccount = new UserAccountInfo
             {
                 UserAccountId = UserAcc,
-                UserAccountStr = accountDisplay,
+                UserAccountStr = accNum,
+                AccountName = accountName ?? "",
                 Balance = balance
             };
             this.UserAccounts = new List<UserAccountInfo>();

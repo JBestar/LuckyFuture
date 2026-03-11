@@ -1,4 +1,4 @@
-﻿
+
 namespace LuckyFuture.UI
 {
 	partial class FrmMain
@@ -109,6 +109,7 @@ namespace LuckyFuture.UI
             this.btnChat = new ReaLTaiizor.Controls.DreamButton();
             this.txtBalance = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.lblAccountName = new System.Windows.Forms.Label();
             this.dgvTotalQuoteInfo = new System.Windows.Forms.DataGridView();
             this.totalSellOrderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalSellCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -830,15 +831,25 @@ namespace LuckyFuture.UI
             // 
             this.bsValuationInfo.DataSource = typeof(LuckyFuture.Models.ValueObjects.ValuationInfo);
             // 
-            // txtId
-            // 
+            // txtId (담보금 입력창과 동일 너비 148)
+            //
             this.txtId.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtId.Location = new System.Drawing.Point(256, 72);
             this.txtId.Margin = new System.Windows.Forms.Padding(4);
             this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(84, 27);
+            this.txtId.Size = new System.Drawing.Size(148, 27);
             this.txtId.TabIndex = 1;
             this.txtId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lblAccountName
+            // 
+            this.lblAccountName.Location = new System.Drawing.Point(198, 78);
+            this.lblAccountName.Margin = new System.Windows.Forms.Padding(0);
+            this.lblAccountName.Name = "lblAccountName";
+            this.lblAccountName.Size = new System.Drawing.Size(65, 19);
+            this.lblAccountName.TabIndex = 4;
+            this.lblAccountName.Text = "계좌명";
+            this.lblAccountName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cmbSiteList
             // 
@@ -6035,6 +6046,7 @@ namespace LuckyFuture.UI
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btnChat);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblAccountName);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbSiteList);
@@ -6125,6 +6137,7 @@ namespace LuckyFuture.UI
 		private System.Windows.Forms.BindingSource bsQuoteInfo;
 		private System.Windows.Forms.TextBox txtBalance;
 		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label lblAccountName;
 		private System.Windows.Forms.BindingSource bsTotalQuoteInfo;
 		private System.Windows.Forms.DataGridViewTextBoxColumn totalSellOrderDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn totalSellCountDataGridViewTextBoxColumn;

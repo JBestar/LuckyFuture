@@ -1186,17 +1186,18 @@ namespace LuckyFuture.UI
 			this.cmbUserAccounts.Items.Clear();
 			if (CurrentSite != null && CurrentSite.UserAccounts != null)
 			{
-				// accounts
+				// 계좌창: 계좌번호만 표시 (CMG는 MetaTrader에서 UserAccountStr=계좌번호로 설정됨)
 				this.cmbUserAccounts.Items.AddRange(
 					(from u in CurrentSite.UserAccounts
 					 select u.UserAccountStr).ToArray<string>()
 				);
 				this.cmbUserAccounts.SelectedIndex = 0;
-				// user name
+				// CMG: txtId에 AccountName 표시
+				if (this.CurrentSiteType == SITETYPE.CMG && CurrentSite.UserAccounts.Count > 0)
+					this.txtId.Text = CurrentSite.UserAccounts[0].AccountName ?? "";
 				string siteName = "";
 				if (cmbSiteList.SelectedItem != null)
 					siteName = cmbSiteList.SelectedItem.ToString();
-				//this.txtUserName.Text = CurrentSite.User.BankUserName;
 				AppAuthor.Default.SetUserAccount(txtId.Text, siteName);
 			}
 		}
@@ -1376,6 +1377,7 @@ namespace LuckyFuture.UI
 			this.chkAutoMode.Checked = Settings.Default.IsAutoMode;
 			cmbPrdList.Enabled = !chkAutoMode.Checked;
 			cmbItemList.Enabled = !chkAutoMode.Checked;
+            UpdateLoginPanelLayout();
             EnableControls();
 		}
 
@@ -5080,12 +5082,22 @@ namespace LuckyFuture.UI
 
         private void cmbSiteList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdateLoginPanelLayout();
             EnableControls();
         }
 
         private void chkSignal_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.SignalSiteOn = chkSignal.Checked;
+        }
+
+        /// <summary>
+        /// CMG(MtApi) 선택 시 비밀번호 입력란만 숨김. cmbSiteList는 본래 크기 유지.
+        /// </summary>
+        private void UpdateLoginPanelLayout()
+        {
+            bool isCmg = this.CurrentSiteType == SITETYPE.CMG;
+            this.txtPassword.Visible = !isCmg;
         }
 
         private void chkCci_CheckedChanged(object sender, EventArgs e)
