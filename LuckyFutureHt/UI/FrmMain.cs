@@ -432,7 +432,7 @@ namespace LuckyFuture.UI
                     ChartForm.SetRTValue(current.CurrentPrice, current.Time, 1, current.ConclusionQty);
                 LogicAuto.Default.OnLogicNoticeReceive();
 
-                if (this.CurrentSiteType == SITETYPE.CMG)
+                if (this.CurrentSiteType == SITETYPE.Prime)
                     CurrentForm2.UpdateCurrentInfo();
                 else CurrentForm.UpdateCurrentInfo();
             }
@@ -1242,7 +1242,7 @@ namespace LuckyFuture.UI
         }
         private void EnableControls()
         {
-            //chkSignal.Visible = !((SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.KIWOOM || (SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.CMG); 
+            //chkSignal.Visible = !((SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.KIWOOM || (SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.Prime); 
 
             bool running = LogicAuto.Default.IsRunning;
             cmbSiteList.Enabled = !running;
@@ -1478,7 +1478,7 @@ namespace LuckyFuture.UI
 
                 if (this.CurrentSiteType == SITETYPE.DREAM || this.CurrentSiteType == SITETYPE.TOPASSET
                     || this.CurrentSiteType == SITETYPE.KIWOOM || this.CurrentSiteType == SITETYPE.MIRAE2
-                    || this.CurrentSiteType == SITETYPE.CMG)
+                    || this.CurrentSiteType == SITETYPE.Prime)
                 {
                     ItemChanged = true;
                     if (CurrentSite.ChangeItem(itemSymbol))
@@ -1670,7 +1670,7 @@ namespace LuckyFuture.UI
         {
             if (!LogicAuto.Default.IsRunning)
                 return;
-            if (this.CurrentSiteType == SITETYPE.CMG)
+            if (this.CurrentSiteType == SITETYPE.Prime)
             {
                 if (!CurrentForm2.Visible)
                 {

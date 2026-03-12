@@ -7,7 +7,7 @@
     <ProjectGuid>{EFCC99BB-9E56-4B88-AA34-9EDB044E87C0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>LuckyFuture</RootNamespace>
-    <AssemblyName>CMG_MT</AssemblyName>
+    <AssemblyName>Prime</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

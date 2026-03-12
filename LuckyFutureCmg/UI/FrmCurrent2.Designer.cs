@@ -1,4 +1,4 @@
-﻿
+
 namespace LuckyFuture.UI
 {
 	partial class FrmCurrent2
@@ -230,7 +230,7 @@ namespace LuckyFuture.UI
             this.MinimumSize = new System.Drawing.Size(190, 40);
             this.Name = "FrmCurrent2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CMG";
+            this.Text = "Prime";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bsQuoteInfo)).EndInit();

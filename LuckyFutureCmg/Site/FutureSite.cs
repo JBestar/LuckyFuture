@@ -29,7 +29,7 @@ namespace LuckyFuture.Site
 	public enum SITETYPE
 	{
 		NONE = -1,
-		CMG = 0,
+		Prime = 0,
         KIWOOM = 1,
         DREAM = 2,
         TOPASSET = 3,
@@ -134,7 +134,7 @@ namespace LuckyFuture.Site
             if (LogicEvent != null)
                 LogicEvent(this, new FutureSiteEventArgs(obj));
         }
-        /// <summary>true면 비밀번호 없이도 Start() 가능 (예: CMG는 MT4 API만 사용)</summary>
+        /// <summary>true면 비밀번호 없이도 Start() 가능 (예: Prime는 MT4 API만 사용)</summary>
         protected virtual bool AllowEmptyPassword => false;
 
         public override bool Start()

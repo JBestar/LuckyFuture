@@ -186,7 +186,7 @@ namespace LuckyFuture.Logic
                 case SITETYPE.KIWOOM:
                     _currentSite = new KFOpen(axKFOpenAPI);
                     break;
-                case SITETYPE.CMG:
+                case SITETYPE.Prime:
                     _currentSite = new MetaTrader();
                     break;
                 case SITETYPE.DREAM:
@@ -779,7 +779,7 @@ namespace LuckyFuture.Logic
                                         {
                                             if (!Settings.Default.OrderSelectOn || (Settings.Default.OrderSelectOn && Settings.Default.OrderSelectType == 0))
                                             {
-                                                if (currentSiteType == SITETYPE.CMG)
+                                                if (currentSiteType == SITETYPE.Prime)
                                                 {
                                                     log = "[청산] ";
                                                 }
@@ -803,7 +803,7 @@ namespace LuckyFuture.Logic
                                         {
                                             if (!Settings.Default.OrderSelectOn || (Settings.Default.OrderSelectOn && Settings.Default.OrderSelectType == 0))
                                             {
-                                                if (currentSiteType == SITETYPE.CMG)
+                                                if (currentSiteType == SITETYPE.Prime)
                                                 {
                                                     log = "[청산] ";
                                                 }
@@ -2227,7 +2227,7 @@ namespace LuckyFuture.Logic
                 currentPrice = _currentSite.Current.CurrentPrice;
             }
             QuoteInfo quoteInfo = null;
-            if (_currentSite.Type == SITETYPE.CMG)
+            if (_currentSite.Type == SITETYPE.Prime)
             {
                 if (_tradeTypeToOrder == TRADETYPE.SELL)
                     currentPrice = _currentSite.Current.CurrentPrice2;
@@ -2264,7 +2264,7 @@ namespace LuckyFuture.Logic
                 return false;
             if (_orderToCancel.OrderType == "미체결")
                 return _currentSite.CancelOrder(_orderToCancel);
-            if (_currentSite.Type == SITETYPE.CMG)
+            if (_currentSite.Type == SITETYPE.Prime)
             {
                 _reorderToCancel = false;
             }

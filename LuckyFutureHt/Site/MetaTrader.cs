@@ -45,7 +45,7 @@ namespace LuckyFuture.Site
 
         public MetaTrader()
         {
-            Type = SITETYPE.CMG;
+            Type = SITETYPE.Prime;
             _httpClient.Reset();
 
 #if WRITE_LOG
@@ -1370,8 +1370,8 @@ namespace LuckyFuture.Site
             ItemSymbolInfo newItem;
 
             newPrd = new PrdInfo();
-            newPrd.Code = "CMG";
-            newPrd.Name = "CMG";
+            newPrd.Code = "Prime";
+            newPrd.Name = "Prime";
             newPrd.ItemList = new List<ItemSymbolInfo>();
 
             string url = String.Format("{0}/users/current/accounts/{1}/symbols", URL_MAIN, mt_userId);

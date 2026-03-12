@@ -833,7 +833,8 @@ namespace LuckyFuture.UI
             // 
             // txtId (담보금 입력창과 동일 너비 148)
             //
-            this.txtId.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            // 계좌명 입력창: 한글이 다른 PC에서도 보이도록 맑은 고딕 사용 (Gulim은 비한글 Windows에 없을 수 있음)
+            this.txtId.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.txtId.Location = new System.Drawing.Point(256, 72);
             this.txtId.Margin = new System.Windows.Forms.Padding(4);
             this.txtId.Name = "txtId";
@@ -5759,7 +5760,7 @@ namespace LuckyFuture.UI
             this.hopeForm1.Name = "hopeForm1";
             this.hopeForm1.Size = new System.Drawing.Size(1119, 40);
             this.hopeForm1.TabIndex = 7;
-            this.hopeForm1.Text = "CMG";
+            this.hopeForm1.Text = "Prime";
             this.hopeForm1.ThemeColor = System.Drawing.Color.DarkCyan;
             // 
             // btnCurrent
@@ -6071,7 +6072,7 @@ namespace LuckyFuture.UI
             this.MinimumSize = new System.Drawing.Size(190, 40);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CMG";
+            this.Text = "Prime";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuoteInfo)).EndInit();

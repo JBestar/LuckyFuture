@@ -18,7 +18,7 @@ using MtApi;
 namespace LuckyFuture.Site
 {
     /// <summary>
-    /// CMG 연동용 MetaTrader 사이트. MtApi로 MT4와 통신하며, 기존 자동매매 로직은 FutureSite 흐름을 그대로 사용.
+    /// Prime 연동용 MetaTrader 사이트. MtApi로 MT4와 통신하며, 기존 자동매매 로직은 FutureSite 흐름을 그대로 사용.
     /// </summary>
     /// <remarks>
     /// [수정 시 원칙] 통신부만 손대고 나머지는 그대로 둬서 기존 자동매매 로직이 작동하도록 유지.
@@ -49,7 +49,7 @@ namespace LuckyFuture.Site
 
         public MetaTrader()
         {
-            Type = SITETYPE.CMG;
+            Type = SITETYPE.Prime;
 #if WRITE_LOG
             CreateLogFile();
 #endif
@@ -128,6 +128,7 @@ namespace LuckyFuture.Site
                 equity = _mtApiClient.AccountEquity();
                 accNum = _mtApiClient.AccountNumber().ToString();
                 try { accountName = _mtApiClient.AccountName() ?? ""; } catch { }
+                accountName = FixAccountNameEncoding(accountName);
                 UserAcc = accNum;
                 WriteLog(String.Format("Login Balance={0}, Equity={1}, Account={2}", balance, equity, accNum));
             }
@@ -157,6 +158,45 @@ namespace LuckyFuture.Site
             return ERRORCODE.SUCCESS;
         }
 
+
+        /// <summary>
+        /// MtApi에서 한글 등이 깨져 내려올 수 있는 계좌명을 올바른 인코딩으로 복구.
+        /// 다른 PC(비한글 Windows 등)에서 UTF-8이 CP1252 등으로 잘못 해석된 경우만 보정하고,
+        /// 이미 정상인 한글은 건드리지 않음.
+        /// </summary>
+        private static string FixAccountNameEncoding(string accountName)
+        {
+            if (string.IsNullOrEmpty(accountName)) return accountName ?? "";
+
+            int HangulCount(string s)
+            {
+                if (string.IsNullOrEmpty(s)) return 0;
+                int n = 0;
+                foreach (char c in s)
+                    if (c >= 0xAC00 && c <= 0xD7A3) n++;
+                return n;
+            }
+
+            int originalHangul = HangulCount(accountName);
+
+            try
+            {
+                byte[] bytes = Encoding.GetEncoding(1252).GetBytes(accountName);
+                string utf8 = Encoding.UTF8.GetString(bytes);
+                if (!string.IsNullOrEmpty(utf8) && utf8.All(c => c < 0x10000 && !char.IsSurrogate(c)) && HangulCount(utf8) >= originalHangul)
+                    return utf8;
+            }
+            catch { }
+            try
+            {
+                byte[] bytes = Encoding.Default.GetBytes(accountName);
+                string utf8 = Encoding.UTF8.GetString(bytes);
+                if (!string.IsNullOrEmpty(utf8) && utf8.All(c => c < 0x10000 && !char.IsSurrogate(c)) && HangulCount(utf8) >= originalHangul)
+                    return utf8;
+            }
+            catch { }
+            return accountName;
+        }
 
         protected override void OnLogin()
         {
@@ -379,7 +419,7 @@ namespace LuckyFuture.Site
             return error_code;
         }
 
-        /// <summary>CMG(MT4)는 서버 로그인 없이 MT4 API 연결만 사용하므로 비밀번호 없이도 Start 가능</summary>
+        /// <summary>Prime(MT4)는 서버 로그인 없이 MT4 API 연결만 사용하므로 비밀번호 없이도 Start 가능</summary>
         protected override bool AllowEmptyPassword => true;
 
         public override bool Start()
@@ -498,7 +538,7 @@ namespace LuckyFuture.Site
                 {
                     double price = bMarketPrice ? _mtApiClient.SymbolInfoDouble(ItemSymbol, EnumSymbolInfoDouble.SYMBOL_ASK) : quoteInfo.Price;
                     TradeOperation orderType = bMarketPrice ? TradeOperation.OP_SELL : TradeOperation.OP_SELLLIMIT;
-                    int ticket = _mtApiClient.OrderSend(ItemSymbol, orderType, nQuantity, price, 30, 0, 0, "CMG", 0, DateTime.MinValue);
+                    int ticket = _mtApiClient.OrderSend(ItemSymbol, orderType, nQuantity, price, 30, 0, 0, "Prime", 0, DateTime.MinValue);
                     if (ticket < 0)
                     {
                         int err = _mtApiClient.GetLastError();
@@ -595,7 +635,7 @@ namespace LuckyFuture.Site
                 {
                     double price = bMarketPrice ? _mtApiClient.SymbolInfoDouble(ItemSymbol, EnumSymbolInfoDouble.SYMBOL_BID) : quoteInfo.Price;
                     TradeOperation orderType = bMarketPrice ? TradeOperation.OP_BUY : TradeOperation.OP_BUYLIMIT;
-                    int ticket = _mtApiClient.OrderSend(ItemSymbol, orderType, nQuantity, price, 30, 0, 0, "CMG", 0, DateTime.MinValue);
+                    int ticket = _mtApiClient.OrderSend(ItemSymbol, orderType, nQuantity, price, 30, 0, 0, "Prime", 0, DateTime.MinValue);
                     if (ticket < 0)
                     {
                         int err = _mtApiClient.GetLastError();
@@ -1607,7 +1647,7 @@ namespace LuckyFuture.Site
                 newItem = allItems.FirstOrDefault(i => string.Equals(i.ItemName, symbol, StringComparison.OrdinalIgnoreCase));
                 if (newItem == null)
                 {
-                    // 하드코딩 목록에 없으면 MtApi 심볼 정보로 동적 생성 → CMG 외 브로커(Moneta 등) 연동
+                    // 하드코딩 목록에 없으면 MtApi 심볼 정보로 동적 생성 → Prime 외 브로커(Moneta 등) 연동
                     newItem = CreateItemFromMtSymbol(symbol);
                     if (newItem == null)
                         continue;

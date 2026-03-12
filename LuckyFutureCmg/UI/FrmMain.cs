@@ -116,7 +116,7 @@ namespace LuckyFuture.UI
             AppConfig.ReadLossConfig();
             AppConfig.SetNetworkInterfaces();
             // supported site list
-            string[] site_names = {"CMG"}; //"더드림", "몬스타", "키움증권", "미래", //"레안텍", "나눔"
+            string[] site_names = {"Prime"}; //"더드림", "몬스타", "키움증권", "미래", //"레안텍", "나눔"
             foreach (string site_name in site_names) 
 				cmbSiteList.Items.Add(site_name);
             if (cmbSiteList.Items.Count > 0)
@@ -476,7 +476,7 @@ namespace LuckyFuture.UI
                     ChartForm.SetRTValue(current.CurrentPrice, current.Time, 1, current.ConclusionQty);
 				LogicAuto.Default.OnLogicNoticeReceive();
 
-                if (this.CurrentSiteType == SITETYPE.CMG)
+                if (this.CurrentSiteType == SITETYPE.Prime)
                    CurrentForm2.UpdateCurrentInfo();
                 else CurrentForm.UpdateCurrentInfo();
             }
@@ -728,7 +728,7 @@ namespace LuckyFuture.UI
                             if (!ItemChanged)
                             {
                                 EnableControls();
-                                AddLog(this.CurrentSiteType == SITETYPE.CMG ? "연결이 종료되었습니다." : "로그아웃 되었습니다.");
+                                AddLog(this.CurrentSiteType == SITETYPE.Prime ? "연결이 종료되었습니다." : "로그아웃 되었습니다.");
                             }
                             if (this.CurrentSiteType == SITETYPE.KIWOOM)
                                 ShowKiwoomUserInfo();
@@ -1186,14 +1186,14 @@ namespace LuckyFuture.UI
 			this.cmbUserAccounts.Items.Clear();
 			if (CurrentSite != null && CurrentSite.UserAccounts != null)
 			{
-				// 계좌창: 계좌번호만 표시 (CMG는 MetaTrader에서 UserAccountStr=계좌번호로 설정됨)
+				// 계좌창: 계좌번호만 표시 (Prime는 MetaTrader에서 UserAccountStr=계좌번호로 설정됨)
 				this.cmbUserAccounts.Items.AddRange(
 					(from u in CurrentSite.UserAccounts
 					 select u.UserAccountStr).ToArray<string>()
 				);
 				this.cmbUserAccounts.SelectedIndex = 0;
-				// CMG: txtId에 AccountName 표시
-				if (this.CurrentSiteType == SITETYPE.CMG && CurrentSite.UserAccounts.Count > 0)
+				// Prime: txtId에 AccountName 표시
+				if (this.CurrentSiteType == SITETYPE.Prime && CurrentSite.UserAccounts.Count > 0)
 					this.txtId.Text = CurrentSite.UserAccounts[0].AccountName ?? "";
 				string siteName = "";
 				if (cmbSiteList.SelectedItem != null)
@@ -1317,7 +1317,7 @@ namespace LuckyFuture.UI
         }
         private void EnableControls()
 		{
-            //chkSignal.Visible = !((SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.KIWOOM || (SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.CMG); 
+            //chkSignal.Visible = !((SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.KIWOOM || (SITETYPE)cmbSiteList.SelectedIndex == SITETYPE.Prime); 
 
             bool running  = LogicAuto.Default.IsRunning;
 			cmbSiteList.Enabled = !running;
@@ -1370,8 +1370,8 @@ namespace LuckyFuture.UI
 			cmbSiteList.SelectedIndex = Settings.Default.SiteType;
             Settings.Default.SignalSiteOn = false;
             chkSignal.Checked = Settings.Default.SignalSiteOn;
-            // site account (id & password)
-            txtId.Text = Settings.Default.SiteId;
+            // site account (id & password) - 앱 기동 시 계좌명은 빈칸으로 초기화
+            txtId.Text = "";
 			txtPassword.Text = Settings.Default.SitePassword;
 			// auto mode (auto / manual)
 			this.chkAutoMode.Checked = Settings.Default.IsAutoMode;
@@ -1379,7 +1379,32 @@ namespace LuckyFuture.UI
 			cmbItemList.Enabled = !chkAutoMode.Checked;
             UpdateLoginPanelLayout();
             EnableControls();
+            EnsureAccountNameFont();
 		}
+
+        /// <summary>
+        /// 계좌명 입력창 한글 표시: 맑은 고딕 등 한글 지원 폰트로 설정. 다른 PC에선 Gulim이 없을 수 있음.
+        /// </summary>
+        private void EnsureAccountNameFont()
+        {
+            try
+            {
+                this.txtId.Font = new System.Drawing.Font("Malgun Gothic", 9f, System.Drawing.FontStyle.Regular);
+                return;
+            }
+            catch { }
+            try
+            {
+                this.txtId.Font = new System.Drawing.Font("Gulim", 9f, System.Drawing.FontStyle.Regular);
+                return;
+            }
+            catch { }
+            try
+            {
+                this.txtId.Font = new System.Drawing.Font("Segoe UI", 9f, System.Drawing.FontStyle.Regular);
+            }
+            catch { }
+        }
 
 		private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
 		{
@@ -1433,8 +1458,8 @@ namespace LuckyFuture.UI
 
 			else
 			{
-				// CMG(MT4)는 서버 검증 없이 MT4 API만 사용 → 아이디/비밀번호 없이 접속 가능
-				if (this.CurrentSiteType != SITETYPE.CMG)
+				// Prime(MT4)는 서버 검증 없이 MT4 API만 사용 → 아이디/비밀번호 없이 접속 가능
+				if (this.CurrentSiteType != SITETYPE.Prime)
 				{
 					if (string.IsNullOrEmpty(txtId.Text))
 					{
@@ -1555,7 +1580,7 @@ namespace LuckyFuture.UI
                 
 				if(this.CurrentSiteType == SITETYPE.DREAM || this.CurrentSiteType == SITETYPE.TOPASSET
                     || this.CurrentSiteType == SITETYPE.KIWOOM || this.CurrentSiteType == SITETYPE.MIRAE2
-                    || this.CurrentSiteType == SITETYPE.CMG)
+                    || this.CurrentSiteType == SITETYPE.Prime)
                 {
                     ItemChanged = true;
                     if (CurrentSite.ChangeItem(itemSymbol))
@@ -1746,7 +1771,7 @@ namespace LuckyFuture.UI
         {
             if (!LogicAuto.Default.IsRunning)
                 return;
-            if(this.CurrentSiteType == SITETYPE.CMG)
+            if(this.CurrentSiteType == SITETYPE.Prime)
             {
                 if (!CurrentForm2.Visible)
                 {
@@ -5092,11 +5117,11 @@ namespace LuckyFuture.UI
         }
 
         /// <summary>
-        /// CMG(MtApi) 선택 시 비밀번호 입력란만 숨김. cmbSiteList는 본래 크기 유지.
+        /// Prime(MtApi) 선택 시 비밀번호 입력란만 숨김. cmbSiteList는 본래 크기 유지.
         /// </summary>
         private void UpdateLoginPanelLayout()
         {
-            bool isCmg = this.CurrentSiteType == SITETYPE.CMG;
+            bool isCmg = this.CurrentSiteType == SITETYPE.Prime;
             this.txtPassword.Visible = !isCmg;
         }
 

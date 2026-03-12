@@ -30,7 +30,7 @@ namespace LuckyFuture.Site
 	{
 		NONE = -1,
         KIWOOM = 0,
-		CMG = 1,
+		Prime = 1,
         DREAM = 2,
         TOPASSET = 3,
         //MIRAE = 4,

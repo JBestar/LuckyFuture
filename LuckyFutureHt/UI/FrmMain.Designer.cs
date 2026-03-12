@@ -5675,7 +5675,7 @@ namespace LuckyFuture.UI
             this.hopeForm1.Name = "hopeForm1";
             this.hopeForm1.Size = new System.Drawing.Size(1119, 40);
             this.hopeForm1.TabIndex = 7;
-            this.hopeForm1.Text = "CMG";
+            this.hopeForm1.Text = "Prime";
             this.hopeForm1.ThemeColor = System.Drawing.Color.DarkCyan;
             // 
             // btnCurrent
@@ -6010,7 +6010,7 @@ namespace LuckyFuture.UI
             this.MinimumSize = new System.Drawing.Size(190, 40);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CMG";
+            this.Text = "Prime";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuoteInfo)).EndInit();
