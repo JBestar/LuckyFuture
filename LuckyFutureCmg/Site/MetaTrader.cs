@@ -667,7 +667,7 @@ namespace LuckyFuture.Site
                     if (!ok) return false;
                     double profit = orderInfo.Valuation;
                     string logMsg = string.Format("[청산] 청산가:{0}", price);
-                    logMsg += " " + (profit >= 0 ? "수익:" : "손실:") + string.Format("{0}", profit);
+                    logMsg += " " + (profit >= 0 ? "수익:" : "손실:") + string.Format("{0:N2}", profit);
                     OnFutureSiteLogEvent(logMsg);
                 }
                 catch (Exception ex)
@@ -1286,7 +1286,7 @@ namespace LuckyFuture.Site
                             };
 
                             string logMsg = string.Format("[청산] 청산가:{0}", price);
-                            logMsg += "(" + (profit > 0 ? "수익:" : "손실:") + string.Format("{0})", profit);
+                            logMsg += "(" + (profit > 0 ? "수익:" : "손실:") + string.Format("{0:N2})", profit);
 
                             this.ValuationList[0].TotalProfit += profit;
                             this.DayProfitLoss.TotalProfit = (long)ValuationList[0].TotalProfit;
@@ -1578,11 +1578,18 @@ namespace LuckyFuture.Site
                 if (_mtApiClient == null || _mtApiClient.ConnectionState != MtConnectionState.Connected) return;
                 try
                 {
+                    // false = 서버의 모든 종목, true = Market Watch만. 브로커(Moneta 등)마다 다를 수 있으므로 둘 다 시도.
                     int total = _mtApiClient.SymbolsTotal(false);
+                    bool useSelected = false;
+                    if (total <= 0)
+                    {
+                        total = _mtApiClient.SymbolsTotal(true);
+                        useSelected = true;
+                    }
                     for (int i = 0; i < total; i++)
                     {
-                        string name = _mtApiClient.SymbolName(i, false);
-                        if (!string.IsNullOrEmpty(name))
+                        string name = _mtApiClient.SymbolName(i, useSelected);
+                        if (!string.IsNullOrEmpty(name) && !symbols.Contains(name))
                             symbols.Add(name);
                     }
                 }
@@ -1597,9 +1604,14 @@ namespace LuckyFuture.Site
 
             foreach (string symbol in symbols)
             {
-                newItem = allItems.FirstOrDefault(i => i.ItemName == symbol);
+                newItem = allItems.FirstOrDefault(i => string.Equals(i.ItemName, symbol, StringComparison.OrdinalIgnoreCase));
                 if (newItem == null)
-                    continue;
+                {
+                    // 하드코딩 목록에 없으면 MtApi 심볼 정보로 동적 생성 → CMG 외 브로커(Moneta 등) 연동
+                    newItem = CreateItemFromMtSymbol(symbol);
+                    if (newItem == null)
+                        continue;
+                }
 
                 newPrd = PrdList.FirstOrDefault(p => p.Name == newItem.PrdName);
                 if (newPrd == null)
@@ -1647,6 +1659,52 @@ namespace LuckyFuture.Site
                     OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.PREPAREITEM);
                 }
             }
+        }
+
+        /// <summary>
+        /// 하드코딩 목록에 없는 심볼을 MtApi SymbolInfo로 생성. Moneta 등 다른 브로커 연동용.
+        /// </summary>
+        private ItemSymbolInfo CreateItemFromMtSymbol(string symbol)
+        {
+            if (string.IsNullOrEmpty(symbol)) return null;
+
+            double point = 0.01;
+            int precision = 2;
+
+            lock (_mtLock)
+            {
+                if (_mtApiClient != null && _mtApiClient.ConnectionState == MtConnectionState.Connected)
+                {
+                    try
+                    {
+                        point = _mtApiClient.SymbolInfoDouble(symbol, EnumSymbolInfoDouble.SYMBOL_POINT);
+                        if (point <= 0) point = 0.01;
+                        double p = point;
+                        precision = p >= 1 ? 0 : (p <= 0 ? 5 : (int)Math.Max(0, Math.Min(8, -Math.Log10(p) + 0.5)));
+                    }
+                    catch { /* 기본값 유지 */ }
+                }
+            }
+
+            string prdName = "MT";
+            int dot = symbol.IndexOf('.');
+            if (dot > 0)
+                prdName = "MT " + symbol.Substring(dot + 1);
+
+            return new ItemSymbolInfo
+            {
+                Symbol = symbol,
+                ItemName = symbol,
+                PrdName = prdName,
+                Precision = precision,
+                TickScale = 1,
+                OverTick = point,
+                Exchange = 1,
+                ValueTick = point * 10,
+                MinVolume = 0.01,
+                MaxVolume = 20,
+                VolumeStep = 0.01
+            };
         }
 
         private List<ItemSymbolInfo> getAllItem()
