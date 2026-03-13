@@ -290,69 +290,83 @@ namespace ChartCtrl
         public static DateTime GetStartTime(TIMETYPE timeType, TIMEUNIT timeUnit, DateTime dtVal)
         {
             DateTime dtStart = dtVal;
-            int nTmPast;
-            switch (timeType)
+            try
             {
-                case TIMETYPE.TIMETYPE_SEC:
-                    nTmPast = (dtVal.Minute * 60 + dtVal.Second) % (int)timeUnit;
-                    dtStart = dtVal.AddSeconds(-nTmPast);
-                    break;
-                case TIMETYPE.TIMETYPE_MIN:
-                    nTmPast = (dtVal.Hour * 60 + dtVal.Minute) % (int)timeUnit;
-                    dtStart = dtVal.AddSeconds(-dtVal.Second);
-                    dtStart = dtStart.AddMinutes(-nTmPast);
-                    break;
-                case TIMETYPE.TIMETYPE_DAY:
-                    dtStart = new DateTime(dtVal.Year, dtVal.Month, dtVal.Day);
-                    break;
-                case TIMETYPE.TIMETYPE_WEEK:
-                    dtStart = new DateTime(dtVal.Year, dtVal.Month, dtVal.Day);
-                    dtStart = dtStart.AddDays(Convert.ToInt32(DayOfWeek.Monday) - Convert.ToInt32(dtVal.DayOfWeek));
-                    break;
-                case TIMETYPE.TIMETYPE_MONTH:
-                    dtStart = new DateTime(dtVal.Year, dtVal.Month, 1);
-                    break;
-                case TIMETYPE.TIMETYPE_YEAR:
-                    dtStart = new DateTime(dtVal.Year, 1, 1);
-                    break;
-                case TIMETYPE.TIMETYPE_TICK:
-                    dtStart = dtVal;
-                    break;
-                default: break;
+                int nTmPast;
+                switch (timeType)
+                {
+                    case TIMETYPE.TIMETYPE_SEC:
+                        nTmPast = (dtVal.Minute * 60 + dtVal.Second) % (int)timeUnit;
+                        dtStart = dtVal.AddSeconds(-nTmPast);
+                        break;
+                    case TIMETYPE.TIMETYPE_MIN:
+                        nTmPast = (dtVal.Hour * 60 + dtVal.Minute) % (int)timeUnit;
+                        dtStart = dtVal.AddSeconds(-dtVal.Second);
+                        dtStart = dtStart.AddMinutes(-nTmPast);
+                        break;
+                    case TIMETYPE.TIMETYPE_DAY:
+                        dtStart = new DateTime(dtVal.Year, dtVal.Month, dtVal.Day);
+                        break;
+                    case TIMETYPE.TIMETYPE_WEEK:
+                        dtStart = new DateTime(dtVal.Year, dtVal.Month, dtVal.Day);
+                        dtStart = dtStart.AddDays(Convert.ToInt32(DayOfWeek.Monday) - Convert.ToInt32(dtVal.DayOfWeek));
+                        break;
+                    case TIMETYPE.TIMETYPE_MONTH:
+                        dtStart = new DateTime(dtVal.Year, dtVal.Month, 1);
+                        break;
+                    case TIMETYPE.TIMETYPE_YEAR:
+                        dtStart = new DateTime(dtVal.Year, 1, 1);
+                        break;
+                    case TIMETYPE.TIMETYPE_TICK:
+                        dtStart = dtVal;
+                        break;
+                    default: break;
+                }
             }
-            
+            catch (Exception ex)
+            {
+                WriteFileLog(string.Format("[DateTime범위] GetStartTime 예외 timeType={0} ex={1}", timeType, ex.Message));
+                dtStart = dtVal;
+            }
             return dtStart;
         }
         public static DateTime GetEndTime(TIMETYPE timeType, TIMEUNIT timeUnit, DateTime dtStart, bool isNext)
         {
             DateTime dtEnd = dtStart;
-            int nTimeUnit = (int)timeUnit;
-            switch (timeType)
+            try
             {
-                case TIMETYPE.TIMETYPE_SEC:
-                    dtEnd = dtStart.AddSeconds(isNext ? nTimeUnit : -nTimeUnit);
-                    break;
-                case TIMETYPE.TIMETYPE_MIN:
-                    dtEnd = dtStart.AddMinutes(isNext ? nTimeUnit : -nTimeUnit);
-                    break;
-                case TIMETYPE.TIMETYPE_DAY:
-                    dtEnd = dtStart.AddDays(isNext ? 1 : -1);
-                    break;
-                case TIMETYPE.TIMETYPE_WEEK:
-                    dtEnd = dtStart.AddDays(isNext ? 7 : -7);
-                    break;
-                case TIMETYPE.TIMETYPE_MONTH:
-                    dtEnd = dtStart.AddMonths(isNext ? 1 : -1);
-                    break;
-                case TIMETYPE.TIMETYPE_YEAR:
-                    dtEnd = dtStart.AddYears(isNext ? 1 : -1);
-                    break;
-                case TIMETYPE.TIMETYPE_TICK:
-                    dtEnd = dtStart;
-                    break;
-                default: break;
+                int nTimeUnit = (int)timeUnit;
+                switch (timeType)
+                {
+                    case TIMETYPE.TIMETYPE_SEC:
+                        dtEnd = dtStart.AddSeconds(isNext ? nTimeUnit : -nTimeUnit);
+                        break;
+                    case TIMETYPE.TIMETYPE_MIN:
+                        dtEnd = dtStart.AddMinutes(isNext ? nTimeUnit : -nTimeUnit);
+                        break;
+                    case TIMETYPE.TIMETYPE_DAY:
+                        dtEnd = dtStart.AddDays(isNext ? 1 : -1);
+                        break;
+                    case TIMETYPE.TIMETYPE_WEEK:
+                        dtEnd = dtStart.AddDays(isNext ? 7 : -7);
+                        break;
+                    case TIMETYPE.TIMETYPE_MONTH:
+                        dtEnd = dtStart.AddMonths(isNext ? 1 : -1);
+                        break;
+                    case TIMETYPE.TIMETYPE_YEAR:
+                        dtEnd = dtStart.AddYears(isNext ? 1 : -1);
+                        break;
+                    case TIMETYPE.TIMETYPE_TICK:
+                        dtEnd = dtStart;
+                        break;
+                    default: break;
+                }
             }
-
+            catch (Exception ex)
+            {
+                WriteFileLog(string.Format("[DateTime범위] GetEndTime 예외 timeType={0} isNext={1} ex={2}", timeType, isNext, ex.Message));
+                dtEnd = dtStart;
+            }
             return dtEnd;
         }
 
