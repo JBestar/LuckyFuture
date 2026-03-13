@@ -127,7 +127,17 @@ namespace LuckyFuture.Site
                 balance = _mtApiClient.AccountBalance();
                 equity = _mtApiClient.AccountEquity();
                 accNum = _mtApiClient.AccountNumber().ToString();
-                try { accountName = _mtApiClient.AccountName() ?? ""; } catch { }
+                try
+                {
+                    var prevCulture = Thread.CurrentThread.CurrentCulture;
+                    try
+                    {
+                        Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("ko-KR");
+                        accountName = _mtApiClient.AccountName() ?? "";
+                    }
+                    finally { Thread.CurrentThread.CurrentCulture = prevCulture; }
+                }
+                catch { }
                 WriteLog(string.Format("[계좌명한글] MT API원본 len={0} DefaultEncoding={1} utf8hex={2} value={3}",
                     (accountName ?? "").Length, Encoding.Default.EncodingName,
                     BitConverter.ToString(Encoding.UTF8.GetBytes(accountName ?? "")), accountName ?? ""));
@@ -166,8 +176,7 @@ namespace LuckyFuture.Site
 
         /// <summary>
         /// MtApi에서 한글 등이 깨져 내려올 수 있는 계좌명을 올바른 인코딩으로 복구.
-        /// 다른 PC(비한글 Windows 등)에서 UTF-8이 CP1252 등으로 잘못 해석된 경우만 보정하고,
-        /// 이미 정상인 한글은 건드리지 않음.
+        /// UTF-8→CP1252/Latin-1 잘못 해석, CP949(한글) 터미널 등 여러 경우를 시도.
         /// </summary>
         private static string FixAccountNameEncoding(string accountName)
         {
@@ -182,24 +191,56 @@ namespace LuckyFuture.Site
                 return n;
             }
 
+            bool ValidResult(string s)
+            {
+                return !string.IsNullOrEmpty(s) && s.All(c => c < 0x10000 && !char.IsSurrogate(c));
+            }
+
             int originalHangul = HangulCount(accountName);
 
+            // 1) UTF-8이 CP1252로 잘못 해석된 경우
             try
             {
                 byte[] bytes = Encoding.GetEncoding(1252).GetBytes(accountName);
                 string utf8 = Encoding.UTF8.GetString(bytes);
-                if (!string.IsNullOrEmpty(utf8) && utf8.All(c => c < 0x10000 && !char.IsSurrogate(c)) && HangulCount(utf8) >= originalHangul)
-                    return utf8;
+                if (ValidResult(utf8) && HangulCount(utf8) >= originalHangul) return utf8;
             }
             catch { }
             try
             {
                 byte[] bytes = Encoding.Default.GetBytes(accountName);
                 string utf8 = Encoding.UTF8.GetString(bytes);
-                if (!string.IsNullOrEmpty(utf8) && utf8.All(c => c < 0x10000 && !char.IsSurrogate(c)) && HangulCount(utf8) >= originalHangul)
-                    return utf8;
+                if (ValidResult(utf8) && HangulCount(utf8) >= originalHangul) return utf8;
             }
             catch { }
+
+            // 2) Latin-1(ISO-8859-1)로 바이트 복원 후 UTF-8/CP949 재해석 (한 글자당 1바이트로 잘못 넘어온 경우)
+            try
+            {
+                Encoding latin1 = Encoding.GetEncoding(28591);
+                byte[] bytes = latin1.GetBytes(accountName);
+                string asUtf8 = Encoding.UTF8.GetString(bytes);
+                if (ValidResult(asUtf8) && HangulCount(asUtf8) > originalHangul) return asUtf8;
+                try
+                {
+                    Encoding cp949 = Encoding.GetEncoding(949);
+                    string asCp949 = cp949.GetString(bytes);
+                    if (ValidResult(asCp949) && HangulCount(asCp949) > originalHangul) return asCp949;
+                }
+                catch { }
+            }
+            catch { }
+
+            // 3) 현재 문자열이 이미 CP949 바이트를 Default로 해석한 경우: Default → 바이트 → CP949
+            try
+            {
+                Encoding cp949 = Encoding.GetEncoding(949);
+                byte[] bytes = Encoding.Default.GetBytes(accountName);
+                string decoded = cp949.GetString(bytes);
+                if (ValidResult(decoded) && HangulCount(decoded) > originalHangul) return decoded;
+            }
+            catch { }
+
             return accountName;
         }
 
