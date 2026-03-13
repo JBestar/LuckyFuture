@@ -237,6 +237,9 @@ namespace ChartCtrl
             try { FileLogWriter?.Invoke(msg); } catch { }
         }
 
+        /// <summary>GetTime 정상 경로에서 FileLogWriter 동작 확인용, 1회만 기록</summary>
+        static bool _getTimeNormalPathLogged = false;
+
         ///Get DateTime From TimeStamp
         /// <summary>초 단위 또는 밀리초 단위 Unix 타임스탬프를 DateTime으로 변환. 범위를 벗어나면 MinValue/MaxValue로 클램프하여 크래시 방지.</summary>
         public static DateTime GetTime(long lSecs)
@@ -266,7 +269,14 @@ namespace ChartCtrl
 
             try
             {
-                return dtOrigin.AddSeconds(lSecs);
+                DateTime result = dtOrigin.AddSeconds(lSecs);
+                // 정상 경로에서 FileLogWriter 동작 여부 확인용 (1회만 로그)
+                if (!_getTimeNormalPathLogged)
+                {
+                    _getTimeNormalPathLogged = true;
+                    WriteFileLog(string.Format("[ChartCtrl] GetTime 정상경로 동작확인 lSecs={0} → FileLogWriter 연결됨", lSecsOrig));
+                }
+                return result;
             }
             catch (Exception ex)
             {

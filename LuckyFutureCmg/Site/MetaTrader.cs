@@ -128,7 +128,12 @@ namespace LuckyFuture.Site
                 equity = _mtApiClient.AccountEquity();
                 accNum = _mtApiClient.AccountNumber().ToString();
                 try { accountName = _mtApiClient.AccountName() ?? ""; } catch { }
+                WriteLog(string.Format("[계좌명한글] MT API원본 len={0} DefaultEncoding={1} utf8hex={2} value={3}",
+                    (accountName ?? "").Length, Encoding.Default.EncodingName,
+                    BitConverter.ToString(Encoding.UTF8.GetBytes(accountName ?? "")), accountName ?? ""));
                 accountName = FixAccountNameEncoding(accountName);
+                WriteLog(string.Format("[계좌명한글] MT Fix후 len={0} utf8hex={1} value={2}",
+                    (accountName ?? "").Length, BitConverter.ToString(Encoding.UTF8.GetBytes(accountName ?? "")), accountName ?? ""));
                 UserAcc = accNum;
                 WriteLog(String.Format("Login Balance={0}, Equity={1}, Account={2}", balance, equity, accNum));
             }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -440,7 +440,10 @@ namespace LuckyFuture
                 {
                     DateTime dtServ = DateTime.Parse(sDt);
                     TimeSpan tmSpan = dtServ.Subtract(dtNow);
-                    AppConfig._DtDelay = (int)(tmSpan.TotalSeconds);
+                    int delaySec = (int)(tmSpan.TotalSeconds);
+                    // DateTime.AddSeconds overflow 방지: 대략 ±10일 범위로 제한
+                    const int maxDelaySec = 86400 * 10;
+                    AppConfig._DtDelay = delaySec > maxDelaySec ? maxDelaySec : (delaySec < -maxDelaySec ? -maxDelaySec : delaySec);
                 }
 
             }

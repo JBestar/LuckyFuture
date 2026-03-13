@@ -1,4 +1,4 @@
-﻿// #define WRITE_LOG
+// #define WRITE_LOG
 
 using ChartCtrl;
 using LuckyFuture.Models.ValueObjects;
@@ -752,7 +752,10 @@ namespace LuckyFuture.Site
                 foreach (Match m in mc)
                 {
                     _ConnectState = LOGINSTATE.OK;
-                    CurrentUserAccount.UserAccountStr = m.Groups[1].Value.Trim();
+                    string accStr = m.Groups[1].Value.Trim();
+                    CurrentUserAccount.UserAccountStr = accStr;
+                    WriteLog(string.Format("[계좌명한글] SiteMirae UserAccountStr len={0} DefaultEncoding={1} utf8hex={2} value={3}",
+                        accStr.Length, Encoding.Default.EncodingName, BitConverter.ToString(Encoding.UTF8.GetBytes(accStr)), accStr));
 
                     string sProfit = m.Groups[3].Value.Trim();
                     string sBalance = m.Groups[4].Value.Trim();

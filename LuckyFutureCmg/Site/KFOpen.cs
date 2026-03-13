@@ -134,6 +134,8 @@ namespace LuckyFuture.Site
                 UserAccountId = UserAcc,
                 UserAccountStr = UserAcc,
             };
+            WriteLog(string.Format("[계좌명한글] KFOpen Login UserAccountStr len={0} DefaultEncoding={1} utf8hex={2} value={3}",
+                (UserAcc ?? "").Length, Encoding.Default.EncodingName, BitConverter.ToString(Encoding.UTF8.GetBytes(UserAcc ?? "")), UserAcc ?? ""));
             this.UserAccounts = new List<UserAccountInfo>();
             this.UserAccounts.Add(this.CurrentUserAccount);
             DayProfitLoss = new DayProfitLossInfo();
@@ -2144,6 +2146,8 @@ namespace LuckyFuture.Site
             }
             catch (Exception ex)
             {
+                // 파일 전용: 원인 추적용 (UI에는 ex.Message만 표시)
+                WriteLog(string.Format("[DateTime범위] sRQName={0} ex={1} {2}", sRQName, ex.Message, ex.StackTrace));
                 OnFutureSiteLogEvent(ex.Message);
             }
         }

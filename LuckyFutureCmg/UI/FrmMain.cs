@@ -13,6 +13,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Windows.Forms;
@@ -760,9 +761,10 @@ namespace LuckyFuture.UI
 				string log = String.Format(fmt, param_list);
 				// string mark = log.Substring(0, 2);
 				DateTime dtCurrent = DateTime.Now;
-				if(AppConfig._DtDelay != 0)
-                {
-                    dtCurrent = dtCurrent.AddSeconds(AppConfig._DtDelay);
+				if (AppConfig._DtDelay != 0)
+				{
+					try { dtCurrent = dtCurrent.AddSeconds(AppConfig._DtDelay); }
+					catch { /* DateTime 범위 초과 시 표시시간만 Now 사용 */ }
 				}
 				log = string.Format("[{0:D2}:{1:D2}:{2:D2}] ", dtCurrent.Hour, dtCurrent.Minute, dtCurrent.Second) + log;
 
@@ -790,7 +792,8 @@ namespace LuckyFuture.UI
                 DateTime dtCurrent = DateTime.Now;
                 if (AppConfig._DtDelay != 0)
                 {
-                    dtCurrent = dtCurrent.AddSeconds(AppConfig._DtDelay);
+                    try { dtCurrent = dtCurrent.AddSeconds(AppConfig._DtDelay); }
+                    catch { }
                 }
                 log = string.Format("[{0:D2}:{1:D2}:{2:D2}]", dtCurrent.Hour, dtCurrent.Minute, dtCurrent.Second) + log;
                 txtStateLog.Text = log;
@@ -812,7 +815,8 @@ namespace LuckyFuture.UI
                 DateTime dtCurrent = DateTime.Now;
                 if (AppConfig._DtDelay != 0)
                 {
-                    dtCurrent = dtCurrent.AddSeconds(AppConfig._DtDelay);
+                    try { dtCurrent = dtCurrent.AddSeconds(AppConfig._DtDelay); }
+                    catch { }
                 }
                 log = string.Format("[{0:D2}:{1:D2}:{2:D2}]", dtCurrent.Hour, dtCurrent.Minute, dtCurrent.Second) + log;
 
@@ -1197,7 +1201,13 @@ namespace LuckyFuture.UI
 				this.cmbUserAccounts.SelectedIndex = 0;
 				// Prime: txtId에 AccountName 표시
 				if (this.CurrentSiteType == SITETYPE.Prime && CurrentSite.UserAccounts.Count > 0)
-					this.txtId.Text = CurrentSite.UserAccounts[0].AccountName ?? "";
+				{
+					string accountName = CurrentSite.UserAccounts[0].AccountName ?? "";
+					this.txtId.Text = accountName;
+					LogAccountNameEncoding("ShowUserInfo Prime txtId AccountName", accountName);
+					if (CurrentSite.UserAccounts[0].UserAccountStr != null)
+						LogAccountNameEncoding("ShowUserInfo Prime UserAccountStr", CurrentSite.UserAccounts[0].UserAccountStr);
+				}
 				string siteName = "";
 				if (cmbSiteList.SelectedItem != null)
 					siteName = cmbSiteList.SelectedItem.ToString();
@@ -1213,6 +1223,8 @@ namespace LuckyFuture.UI
 
                 string sUserId = axKFOpenAPI.GetLoginInfo("USER_ID");
                 string sUserName = axKFOpenAPI.GetLoginInfo("USER_NAME");
+                LogAccountNameEncoding("ShowKiwoomUserInfo USER_NAME", sUserName ?? "");
+                LogAccountNameEncoding("ShowKiwoomUserInfo USER_ID", sUserId ?? "");
 
                 if (String.IsNullOrEmpty(sUserId))
                 {
@@ -1384,6 +1396,20 @@ namespace LuckyFuture.UI
             EnableControls();
             EnsureAccountNameFont();
 		}
+
+        /// <summary>계좌명 한글 깨짐 원인 추적용 파일 전용 로그 (UI 미노출)</summary>
+        private void LogAccountNameEncoding(string label, string value)
+        {
+            if (value == null) value = "";
+            try
+            {
+                string utf8hex = BitConverter.ToString(Encoding.UTF8.GetBytes(value));
+                string defaultHex = BitConverter.ToString(Encoding.Default.GetBytes(value));
+                WriteLog(string.Format("[계좌명한글] {0} len={1} DefaultEncoding={2} utf8hex={3} defaultHex={4} value={5}",
+                    label, value.Length, Encoding.Default.EncodingName, utf8hex, defaultHex, value));
+            }
+            catch (Exception ex) { WriteLog("[계좌명한글] " + label + " log err " + ex.Message); }
+        }
 
         /// <summary>
         /// 계좌명 입력창 한글 표시: 맑은 고딕 등 한글 지원 폰트로 설정. 다른 PC에선 Gulim이 없을 수 있음.
