@@ -612,6 +612,8 @@ namespace LuckyFuture.UI
 				catch (Exception ex)
 				{
                     string exMessage = ex.Message;
+                    if (exMessage != null && (exMessage.Contains("DateTime") || exMessage.Contains("범위")))
+                        WriteLog("[DateTime범위 발생위치] OnSiteNoticeReceive(InvokeRequired) 스택: " + (ex.StackTrace ?? ""));
                     AddLog(ex.Message);
                     return;
                 }
@@ -741,6 +743,8 @@ namespace LuckyFuture.UI
 				}
 				catch(Exception ex)
 				{
+					if (ex.Message != null && (ex.Message.Contains("DateTime") || ex.Message.Contains("범위")))
+						WriteLog("[DateTime범위 발생위치] OnSiteNoticeReceive(switch) noticeType=" + (e.Data != null ? e.Data.ToString() : "null") + " 스택: " + (ex.StackTrace ?? ""));
 					AddLog(ex.Message);
 				}
 			}
