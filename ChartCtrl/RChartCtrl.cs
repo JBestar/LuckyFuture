@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -906,11 +906,22 @@ namespace ChartCtrl
 
         public int GetConcPerMin(int min)
         {
-            int nQty = 0; 
-            if(mlistRealVal.Count > 0)
+            int nQty = 0;
+            if (mlistRealVal.Count > 0)
             {
-                DateTime dtLast = mlistRealVal[mlistRealVal.Count - 1]._dtRec.AddMinutes(-min);
-                for (int i = mlistRealVal.Count-1; i >= 0 ; i--)
+                // min이 과대하면 AddMinutes(-min)에서 DateTime 범위 초과 → 최대 1일(1440분)로 제한
+                if (min < 0) min = 0;
+                if (min > 1440) min = 1440;
+                DateTime dtLast;
+                try
+                {
+                    dtLast = mlistRealVal[mlistRealVal.Count - 1]._dtRec.AddMinutes(-min);
+                }
+                catch
+                {
+                    return 0; // DateTime 범위 초과 시(비정상 _dtRec 등) 0 반환
+                }
+                for (int i = mlistRealVal.Count - 1; i >= 0; i--)
                 {
                     if (mlistRealVal[i]._dtRec > dtLast)
                         nQty += mlistRealVal[i]._nConc;
