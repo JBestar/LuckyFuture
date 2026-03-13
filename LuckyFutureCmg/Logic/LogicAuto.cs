@@ -1,4 +1,4 @@
-﻿// #define DEBUG_LOG
+// #define DEBUG_LOG
 
 using System;
 using System.Collections.Generic;
@@ -2206,7 +2206,8 @@ namespace LuckyFuture.Logic
                 DateTime dtNow = DateTime.Now;
                 if (AppConfig._DtDelay != 0)
                 {
-                    dtNow = dtNow.AddSeconds(AppConfig._DtDelay);
+                    try { dtNow = dtNow.AddSeconds(AppConfig._DtDelay); }
+                    catch { /* DateTime 범위 초과 시 보정 없이 Now 사용 */ }
                 }
                 DateTime dtToday = new DateTime(dtNow.Year, dtNow.Month, dtNow.Day);
                 if (dtNow >= dtToday + Settings.Default.AutoReserveTime.TimeOfDay && dtNow <= dtToday.AddSeconds(3) + Settings.Default.AutoReserveTime.TimeOfDay)
