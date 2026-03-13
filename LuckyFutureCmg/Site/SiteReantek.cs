@@ -697,10 +697,7 @@ namespace LuckyFuture.Site
             if (splitMsg[0] == RECV_RESULT_SUCCESS)
             {
                 _ConnectState = LOGINSTATE.OK;
-                string accStr = splitMsg[7];
-                CurrentUserAccount.UserAccountStr = accStr;
-                WriteLog(string.Format("[계좌명한글] SiteReantek UserAccountStr len={0} DefaultEncoding={1} utf8hex={2} value={3}",
-                    accStr.Length, Encoding.Default.EncodingName, BitConverter.ToString(Encoding.UTF8.GetBytes(accStr ?? "")), accStr ?? ""));
+                CurrentUserAccount.UserAccountStr = splitMsg[7];
                 int nTemp = 0;
                 if (int.TryParse(splitMsg[5], out nTemp))
                 {

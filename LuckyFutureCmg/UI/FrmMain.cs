@@ -125,7 +125,6 @@ namespace LuckyFuture.UI
 
 			this.hopeForm1.Text = AppAuthor.Default.GetAppName() + " " + AppAuthor.Default.GetAppVersion();
             LogPath = AppAuthor.Default.CreatePathFolder("Log") + "/" + DateTime.Now.ToString("yyyyMMdd") + "_MT";
-            CtrlProperty.FileLogWriter = WriteLog; // DateTime범위 오류 디버그용 (파일에만 기록)
             WriteLog("<============= 시작 =============>");
 			// double buffered
             this.dgvOrderInfo.DoubleBuffered(true);
@@ -611,9 +610,6 @@ namespace LuckyFuture.UI
 				}
 				catch (Exception ex)
 				{
-                    string exMessage = ex.Message;
-                    if (exMessage != null && (exMessage.Contains("DateTime") || exMessage.Contains("범위")))
-                        WriteLog("[DateTime범위 발생위치] OnSiteNoticeReceive(InvokeRequired) 스택: " + (ex.StackTrace ?? ""));
                     AddLog(ex.Message);
                     return;
                 }
@@ -743,8 +739,6 @@ namespace LuckyFuture.UI
 				}
 				catch(Exception ex)
 				{
-					if (ex.Message != null && (ex.Message.Contains("DateTime") || ex.Message.Contains("범위")))
-						WriteLog("[DateTime범위 발생위치] OnSiteNoticeReceive(switch) noticeType=" + (e.Data != null ? e.Data.ToString() : "null") + " 스택: " + (ex.StackTrace ?? ""));
 					AddLog(ex.Message);
 				}
 			}
@@ -1205,13 +1199,7 @@ namespace LuckyFuture.UI
 				this.cmbUserAccounts.SelectedIndex = 0;
 				// Prime: txtId에 AccountName 표시
 				if (this.CurrentSiteType == SITETYPE.Prime && CurrentSite.UserAccounts.Count > 0)
-				{
-					string accountName = CurrentSite.UserAccounts[0].AccountName ?? "";
-					this.txtId.Text = accountName;
-					LogAccountNameEncoding("ShowUserInfo Prime txtId AccountName", accountName);
-					if (CurrentSite.UserAccounts[0].UserAccountStr != null)
-						LogAccountNameEncoding("ShowUserInfo Prime UserAccountStr", CurrentSite.UserAccounts[0].UserAccountStr);
-				}
+					this.txtId.Text = CurrentSite.UserAccounts[0].AccountName ?? "";
 				string siteName = "";
 				if (cmbSiteList.SelectedItem != null)
 					siteName = cmbSiteList.SelectedItem.ToString();
@@ -1227,8 +1215,6 @@ namespace LuckyFuture.UI
 
                 string sUserId = axKFOpenAPI.GetLoginInfo("USER_ID");
                 string sUserName = axKFOpenAPI.GetLoginInfo("USER_NAME");
-                LogAccountNameEncoding("ShowKiwoomUserInfo USER_NAME", sUserName ?? "");
-                LogAccountNameEncoding("ShowKiwoomUserInfo USER_ID", sUserId ?? "");
 
                 if (String.IsNullOrEmpty(sUserId))
                 {
@@ -1400,20 +1386,6 @@ namespace LuckyFuture.UI
             EnableControls();
             EnsureAccountNameFont();
 		}
-
-        /// <summary>계좌명 한글 깨짐 원인 추적용 파일 전용 로그 (UI 미노출)</summary>
-        private void LogAccountNameEncoding(string label, string value)
-        {
-            if (value == null) value = "";
-            try
-            {
-                string utf8hex = BitConverter.ToString(Encoding.UTF8.GetBytes(value));
-                string defaultHex = BitConverter.ToString(Encoding.Default.GetBytes(value));
-                WriteLog(string.Format("[계좌명한글] {0} len={1} DefaultEncoding={2} utf8hex={3} defaultHex={4} value={5}",
-                    label, value.Length, Encoding.Default.EncodingName, utf8hex, defaultHex, value));
-            }
-            catch (Exception ex) { WriteLog("[계좌명한글] " + label + " log err " + ex.Message); }
-        }
 
         /// <summary>
         /// 계좌명 입력창 한글 표시: 맑은 고딕 등 한글 지원 폰트로 설정. 다른 PC에선 Gulim이 없을 수 있음.
