@@ -124,6 +124,7 @@ namespace LuckyFuture.UI
 
 			this.hopeForm1.Text = AppAuthor.Default.GetAppName() + " " + AppAuthor.Default.GetAppVersion();
             LogPath = AppAuthor.Default.CreatePathFolder("Log") + "/" + DateTime.Now.ToString("yyyyMMdd") + "_MT";
+            CtrlProperty.FileLogWriter = WriteLog; // DateTime범위 오류 디버그용 (파일에만 기록)
             WriteLog("<============= 시작 =============>");
 			// double buffered
             this.dgvOrderInfo.DoubleBuffered(true);
@@ -409,6 +410,8 @@ namespace LuckyFuture.UI
 				{
 					ValuationInfo = null;
 					ValuationInfo = CurrentSite.ValuationList;
+					if (this.bsValuationInfo != null)
+						this.bsValuationInfo.ResetBindings(false);
 				}
 			}
 		}

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -229,12 +229,52 @@ namespace ChartCtrl
 
         }
 
+        /// <summary>파일 전용 디버그 로그 (UI 노출 없음). 앱에서 SetFileLogWriter(WriteLog)로 연결.</summary>
+        public static Action<string> FileLogWriter { get; set; }
+
+        static void WriteFileLog(string msg)
+        {
+            try { FileLogWriter?.Invoke(msg); } catch { }
+        }
+
         ///Get DateTime From TimeStamp
+        /// <summary>초 단위 또는 밀리초 단위 Unix 타임스탬프를 DateTime으로 변환. 범위를 벗어나면 MinValue/MaxValue로 클램프하여 크래시 방지.</summary>
         public static DateTime GetTime(long lSecs)
         {
-            DateTime dtOrigin = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            return dtOrigin.AddSeconds(lSecs);
+            long lSecsOrig = lSecs;
+            // 밀리초 단위로 들어온 경우(1e12 초과) 초 단위로 변환
+            if (lSecs > 1e12)
+            {
+                WriteFileLog(string.Format("[DateTime범위] GetTime lSecs={0} (밀리초로판단, /1000 적용)", lSecsOrig));
+                lSecs = lSecs / 1000;
+            }
 
+            DateTime dtOrigin = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            const long minSecs = -62135596800L;   // DateTime.MinValue 기준
+            const long maxSecs = 253402300799L;   // DateTime.MaxValue 기준
+
+            if (lSecs < minSecs)
+            {
+                WriteFileLog(string.Format("[DateTime범위] GetTime lSecs={0} → minSecs 미만, MinValue 반환", lSecsOrig));
+                return DateTime.SpecifyKind(DateTime.MinValue, DateTimeKind.Utc);
+            }
+            if (lSecs > maxSecs)
+            {
+                WriteFileLog(string.Format("[DateTime범위] GetTime lSecs={0} → maxSecs 초과, MaxValue 반환", lSecsOrig));
+                return DateTime.SpecifyKind(DateTime.MaxValue, DateTimeKind.Utc);
+            }
+
+            try
+            {
+                return dtOrigin.AddSeconds(lSecs);
+            }
+            catch (Exception ex)
+            {
+                WriteFileLog(string.Format("[DateTime범위] GetTime AddSeconds 예외 lSecs={0} ex={1}", lSecsOrig, ex.Message));
+                if (lSecs < 0)
+                    return DateTime.SpecifyKind(DateTime.MinValue, DateTimeKind.Utc);
+                return DateTime.SpecifyKind(DateTime.MaxValue, DateTimeKind.Utc);
+            }
         }
 
         public static DateTime GetStartTime(TIMETYPE timeType, TIMEUNIT timeUnit, DateTime dtVal)

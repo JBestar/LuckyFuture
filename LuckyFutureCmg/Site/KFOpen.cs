@@ -1,4 +1,4 @@
-﻿// #define WRITE_LOG
+// #define WRITE_LOG
 
 using System;
 using System.Collections.Generic;
@@ -226,7 +226,7 @@ namespace LuckyFuture.Site
                 CreateQuoteInfo();
             }
             
-            if (!m_bNeedAcc && Math.Abs(Environment.TickCount - m_tickAccount) < 60000)
+            if (!m_bNeedAcc && Math.Abs(Environment.TickCount - m_tickAccount) < 10000)
                 return ERRORCODE.SUCCESS;
 
             m_tickAccount = Environment.TickCount;
@@ -991,8 +991,7 @@ namespace LuckyFuture.Site
                     this.ValuationList[0].TotalProfit = DayProfitLoss.TotalProfit;
                     this.ValuationList[0].CurrentProfit = DayProfitLoss.TotalProfit + lValuation;
 
-                    if(!Settings.Default.SignalSiteOn)
-                        OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.VALUATION);
+                    OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.VALUATION);
                     WriteLog(String.Format("OnReceiveValuation Balance={0}, Valuation={1}, Profit={2}", lBalance, lValuation, lProfit));
                 }
 
@@ -2591,6 +2590,8 @@ namespace LuckyFuture.Site
                 };
                 RequestOrderList(true, true);
                 RequestOrderList(false, false);
+                if (nLiquidCnt > 0)
+                    RequestAccountData();
 
                 OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.LIQUID);
                 if (logMsg.Length > 0)

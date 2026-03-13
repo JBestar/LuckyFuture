@@ -1,4 +1,4 @@
-﻿using Goodbyte.TradingSystem.Client.Common;
+using Goodbyte.TradingSystem.Client.Common;
 using Goodbyte.TradingSystem.Domain.Common;
 using Goodbyte.TradingSystem.Domain.Entities;
 using Goodbyte.TradingSystem.Domain.Modules.Concrete;
@@ -35,6 +35,8 @@ namespace LuckyFuture.Site
 		UserAccountModule _userAccountModule;
 
 		private readonly object _objLock = new object();
+		private int _lastDayProfitLossRefreshTick;
+		private const int DayProfitLossRefreshIntervalMs = 10000;
 
 		public SiteVisionAsset(SITETYPE siteType)
 		{
@@ -310,10 +312,46 @@ namespace LuckyFuture.Site
                     LogOut();
                     return ERRORCODE.ACCOUNT_STANDBY;
                 }
-                else return ERRORCODE.SUCCESS;
+                RefreshDayProfitLossIfDue();
+                return ERRORCODE.SUCCESS;
 			}
-				
+
 			return ERRORCODE.UNKNOWN_FAILED;
+		}
+
+		private void RefreshDayProfitLossIfDue()
+		{
+			if (ClientState.UserAccounts == null || ClientState.UserAccounts.Count == 0 || this.DayProfitLoss == null)
+				return;
+			if (Math.Abs(Environment.TickCount - _lastDayProfitLossRefreshTick) < DayProfitLossRefreshIntervalMs)
+				return;
+			_lastDayProfitLossRefreshTick = Environment.TickCount;
+			RefreshDayProfitLossImmediate();
+		}
+
+		private void RefreshDayProfitLossImmediate()
+		{
+			if (ClientState.UserAccounts == null || ClientState.UserAccounts.Count == 0)
+				return;
+			try
+			{
+				MarketServiceClient marketServiceClient = new MarketServiceClient();
+				DayProfitLossServiceClient dayProfitLossServiceClient = new DayProfitLossServiceClient();
+				DateTime latestMarketDate = marketServiceClient.GetLatestMarketDate(ClientState.Certification);
+				long accountId = ClientState.UserAccounts[0].UserAccountId;
+				var dayProfitLoss = dayProfitLossServiceClient.GetDayProfitLoss(ClientState.Certification, accountId, latestMarketDate);
+				marketServiceClient.Close();
+				dayProfitLossServiceClient.Close();
+				if (dayProfitLoss != null)
+				{
+					this.DayProfitLoss = ConvertTo(dayProfitLoss);
+					this.SetValuationInfo(ClientState.Orders != null
+						? (from o in ClientState.Orders where o.UnliquidationQty > 0 select o).ToList()
+						: new List<Order>());
+					OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.VALUATION);
+				}
+			}
+			catch (Exception) { }
 		}
 
         public override bool ChangeItem(string sSymbol)
@@ -468,6 +506,8 @@ namespace LuckyFuture.Site
                 return;
             // 일일손익
             this.DayProfitLoss = ConvertTo(orderResult.DayProfitLoss);
+			if (orderResult.Order.OrderType == OrderType.Conclusion)
+				RefreshDayProfitLossImmediate();
 			if(orderResult.Order.OrderType == OrderType.Conclusion)
 			{
 				if(this.CurrentList != null)
@@ -506,6 +546,7 @@ namespace LuckyFuture.Site
 					this.SetValuationInfo((from o in ClientState.Orders
 										   where o.UnliquidationQty > 0
 										   select o).ToList<Order>());
+					OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.VALUATION);
 				}
 				
 				string msg = "";

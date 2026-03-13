@@ -1,4 +1,4 @@
-﻿using Goodbyte.TradingSystem.Client.Common;
+using Goodbyte.TradingSystem.Client.Common;
 using Goodbyte.TradingSystem.Domain.Common;
 using Goodbyte.TradingSystem.Domain.Entities;
 using Goodbyte.TradingSystem.Domain.Modules.Concrete;

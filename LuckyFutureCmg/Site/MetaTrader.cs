@@ -397,7 +397,7 @@ namespace LuckyFuture.Site
                 try { RequestOrderList(false); } catch (Exception ex) { WriteLog("[Check] RequestOrderList " + ex.Message); }
             }
 
-            if (!m_bNeedAcc && Math.Abs(Environment.TickCount - m_tickAccount) < 60000)
+            if (!m_bNeedAcc && Math.Abs(Environment.TickCount - m_tickAccount) < 10000)
                 return ERRORCODE.SUCCESS;
 
             m_tickAccount = Environment.TickCount;
@@ -986,8 +986,7 @@ namespace LuckyFuture.Site
             if (this.CurrentUserAccount == null)
                 return CONSTATE.NO_LOGIN;
 
-            // MtApi: 계정 정보는 Check() 주기에서 필요시 AccountBalance/AccountEquity로 갱신 가능
-            return CONSTATE.SUCCESSS;
+            return RequestHistoryDeals();
         }
 
         private CONSTATE RequestHistoryDeals()
@@ -1015,6 +1014,7 @@ namespace LuckyFuture.Site
                     this.ValuationList[0].TotalProfit = dProfit;
                     DayProfitLoss.TotalProfit = (long)this.ValuationList[0].TotalProfit;
                     this.ValuationList[0].CurrentProfit = this.ValuationList[0].TotalProfit + this.ValuationList[0].TotalValuation;
+                    OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.VALUATION);
                 }
             }
             catch (Exception ex)
@@ -1330,6 +1330,8 @@ namespace LuckyFuture.Site
 
                             this.ValuationList[0].TotalProfit += profit;
                             this.DayProfitLoss.TotalProfit = (long)ValuationList[0].TotalProfit;
+                            m_bNeedAcc = true;
+                            OnFutureSiteNoticeEvent(SITE_NOTICEEVENTTYPE.VALUATION);
 
                             OnFutureSiteLogEvent(logMsg);
                             break;

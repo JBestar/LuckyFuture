@@ -1,4 +1,4 @@
-﻿//#define WRITE_LOG
+//#define WRITE_LOG
 
 using System;
 using System.Collections.Generic;
